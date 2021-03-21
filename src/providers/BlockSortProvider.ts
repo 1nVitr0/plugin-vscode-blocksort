@@ -46,7 +46,12 @@ export default class BlockSortProvider {
     let lastStart = 0;
     let currentEnd = 0;
     for (const line of lines) {
-      if (this.isValidLine(line) && this.getIndent(line) === initialIndent && !this.hasFolding(folding)) {
+      if (
+        this.isValidLine(line) &&
+        !this.isIndentIgnoreLine(line) &&
+        this.getIndent(line) === initialIndent &&
+        !this.hasFolding(folding)
+      ) {
         blocks.push(
           this.document.validateRange(
             new Range(range.start.line + lastStart, 0, range.start.line + currentEnd, Infinity)
@@ -116,6 +121,14 @@ export default class BlockSortProvider {
       range = new Range(range.start.line, 0, range.end.line + 1, Infinity);
     range = new Range(range.start.line, 0, range.end.line - 1, Infinity);
 
+    while (
+      range.start.line <= range.end.line &&
+      this.isIndentIgnoreLine(
+        this.document.getText(range.with(range.start, range.start.with(range.start.line, Infinity)))
+      )
+    )
+      range = range.with(range.start.with(range.start.line + 1, 0));
+
     return this.document.validateRange(range);
   }
 
@@ -127,6 +140,7 @@ export default class BlockSortProvider {
     let max = 0;
 
     for (const line of lines) {
+      if (this.isIndentIgnoreLine(line)) continue;
       const indent = this.getIndent(line, indentWidth);
       if (indent < min) min = indent;
       if (indent > max) max = indent;
@@ -175,6 +189,10 @@ export default class BlockSortProvider {
 
     const first = this.document.getText(blocks[0]).trim();
     return Array.from(first).pop() === ',';
+  }
+
+  private isIndentIgnoreLine(line: string): boolean {
+    return /^\s*$/.test(line) || /^\s*(private|protected|public):\s*(\/\/.*|\/\*\.*\*\/)?/.test(line);
   }
 
   private isValidLine(line: string): boolean {
