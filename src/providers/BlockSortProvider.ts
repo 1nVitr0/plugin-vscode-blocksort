@@ -60,11 +60,9 @@ export default class BlockSortProvider {
       folding = this.getFolding(line, folding);
     }
 
-    if (lines.length) {
-      blocks.push(
-        this.document.validateRange(new Range(range.start.line + lastStart, 0, range.start.line + currentEnd, Infinity))
-      );
-    }
+    blocks.push(
+      this.document.validateRange(new Range(range.start.line + lastStart, 0, range.start.line + currentEnd, Infinity))
+    );
 
     return blocks;
   }
@@ -180,7 +178,7 @@ export default class BlockSortProvider {
   }
 
   private isValidLine(line: string): boolean {
-    return !/^\s*$/.test(line) && !/^\s*@/.test(line);
+    return !/^\s*$/.test(line) && !/^\s*(@|{)/.test(line);
   }
 
   private getIndent(
