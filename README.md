@@ -2,7 +2,7 @@
 
 ![Sort Blocks instead of lines!](https://raw.githubusercontent.com/1nVitr0/plugin-vscode-blocksort/main/resources/demo.gif)
 
-Sort Blocks instead of lines! Works for all major programming languages including JavaScript / TypeScript, C / C++, Java, JSON, XML, etc.
+Sort Blocks instead of lines! Works for all major programming languages including JavaScript / TypeScript, Java, JSON, XML, etc.
 
 ## Features
 
@@ -29,3 +29,4 @@ This extension currently contributes no settings.
 - The automatic selection validation is farly complicated. Some languages or edge cases might not work yet (feel free to open an issue)
 - some spacings between the original blocks may not be preserved
 - The extension does NOT check for code erros due to sorting
+- C++ is not currently supported, as indentation doesn't always relate to blocks (`{` in a new line, `private` / `protected` / `public` modifiers not indented, etc.)
