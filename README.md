@@ -1,5 +1,7 @@
 # Block Sort
 
+![Sort Blocks instead of lines!](https://raw.githubusercontent.com/1nVitr0/plugin-vscode-blocksort/main/resources/demo.gif)
+
 Sort Blocks instead of lines! Works for all major programming languages including JavaScript / TypeScript, C / C++, Java, JSON, XML, etc.
 
 ## Features
