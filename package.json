@@ -1,12 +1,12 @@
 {
   "name": "blocksort",
   "displayName": "Block Sort",
-  "description": "sort blocks",
+  "description": "Sort Blocks instead of lines!",
   "author": "1nVitr0",
   "publisher": "1nVitr0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/1nVitr0/plugin-vscode-censitive"
+    "url": "https://github.com/1nVitr0/plugin-vscode-blocksort.git"
   },
   "icon": "resources/icon.png",
   "version": "0.1.0",
@@ -14,15 +14,15 @@
     "vscode": "^1.53.0"
   },
   "categories": [
-    "Linters",
+    "Formatters",
     "Other"
   ],
   "keywords": [
-    "censor",
-    "hide",
-    "sensitive",
-    "private",
-    "passwords"
+    "sort",
+    "format",
+    "block",
+    "order",
+    "arrange"
   ],
   "activationEvents": [
     "onCommand:blocksort.sortBlocksAsc",
