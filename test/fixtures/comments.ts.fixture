@@ -1,0 +1,19 @@
+const foo = {
+  /**
+   * Some fuction
+   *
+   * @param param Some Param
+   * @param args Some args
+   */
+  testB(param: string, ...args: number[]) {
+    console.log('second');
+  },
+  // Some inline comment
+  testC(param: string, ...args: number[]) {
+    console.log('third');
+  },
+  @SomeDecorator
+  testA(param: string, ...args: number[]) {
+    console.log('first');
+  }
+};

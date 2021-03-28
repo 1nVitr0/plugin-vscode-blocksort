@@ -1,0 +1,59 @@
+class TestA {
+  _2: number = 2;
+  _0: number = 0;
+  _1: number = 1;
+
+  nested() {
+    if ('this') {
+      const x = 'should';
+      return x;
+    } else if ('not') return 'be';
+
+    return 'sorted';
+  }
+}
+
+class TestB {
+  _2: number = 2;
+  _0: number = 0;
+  _1: number = 1;
+
+  nested() {
+    if ('this') {
+      const x = 'should';
+      return x;
+    } else if ('not') return 'be';
+
+    return 'sorted';
+  }
+}
+
+class TestC {
+  _2: number = 2;
+  _0: number = 0;
+  _1: number = 1;
+
+  nested() {
+    if ('this') {
+      const x = 'should';
+      return x;
+    } else if ('not') return 'be';
+
+    return 'sorted';
+  }
+}
+
+class TestD {
+  _2: number = 2;
+  _0: number = 0;
+  _1: number = 1;
+
+  nested() {
+    if ('this') {
+      const x = 'should';
+      return x;
+    } else if ('not') return 'be';
+
+    return 'sorted';
+  }
+}

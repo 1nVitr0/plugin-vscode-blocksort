@@ -1,0 +1,83 @@
+class Test {
+  testSwitch(input: string) {
+    switch (input) {
+      case 'a':
+        return 'first';
+      case 'b':
+        const result = 'second';
+        return result;
+      case 'c':
+        return 'third';
+      default:
+        return 'last';
+    }
+  }
+
+  testObject() {
+    return {
+      a: {
+        2: 2,
+        0: 0,
+        1: 1
+      },
+      b: {
+        2: 2,
+        0: 0,
+        1: 1
+      },
+      c: {
+        2: 2,
+        0: 0,
+        1: 1
+      }
+    };
+  }
+
+  testReverse() {
+    return {
+      a: {
+        0: 0
+      },
+      b: {
+        0: 0
+      },
+      c: {
+        0: 0
+      }
+    };
+  }
+
+  testNatural() {
+    return {
+      3: {
+        0: 0
+      },
+      5: {
+        0: 0
+      },
+      16: {
+        0: 0
+      },
+      300: {
+        0: 0
+      }
+    };
+  }
+
+  testNaturalExtra() {
+    return {
+      0o3: {
+        0: 0
+      },
+      0b101: {
+        0: 0
+      },
+      0xF: {
+        0: 0
+      },
+      300: {
+        0: 0
+      }
+    };
+  }
+}

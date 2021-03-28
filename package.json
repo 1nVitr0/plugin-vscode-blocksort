@@ -22,7 +22,7 @@
     "format",
     "block",
     "order",
-    "arrange"
+    "block sort"
   ],
   "activationEvents": [
     "onCommand:blocksort.sortBlocksAsc",

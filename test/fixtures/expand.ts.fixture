@@ -1,0 +1,20 @@
+class Test {
+  expandSelection(input: number) {
+    switch(input) {
+      case 0:
+        return {
+          some: {
+            fairly: {
+              nested: 'object',
+              with: 'many'
+            },
+            properties: 'and',
+            sub: 'properties'
+          },
+          and: 'stuff',
+        }
+      default:
+        return null;
+    }
+  }
+}

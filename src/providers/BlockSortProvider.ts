@@ -1,5 +1,4 @@
-import { Range, Selection, TextDocument, TextEditorEdit, window, workspace } from 'vscode';
-import * as code from 'vscode';
+import { Range, Selection, TextDocument, workspace } from 'vscode';
 
 type FoldingMarker = '()' | '[]' | '{}';
 type SortingStrategy = 'asc' | 'desc';

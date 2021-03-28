@@ -1,4 +1,4 @@
-import { commands, ExtensionContext } from 'vscode';
+import { ExtensionContext } from 'vscode';
 import contributeCommands from './contribute/commands';
 
 export function activate(context: ExtensionContext) {
