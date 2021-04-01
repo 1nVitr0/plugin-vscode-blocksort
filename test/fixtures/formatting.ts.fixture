@@ -1,0 +1,16 @@
+const foo = {
+  testB(param: string, ...args: number[])
+  {
+    console.log('second');
+  },
+  testD(
+    param: string,
+    ...args: number[]
+  ) {
+    console.log('third');
+  },
+  testC(param: string, ...args: number[]) {
+    console.log('third');
+  },
+  testA(param: string, ...args: number[]) { console.log('first'); },
+};

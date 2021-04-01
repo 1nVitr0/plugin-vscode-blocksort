@@ -1,5 +1,12 @@
 # Block Sort
 
+[![Visual Studio Code extension 1nVitr0blocksort](https://vsmarketplacebadge.apphb.com/version/1nVitr0.blocksort.svg)](https://marketplace.visualstudio.com/items?itemName=1nVitr0.blocksort)
+[![Installs for Visual Studio Code extension 1nVitr0.blocksort](https://vsmarketplacebadge.apphb.com/installs/1nVitr0.blocksort.svg)](https://marketplace.visualstudio.com/items?itemName=1nVitr0.blocksort)
+[![Rating for Visual Studio Code extension 1nVitr0.blocksort](https://vsmarketplacebadge.apphb.com/rating/1nVitr0.blocksort.svg)](https://marketplace.visualstudio.com/items?itemName=1nVitr0.blocksort)
+![Tests](https://github.com/1nVitr0/plugin-vscode-blocksort/actions/workflows/tests.yml/badge.svg)
+![Release](https://github.com/1nVitr0/plugin-vscode-blocksort/actions/workflows/release.yml/badge.svg)
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+
 ![Sort Blocks instead of lines!](https://raw.githubusercontent.com/1nVitr0/plugin-vscode-blocksort/main/resources/demo.gif)
 
 Sort Blocks instead of lines! Works for all major programming languages including JavaScript / TypeScript, Java, JSON, XML, etc.
@@ -26,7 +33,8 @@ This extension currently contributes no settings.
 
 ## Known Issues
 
-- The automatic selection validation is farly complicated. Some languages or edge cases might not work yet (feel free to open an issue)
+- The automatic selection validation is fairly complicated. Some languages or edge cases might not work yet (feel free to open an issue)
 - some spacings between the original blocks may not be preserved
 - The extension does NOT check for code erros due to sorting
-- C++ is not currently supported, as indentation doesn't always relate to blocks (`{` in a new line, `private` / `protected` / `public` modifiers not indented, etc.)
+- The extension assumes valid code, invalid formatting will probably result in invalid sorting
+- When comments and / or decorators are involved the results may vary (the extension tries it's best, comments will stick to the lines below them)
