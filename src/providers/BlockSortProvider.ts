@@ -1,72 +1,82 @@
-import { Range, Selection, TextDocument, workspace } from 'vscode';
+import { Range, Selection, TextDocument } from 'vscode';
+import StringProcessingProvider, { Folding } from './StringProcessingProvider';
 
-type FoldingMarker = '()' | '[]' | '{}';
 type SortingStrategy = 'asc' | 'desc';
-type Folding = { [K in FoldingMarker]: number };
 
 export default class BlockSortProvider {
-  public static sort: { [K in SortingStrategy]: (a: string, b: string) => number } = {
+  public static sort: Record<SortingStrategy, (a: string, b: string) => number> = {
     asc: (a, b) => (a > b ? 1 : a < b ? -1 : 0),
     desc: (a, b) => (a < b ? 1 : a > b ? -1 : 0),
   };
 
-  // eslint-disable-next-line quotes
-  private static stringMarkes: string[] = ['"', "'", '`'];
-  private static foldingMarkers: FoldingMarker[] = ['()', '[]', '{}'];
-
   private document: TextDocument;
+  private stringProcessor: StringProcessingProvider;
 
   public constructor(document: TextDocument) {
     this.document = document;
+    this.stringProcessor = new StringProcessingProvider(document);
   }
 
   public sortBlocks(blocks: Range[], sort: (a: string, b: string) => number = BlockSortProvider.sort.asc): string[] {
     const textBlocks = blocks.map((block) => this.document.getText(block));
 
-    if (this.isList(blocks) && textBlocks.length) {
+    if (this.stringProcessor.isList(blocks) && textBlocks.length && !/,$/.test(textBlocks[textBlocks.length - 1])) {
       textBlocks[textBlocks.length - 1] += ',';
-      textBlocks.sort(sort);
+      this.applySort(textBlocks, sort);
       textBlocks[textBlocks.length - 1] = textBlocks[textBlocks.length - 1].replace(/,\s*$/, '');
     } else {
-      textBlocks.sort(sort);
+      this.applySort(textBlocks, sort);
+    }
+
+    if (textBlocks.length && !textBlocks[0].trim()) {
+      textBlocks.push(textBlocks.shift() || '');
+    } else if (textBlocks.length && /^\s*\r?\n/.test(textBlocks[0])) {
+      textBlocks[0] = textBlocks[0].replace(/^\s*\r?\n/, '');
+      textBlocks[textBlocks.length - 1] += '\n';
     }
 
     return textBlocks;
   }
 
   public getBlocks(range: Range): Range[] {
+    const startLine = range.start.line;
     const text = this.document.getText(range);
     const lines = text.split(/\r?\n/);
     const firstLine = lines.shift() || '';
-    const initialIndent = this.getIndent(firstLine);
+    const initialIndent = this.stringProcessor.getIndent(firstLine);
     const blocks: Range[] = [];
 
-    let folding = this.getFolding(firstLine);
+    let currentBlock = firstLine;
+    let validBlock = this.stringProcessor.isValidLine(firstLine);
+    let folding = this.stringProcessor.getFolding(firstLine);
     let lastStart = 0;
     let currentEnd = 0;
     for (const line of lines) {
       if (
-        this.isValidLine(line) &&
-        !this.isIndentIgnoreLine(line) &&
-        this.getIndent(line) === initialIndent &&
-        !this.hasFolding(folding)
+        validBlock &&
+        this.stringProcessor.stripComments(currentBlock).trim() &&
+        (!this.stringProcessor.isIndentIgnoreLine(line) || this.stringProcessor.isClosedBlock(currentBlock)) &&
+        this.stringProcessor.getIndent(line) === initialIndent &&
+        !this.stringProcessor.hasFolding(folding)
       ) {
-        blocks.push(
-          this.document.validateRange(
-            new Range(range.start.line + lastStart, 0, range.start.line + currentEnd, Infinity)
-          )
-        );
+        blocks.push(this.document.validateRange(new Range(startLine + lastStart, 0, startLine + currentEnd, Infinity)));
         lastStart = currentEnd + 1;
         currentEnd = lastStart;
+        currentBlock = '';
+        validBlock = false;
       } else {
         currentEnd++;
       }
-      folding = this.getFolding(line, folding);
+      currentBlock += `\n${line}`;
+      if (this.stringProcessor.isValidLine(line)) validBlock = true;
+      folding = this.stringProcessor.getFolding(line, folding);
     }
 
-    blocks.push(
-      this.document.validateRange(new Range(range.start.line + lastStart, 0, range.start.line + currentEnd, Infinity))
+    const remaining = this.document.validateRange(
+      new Range(startLine + lastStart, 0, startLine + currentEnd, Infinity)
     );
+    if (this.document.getText(remaining).trim()) blocks.push(remaining);
+    else if (blocks.length) blocks[blocks.length - 1] = new Range(blocks[blocks.length - 1].start, remaining.end);
 
     return blocks;
   }
@@ -74,13 +84,13 @@ export default class BlockSortProvider {
   public getInnerBlocks(block: Range): Range[] {
     const text = this.document.getText(block);
     const lines = text.split(/\r?\n/);
-    const indent = this.getIndentRange(text);
+    const indent = this.stringProcessor.getIndentRange(text);
 
     const result: Range[] = [];
     let start = 0;
     let end = 0;
     for (const line of lines) {
-      if (this.getIndent(line) > indent.min) {
+      if (this.stringProcessor.getIndent(line) > indent.min) {
         end++;
       } else if (start !== end) {
         result.push(
@@ -101,28 +111,38 @@ export default class BlockSortProvider {
 
     while (
       range.start.line < this.document.lineCount &&
-      this.totalOpenFolding((folding = this.getFolding(this.document.getText(range), undefined, true))) > 0
+      this.stringProcessor.totalOpenFolding(
+        (folding = this.stringProcessor.getFolding(this.document.getText(range), undefined, true))
+      ) > 0
     )
       range = new Range(range.start, range.end.with(range.end.line + 1));
-    while (range.start.line > 0 && this.totalOpenFolding((folding = this.getFolding(this.document.getText(range)))) < 0)
+
+    while (
+      range.start.line > 0 &&
+      this.stringProcessor.totalOpenFolding((folding = this.stringProcessor.getFolding(this.document.getText(range)))) <
+        0
+    )
       range = new Range(range.start.with(range.start.line - 1), range.end);
 
     if (!selection.isEmpty) return this.document.validateRange(range);
 
-    let indentRange = this.getIndentRange(this.document.getText(range));
+    let indentRange = this.stringProcessor.getIndentRange(this.document.getText(range));
     const { min } = indentRange;
 
-    while (range.start.line > 0 && this.getIndentRange(this.document.getText(range)).min >= min)
+    while (range.start.line > 0 && this.stringProcessor.getIndentRange(this.document.getText(range)).min >= min)
       range = new Range(range.start.line - 1, 0, range.end.line, range.end.character);
     range = new Range(range.start.line + 1, 0, range.end.line, range.end.character);
 
-    while (range.end.line < this.document.lineCount && this.getIndentRange(this.document.getText(range)).min >= min)
+    while (
+      range.end.line < this.document.lineCount &&
+      this.stringProcessor.getIndentRange(this.document.getText(range)).min >= min
+    )
       range = new Range(range.start.line, 0, range.end.line + 1, Infinity);
     range = new Range(range.start.line, 0, range.end.line - 1, Infinity);
 
     while (
       range.start.line <= range.end.line &&
-      this.isIndentIgnoreLine(
+      this.stringProcessor.isIndentIgnoreLine(
         this.document.getText(range.with(range.start, range.start.with(range.start.line, Infinity)))
       )
     )
@@ -131,77 +151,12 @@ export default class BlockSortProvider {
     return this.document.validateRange(range);
   }
 
-  private getIndentRange(text: string): { min: number; max: number } {
-    const lines = text.split(/\r?\n/);
-    const indentWidth: number = workspace.getConfiguration('editor').get('tabSize') || 4;
-
-    let min = Infinity;
-    let max = 0;
-
-    for (const line of lines) {
-      if (this.isIndentIgnoreLine(line)) continue;
-      const indent = this.getIndent(line, indentWidth);
-      if (indent < min) min = indent;
-      if (indent > max) max = indent;
-    }
-
-    return { min, max };
-  }
-
-  private getFolding(line: string, initial: Folding = { '()': 0, '[]': 0, '{}': 0 }, validate = false): Folding {
-    const result: Folding = { '()': initial['()'], '[]': initial['[]'], '{}': initial['{}'] };
-    const foldingStart = BlockSortProvider.foldingMarkers.map((marker) => marker[0]);
-    const foldingEnd = BlockSortProvider.foldingMarkers.map((marker) => marker[1]);
-
-    let escaped = false;
-    let inString: string | null = null;
-    let foldingIndex: number = -1;
-    for (const char of line) {
-      if (char === inString && !escaped) {
-        inString = null;
-      } else if (inString && !escaped && char === '\\') {
-        escaped = true;
-      } else if (inString) {
-        escaped = false;
-      } else if ((foldingIndex = foldingStart.indexOf(char)) >= 0) {
-        const marker = (foldingStart[foldingIndex] + foldingEnd[foldingIndex]) as FoldingMarker;
-        result[marker]++;
-      } else if ((foldingIndex = foldingEnd.indexOf(char)) >= 0) {
-        const marker = (foldingStart[foldingIndex] + foldingEnd[foldingIndex]) as FoldingMarker;
-        if (!validate || result[marker] > 0) result[marker]--;
-      }
-    }
-
-    return result;
-  }
-
-  private hasFolding(folding: Folding): boolean {
-    return !!(folding['()'] || folding['[]'] || folding['{}']);
-  }
-
-  private totalOpenFolding(folding: Folding): number {
-    return folding['()'] + folding['[]'] + folding['{}'];
-  }
-
-  private isList(blocks: Range[]): boolean {
-    if (!blocks.length) return false;
-
-    const first = this.document.getText(blocks[0]).trim();
-    return Array.from(first).pop() === ',';
-  }
-
-  private isIndentIgnoreLine(line: string): boolean {
-    return /^\s*$/.test(line) || /^\s*(private|protected|public):\s*(\/\/.*|\/\*\.*\*\/)?/.test(line);
-  }
-
-  private isValidLine(line: string): boolean {
-    return !/^\s*$/.test(line) && !/^\s*(@|{)/.test(line);
-  }
-
-  private getIndent(
-    line: string,
-    indentWidth: number = workspace.getConfiguration('editor').get('tabSize') || 4
-  ): number {
-    return (line.match(/^\s*/)?.pop() || '').length / indentWidth;
+  private applySort(blocks: string[], sort: (a: string, b: string) => number = BlockSortProvider.sort.asc) {
+    blocks.sort((a, b) =>
+      sort(
+        this.stringProcessor.stripDecorators(this.stringProcessor.stripComments(a)).trim() || a.trim(),
+        this.stringProcessor.stripDecorators(this.stringProcessor.stripComments(b)).trim() || b.trim()
+      )
+    );
   }
 }
