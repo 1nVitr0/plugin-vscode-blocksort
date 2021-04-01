@@ -1,6 +1,5 @@
-import { join } from 'path';
 import { Range } from 'vscode';
-import { ExpandTest, SortTest } from './types';
+import { SortTest } from '../suite/types';
 
 export const sortTests: SortTest[] = [
   {
@@ -16,6 +15,21 @@ export const sortTests: SortTest[] = [
   {
     file: 'comments.ts.fixture',
     compareFile: 'comments.ts.expect',
-    ranges: [new Range(1, 0, 27, 3)],
+    ranges: [new Range(1, 0, 17, 3)],
+  },
+  {
+    file: 'formatting.ts.fixture',
+    compareFile: 'formatting.ts.expect',
+    ranges: [new Range(1, 0, 14, 68)],
+  },
+  {
+    file: 'nested.json.fixture',
+    compareFile: 'nested.json.expect',
+    ranges: [new Range(1, 0, 68, 3), new Range(89, 0, 95, 60)],
+  },
+  {
+    file: 'nested.html.fixture',
+    compareFile: 'nested.html.expect',
+    ranges: [new Range(3, 0, 34, 11), new Range(45, 0, 48, 64)],
   },
 ];

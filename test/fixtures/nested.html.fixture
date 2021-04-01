@@ -1,0 +1,77 @@
+<div class="liveSample">
+  <table>
+    <tr>
+      <td spry:region="dsExample12_Items dsExample12_Batters">
+        <ul>
+          <li spry:repeat="dsExample12_Items">
+            {dsExample12_Items::name}
+            <ul>
+              <li>Batters:
+                <ul>
+                  <li spry:repeat="dsExample12_Batters">{dsExample12_Batters::type}</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </td>
+      <td spry:region="dsExample12_Items dsExample12_Batters">
+        <table class="dataTable">
+          <tr>
+            <th spry:sort="dsExample12_Items id">id</th>
+            <th spry:sort="dsExample12_Items type">type</th>
+            <th spry:sort="dsExample12_Items name">name</th>
+            <th spry:sort="dsExample12_Batters type">batter</th>
+          </tr>
+          <tbody spry:repeatchildren="dsExample12_Items">
+            <tr spry:repeat="dsExample12_Batters">
+              <td>{dsExample12_Items::id}</td>
+              <td>{dsExample12_Items::type}</td>
+              <td>{dsExample12_Items::name}</td>
+              <td>{dsExample12_Batters::type}</td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="liveSample">
+  <table>
+    <tr>
+      <td spry:region="dsExample12_Items dsExample12_Batters">
+        <table class="dataTable">
+          <tr>
+            <th spry:sort="dsExample12_Items id">id</th>
+            <th spry:sort="dsExample12_Items type">type</th>
+            <th spry:sort="dsExample12_Items name">name</th>
+            <th spry:sort="dsExample12_Batters type">batter</th>
+          </tr>
+          <tbody spry:repeatchildren="dsExample12_Items">
+            <tr spry:repeat="dsExample12_Batters">
+              <td>{dsExample12_Items::id}</td>
+              <td>{dsExample12_Items::type}</td>
+              <td>{dsExample12_Items::name}</td>
+              <td>{dsExample12_Batters::type}</td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+      <td spry:region="dsExample12_Items dsExample12_Batters">
+        <ul>
+          <li spry:repeat="dsExample12_Items">
+            {dsExample12_Items::name}
+            <ul>
+              <li>Batters:
+                <ul>
+                  <li spry:repeat="dsExample12_Batters">{dsExample12_Batters::type}</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </td>
+    </tr>
+  </table>
+</div>

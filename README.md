@@ -33,7 +33,8 @@ This extension currently contributes no settings.
 
 ## Known Issues
 
-- The automatic selection validation is farly complicated. Some languages or edge cases might not work yet (feel free to open an issue)
+- The automatic selection validation is fairly complicated. Some languages or edge cases might not work yet (feel free to open an issue)
 - some spacings between the original blocks may not be preserved
 - The extension does NOT check for code erros due to sorting
-- C++ is not currently supported, as indentation doesn't always relate to blocks (`{` in a new line, `private` / `protected` / `public` modifiers not indented, etc.)
+- The extension assumes valid code, invalid formatting will probably result in invalid sorting
+- When comments and / or decorators are involved the results may vary (the extension tries it's best, comments will stick to the lines below them)

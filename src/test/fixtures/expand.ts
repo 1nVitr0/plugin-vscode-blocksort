@@ -1,5 +1,5 @@
 import { Range } from 'vscode';
-import { ExpandTest } from './types';
+import { ExpandTest } from '../suite/types';
 
 export const expandTests: ExpandTest[] = [
   {
