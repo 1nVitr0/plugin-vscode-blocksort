@@ -86,7 +86,7 @@ export default class StringProcessingProvider {
 
   public isIndentIgnoreLine(line: string): boolean {
     const comment = commentRegex[this.document.languageId || 'default'] || commentRegex.default;
-    return new RegExp(`^\\s*(?:{|(private|protected|public):)\\s*(?:${comment}\\s*)*\\s*$`).test(line);
+    return new RegExp(`^\\s*{\\s*(?:${comment}\\s*)*\\s*$`).test(line);
   }
 
   public isClosedBlock(block: string): boolean {

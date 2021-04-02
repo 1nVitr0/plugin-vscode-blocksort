@@ -131,7 +131,7 @@ export default class BlockSortProvider {
 
     while (range.start.line > 0 && this.stringProcessor.getIndentRange(this.document.getText(range)).min >= min)
       range = new Range(range.start.line - 1, 0, range.end.line, range.end.character);
-    range = new Range(range.start.line + 1, 0, range.end.line, range.end.character);
+    if (range.start.line !== 0) range = new Range(range.start.line + 1, 0, range.end.line, range.end.character);
 
     while (
       range.end.line < this.document.lineCount &&
@@ -141,7 +141,7 @@ export default class BlockSortProvider {
     range = new Range(range.start.line, 0, range.end.line - 1, Infinity);
 
     while (
-      range.start.line <= range.end.line &&
+      range.start.line < range.end.line &&
       this.stringProcessor.isIndentIgnoreLine(
         this.document.getText(range.with(range.start, range.start.with(range.start.line, Infinity)))
       )

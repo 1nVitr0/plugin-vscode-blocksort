@@ -1,0 +1,37 @@
+class Car {
+  public:
+    int year;
+    string brand;
+    string model;
+
+  protected:
+    int alarmCode;
+    int vehicleNumber;
+
+    void startMotor();
+
+  private:
+    int fuseCount;
+    int wireLength;
+
+    void blowFuse();
+};
+
+class Car {
+public:
+  int year;
+  string brand;
+  string model;
+
+protected:
+  int alarmCode;
+  int vehicleNumber;
+
+  void startMotor();
+
+private:
+  int fuseCount;
+  int wireLength;
+
+  void blowFuse();
+};
