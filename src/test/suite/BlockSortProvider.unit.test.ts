@@ -14,22 +14,23 @@ suite('Unit Suite for BlockSortProvider', async () => {
   expandTests.map(({ file, ranges, targetRanges }) => {
     ranges
       .map((range, i) => ({ position: range, target: targetRanges[i] }))
-      .forEach(({ position, target }) => {
-        test('Expands selection', async () => {
+      .forEach(({ position, target }, i) => {
+        const [_, lang] = file.match(/\.(.*)\.fixture/) || ['', 'generic'];
+        test(`Expands selection (lang ${lang}) #${i}`, async () => {
           document = await workspace.openTextDocument(join(fixtureDir, file));
           blockSortProvider = new BlockSortProvider(document);
           const selection = new Selection(position.start, position.end);
           const expanded = blockSortProvider.expandSelection(selection);
 
-          assert(expanded.isEqual(target), 'range did not expand correctly');
+          assert.deepStrictEqual(expanded, target, 'range did not expand correctly');
         });
       });
   });
 
   sortTests.map(({ file, compareFile, ranges }) => {
     ranges.forEach((range, i) => {
-      const descriptor = file.match(/^(.*)\.(.*)\.fixture/);
-      const [_, type, lang] = descriptor || ['generic', 'generic'];
+      const descriptor = file.match(/(.*)\.(.*)\.fixture/);
+      const [_, type, lang] = descriptor || ['', 'generic', 'generic'];
       test(`Sort Blocks (${type}, lang ${lang}) #${i}`, async () => {
         compareDocument = await workspace.openTextDocument(join(fixtureDir, compareFile));
         document = await workspace.openTextDocument(join(fixtureDir, file));

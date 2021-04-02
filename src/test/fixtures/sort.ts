@@ -8,6 +8,11 @@ export const sortTests: SortTest[] = [
     ranges: [new Range(3, 0, 11, 22), new Range(17, 0, 31, 8), new Range(37, 0, 45, 8)],
   },
   {
+    file: 'block.cpp.fixture',
+    compareFile: 'block.cpp.expect',
+    ranges: [new Range(2, 0, 4, 17), new Range(21, 0, 23, 15)],
+  },
+  {
     file: 'toplevel.ts.fixture',
     compareFile: 'toplevel.ts.expect',
     ranges: [new Range(0, 0, 59, 0)],
