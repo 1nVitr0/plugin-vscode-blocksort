@@ -1,9 +1,10 @@
 import { Range, TextDocument, workspace } from 'vscode';
 import { commentMarkers, commentRegex } from '../constants/comments';
 import { stringMarkers } from '../constants/strings';
+import ConfigurationProvider from './ConfigurationProvider';
 
-type FoldingMarkerDefault = '()' | '[]' | '{}' | '<>';
-type FoldingMarkerList<T extends string = string> = Record<
+export type FoldingMarkerDefault = '()' | '[]' | '{}' | '<>';
+export type FoldingMarkerList<T extends string = string> = Record<
   T,
   { start: string; end: string; abortOnCurlyBrace?: boolean }
 >;
@@ -15,27 +16,8 @@ export interface FoldingLevel {
 }
 export type Folding<T extends string = string> = { [marker in keyof FoldingMarkerList<T>]: FoldingLevel };
 
-type FoldingMarkerOld = '()' | '[]' | '{}';
-export type FoldingOld = Partial<Record<FoldingMarkerOld | '<>', number | null>> &
-  Record<FoldingMarkerOld, number | null>;
-
-const foldingMarkers: FoldingMarkerList = {
-  '()': { start: '\\(', end: '\\)' },
-  '[]': { start: '\\[', end: '\\]' },
-  '{}': { start: '\\{', end: '\\}' },
-  '<>': { start: '<[a-zA-Z0-9\\-_=\\s]+', end: '<\\/[a-zA-Z0-9\\-_=\\s]+' },
-};
-
-const completeBlockMarkers = ['\\}', '<\\/[a-zA-Z0-9\\-_=\\s]+'];
-
-const indentIgnoreMarkers = [
-  '{',
-  // eslint-disable-next-line quotes
-  "end(?:for(?:each)?|if|while|case|def)?\\s*?([\\.\\[\\->\\|\\s]\\s*(?:[$A-Za-z0-9_+\\-\\*\\/\\^\\%\\<\\>\\=\\!\\?\\:]*|'[^']*?'|'[']*?'|\"[^\"]*?\"|`[^`]*?`)\\s*[\\]\\|]?\\s*)*",
-  'esac|fi',
-];
-
 function initialFolding(): Folding {
+  const foldingMarkers = ConfigurationProvider.getFoldingMarkers();
   return Object.keys(foldingMarkers).reduce<Folding>((r, key) => {
     r[key] = { level: 0 };
     return r;
@@ -43,9 +25,6 @@ function initialFolding(): Folding {
 }
 
 export default class StringProcessingProvider {
-  private static foldingMarkers: FoldingMarkerOld[] = ['()', '[]', '{}'];
-  private static useXmlFolding = ['html', 'jsx', 'xml'];
-
   private document: TextDocument;
 
   public constructor(document: TextDocument) {
@@ -77,6 +56,7 @@ export default class StringProcessingProvider {
   }
 
   public getFolding(text: string, initial: Folding = initialFolding(), validate = false): Folding {
+    const foldingMarkers = ConfigurationProvider.getFoldingMarkers();
     const result: Folding = { ...initial };
 
     const lines = text.split(/\r?\n/);
@@ -88,7 +68,7 @@ export default class StringProcessingProvider {
       const sanitized = this.stripStrings(this.stripComments(line)).trim();
       for (const key of Object.keys(foldingMarkers)) {
         const folding = result[key] || { level: 0 };
-        const { start, end, abortOnCurlyBrace } = foldingMarkers[key];
+        const { start, end } = foldingMarkers[key];
 
         const open = sanitized.split(new RegExp(start)).length - 1;
         const close = sanitized.split(new RegExp(end)).length - 1;
@@ -117,12 +97,14 @@ export default class StringProcessingProvider {
   }
 
   public isIndentIgnoreLine(line: string): boolean {
+    const indentIgnoreMarkers = ConfigurationProvider.getIndentIgnoreMarkers();
     const comment = commentRegex[this.document.languageId || 'default'] || commentRegex.default;
     const indentIgnoreRegex = `^\\s*(?:${indentIgnoreMarkers.join('|')})(?:${comment}|\\s*)*$`;
     return new RegExp(indentIgnoreRegex).test(line);
   }
 
   public isCompleteBlock(block: string): boolean {
+    const completeBlockMarkers = ConfigurationProvider.getCompleteBlockMarkers();
     const comment = commentRegex[this.document.languageId || 'default'] || commentRegex.default;
     const completeBlockRegex = `(?:${completeBlockMarkers.join('|')})(?:,|;)?(?:${comment}|\\s*)*(?:,|;)?$`;
     return new RegExp(completeBlockRegex, 'g').test(block);
