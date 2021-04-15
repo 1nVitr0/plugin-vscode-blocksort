@@ -14,7 +14,7 @@ export const expandTests: ExpandTest[] = [
   },
   {
     file: 'expand.rb.fixture',
-    ranges: [new Range(1, 3, 1, 3)],
-    targetRanges: [new Range(1, 0, 8, 14)],
+    ranges: [new Range(1, 5, 1, 5)],
+    targetRanges: [new Range(1, 0, 8, 48)],
   },
 ];

@@ -1,10 +1,10 @@
 case n
-else
-  puts 'Only single-digit numbers are allowed'
-when 1
-  puts 'second'
-when 2, 5, 7
-  puts 'second'
-when 0
-  puts 'first'
+  when 0
+    puts 'first'
+  when 1
+    puts 'second'
+  when 2, 5, 7
+    puts 'second'
+  else
+    puts 'Only single-digit numbers are allowed'
 end
