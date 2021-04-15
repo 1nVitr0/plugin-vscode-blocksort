@@ -31,8 +31,10 @@ export default class BlockSortProvider {
     if (textBlocks.length && !textBlocks[0].trim()) {
       textBlocks.push(textBlocks.shift() || '');
     } else if (textBlocks.length && /^\s*\r?\n/.test(textBlocks[0])) {
+      // For some reason a newline for the second block gets left behind sometimes
+      const front = !/\r?\n$/.test(textBlocks[0]) && textBlocks[1] && !/^\r?\n/.test(textBlocks[1]);
       textBlocks[0] = textBlocks[0].replace(/^\s*\r?\n/, '');
-      textBlocks[textBlocks.length - 1] += '\n';
+      textBlocks[front ? 0 : textBlocks.length - 1] += '\n';
     }
 
     return textBlocks;
@@ -55,7 +57,7 @@ export default class BlockSortProvider {
       if (
         validBlock &&
         this.stringProcessor.stripComments(currentBlock).trim() &&
-        (!this.stringProcessor.isIndentIgnoreLine(line) || this.stringProcessor.isClosedBlock(currentBlock)) &&
+        (!this.stringProcessor.isIndentIgnoreLine(line) || this.stringProcessor.isCompleteBlock(currentBlock)) &&
         this.stringProcessor.getIndent(line) === initialIndent &&
         !this.stringProcessor.hasFolding(folding)
       ) {
@@ -106,43 +108,45 @@ export default class BlockSortProvider {
   }
 
   public expandSelection(selection: Selection, indent = 0): Range {
+    const { stringProcessor } = this;
     let range: Range = this.document.validateRange(new Range(selection.start.line, 0, selection.end.line, Infinity));
     let folding: Folding;
 
     while (
-      range.start.line < this.document.lineCount &&
+      range.end.line < this.document.lineCount &&
       this.stringProcessor.totalOpenFolding(
-        (folding = this.stringProcessor.getFolding(this.document.getText(range), undefined, true))
+        (folding = stringProcessor.getFolding(this.document.getText(range), undefined, true))
       ) > 0
     )
       range = new Range(range.start, range.end.with(range.end.line + 1));
 
     while (
       range.start.line > 0 &&
-      this.stringProcessor.totalOpenFolding((folding = this.stringProcessor.getFolding(this.document.getText(range)))) <
-        0
+      stringProcessor.totalOpenFolding((folding = stringProcessor.getFolding(this.document.getText(range)))) < 0
     )
       range = new Range(range.start.with(range.start.line - 1), range.end);
 
     if (!selection.isEmpty) return this.document.validateRange(range);
 
-    let indentRange = this.stringProcessor.getIndentRange(this.document.getText(range));
+    let indentRange = stringProcessor.getIndentRange(this.document.getText(range));
     const { min } = indentRange;
 
-    while (range.start.line > 0 && this.stringProcessor.getIndentRange(this.document.getText(range)).min >= min)
+    while (range.start.line > 0 && stringProcessor.getIndentRange(this.document.getText(range), false).min >= min)
       range = new Range(range.start.line - 1, 0, range.end.line, range.end.character);
-    if (range.start.line !== 0) range = new Range(range.start.line + 1, 0, range.end.line, range.end.character);
+    if (stringProcessor.getIndentRange(this.document.getText(range), false).min < min)
+      range = new Range(range.start.line + 1, 0, range.end.line, range.end.character);
 
     while (
       range.end.line < this.document.lineCount &&
-      this.stringProcessor.getIndentRange(this.document.getText(range)).min >= min
+      stringProcessor.getIndentRange(this.document.getText(range), false).min >= min
     )
       range = new Range(range.start.line, 0, range.end.line + 1, Infinity);
-    range = new Range(range.start.line, 0, range.end.line - 1, Infinity);
+    if (stringProcessor.getIndentRange(this.document.getText(range), false).min < min)
+      range = new Range(range.start.line, 0, range.end.line - 1, Infinity);
 
     while (
       range.start.line < range.end.line &&
-      this.stringProcessor.isIndentIgnoreLine(
+      stringProcessor.isIndentIgnoreLine(
         this.document.getText(range.with(range.start, range.start.with(range.start.line, Infinity)))
       )
     )
