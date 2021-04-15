@@ -31,8 +31,10 @@ export default class BlockSortProvider {
     if (textBlocks.length && !textBlocks[0].trim()) {
       textBlocks.push(textBlocks.shift() || '');
     } else if (textBlocks.length && /^\s*\r?\n/.test(textBlocks[0])) {
+      // For some reason a newline for the second block gets left behind sometimes
+      const front = !/\r?\n$/.test(textBlocks[0]) && textBlocks[1] && !/^\r?\n/.test(textBlocks[1]);
       textBlocks[0] = textBlocks[0].replace(/^\s*\r?\n/, '');
-      textBlocks[textBlocks.length - 1] += '\n';
+      textBlocks[front ? 0 : textBlocks.length - 1] += '\n';
     }
 
     return textBlocks;
