@@ -28,6 +28,29 @@ export default class ConfigurationProvider {
     return [...additional, ...defaultCompleteBlockMarkers];
   }
 
+  public static getSortConsecutiveBlockHeaders(): boolean {
+    const configuration: boolean | undefined = workspace
+      .getConfiguration('blocksort')
+      .get('sortConsecutiveBlockHeaders');
+    return configuration === undefined ? true : configuration;
+  }
+
+  public static getForceBlockHeaderFirstRegex(): string {
+    return '$^';
+  }
+
+  public static getForceBlockHeaderLastRegex(): string {
+    return '(default|else)\\s*(\'([^\']|(?<=\\\\)\')*\'|"([^"]|(?<=\\\\)")*"|`([^`]|(?<=\\\\)`)*`|[A-Za-z_+\\-*/%<>d.,s]*)*\\s*(.*:)?(\r?\n|$)';
+  }
+
+  public static getMultiBlockHeaderRegex(): string {
+    return '(when|case|else|default)\\s*(\'([^\']|(?<=\\\\)\')*\'|"([^"]|(?<=\\\\)")*"|`([^`]|(?<=\\\\)`)*`|[A-Za-z_+\\-*/%<>d.,s]*)*\\s*(.*:)?$';
+  }
+
+  public static getIncompleteBlockRegex(): string {
+    return '(if|when|else|case|for|foreach|else|elsif|while|def|then)\\s*(\'([^\']|(?<=\\\\)\')*\'|"([^"]|(?<=\\\\)")*"|`([^`]|(?<=\\\\)`)*`|[A-Za-z_+\\-*/%<>d.,s]*)*\\s*(.*:)?$';
+  }
+
   public static getIndentIgnoreMarkers(): string[] {
     const additional: string[] = workspace.getConfiguration('blocksort').get('indentIgnoreMarkers') || [];
     return [...additional, ...defaultIndentIgnoreMarkers];

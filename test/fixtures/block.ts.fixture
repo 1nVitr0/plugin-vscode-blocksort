@@ -8,6 +8,8 @@ class Test {
         return 'third';
       case 'a':
         return 'first';
+      case 'd':
+      case 'e':
       default:
         return 'last';
     }

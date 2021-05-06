@@ -1,4 +1,5 @@
 import { Range, Selection, TextDocument } from 'vscode';
+import ConfigurationProvider from './ConfigurationProvider';
 import StringProcessingProvider, { Folding } from './StringProcessingProvider';
 
 type SortingStrategy = 'asc' | 'desc';
@@ -18,7 +19,9 @@ export default class BlockSortProvider {
   }
 
   public sortBlocks(blocks: Range[], sort: (a: string, b: string) => number = BlockSortProvider.sort.asc): string[] {
-    const textBlocks = blocks.map((block) => this.document.getText(block));
+    let textBlocks = blocks.map((block) => this.document.getText(block));
+    if (ConfigurationProvider.getSortConsecutiveBlockHeaders())
+      textBlocks = textBlocks.map((block) => this.sortBlockHeaders(block, sort));
 
     if (this.stringProcessor.isList(blocks) && textBlocks.length && !/,$/.test(textBlocks[textBlocks.length - 1])) {
       textBlocks[textBlocks.length - 1] += ',';
@@ -57,6 +60,7 @@ export default class BlockSortProvider {
       if (
         validBlock &&
         this.stringProcessor.stripComments(currentBlock).trim() &&
+        !this.stringProcessor.isInCompleteBlock(currentBlock) &&
         (!this.stringProcessor.isIndentIgnoreLine(line) || this.stringProcessor.isCompleteBlock(currentBlock)) &&
         this.stringProcessor.getIndent(line) === initialIndent &&
         !this.stringProcessor.hasFolding(folding)
@@ -155,12 +159,33 @@ export default class BlockSortProvider {
     return this.document.validateRange(range);
   }
 
+  private sortBlockHeaders(block: string, sort: (a: string, b: string) => number = BlockSortProvider.sort.asc): string {
+    let lines = block.split(/\r?\n/);
+    const headers: string[] = [];
+
+    let currentLine;
+    while ((currentLine = lines.shift()) && this.stringProcessor.isMultiBlockHeader(currentLine)) {
+      headers.push(currentLine);
+      currentLine = undefined;
+    }
+
+    if (currentLine !== undefined) lines.unshift(currentLine);
+    this.applySort(headers, sort);
+    lines = [...headers, ...lines];
+
+    return lines.join('\n');
+  }
+
   private applySort(blocks: string[], sort: (a: string, b: string) => number = BlockSortProvider.sort.asc) {
     blocks.sort((a, b) =>
-      sort(
-        this.stringProcessor.stripDecorators(this.stringProcessor.stripComments(a)).trim() || a.trim(),
-        this.stringProcessor.stripDecorators(this.stringProcessor.stripComments(b)).trim() || b.trim()
-      )
+      this.stringProcessor.isForceFirstBlock(a) || this.stringProcessor.isForceLastBlock(b)
+        ? -1
+        : this.stringProcessor.isForceLastBlock(a)
+        ? 1
+        : sort(
+            this.stringProcessor.stripDecorators(this.stringProcessor.stripComments(a)).trim() || a.trim(),
+            this.stringProcessor.stripDecorators(this.stringProcessor.stripComments(b)).trim() || b.trim()
+          )
     );
   }
 }
