@@ -28,6 +28,17 @@ export default class ConfigurationProvider {
     return [...additional, ...defaultCompleteBlockMarkers];
   }
 
+  public static getSortConsecutiveBlockHeaders(): boolean {
+    const configuration: boolean | undefined = workspace
+      .getConfiguration('blocksort')
+      .get('sortConsecutiveBlockHeaders');
+    return configuration === undefined ? true : configuration;
+  }
+
+  public static getMultiBlockHeaderRegex(): string {
+    return '(when|case|else)\\s*(\'([^\']|(?<=\\\\)\')*\'|"([^"]|(?<=\\\\)")*"|`([^`]|(?<=\\\\)`)*`|[A-Za-z_+\\-*/%<>d.,s]*)*\\s*(.*:)?$';
+  }
+
   public static getIncompleteBlockRegex(): string {
     return '(if|when|else|case|for|foreach|else|elsif|while|def|then)\\s*(\'([^\']|(?<=\\\\)\')*\'|"([^"]|(?<=\\\\)")*"|`([^`]|(?<=\\\\)`)*`|[A-Za-z_+\\-*/%<>d.,s]*)*\\s*(.*:)?$';
   }

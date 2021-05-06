@@ -79,6 +79,11 @@
                 }
               }
             }
+          },
+          "blocksort.sortConsecutiveBlockHeaders": {
+            "description": "sort consecutive block headers (such as case or when)",
+            "type": "boolean",
+            "default": true
           }
         }
       }
