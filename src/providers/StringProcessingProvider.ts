@@ -110,6 +110,30 @@ export default class StringProcessingProvider {
     return new RegExp(completeBlockRegex, 'g').test(block);
   }
 
+  public isInCompleteBlock(block: string): boolean {
+    const comment = commentRegex[this.document.languageId || 'default'] || commentRegex.default;
+    const blockHeaderRegex = ConfigurationProvider.getIncompleteBlockRegex().replace(/\$$/, `(?:${comment}|\\s*)*$`);
+    return new RegExp(blockHeaderRegex, 'g').test(block);
+  }
+
+  public isMultiBlockHeader(block: string): boolean {
+    const comment = commentRegex[this.document.languageId || 'default'] || commentRegex.default;
+    const blockHeaderRegex = ConfigurationProvider.getMultiBlockHeaderRegex().replace(/\$$/, `(?:${comment}|\\s*)*$`);
+    return new RegExp(blockHeaderRegex, 'g').test(block);
+  }
+
+  public isForceFirstBlock(block: string): boolean {
+    const comment = commentRegex[this.document.languageId || 'default'] || commentRegex.default;
+    const firstRegex = ConfigurationProvider.getForceBlockHeaderFirstRegex().replace(/\$$/, `(?:${comment}|\\s*)*$`);
+    return new RegExp(firstRegex, 'g').test(block);
+  }
+
+  public isForceLastBlock(block: string): boolean {
+    const comment = commentRegex[this.document.languageId || 'default'] || commentRegex.default;
+    const lastRegex = ConfigurationProvider.getForceBlockHeaderLastRegex().replace(/\$$/, `(?:${comment}|\\s*)*$`);
+    return new RegExp(lastRegex, 'g').test(block);
+  }
+
   public isValidLine(line: string): boolean {
     const comment = commentRegex[this.document.languageId || 'default'] || commentRegex.default;
     const hasFolding = this.hasFolding(this.getFolding(line));

@@ -5,7 +5,7 @@ export const sortTests: SortTest[] = [
   {
     file: 'block.ts.fixture',
     compareFile: 'block.ts.expect',
-    ranges: [new Range(3, 0, 11, 22), new Range(17, 0, 31, 8), new Range(37, 0, 45, 8)],
+    ranges: [new Range(3, 0, 13, 22), new Range(19, 0, 33, 8), new Range(39, 0, 47, 8)],
   },
   {
     file: 'block.cpp.fixture',
@@ -41,5 +41,10 @@ export const sortTests: SortTest[] = [
     file: 'nested.html.fixture',
     compareFile: 'nested.html.expect',
     ranges: [new Range(3, 0, 34, 11), new Range(45, 0, 48, 64)],
+  },
+  {
+    file: 'case.ts.fixture',
+    compareFile: 'case.ts.expect',
+    ranges: [new Range(1, 0, 12, 18)],
   },
 ];

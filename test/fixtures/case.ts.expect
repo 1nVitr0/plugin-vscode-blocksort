@@ -1,0 +1,14 @@
+switch (input) {
+  case 'a':
+    return 'first';
+  case 'c':
+    const result = 'second';
+    return result;
+  case 'd':
+    return 'third';
+  case 'b':
+  case 'e':
+  case 'f':
+  default:
+    return 'last';
+}
