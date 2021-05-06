@@ -110,6 +110,12 @@ export default class StringProcessingProvider {
     return new RegExp(completeBlockRegex, 'g').test(block);
   }
 
+  public isInCompleteBlock(block: string): boolean {
+    const comment = commentRegex[this.document.languageId || 'default'] || commentRegex.default;
+    const blockHeaderRegex = ConfigurationProvider.getIncompleteBlockRegex().replace(/\$$/, `(?:${comment}|\\s*)*$`);
+    return new RegExp(blockHeaderRegex, 'g').test(block);
+  }
+
   public isValidLine(line: string): boolean {
     const comment = commentRegex[this.document.languageId || 'default'] || commentRegex.default;
     const hasFolding = this.hasFolding(this.getFolding(line));

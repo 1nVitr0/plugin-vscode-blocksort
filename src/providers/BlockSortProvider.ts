@@ -57,6 +57,7 @@ export default class BlockSortProvider {
       if (
         validBlock &&
         this.stringProcessor.stripComments(currentBlock).trim() &&
+        !this.stringProcessor.isInCompleteBlock(currentBlock) &&
         (!this.stringProcessor.isIndentIgnoreLine(line) || this.stringProcessor.isCompleteBlock(currentBlock)) &&
         this.stringProcessor.getIndent(line) === initialIndent &&
         !this.stringProcessor.hasFolding(folding)

@@ -28,6 +28,10 @@ export default class ConfigurationProvider {
     return [...additional, ...defaultCompleteBlockMarkers];
   }
 
+  public static getIncompleteBlockRegex(): string {
+    return '(if|when|else|case|for|foreach|else|elsif|while|def|then)\\s*(\'([^\']|(?<=\\\\)\')*\'|"([^"]|(?<=\\\\)")*"|`([^`]|(?<=\\\\)`)*`|[A-Za-z_+\\-*/%<>d.,s]*)*\\s*(.*:)?$';
+  }
+
   public static getIndentIgnoreMarkers(): string[] {
     const additional: string[] = workspace.getConfiguration('blocksort').get('indentIgnoreMarkers') || [];
     return [...additional, ...defaultIndentIgnoreMarkers];
