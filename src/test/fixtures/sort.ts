@@ -45,6 +45,6 @@ export const sortTests: SortTest[] = [
   {
     file: 'case.ts.fixture',
     compareFile: 'case.ts.expect',
-    ranges: [new Range(1, 0, 13, 18)],
+    ranges: [new Range(1, 0, 12, 18)],
   },
 ];

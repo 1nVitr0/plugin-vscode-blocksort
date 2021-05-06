@@ -178,10 +178,14 @@ export default class BlockSortProvider {
 
   private applySort(blocks: string[], sort: (a: string, b: string) => number = BlockSortProvider.sort.asc) {
     blocks.sort((a, b) =>
-      sort(
-        this.stringProcessor.stripDecorators(this.stringProcessor.stripComments(a)).trim() || a.trim(),
-        this.stringProcessor.stripDecorators(this.stringProcessor.stripComments(b)).trim() || b.trim()
-      )
+      this.stringProcessor.isForceFirstBlock(a) || this.stringProcessor.isForceLastBlock(b)
+        ? -1
+        : this.stringProcessor.isForceLastBlock(a)
+        ? 1
+        : sort(
+            this.stringProcessor.stripDecorators(this.stringProcessor.stripComments(a)).trim() || a.trim(),
+            this.stringProcessor.stripDecorators(this.stringProcessor.stripComments(b)).trim() || b.trim()
+          )
     );
   }
 }
