@@ -26,9 +26,11 @@
   ],
   "activationEvents": [
     "onCommand:blocksort.sortBlocksAsc",
-    "onCommand:blocksort.sortBlocksDesc"
+    "onCommand:blocksort.sortBlocksDesc",
+    "onCommand:blocksort.sortBlocksMultilevelAsc",
+    "onCommand:blocksort.sortBlocksMultilevelDesc"
   ],
-  "main": "./dist/extension.js",
+  "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
