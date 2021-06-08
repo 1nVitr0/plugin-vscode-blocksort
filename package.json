@@ -30,7 +30,7 @@
     "onCommand:blocksort.sortBlocksMultilevelAsc",
     "onCommand:blocksort.sortBlocksMultilevelDesc"
   ],
-  "main": "./out/extension.js",
+  "main": "./dist/extension.js",
   "contributes": {
     "commands": [
       {
