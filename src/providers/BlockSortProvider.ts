@@ -18,8 +18,8 @@ export default class BlockSortProvider {
     this.stringProcessor = new StringProcessingProvider(document);
   }
 
-  public sortBlocks(blocks: Range[], sort: (a: string, b: string) => number = BlockSortProvider.sort.asc): string[] {
-    let textBlocks = blocks.map((block) => this.document.getText(block));
+  public sortBlocks(blocks: Range[], sort: (a: string, b: string) => number = BlockSortProvider.sort.asc, sortChildren = 0): string[] {
+    let textBlocks = blocks.map((block) => this.sortInnerBlocks(block, sort, sortChildren));
     if (ConfigurationProvider.getSortConsecutiveBlockHeaders())
       textBlocks = textBlocks.map((block) => this.sortBlockHeaders(block, sort));
 
@@ -92,23 +92,19 @@ export default class BlockSortProvider {
     const lines = text.split(/\r?\n/);
     const indent = this.stringProcessor.getIndentRange(text);
 
-    const result: Range[] = [];
     let start = 0;
     let end = 0;
     for (const line of lines) {
-      if (this.stringProcessor.getIndent(line) > indent.min) {
-        end++;
-      } else if (start !== end) {
-        result.push(
-          this.document.validateRange(new Range(block.start.line + start, 0, block.start.line + end, Infinity))
-        );
-        start = ++end;
-      } else {
-        start = ++end;
+      if (this.stringProcessor.getIndent(line) === indent.min) {
+        if (end > start) break;
+        start++;
       }
+      end++;
     }
 
-    return result;
+    const intersection = block.intersection(new Range(block.start.line + start, 0, block.start.line + end, Infinity));
+    if (intersection && !intersection.isEmpty) return this.getBlocks(intersection);
+    return [];
   }
 
   public expandSelection(selection: Selection, indent = 0): Range {
@@ -157,6 +153,18 @@ export default class BlockSortProvider {
       range = range.with(range.start.with(range.start.line + 1, 0));
 
     return this.document.validateRange(range);
+  }
+
+  private sortInnerBlocks(block: Range, sort: (a: string, b: string) => number = BlockSortProvider.sort.asc, sortChildren = 0): string {
+    if (sortChildren === 0) return this.document.getText(block);
+
+    let blocks = this.getInnerBlocks(block);
+    if (!blocks.length) return this.document.getText(block);
+
+    const head: Range = new Range(block.start, blocks[0]?.start || block.start);
+    const tail: Range = new Range(blocks[blocks.length-1]?.end || block.end, block.end);
+    
+    return this.document.getText(head) + this.sortBlocks(blocks, sort, sortChildren - 1).join('\n') +  this.document.getText(tail);
   }
 
   private sortBlockHeaders(block: string, sort: (a: string, b: string) => number = BlockSortProvider.sort.asc): string {
