@@ -1,7 +1,8 @@
-import { InputBoxOptions, Selection, TextEditor, TextEditorEdit, window } from 'vscode';
+import { commands, InputBoxOptions, Selection, TextEditor, TextEditorEdit, window } from 'vscode';
 import BlockSortProvider from '../providers/BlockSortProvider';
+import ConfigurationProvider from '../providers/ConfigurationProvider';
 
-function blockSort(
+export function blockSort(
   editor: TextEditor,
   editBuilder: TextEditorEdit,
   sortFunction: (a: string, b: string) => number,
@@ -19,21 +20,21 @@ function blockSort(
   editBuilder.replace(range, sorted.join('\n'));
 }
 
-export function blockSortMultilevel(
-  editor: TextEditor,
-  editBuilder: TextEditorEdit,
-  sortFunction: (a: string, b: string) => number
-) {
+function blockSortMultilevel(sortFunction: (a: string, b: string) => number) {
+  const defaultDepth = ConfigurationProvider.getDefaultMultilevelDepth();
+  if (!ConfigurationProvider.getAskForMultilevelDepth())
+    return commands.executeCommand('blocksort._sortBlocks', sortFunction, defaultDepth);
+
   let options: InputBoxOptions = {
     prompt: 'Indentation Depth: ',
     placeHolder: '(number)',
-    value: '-1',
-    validateInput: (value) => (/-?\d+/.test(value) ? value : null),
+    value: defaultDepth.toString(),
+    validateInput: (value) => (/\-?\d+/.test(value) ? null : 'Only integer values allowed. Use -1 for infinite depth'),
   };
 
   window.showInputBox(options).then((value) => {
-    if (!value) return;
-    blockSort(editor, editBuilder, sortFunction, parseInt(value));
+    if (value === undefined) return;
+    commands.executeCommand('blocksort._sortBlocks', sortFunction, parseInt(value));
   });
 }
 
@@ -45,10 +46,10 @@ export function blockSortDesc(editor: TextEditor, editBuilder: TextEditorEdit) {
   blockSort(editor, editBuilder, BlockSortProvider.sort.desc);
 }
 
-export function blockSortMultilevelAsc(editor: TextEditor, editBuilder: TextEditorEdit) {
-  blockSortMultilevel(editor, editBuilder, BlockSortProvider.sort.asc);
+export function blockSortMultilevelAsc() {
+  blockSortMultilevel(BlockSortProvider.sort.asc);
 }
 
-export function blockSortMultilevelDesc(editor: TextEditor, editBuilder: TextEditorEdit) {
-  blockSortMultilevel(editor, editBuilder, BlockSortProvider.sort.desc);
+export function blockSortMultilevelDesc() {
+  blockSortMultilevel(BlockSortProvider.sort.desc);
 }
