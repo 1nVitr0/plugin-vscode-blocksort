@@ -33,17 +33,55 @@
     "commands": [
       {
         "command": "blocksort.sortBlocksAsc",
-        "title": "Sort Blocks Ascending"
+        "title": "Sort Blocks Ascending",
+        "category": "Sort",
+        "icon": {
+          "dark": "resources/icon_asc_dark.svg",
+          "light": "resources/icon_asc.svg"
+        }
       },
       {
         "command": "blocksort.sortBlocksDesc",
-        "title": "Sort Blocks Descending"
+        "title": "Sort Blocks Descending",
+        "category": "Sort",
+        "icon": {
+          "dark": "resources/icon_desc_dark.svg",
+          "light": "resources/icon_desc.svg"
+        }
+      },
+      {
+        "command": "blocksort.sortBlocksMultilevelAsc",
+        "title": "Sort Blocks Deep Ascending (Multilevel)",
+        "category": "Sort",
+        "icon": {
+          "dark": "resources/icon_asc_dark.svg",
+          "light": "resources/icon_asc.svg"
+        }
+      },
+      {
+        "command": "blocksort.sortBlocksMultilevelDesc",
+        "title": "Sort Blocks Deep Descending (Multilevel)",
+        "category": "Sort",
+        "icon": {
+          "dark": "resources/icon_desc_dark.svg",
+          "light": "resources/icon_desc.svg"
+        }
       }
     ],
     "configuration": [
       {
         "title": "Block Sort",
         "properties": {
+          "blocksort.defaultMultilevelDepth": {
+            "description": "Default depth used for depp (multilevel) sorting. Use `-1` for infinite depth",
+            "default": -1,
+            "type": "integer"
+          },
+          "blocksort.askForMultilevelDepth": {
+            "description": "Controls secondary dialog asking for multilevel Depth. When false, blocksort.defaultMultilevelDepth will be used",
+            "default": true,
+            "type": "boolean"
+          },
           "blocksort.indentIgnoreMarkers": {
             "description": "Lines starting with these will not be taken into account when checking indentation. This is ised for C++-Style blocks ('{' in separate line) and for non-bracketed blocks (begin-end style). '{', 'end.*' and 'esac|fi' are already provided ('end.* is a bit more complicated, feel free to submit issued when some instances do not work)').",
             "default": [],

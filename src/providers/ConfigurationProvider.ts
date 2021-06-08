@@ -35,6 +35,16 @@ export default class ConfigurationProvider {
     return configuration === undefined ? true : configuration;
   }
 
+  public static getDefaultMultilevelDepth(): number {
+    const configuration: number | undefined = workspace.getConfiguration('blocksort').get('defaultMultilevelDepth');
+    return configuration === undefined ? -1 : configuration;
+  }
+
+  public static getAskForMultilevelDepth(): boolean {
+    const configuration: boolean | undefined = workspace.getConfiguration('blocksort').get('askForMultilevelDepth');
+    return configuration === undefined ? true : configuration;
+  }
+
   public static getForceBlockHeaderFirstRegex(): string {
     return '$^';
   }
