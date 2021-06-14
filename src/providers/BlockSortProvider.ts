@@ -1,14 +1,32 @@
-import { Range, Selection, TextDocument } from 'vscode';
-import ConfigurationProvider from './ConfigurationProvider';
-import StringProcessingProvider, { Folding } from './StringProcessingProvider';
+import { Range, Selection, TextDocument } from "vscode";
+import ConfigurationProvider from "./ConfigurationProvider";
+import StringProcessingProvider, { Folding } from "./StringProcessingProvider";
 
-type SortingStrategy = 'asc' | 'desc';
+type SortingStrategy = "asc" | "desc" | "ascNatural" | "descNatural";
 
 export default class BlockSortProvider {
   public static sort: Record<SortingStrategy, (a: string, b: string) => number> = {
     asc: (a, b) => (a > b ? 1 : a < b ? -1 : 0),
     desc: (a, b) => (a < b ? 1 : a > b ? -1 : 0),
+    ascNatural: (a, b) => BlockSortProvider.sort.asc(BlockSortProvider.padNumbers(a), BlockSortProvider.padNumbers(b)),
+    descNatural: (a, b) =>
+      BlockSortProvider.sort.desc(BlockSortProvider.padNumbers(a), BlockSortProvider.padNumbers(b)),
   };
+  protected static padNumbers(line: string) {
+    const { omitUuids, padding, sortNegativeValues } = ConfigurationProvider.getNaturalSortOptions();
+    let result = line;
+    if (omitUuids) result = result.replace(/\d+(?=[^a-zA-z]|$)|(?<=[^a-zA-z]|^)\d+/g, (match) => match.padStart(padding, "0"));
+    else result = result.replace(/\d+/g, (match) => match.padStart(padding, "0"));
+
+    if (sortNegativeValues) {
+      result = result.replace(
+        new RegExp(`-\\d{${padding}}`, "g"),
+        (match) => `-${(Math.pow(10, padding) + parseInt(match)).toString()}`
+      );
+    }
+
+    return result;
+  }
 
   private document: TextDocument;
   private stringProcessor: StringProcessingProvider;
@@ -18,26 +36,30 @@ export default class BlockSortProvider {
     this.stringProcessor = new StringProcessingProvider(document);
   }
 
-  public sortBlocks(blocks: Range[], sort: (a: string, b: string) => number = BlockSortProvider.sort.asc, sortChildren = 0): string[] {
+  public sortBlocks(
+    blocks: Range[],
+    sort: (a: string, b: string) => number = BlockSortProvider.sort.asc,
+    sortChildren = 0
+  ): string[] {
     let textBlocks = blocks.map((block) => this.sortInnerBlocks(block, sort, sortChildren));
     if (ConfigurationProvider.getSortConsecutiveBlockHeaders())
       textBlocks = textBlocks.map((block) => this.sortBlockHeaders(block, sort));
 
     if (this.stringProcessor.isList(blocks) && textBlocks.length && !/,$/.test(textBlocks[textBlocks.length - 1])) {
-      textBlocks[textBlocks.length - 1] += ',';
+      textBlocks[textBlocks.length - 1] += ",";
       this.applySort(textBlocks, sort);
-      textBlocks[textBlocks.length - 1] = textBlocks[textBlocks.length - 1].replace(/,\s*$/, '');
+      textBlocks[textBlocks.length - 1] = textBlocks[textBlocks.length - 1].replace(/,\s*$/, "");
     } else {
       this.applySort(textBlocks, sort);
     }
 
     if (textBlocks.length && !textBlocks[0].trim()) {
-      textBlocks.push(textBlocks.shift() || '');
+      textBlocks.push(textBlocks.shift() || "");
     } else if (textBlocks.length && /^\s*\r?\n/.test(textBlocks[0])) {
       // For some reason a newline for the second block gets left behind sometimes
       const front = !/\r?\n$/.test(textBlocks[0]) && textBlocks[1] && !/^\r?\n/.test(textBlocks[1]);
-      textBlocks[0] = textBlocks[0].replace(/^\s*\r?\n/, '');
-      textBlocks[front ? 0 : textBlocks.length - 1] += '\n';
+      textBlocks[0] = textBlocks[0].replace(/^\s*\r?\n/, "");
+      textBlocks[front ? 0 : textBlocks.length - 1] += "\n";
     }
 
     return textBlocks;
@@ -47,7 +69,7 @@ export default class BlockSortProvider {
     const startLine = range.start.line;
     const text = this.document.getText(range);
     const lines = text.split(/\r?\n/);
-    const firstLine = lines.shift() || '';
+    const firstLine = lines.shift() || "";
     const initialIndent = this.stringProcessor.getIndent(firstLine);
     const blocks: Range[] = [];
 
@@ -68,7 +90,7 @@ export default class BlockSortProvider {
         blocks.push(this.document.validateRange(new Range(startLine + lastStart, 0, startLine + currentEnd, Infinity)));
         lastStart = currentEnd + 1;
         currentEnd = lastStart;
-        currentBlock = '';
+        currentBlock = "";
         validBlock = false;
       } else {
         currentEnd++;
@@ -155,16 +177,24 @@ export default class BlockSortProvider {
     return this.document.validateRange(range);
   }
 
-  private sortInnerBlocks(block: Range, sort: (a: string, b: string) => number = BlockSortProvider.sort.asc, sortChildren = 0): string {
+  private sortInnerBlocks(
+    block: Range,
+    sort: (a: string, b: string) => number = BlockSortProvider.sort.asc,
+    sortChildren = 0
+  ): string {
     if (sortChildren === 0) return this.document.getText(block);
 
     let blocks = this.getInnerBlocks(block);
     if (!blocks.length) return this.document.getText(block);
 
     const head: Range = new Range(block.start, blocks[0]?.start || block.start);
-    const tail: Range = new Range(blocks[blocks.length-1]?.end || block.end, block.end);
-    
-    return this.document.getText(head) + this.sortBlocks(blocks, sort, sortChildren - 1).join('\n') +  this.document.getText(tail);
+    const tail: Range = new Range(blocks[blocks.length - 1]?.end || block.end, block.end);
+
+    return (
+      this.document.getText(head) +
+      this.sortBlocks(blocks, sort, sortChildren - 1).join("\n") +
+      this.document.getText(tail)
+    );
   }
 
   private sortBlockHeaders(block: string, sort: (a: string, b: string) => number = BlockSortProvider.sort.asc): string {
@@ -181,7 +211,7 @@ export default class BlockSortProvider {
     this.applySort(headers, sort);
     lines = [...headers, ...lines];
 
-    return lines.join('\n');
+    return lines.join("\n");
   }
 
   private applySort(blocks: string[], sort: (a: string, b: string) => number = BlockSortProvider.sort.asc) {

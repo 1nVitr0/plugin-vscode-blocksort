@@ -4,3 +4,4 @@ export const fixtureDir = join(__dirname, '../../../test/fixtures');
 export * from './expand';
 export * from './sort';
 export * from './multilevel';
+export * from './natural';
