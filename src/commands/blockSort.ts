@@ -39,17 +39,21 @@ function blockSortMultilevel(sortFunction: (a: string, b: string) => number) {
 }
 
 export function blockSortAsc(editor: TextEditor, editBuilder: TextEditorEdit) {
-  blockSort(editor, editBuilder, BlockSortProvider.sort.asc);
+  const naturalSorting = ConfigurationProvider.getEnableNaturalSorting();
+  blockSort(editor, editBuilder, naturalSorting ? BlockSortProvider.sort.ascNatural : BlockSortProvider.sort.asc);
 }
 
 export function blockSortDesc(editor: TextEditor, editBuilder: TextEditorEdit) {
-  blockSort(editor, editBuilder, BlockSortProvider.sort.desc);
+  const naturalSorting = ConfigurationProvider.getEnableNaturalSorting();
+  blockSort(editor, editBuilder, naturalSorting ? BlockSortProvider.sort.descNatural : BlockSortProvider.sort.desc);
 }
 
 export function blockSortMultilevelAsc() {
-  blockSortMultilevel(BlockSortProvider.sort.asc);
+  const naturalSorting = ConfigurationProvider.getEnableNaturalSorting();
+  blockSortMultilevel(naturalSorting ? BlockSortProvider.sort.ascNatural : BlockSortProvider.sort.asc);
 }
 
 export function blockSortMultilevelDesc() {
-  blockSortMultilevel(BlockSortProvider.sort.desc);
+  const naturalSorting = ConfigurationProvider.getEnableNaturalSorting();
+  blockSortMultilevel(naturalSorting ? BlockSortProvider.sort.descNatural : BlockSortProvider.sort.desc);
 }
