@@ -13,16 +13,15 @@ export default class BlockSortProvider {
       BlockSortProvider.sort.desc(BlockSortProvider.padNumbers(a), BlockSortProvider.padNumbers(b)),
   };
   protected static padNumbers(line: string) {
-    const pad = /*naturalSortPadding*/ 16;
+    const { omitUuids, padding, sortNegativeValues } = ConfigurationProvider.getNaturalSortOptions();
     let result = line;
-    if (/*detectUuids*/ true)
-      result = result.replace(/\d+(?=[^a-zA-z]|$)|(?<=[^a-zA-z]|^)\d+/g, (match) => match.padStart(pad, "0"));
-    else result = result.replace(/\d+/g, (match) => match.padStart(pad, "0"));
+    if (omitUuids) result = result.replace(/\d+(?=[^a-zA-z]|$)|(?<=[^a-zA-z]|^)\d+/g, (match) => match.padStart(padding, "0"));
+    else result = result.replace(/\d+/g, (match) => match.padStart(padding, "0"));
 
-    if (/*negative values*/ true) {
+    if (sortNegativeValues) {
       result = result.replace(
-        new RegExp(`-\\d{${pad}}`, "g"),
-        (match) => `-${(Math.pow(10, pad) + parseInt(match)).toString()}`
+        new RegExp(`-\\d{${padding}}`, "g"),
+        (match) => `-${(Math.pow(10, padding) + parseInt(match)).toString()}`
       );
     }
 

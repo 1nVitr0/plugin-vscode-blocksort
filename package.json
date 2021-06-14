@@ -120,6 +120,44 @@
               }
             }
           },
+          "blocksort.enableNaturalSorting": {
+            "type": "boolean",
+            "description": "Sort string containing numbers intuitively (`80` before `443`)",
+            "default": false
+          },
+          "blocksort.naturalSorting": {
+            "type": "object",
+            "description": "Settings for natural sorting",
+            "default": {
+              "enabled": false,
+              "padding": 9,
+              "omitUuids": false,
+              "sortNegativeValues": true
+            },
+            "required": [
+              "enabled"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "padding": {
+                "description": "For natural sorting numbers are padded with 0. For performance reasons the number of 0s is fixed to this value",
+                "default": 9,
+                "type": "number",
+                "minimum": "0",
+                "maximum": "16"
+              },
+              "omitUuids": {
+                "description": "Enables very basic UUID detection and automatically disables natural sorting for these values.  Might still fail for edge cases (like a number at the end of the UUID or on dashes)",
+                "default": false,
+                "type": "boolean"
+              },
+              "sortNegativeValues": {
+                "description": "Sort negative values before positive. Might fail, especially on UUIDs containing dashes",
+                "default": true,
+                "type": "boolean"
+              }
+            }
+          },
           "blocksort.sortConsecutiveBlockHeaders": {
             "description": "sort consecutive block headers (such as case or when)",
             "type": "boolean",
