@@ -2,12 +2,19 @@ import { Range, Selection, TextDocument } from 'vscode';
 import ConfigurationProvider from './ConfigurationProvider';
 import StringProcessingProvider, { Folding } from './StringProcessingProvider';
 
-type SortingStrategy = 'asc' | 'desc';
+type SortingStrategy = 'asc' | 'desc' | 'ascNatural' | 'descNatural';
 
 export default class BlockSortProvider {
   public static sort: Record<SortingStrategy, (a: string, b: string) => number> = {
     asc: (a, b) => (a > b ? 1 : a < b ? -1 : 0),
     desc: (a, b) => (a < b ? 1 : a > b ? -1 : 0),
+    ascNatural: (a, b) => BlockSortProvider.sort.asc(BlockSortProvider.padNumbers(a), BlockSortProvider.padNumbers(b)),
+    descNatural: (a, b) => BlockSortProvider.sort.desc(BlockSortProvider.padNumbers(a), BlockSortProvider.padNumbers(b)),
+  };
+  protected static padNumbers(line: string) {
+    const pad = /*naturalSortPadding*/ 20;
+    if (/*detectUuids*/ true)return line.replace(/\d+(?=[^a-zA-z]|$)|(?<=[^a-zA-z]|^)\d+/g, match => match.padStart(pad, '0'));
+    return line.replace(/\d+/g, match => match.padStart(pad, '0'));
   };
 
   private document: TextDocument;
