@@ -1,0 +1,21 @@
+function test(input: string, select = 0) {
+  switch(input) {
+    case '1':
+      return 'first';
+    case '2':
+      return 'second';
+    case '3':
+      switch (select) {
+        case 8:
+          return 'third-first';
+        case 23:
+          return 'third-second';
+        case 196:
+          return 'third-third';
+        default:
+          return 'third-last';
+      }
+    default:
+      return 'last';
+  }
+}
