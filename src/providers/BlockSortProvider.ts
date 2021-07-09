@@ -83,7 +83,7 @@ export default class BlockSortProvider {
       if (
         validBlock &&
         this.stringProcessor.stripComments(currentBlock).trim() &&
-        !this.stringProcessor.isInCompleteBlock(currentBlock) &&
+        !this.stringProcessor.isIncompleteBlock(currentBlock) &&
         (!this.stringProcessor.isIndentIgnoreLine(line) || this.stringProcessor.isCompleteBlock(currentBlock)) &&
         this.stringProcessor.getIndent(line) === initialIndent &&
         !this.stringProcessor.hasFolding(folding)
@@ -126,9 +126,7 @@ export default class BlockSortProvider {
     }
 
     const intersection = block.intersection(new Range(block.start.line + start, 0, block.start.line + end, Infinity));
-    const lineDiff =
-      block.end.line - block.start.line - (intersection ? intersection.end.line - intersection.start.line : 0);
-    if (intersection && !intersection.isEmpty && lineDiff) return this.getBlocks(intersection);
+    if (intersection && !intersection.isEmpty) return this.getBlocks(intersection);
     return [];
   }
 
@@ -188,10 +186,12 @@ export default class BlockSortProvider {
     if (sortChildren === 0) return this.document.getText(block);
 
     let blocks = this.getInnerBlocks(block);
-    if (blocks.length < 2) return this.document.getText(block);
+    // if (!blocks.length || (blocks.length === 1 && blocks[0].isSingleLine)) return this.document.getText(block);
 
     const head: Range = new Range(block.start, blocks[0]?.start || block.start);
     const tail: Range = new Range(blocks[blocks.length - 1]?.end || block.end, block.end);
+
+    if (head.isEmpty && tail.isEmpty) return this.document.getText(block);
 
     return (
       this.document.getText(head) +
@@ -218,15 +218,14 @@ export default class BlockSortProvider {
   }
 
   private applySort(blocks: string[], sort: (a: string, b: string) => number = BlockSortProvider.sort.asc) {
-    blocks.sort((a, b) =>
-      this.stringProcessor.isForceFirstBlock(a) || this.stringProcessor.isForceLastBlock(b)
+    blocks.sort((a, b) => {
+      const sanitizedA = this.stringProcessor.stripDecorators(this.stringProcessor.stripComments(a)).trim() || a.trim();
+      const sanitizedB = this.stringProcessor.stripDecorators(this.stringProcessor.stripComments(b)).trim() || b.trim();
+      return this.stringProcessor.isForceFirstBlock(sanitizedA) || this.stringProcessor.isForceLastBlock(sanitizedB)
         ? -1
-        : this.stringProcessor.isForceLastBlock(a)
+        : this.stringProcessor.isForceLastBlock(sanitizedA) || this.stringProcessor.isForceFirstBlock(sanitizedB)
         ? 1
-        : sort(
-            this.stringProcessor.stripDecorators(this.stringProcessor.stripComments(a)).trim() || a.trim(),
-            this.stringProcessor.stripDecorators(this.stringProcessor.stripComments(b)).trim() || b.trim()
-          )
-    );
+        : sort(sanitizedA, sanitizedB);
+    });
   }
 }
