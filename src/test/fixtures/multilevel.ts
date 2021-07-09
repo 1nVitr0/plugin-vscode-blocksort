@@ -7,4 +7,9 @@ export const multilevelSortTests: SortTest[] = [
     compareFile: 'multilevel.txt.expect',
     ranges: [new Range(0, 0, 16, 8)],
   },
+  {
+    file: 'multilevel.ts.fixture',
+    compareFile: 'multilevel.ts.expect',
+    ranges: [new Range(1, 0, 18, 20)],
+  },
 ];
