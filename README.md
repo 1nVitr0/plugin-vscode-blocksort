@@ -58,7 +58,7 @@ This extension contributed the following settings:#
 
 - The automatic selection validation is fairly complicated. Some languages or edge cases might not work yet (feel free to open an issue)
 - some spacings between the original blocks may not be preserved
-- The extension does NOT check for code erros due to sorting
+- The extension does NOT check for code errors due to sorting
 - The extension assumes valid code, invalid formatting will probably result in invalid sorting
 - When comments and / or decorators are involved the results may vary (the extension tries it's best, comments will stick to the lines below them)
 - "Natural" sorting may break on UUID strings containing a mix of numbers, letters and/or dashes
