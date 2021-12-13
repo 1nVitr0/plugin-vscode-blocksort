@@ -25,6 +25,7 @@
     "block sort"
   ],
   "activationEvents": [
+    "onStartupFinished",
     "onCommand:blocksort.sortBlocksAsc",
     "onCommand:blocksort.sortBlocksDesc",
     "onCommand:blocksort.sortBlocksMultilevelAsc",
