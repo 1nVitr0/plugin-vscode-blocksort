@@ -17,6 +17,7 @@ If something is already selected, the extension tries it's best to validate and 
 
 Additional features include:
 
+- `@blocksort` markers and `source.fixAll` code actions for auto-sorting on save
 - deep (multilevel) sorting for nested blocks
 - "*natural*" sorting for lines containing numbers
 
@@ -33,6 +34,48 @@ This extension contributed the following commands:
 `Sort Blocks Deep Ascending (Multilevel)`: Sorts the selected code blocks in ascending order, including nested blocks up to a specified depth.
 
 `Sort Blocks Deep Descending (Multilevel)`: Sorts the selected code blocks in descending order, including nested blocks up to a specified depth.
+
+## Code Actions
+
+The extension provides the following code actions:
+
+`source.fixAll.blocksort`: This can be executed on save to auto-sort all blocks following a `@blocksort` marker.
+
+To enable auto Sorting, you must set the `editor.codeActionsOnSave` in your `settings.json`:
+```json
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll.blocksort": true
+  }
+}
+```
+
+This will enable auto-sorting for blocks following a `@blocksort` marker.
+The marker can additionally be followed by the options `asc` or `desc` to control the sorting order,
+as well as a number for the sorting depth:
+
+```js
+// @blocksort asc
+switch(value) {
+  case 1:
+    return 1;
+  case 2:
+    return 2;
+  default:
+    return 2;
+}
+```
+
+```yaml
+# @blocksort asc 9
+some:
+  nested:
+    - code
+    - (will be
+  sorted:
+    - up to
+    - 9 levels)
+```
 
 ## Extension Settings
 
@@ -58,7 +101,7 @@ This extension contributed the following settings:#
 
 - The automatic selection validation is fairly complicated. Some languages or edge cases might not work yet (feel free to open an issue)
 - some spacings between the original blocks may not be preserved
-- The extension does NOT check for code erros due to sorting
+- The extension does NOT check for code errors due to sorting
 - The extension assumes valid code, invalid formatting will probably result in invalid sorting
 - When comments and / or decorators are involved the results may vary (the extension tries it's best, comments will stick to the lines below them)
 - "Natural" sorting may break on UUID strings containing a mix of numbers, letters and/or dashes
