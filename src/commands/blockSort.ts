@@ -1,40 +1,39 @@
-import { commands, InputBoxOptions, Selection, TextEditor, TextEditorEdit, window } from 'vscode';
-import BlockSortProvider from '../providers/BlockSortProvider';
-import ConfigurationProvider from '../providers/ConfigurationProvider';
+import { commands, InputBoxOptions, Selection, Range, TextEditor, TextEditorEdit, window } from "vscode";
+import BlockSortProvider from "../providers/BlockSortProvider";
+import ConfigurationProvider from "../providers/ConfigurationProvider";
+import FormattingProvider from "../providers/FormattingProvider";
 
 export function blockSort(
-  editor: TextEditor,
+  editor: TextEditor | undefined,
   editBuilder: TextEditorEdit,
   sortFunction: (a: string, b: string) => number,
   sortChildren = 0
 ) {
-  if (!window.activeTextEditor) return;
-  const { document, selection } = window.activeTextEditor;
+  if (!editor) editor = window.activeTextEditor;
+  if (!editor) return;
 
-  const blockSort = new BlockSortProvider(document);
-  const range = blockSort.expandSelection(selection);
-  const blocks = blockSort.getBlocks(range);
-  const sorted = blockSort.sortBlocks(blocks, sortFunction, sortChildren);
+  const { document, selection } = editor;
 
-  editor.selection = new Selection(range.start, range.end);
-  editBuilder.replace(range, sorted.join('\n'));
+  const edit = FormattingProvider.getBlockSortEdit(document, selection, { sortFunction, sortChildren });
+  editBuilder.replace(edit.range, edit.newText);
+  editor.selection = new Selection(edit.range.start, edit.range.end);
 }
 
 function blockSortMultilevel(sortFunction: (a: string, b: string) => number) {
   const defaultDepth = ConfigurationProvider.getDefaultMultilevelDepth();
   if (!ConfigurationProvider.getAskForMultilevelDepth())
-    return commands.executeCommand('blocksort._sortBlocks', sortFunction, defaultDepth);
+    return commands.executeCommand("blocksort._sortBlocks", sortFunction, defaultDepth);
 
   let options: InputBoxOptions = {
-    prompt: 'Indentation Depth: ',
-    placeHolder: '(number)',
+    prompt: "Indentation Depth: ",
+    placeHolder: "(number)",
     value: defaultDepth.toString(),
-    validateInput: (value) => (/\-?\d+/.test(value) ? null : 'Only integer values allowed. Use -1 for infinite depth'),
+    validateInput: (value) => (/\-?\d+/.test(value) ? null : "Only integer values allowed. Use -1 for infinite depth"),
   };
 
   window.showInputBox(options).then((value) => {
     if (value === undefined) return;
-    commands.executeCommand('blocksort._sortBlocks', sortFunction, parseInt(value));
+    commands.executeCommand("blocksort._sortBlocks", sortFunction, parseInt(value));
   });
 }
 
