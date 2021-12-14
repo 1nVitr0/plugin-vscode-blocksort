@@ -122,9 +122,7 @@ export default class BlockSortActionProvider
     this.blockSortProviders.delete(document.uri);
     if (this.documentListeners.has(document.uri)) {
       const disposables = this.documentListeners.get(document.uri)!;
-      for (const disposable of disposables) {
-        disposable.dispose();
-      }
+      for (const disposable of disposables) disposable.dispose();
       this.documentListeners.delete(document.uri);
     }
   }
@@ -158,7 +156,7 @@ export default class BlockSortActionProvider
     for (const change of changes) {
       if (token.isCancellationRequested) return markers;
       const { range, text } = change;
-      const lineCountBefore = range.end.line - range.start.line;
+      const lineCountBefore = range.end.line - range.start.line + 1;
       const lines = text.split("\n");
 
       // If line count changes, update all markers after the change
