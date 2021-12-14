@@ -6,6 +6,7 @@ import FormattingProvider from "../providers/FormattingProvider";
 export function blockSort(
   editor: TextEditor | undefined,
   editBuilder: TextEditorEdit,
+  range: Range | null,
   sortFunction: (a: string, b: string) => number,
   sortChildren = 0
 ) {
@@ -14,7 +15,7 @@ export function blockSort(
 
   const { document, selection } = editor;
 
-  const edit = FormattingProvider.getBlockSortEdit(document, selection, { sortFunction, sortChildren });
+  const edit = FormattingProvider.getBlockSortEdit(document, range ?? selection, { sortFunction, sortChildren });
   editBuilder.replace(edit.range, edit.newText);
   editor.selection = new Selection(edit.range.start, edit.range.end);
 }
@@ -39,20 +40,24 @@ function blockSortMultilevel(sortFunction: (a: string, b: string) => number) {
 
 export function blockSortAsc(editor: TextEditor, editBuilder: TextEditorEdit) {
   const naturalSorting = ConfigurationProvider.getEnableNaturalSorting();
-  blockSort(editor, editBuilder, naturalSorting ? BlockSortProvider.sort.ascNatural : BlockSortProvider.sort.asc);
+  const sortFunction = naturalSorting ? BlockSortProvider.sort.ascNatural : BlockSortProvider.sort.asc;
+  blockSort(editor, editBuilder, null, sortFunction);
 }
 
 export function blockSortDesc(editor: TextEditor, editBuilder: TextEditorEdit) {
   const naturalSorting = ConfigurationProvider.getEnableNaturalSorting();
-  blockSort(editor, editBuilder, naturalSorting ? BlockSortProvider.sort.descNatural : BlockSortProvider.sort.desc);
+  const sortFunction = naturalSorting ? BlockSortProvider.sort.descNatural : BlockSortProvider.sort.desc;
+  blockSort(editor, editBuilder, null, sortFunction);
 }
 
 export function blockSortMultilevelAsc() {
   const naturalSorting = ConfigurationProvider.getEnableNaturalSorting();
-  blockSortMultilevel(naturalSorting ? BlockSortProvider.sort.ascNatural : BlockSortProvider.sort.asc);
+  const sortFunction = naturalSorting ? BlockSortProvider.sort.ascNatural : BlockSortProvider.sort.asc;
+  blockSortMultilevel(sortFunction);
 }
 
 export function blockSortMultilevelDesc() {
   const naturalSorting = ConfigurationProvider.getEnableNaturalSorting();
-  blockSortMultilevel(naturalSorting ? BlockSortProvider.sort.descNatural : BlockSortProvider.sort.desc);
+  const sortFunction = naturalSorting ? BlockSortProvider.sort.descNatural : BlockSortProvider.sort.desc;
+  blockSortMultilevel(sortFunction);
 }

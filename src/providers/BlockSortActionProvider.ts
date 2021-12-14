@@ -59,7 +59,7 @@ export default class BlockSortActionProvider
             tooltip: "Apply blocksort action",
             title: "Sort block",
             command: "blocksort._sortBlocks",
-            arguments: [options.sortFunction, options.sortChildren],
+            arguments: [range, options.sortFunction, options.sortChildren],
           })
         );
       });
