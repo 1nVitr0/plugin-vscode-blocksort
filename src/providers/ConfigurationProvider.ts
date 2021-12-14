@@ -25,6 +25,8 @@ export interface NaturalSortOptions {
 }
 
 export default class ConfigurationProvider {
+  public static invalidatingConfigurationKeys: string[] = ["enableNaturalSorting", "enableCodeLens"];
+
   public static getFoldingMarkers(): FoldingMarkerList {
     const additional: FoldingMarkerList = workspace.getConfiguration("blocksort").get("foldingMarkers") || {};
     return { ...additional, ...defaultFoldingMarkers };
@@ -87,5 +89,9 @@ export default class ConfigurationProvider {
 
   public static getEnableNaturalSorting(): boolean {
     return !!workspace.getConfiguration("blocksort").get("enableNaturalSorting");
+  }
+
+  public static getEnableCodeLens(): boolean {
+    return !!workspace.getConfiguration("blocksort").get("enableCodeLens");
   }
 }

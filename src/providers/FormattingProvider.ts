@@ -12,6 +12,7 @@ import {
 } from "vscode";
 import { commentMarkers } from "../constants/comments";
 import BlockSortProvider from "./BlockSortProvider";
+import ConfigurationProvider from "./ConfigurationProvider";
 
 type BlockSortOptions = {
   sortFunction: (a: string, b: string) => number;
@@ -40,11 +41,17 @@ export default class FormattingProvider implements DocumentFormattingEditProvide
     const line = document.lineAt(position.line).text;
     const matches = line.match(/@blocksort ?(asc|desc)? ?(\d+|infinite)?/) ?? [];
     const [_, direction = "asc", depth = "0"] = matches;
+    const naturalSorting = ConfigurationProvider.getEnableNaturalSorting();
 
-    return {
-      sortFunction: direction === "asc" ? BlockSortProvider.sort.asc : BlockSortProvider.sort.desc,
-      sortChildren: parseInt(depth, 10),
-    };
+    const sortFunction = naturalSorting
+      ? direction === "asc"
+        ? BlockSortProvider.sort.ascNatural
+        : BlockSortProvider.sort.descNatural
+      : direction === "asc"
+      ? BlockSortProvider.sort.asc
+      : BlockSortProvider.sort.desc;
+
+    return { sortFunction, sortChildren: parseInt(depth, 10) };
   }
 
   public static getNextBlockPosition(document: TextDocument, position: Position): Position {
@@ -55,7 +62,7 @@ export default class FormattingProvider implements DocumentFormattingEditProvide
       line = document.lineAt(line.lineNumber + 1);
     }
 
-    return line.range.end;
+    return new Position(line.lineNumber, line.firstNonWhitespaceCharacterIndex);
   }
 
   public static getBlockSortEdit(
