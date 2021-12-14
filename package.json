@@ -163,6 +163,11 @@
             "description": "sort consecutive block headers (such as case or when)",
             "type": "boolean",
             "default": true
+          },
+          "blocksort.enableCodeLens": {
+            "description": "Display `Sort Blocks` code lens under `@blocksort` comments",
+            "type": "boolean",
+            "default": true
           }
         }
       }
