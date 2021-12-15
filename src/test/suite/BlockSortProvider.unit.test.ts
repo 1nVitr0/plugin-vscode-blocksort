@@ -3,11 +3,11 @@ import { join } from "path";
 import { window, workspace, Selection } from "vscode";
 import BlockSortProvider from "../../providers/BlockSortProvider";
 import { expandTests, fixtureDir, sortTests, multilevelSortTests } from "../fixtures";
-import { SortTest } from "./types";
+import { CompareTest } from "./types";
 import { naturalSortTests } from "../fixtures/natural";
 
 function sortTest(
-  tests: SortTest[],
+  tests: CompareTest[],
   title = "Sort Blocks",
   sort: (a: string, b: string) => number = BlockSortProvider.sort.asc,
   sortChildren = 0
@@ -16,7 +16,7 @@ function sortTest(
     ranges.forEach((range, i) => {
       const descriptor = file.match(/(.*)\.(.*)\.fixture/);
       const [_, type, lang] = descriptor || ["", "generic", "generic"];
-      test(`Sort Blocks (${type}, lang ${lang}) #${i}`, async () => {
+      test(`${title} (${type}, lang ${lang}) #${i}`, async () => {
         const compareDocument = await workspace.openTextDocument(join(fixtureDir, compareFile));
         const document = await workspace.openTextDocument(join(fixtureDir, file));
         const blockSortProvider = new BlockSortProvider(document);

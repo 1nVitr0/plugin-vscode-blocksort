@@ -1,14 +1,25 @@
-import { Range } from 'vscode';
+import { Position, Range } from "vscode";
 
 interface BaseTest {
   file: string;
   ranges: Range[];
 }
 
-export interface SortTest extends BaseTest {
+export interface CompareTest extends BaseTest {
   compareFile: string;
 }
 
-export interface ExpandTest extends BaseTest {
+export interface RangeTest extends BaseTest {
   targetRanges: Range[];
+}
+
+export interface PositionTest extends BaseTest {
+  ranges: Range[];
+  targetPositions: Position[];
+  ignoreCharacterOffset?: boolean;
+}
+
+export interface ListOfKindTest<T> extends BaseTest {
+  targetKinds: T[];
+  strict?: boolean;
 }
