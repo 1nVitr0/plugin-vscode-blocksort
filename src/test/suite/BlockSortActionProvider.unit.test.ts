@@ -3,7 +3,7 @@ import { join } from "path";
 import { CancellationTokenSource, CodeActionKind, window, workspace, WorkspaceEdit } from "vscode";
 import BlockSortActionProvider from "../../providers/BlockSortActionProvider";
 import FormattingProvider from "../../providers/FormattingProvider";
-import { codeActionKindTest, codeActionResultTest, fixtureDir } from "../fixtures";
+import { codeActionKindTest, codeActionResultTest, codeLensTest, fixtureDir } from "../fixtures";
 
 suite("Unit Suite for BlockSortProvider", async () => {
   window.showInformationMessage("Start tests for BlockSortProvider.");
@@ -65,6 +65,21 @@ suite("Unit Suite for BlockSortProvider", async () => {
         const compareSorted = compareDocument.getText(range);
 
         assert.strictEqual(sorted, compareSorted, "sorted ranges are not equal");
+      });
+    });
+  });
+
+  codeLensTest.forEach(({ file, ranges, targetRanges }) => {
+    ranges.forEach((range, i) => {
+      const descriptor = file.match(/\.(.*)\.fixture/);
+      const [_, type, lang] = descriptor || ["", "generic", "generic"];
+      test(`Code Lens test(${type}, lang ${lang}) #${i}`, async () => {
+        const document = await workspace.openTextDocument(join(fixtureDir, file));
+
+        const codeLenses = await codeActionProvider.provideCodeLenses(document, token.token);
+        const codeLensRanges = codeLenses?.map((codeLens) => codeLens.range);
+
+        assert.deepStrictEqual(codeLensRanges, targetRanges, "code lenses do not match");
       });
     });
   });

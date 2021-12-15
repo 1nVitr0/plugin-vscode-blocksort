@@ -1,6 +1,6 @@
 import { Range } from "vscode";
 import { BlockSortCodeActionKind } from "../../providers/BlockSortActionProvider";
-import { CompareTest, ListOfKindTest } from "../suite/types";
+import { CompareTest, ListOfKindTest, RangeTest } from "../suite/types";
 
 export const codeActionKindTest: ListOfKindTest<BlockSortCodeActionKind>[] = [
   {
@@ -38,5 +38,13 @@ export const codeActionResultTest: CompareTest[] = [
     file: "marker.ts.fixture",
     compareFile: "marker.ts.expect",
     ranges: [new Range(49, 0, 75, 7)],
+  },
+];
+
+export const codeLensTest: RangeTest[] = [
+  {
+    file: "marker.ts.fixture",
+    ranges: [new Range(0, 0, 79, 0)],
+    targetRanges: [new Range(4, 0, 12, 7), new Range(19, 0, 27, 7), new Range(34, 0, 42, 7), new Range(49, 0, 75, 7)],
   },
 ];
