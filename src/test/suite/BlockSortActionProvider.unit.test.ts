@@ -1,6 +1,6 @@
 import * as assert from "assert";
 import { join } from "path";
-import { CancellationTokenSource, CodeActionKind, window, workspace, WorkspaceEdit } from "vscode";
+import { CancellationTokenSource, CodeActionKind, Diagnostic, window, workspace } from "vscode";
 import BlockSortActionProvider from "../../providers/BlockSortActionProvider";
 import FormattingProvider from "../../providers/FormattingProvider";
 import { codeActionKindTest, codeActionResultTest, codeLensTest, fixtureDir } from "../fixtures";
@@ -18,11 +18,16 @@ suite("Unit Suite for BlockSortProvider", async () => {
       test(`Code Action Kind Tests (lang ${lang}) #${i}.${j}`, async () => {
         const document = await workspace.openTextDocument(join(fixtureDir, file));
 
-        const codeActions = codeActionProvider.provideCodeActions(document, range, { diagnostics: [] }, token.token);
+        const codeActions = codeActionProvider.provideCodeActions(
+          document,
+          range,
+          { diagnostics: [] as Diagnostic[] },
+          token.token
+        );
         const codeActionsFixAll = codeActionProvider.provideCodeActions(
           document,
           range,
-          { diagnostics: [], only: CodeActionKind.SourceFixAll },
+          { diagnostics: [] as Diagnostic[], only: CodeActionKind.SourceFixAll },
           token.token
         );
 
@@ -54,7 +59,12 @@ suite("Unit Suite for BlockSortProvider", async () => {
         const compareDocument = await workspace.openTextDocument(join(fixtureDir, compareFile));
         const document = await workspace.openTextDocument(join(fixtureDir, file));
 
-        const codeActions = codeActionProvider.provideCodeActions(document, range, { diagnostics: [] }, token.token);
+        const codeActions = codeActionProvider.provideCodeActions(
+          document,
+          range,
+          { diagnostics: [] as Diagnostic[] },
+          token.token
+        );
         const resolvedActions = codeActions.map((action) => codeActionProvider.resolveCodeAction(action, token.token));
 
         for (const { edit } of resolvedActions) {
