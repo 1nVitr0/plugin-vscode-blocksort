@@ -15,7 +15,7 @@ suite("Unit Suite for BlockSortProvider", async () => {
   codeActionKindTest.forEach(({ file, ranges, targetKinds, strict }, i) => {
     ranges.forEach((range, j) => {
       const [_, lang] = file.match(/\.(.*)\.fixture/) || ["", "generic"];
-      test(`Code Action Kind Tests (lang ${lang}) #${i}.${j}`, async () => {
+      test.only(`Code Action Kind Tests (lang ${lang}) #${i}.${j}`, async () => {
         const document = await workspace.openTextDocument(join(fixtureDir, file));
 
         const codeActions = codeActionProvider.provideCodeActions(document, range, { diagnostics: [] }, token.token);
@@ -49,8 +49,8 @@ suite("Unit Suite for BlockSortProvider", async () => {
   codeActionResultTest.forEach(({ file, ranges, compareFile }, i) => {
     ranges.forEach((range, j) => {
       const descriptor = file.match(/\.(.*)\.fixture/);
-      const [_, type, lang] = descriptor || ["", "generic", "generic"];
-      test(`Code Action Compare test(${type}, lang ${lang}) #${i}.${j}`, async () => {
+      const [_, lang] = descriptor || ["", "generic", "generic"];
+      test(`Code Action Compare test(lang ${lang}) #${i}.${j}`, async () => {
         const compareDocument = await workspace.openTextDocument(join(fixtureDir, compareFile));
         const document = await workspace.openTextDocument(join(fixtureDir, file));
 
@@ -72,8 +72,8 @@ suite("Unit Suite for BlockSortProvider", async () => {
   codeLensTest.forEach(({ file, ranges, targetRanges }) => {
     ranges.forEach((range, i) => {
       const descriptor = file.match(/\.(.*)\.fixture/);
-      const [_, type, lang] = descriptor || ["", "generic", "generic"];
-      test(`Code Lens test(${type}, lang ${lang}) #${i}`, async () => {
+      const [_, lang] = descriptor || ["", "generic", "generic"];
+      test(`Code Lens test(lang ${lang}) #${i}`, async () => {
         const document = await workspace.openTextDocument(join(fixtureDir, file));
 
         const codeLenses = await codeActionProvider.provideCodeLenses(document, token.token);

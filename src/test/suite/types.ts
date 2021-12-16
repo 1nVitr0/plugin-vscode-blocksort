@@ -23,3 +23,7 @@ export interface ListOfKindTest<T> extends BaseTest {
   targetKinds: T[];
   strict?: boolean;
 }
+
+export interface BlockSortOptionsTest extends BaseTest {
+  targetOptions: { sort: string[]; targetSort: string[]; targetDepth: number };
+}

@@ -1,0 +1,9 @@
+// @blocksort
+// @blocksort asc
+// @blocksort desc
+// @blocksort asc 2
+// @blocksort desc 2
+// @blocksort asc infinite
+// @blocksort desc infinite
+// @blocksort asc inf
+// @blocksort desc inf
