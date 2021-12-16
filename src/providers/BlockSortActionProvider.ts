@@ -183,7 +183,7 @@ export default class BlockSortActionProvider
   private getBlockMarkerRange(document: TextDocument, position: Position): Range | undefined {
     const blockSortProvider = this.blockSortProviders.get(document.uri);
     const blockPosition = FormattingProvider.getNextBlockPosition(document, position);
-    return blockSortProvider?.expandRange(new Selection(blockPosition, blockPosition));
+    return blockPosition ? blockSortProvider?.expandRange(new Selection(blockPosition, blockPosition)) : undefined;
   }
 
   private updateBlockSortMarkers(
