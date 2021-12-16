@@ -9,6 +9,14 @@
 
 Sort Blocks instead of lines! Works for all major programming languages including JavaScript / TypeScript, Java, JSON, XML, etc.
 
+### Table of Contents
+
+- [Features](#features)
+- [Commands](#commands)
+- [Code Actions / Auto Sorting](#code-actions--auto-sorting)
+- [Extension Settings](#extension-settings)
+- [Known Issues](#known-issues)
+
 ## Features
 
 The extension offers commands, similar to the default "Sort Lines Ascending / Descending" command. But instead of sorting lines, it sorts code blocks.
@@ -17,7 +25,7 @@ If something is already selected, the extension tries it's best to validate and 
 
 Additional features include:
 
-- `@blocksort` markers and `source.fixAll` code actions for auto-sorting on save
+- `@blocksort` annotations and `source.fixAll` code actions for auto-sorting on save
 - deep (multilevel) sorting for nested blocks
 - "*natural*" sorting for lines containing numbers
 
@@ -35,7 +43,7 @@ This extension contributed the following commands:
 
 `Sort Blocks Deep Descending (Multilevel)`: Sorts the selected code blocks in descending order, including nested blocks up to a specified depth.
 
-## Code Actions
+## Code Actions / Auto Sorting
 
 The extension provides the following code actions:
 
@@ -67,7 +75,7 @@ switch(value) {
 ```
 
 ```yaml
-# @blocksort asc 9
+# @blocksort asc inf
 some:
   nested:
     - code
@@ -97,11 +105,11 @@ This extension contributed the following settings:#
 
 `sortConsecutiveBlockHeaders`: sorts consecutive block headers, such as a list of `case` statements.
 
+`enableCodeLens`: enables / disables code lenses shown over blocks annotated with `@blocksort`
+
 ## Known Issues
 
-- The automatic selection validation is fairly complicated. Some languages or edge cases might not work yet (feel free to open an issue)
 - some spacings between the original blocks may not be preserved
 - The extension does NOT check for code errors due to sorting
-- The extension assumes valid code, invalid formatting will probably result in invalid sorting
-- When comments and / or decorators are involved the results may vary (the extension tries it's best, comments will stick to the lines below them)
-- "Natural" sorting may break on UUID strings containing a mix of numbers, letters and/or dashes
+- The extension assumes valid formatting, invalid formatting will probably result in invalid sorting
+- "Natural" sorting may break sorting of UUID strings containing a mix of numbers, letters and/or dashes
