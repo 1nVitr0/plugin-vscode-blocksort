@@ -39,7 +39,7 @@ export default class FormattingProvider implements DocumentFormattingEditProvide
 
   public static getBlockSortMarkerOptions(document: TextDocument, position: Position): BlockSortOptions {
     const line = document.lineAt(position.line).text;
-    const matches = line.match(/@blocksort ?(asc|desc)? ?(\d+|infinite)?/) ?? [];
+    const matches = line.match(/@blocksort ?(asc|desc)? ?(\d+|inf(?:inite)?)?/) ?? [];
     const [_, direction = "asc", depth = "0"] = matches;
     const naturalSorting = ConfigurationProvider.getEnableNaturalSorting();
 
@@ -51,7 +51,7 @@ export default class FormattingProvider implements DocumentFormattingEditProvide
       ? BlockSortProvider.sort.asc
       : BlockSortProvider.sort.desc;
 
-    return { sortFunction, sortChildren: parseInt(depth, 10) };
+    return { sortFunction, sortChildren: depth.includes("inf") ? Infinity : parseInt(depth, 10) };
   }
 
   public static getNextBlockPosition(document: TextDocument, position: Position): Position {
