@@ -1,6 +1,6 @@
 import * as assert from "assert";
 import { join } from "path";
-import { CancellationTokenSource, CodeActionKind, CodeActionTriggerKind, Diagnostic, window, workspace } from "vscode";
+import { CancellationTokenSource, CodeActionKind, window, workspace } from "vscode";
 import BlockSortActionProvider from "../../providers/BlockSortActionProvider";
 import FormattingProvider from "../../providers/FormattingProvider";
 import { codeActionKindTest, codeActionResultTest, codeLensTest, fixtureDir } from "../fixtures";
@@ -39,14 +39,15 @@ suite("Unit Suite for BlockSortProvider", async () => {
         const targetKindsFixAll = targetKinds
           .filter((kind) => kind.value.includes(CodeActionKind.SourceFixAll.value))
           .sort();
-        if (strict)
-          {assert.deepStrictEqual(kindsFixAll, targetKindsFixAll, "sourceFixAll code actions do not match strictly");}
-        else
-          {assert.deepStrictEqual(
+        if (strict) {
+          assert.deepStrictEqual(kindsFixAll, targetKindsFixAll, "sourceFixAll code actions do not match strictly");
+        } else {
+          assert.deepStrictEqual(
             [...new Set(kindsFixAll)],
             targetKindsFixAll,
             "sourceFixAll code actions do not match"
-          );}
+          );
+        }
       });
     });
   });
@@ -67,9 +68,7 @@ suite("Unit Suite for BlockSortProvider", async () => {
         );
         const resolvedActions = codeActions.map((action) => codeActionProvider.resolveCodeAction(action, token.token));
 
-        for (const { edit } of resolvedActions) 
-          if (edit) await workspace.applyEdit(edit);
-        
+        for (const { edit } of resolvedActions) if (edit) await workspace.applyEdit(edit);
 
         const sorted = document.getText(range);
         const compareSorted = compareDocument.getText(range);
