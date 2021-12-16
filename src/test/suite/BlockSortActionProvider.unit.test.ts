@@ -21,13 +21,13 @@ suite("Unit Suite for BlockSortProvider", async () => {
         const codeActions = codeActionProvider.provideCodeActions(
           document,
           range,
-          { diagnostics: [], triggerKind: CodeActionTriggerKind.Invoke, only: undefined },
+          { diagnostics: [], only: undefined },
           token.token
         );
         const codeActionsFixAll = codeActionProvider.provideCodeActions(
           document,
           range,
-          { diagnostics: [], triggerKind: CodeActionTriggerKind.Automatic, only: CodeActionKind.SourceFixAll },
+          { diagnostics: [], only: CodeActionKind.SourceFixAll },
           token.token
         );
 
@@ -40,13 +40,13 @@ suite("Unit Suite for BlockSortProvider", async () => {
           .filter((kind) => kind.value.includes(CodeActionKind.SourceFixAll.value))
           .sort();
         if (strict)
-          assert.deepStrictEqual(kindsFixAll, targetKindsFixAll, "sourceFixAll code actions do not match strictly");
+          {assert.deepStrictEqual(kindsFixAll, targetKindsFixAll, "sourceFixAll code actions do not match strictly");}
         else
-          assert.deepStrictEqual(
+          {assert.deepStrictEqual(
             [...new Set(kindsFixAll)],
             targetKindsFixAll,
             "sourceFixAll code actions do not match"
-          );
+          );}
       });
     });
   });
@@ -62,14 +62,14 @@ suite("Unit Suite for BlockSortProvider", async () => {
         const codeActions = codeActionProvider.provideCodeActions(
           document,
           range,
-          { diagnostics: [], triggerKind: CodeActionTriggerKind.Invoke, only: undefined },
+          { diagnostics: [], only: undefined },
           token.token
         );
         const resolvedActions = codeActions.map((action) => codeActionProvider.resolveCodeAction(action, token.token));
 
-        for (const { edit } of resolvedActions) {
+        for (const { edit } of resolvedActions) 
           if (edit) await workspace.applyEdit(edit);
-        }
+        
 
         const sorted = document.getText(range);
         const compareSorted = compareDocument.getText(range);
