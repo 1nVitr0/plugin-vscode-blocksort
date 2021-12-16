@@ -32,6 +32,7 @@ interface CodeActionWithEditBuilder extends CodeAction {
 export class BlockSortCodeActionKind extends CodeActionKind {
   public static readonly identifier = "blocksort";
 
+  /* eslint-disable @typescript-eslint/naming-convention */
   public static readonly SourceFixAll = new BlockSortCodeActionKind(CodeActionKind.SourceFixAll);
   public static readonly QuickFix = new BlockSortCodeActionKind(CodeActionKind.QuickFix);
   public static readonly Refactor = new BlockSortCodeActionKind(CodeActionKind.Refactor);
@@ -144,16 +145,13 @@ export default class BlockSortActionProvider
         this.updateBlockSortMarkers(e.document, token, ...e.contentChanges)
       ),
       workspace.onDidCloseTextDocument((e: TextDocument) => {
-        if (e.uri == document.uri) this.disposeDocument(e);
+        if (e.uri === document.uri) this.disposeDocument(e);
       }),
       token.onCancellationRequested(() => this.disposeDocument(document)),
     ];
 
-    if (this.documentListeners.has(document.uri)) {
-      this.documentListeners.get(document.uri)?.push(...disposable);
-    } else {
-      this.documentListeners.set(document.uri, disposable);
-    }
+    if (this.documentListeners.has(document.uri)) this.documentListeners.get(document.uri)?.push(...disposable);
+    else this.documentListeners.set(document.uri, disposable);
 
     this.blockSortProviders.set(document.uri, new BlockSortProvider(document));
 
@@ -172,11 +170,8 @@ export default class BlockSortActionProvider
   }
 
   public dispose() {
-    for (const [uri, disposables] of this.documentListeners) {
-      for (const disposable of disposables) {
-        disposable.dispose();
-      }
-    }
+    for (const [uri, disposables] of this.documentListeners) for (const disposable of disposables) disposable.dispose();
+
     this.documentListeners.clear();
   }
 
@@ -212,15 +207,12 @@ export default class BlockSortActionProvider
       // If line count changes, update all markers after the change
       if (lineCountBefore !== lines.length) {
         const lineCountChange = lines.length - lineCountBefore;
-        for (let i = 0; i < markers.length; i++) {
+        for (let i = 0; i < markers.length; i++)
           if (markers[i].isAfter(range.end)) markers[i] = markers[i].translate(lineCountChange, 0);
-        }
       }
 
       // Delete and recreate all markers inside the changed range
-      for (let i = markers.length - 1; i >= 0; i--) {
-        if (range.contains(markers[i])) markers.splice(i, 1);
-      }
+      for (let i = markers.length - 1; i >= 0; i--) if (range.contains(markers[i])) markers.splice(i, 1);
 
       markers.push(
         ...FormattingProvider.getBlockSortMarkers(document, range, token).map(({ range: { start } }) => start)

@@ -12,9 +12,9 @@ export default function contributeFormattingActions() {
     languages.registerDocumentRangeFormattingEditProvider("*", formattingProvider),
     languages.registerCodeActionsProvider("*", codeActionsProvider),
   ];
-  if (ConfigurationProvider.getEnableCodeLens()) {
+  if (ConfigurationProvider.getEnableCodeLens()) 
     disposables.push(languages.registerCodeLensProvider("*", codeActionsProvider));
-  }
+  
 
   return disposables;
 }
