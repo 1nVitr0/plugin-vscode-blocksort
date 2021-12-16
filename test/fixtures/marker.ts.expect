@@ -45,7 +45,7 @@ class Test {
   }
 
   testDepth() {
-    // @blocksort desc 2
+    // @blocksort desc 1
     return {
       c: {
         c: {
@@ -73,7 +73,7 @@ class Test {
           c: 0,
           a: 0
         }
-      },
+      }
     };
   }
 }
