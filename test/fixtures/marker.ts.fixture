@@ -1,0 +1,79 @@
+class Test {
+  testDefault() {
+    // @blocksort
+    return {
+      c: {
+        0: 0
+      },
+      b: {
+        0: 0
+      },
+      a: {
+        0: 0
+      }
+    };
+  }
+
+  testAsc() {
+    // @blocksort asc
+    return {
+      a: {
+        0: 0
+      },
+      c: {
+        0: 0
+      },
+      b: {
+        0: 0
+      }
+    };
+  }
+
+  testDesc() {
+    // @blocksort desc
+    return {
+      a: {
+        0: 0
+      },
+      c: {
+        0: 0
+      },
+      b: {
+        0: 0
+      }
+    };
+  }
+
+  testDepth() {
+    // @blocksort desc 1
+    return {
+      a: {
+        b: 0,
+        c: 0,
+        a: {
+          b: 0,
+          c: 0,
+          a: 0
+        }
+      },
+      c: {
+        a: 0,
+        b: 0,
+        c: {
+          a: 0,
+          b: 0,
+          c: 0
+        }
+      },
+      b: {
+        a: 0,
+        c: 0,
+        b: {
+          a: 0,
+          c: 0,
+          b: 0
+        }
+      }
+    };
+  }
+}

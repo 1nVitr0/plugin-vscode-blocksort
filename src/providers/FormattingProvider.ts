@@ -39,7 +39,7 @@ export default class FormattingProvider implements DocumentFormattingEditProvide
 
   public static getBlockSortMarkerOptions(document: TextDocument, position: Position): BlockSortOptions {
     const line = document.lineAt(position.line).text;
-    const matches = line.match(/@blocksort ?(asc|desc)? ?(\d+|infinite)?/) ?? [];
+    const matches = line.match(/@blocksort ?(asc|desc)? ?(\d+|inf(?:inite)?)?/) ?? [];
     const [_, direction = "asc", depth = "0"] = matches;
     const naturalSorting = ConfigurationProvider.getEnableNaturalSorting();
 
@@ -51,14 +51,15 @@ export default class FormattingProvider implements DocumentFormattingEditProvide
       ? BlockSortProvider.sort.asc
       : BlockSortProvider.sort.desc;
 
-    return { sortFunction, sortChildren: parseInt(depth, 10) };
+    return { sortFunction, sortChildren: depth.includes("inf") ? Infinity : parseInt(depth, 10) };
   }
 
-  public static getNextBlockPosition(document: TextDocument, position: Position): Position {
+  public static getNextBlockPosition(document: TextDocument, position: Position): Position | null {
     let line = document.lineAt(position.line);
     const initialIndent = line.firstNonWhitespaceCharacterIndex;
 
     while (line.firstNonWhitespaceCharacterIndex <= initialIndent) {
+      if (line.lineNumber >= document.lineCount - 1) return null;
       line = document.lineAt(line.lineNumber + 1);
     }
 
@@ -79,17 +80,20 @@ export default class FormattingProvider implements DocumentFormattingEditProvide
     return TextEdit.replace(range, sorted.join("\n"));
   }
 
-  public static mapBlockSortHeaders<T>(
+  public static mapFilterBlockSortHeaders<T>(
     document: TextDocument,
     headers: (TextLine | Position)[],
     callback: (position: Position, options: BlockSortOptions) => T
   ): T[] {
-    return headers.map((line) => {
+    const result = [];
+    for (const line of headers) {
       const position = "range" in line ? line.range.start : line;
       const nextBlockPosition = FormattingProvider.getNextBlockPosition(document, position);
       const options = FormattingProvider.getBlockSortMarkerOptions(document, position);
-      return callback(nextBlockPosition, options);
-    });
+      if (nextBlockPosition) result.push(callback(nextBlockPosition, options));
+    }
+
+    return result;
   }
 
   public provideDocumentFormattingEdits(
@@ -111,7 +115,7 @@ export default class FormattingProvider implements DocumentFormattingEditProvide
   }
 
   public provideBlockMarkerFormattingEdits(document: TextDocument, ...positions: (Position | TextLine)[]): TextEdit[] {
-    return FormattingProvider.mapBlockSortHeaders(
+    return FormattingProvider.mapFilterBlockSortHeaders(
       document,
       positions,
       FormattingProvider.getBlockSortEdit.bind(this, document)

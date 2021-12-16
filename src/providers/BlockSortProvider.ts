@@ -116,10 +116,10 @@ export default class BlockSortProvider {
     const indent = this.stringProcessor.getIndentRange(text);
 
     let start = 0;
-    let end = 0;
+    let end = -1;
     for (const line of lines) {
       if (this.stringProcessor.getIndent(line) === indent.min) {
-        if (end > start) break;
+        if (end >= start) break;
         start++;
       }
       end++;

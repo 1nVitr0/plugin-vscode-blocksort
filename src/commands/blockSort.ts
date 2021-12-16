@@ -23,7 +23,7 @@ export function blockSort(
 function blockSortMultilevel(sortFunction: (a: string, b: string) => number) {
   const defaultDepth = ConfigurationProvider.getDefaultMultilevelDepth();
   if (!ConfigurationProvider.getAskForMultilevelDepth())
-    return commands.executeCommand("blocksort._sortBlocks", sortFunction, defaultDepth);
+    return commands.executeCommand("blocksort._sortBlocks", null, sortFunction, defaultDepth);
 
   let options: InputBoxOptions = {
     prompt: "Indentation Depth: ",
@@ -34,7 +34,7 @@ function blockSortMultilevel(sortFunction: (a: string, b: string) => number) {
 
   window.showInputBox(options).then((value) => {
     if (value === undefined) return;
-    commands.executeCommand("blocksort._sortBlocks", sortFunction, parseInt(value));
+    commands.executeCommand("blocksort._sortBlocks", null, sortFunction, parseInt(value));
   });
 }
 

@@ -28,11 +28,27 @@ interface CodeActionWithEditBuilder extends CodeAction {
   editBuilder: () => TextEdit[];
 }
 
+// @ts-ignore We need to override this to create custom CodeAction kinds
+export class BlockSortCodeActionKind extends CodeActionKind {
+  public static readonly identifier = "blocksort";
+
+  public static readonly SourceFixAll = new BlockSortCodeActionKind(CodeActionKind.SourceFixAll);
+  public static readonly QuickFix = new BlockSortCodeActionKind(CodeActionKind.QuickFix);
+  public static readonly Refactor = new BlockSortCodeActionKind(CodeActionKind.Refactor);
+  public static readonly RefactorExtract = new BlockSortCodeActionKind(CodeActionKind.RefactorExtract);
+  public static readonly RefactorInline = new BlockSortCodeActionKind(CodeActionKind.RefactorInline);
+  public static readonly RefactorRewrite = new BlockSortCodeActionKind(CodeActionKind.RefactorRewrite);
+  public static readonly Source = new BlockSortCodeActionKind(CodeActionKind.Source);
+  public static readonly SourceOrganizeImports = new BlockSortCodeActionKind(CodeActionKind.SourceOrganizeImports);
+
+  public constructor(kind: CodeActionKind, ...specifiers: string[]) {
+    super(`${kind.value}.${[BlockSortCodeActionKind.identifier, ...specifiers].join(".")}`);
+  }
+}
+
 export default class BlockSortActionProvider
   implements CodeLensProvider, CodeActionProvider<CodeActionWithEditBuilder>, Disposable
 {
-  // @ts-ignore Documentation for this is 💩. The `kind` is what can be used in `codeActionsOnSave`
-  public static BlocksortFixAllKind: CodeActionKind = new CodeActionKind("source.fixAll.blocksort");
   public onDidChangeCodeLenses?: Event<void> | undefined;
 
   private blockSortMarkers: Map<Uri, Position[]> = new Map();
@@ -47,21 +63,21 @@ export default class BlockSortActionProvider
     if (token.isCancellationRequested) return [];
 
     const codeLenses: CodeLens[] = [];
-    const blockSortProvider = this.blockSortProviders.get(document.uri);
     const markers = this.blockSortMarkers.get(document.uri);
-    if (blockSortProvider && markers && markers.length > 0) {
+    if (markers && markers.length > 0) {
       markers.forEach((position) => {
-        const blockPosition = FormattingProvider.getNextBlockPosition(document, position);
-        const range = blockSortProvider.expandRange(new Selection(blockPosition, blockPosition));
+        const range = this.getBlockMarkerRange(document, position);
         const options = FormattingProvider.getBlockSortMarkerOptions(document, position);
-        codeLenses.push(
-          new CodeLens(range, {
-            tooltip: "Apply blocksort action",
-            title: "Sort block",
-            command: "blocksort._sortBlocks",
-            arguments: [range, options.sortFunction, options.sortChildren],
-          })
-        );
+        if (range) {
+          codeLenses.push(
+            new CodeLens(range, {
+              tooltip: "Apply blocksort action",
+              title: "Sort block",
+              command: "blocksort._sortBlocks",
+              arguments: [range, options.sortFunction, options.sortChildren],
+            })
+          );
+        }
       });
     }
     return codeLenses;
@@ -77,15 +93,43 @@ export default class BlockSortActionProvider
     const markers = this.blockSortMarkers.get(document.uri);
 
     if (!markers) return [];
-    const filteredMarkers = range ? markers.filter((position) => range.contains(position)) : markers;
+    const filteredMarkers: Position[] = [];
 
-    return filteredMarkers.map((marker) => ({
-      title: "Sort block",
-      range: new Range(marker, marker),
-      kind: BlockSortActionProvider.BlocksortFixAllKind,
-      uri: document.uri,
-      editBuilder: () => this.formattingProvider.provideBlockMarkerFormattingEdits(document, marker),
-    }));
+    for (const marker of markers) {
+      const markerRange = this.getBlockMarkerRange(document, marker);
+
+      if (!range || (markerRange && range.contains(markerRange) && !markerRange.isEqual(range))) {
+        filteredMarkers.push(marker);
+      } else if (markerRange?.contains(range)) {
+        if (context?.only?.contains(CodeActionKind.SourceFixAll)) return [];
+        return [
+          {
+            title: "Sort Block",
+            kind: BlockSortCodeActionKind.QuickFix,
+            uri: document.uri,
+            editBuilder: () => this.formattingProvider.provideBlockMarkerFormattingEdits(document, marker),
+          },
+        ];
+      } else if (markerRange?.start.isAfter(range.end)) {
+        // Abort if marker is after range
+        break;
+      }
+    }
+
+    if (!filteredMarkers.length) return [];
+
+    return [
+      {
+        title: "Sort all annotated Blocks",
+        kind: BlockSortCodeActionKind.SourceFixAll,
+        uri: document.uri,
+        editBuilder: () =>
+          filteredMarkers.reduce<TextEdit[]>((edits, marker) => {
+            const options = FormattingProvider.getBlockSortMarkerOptions(document, marker);
+            return [...edits, ...this.formattingProvider.provideBlockMarkerFormattingEdits(document, marker)];
+          }, []),
+      },
+    ];
   }
 
   public resolveCodeAction(codeAction: CodeActionWithEditBuilder, token: CancellationToken): CodeActionWithEditBuilder {
@@ -136,6 +180,12 @@ export default class BlockSortActionProvider
     this.documentListeners.clear();
   }
 
+  private getBlockMarkerRange(document: TextDocument, position: Position): Range | undefined {
+    const blockSortProvider = this.blockSortProviders.get(document.uri);
+    const blockPosition = FormattingProvider.getNextBlockPosition(document, position);
+    return blockPosition ? blockSortProvider?.expandRange(new Selection(blockPosition, blockPosition)) : undefined;
+  }
+
   private updateBlockSortMarkers(
     document: TextDocument,
     token: CancellationToken,
@@ -177,6 +227,7 @@ export default class BlockSortActionProvider
       );
     }
 
+    markers.sort((a, b) => a.compareTo(b));
     this.blockSortMarkers.set(document.uri, markers);
     return markers;
   }
