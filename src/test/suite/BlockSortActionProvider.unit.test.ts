@@ -1,6 +1,6 @@
 import * as assert from "assert";
 import { join } from "path";
-import { CancellationTokenSource, CodeActionKind, Diagnostic, window, workspace } from "vscode";
+import { CancellationTokenSource, CodeActionKind, CodeActionTriggerKind, Diagnostic, window, workspace } from "vscode";
 import BlockSortActionProvider from "../../providers/BlockSortActionProvider";
 import FormattingProvider from "../../providers/FormattingProvider";
 import { codeActionKindTest, codeActionResultTest, codeLensTest, fixtureDir } from "../fixtures";
@@ -21,13 +21,13 @@ suite("Unit Suite for BlockSortProvider", async () => {
         const codeActions = codeActionProvider.provideCodeActions(
           document,
           range,
-          { diagnostics: [] as Diagnostic[] },
+          { diagnostics: [], triggerKind: CodeActionTriggerKind.Invoke, only: undefined },
           token.token
         );
         const codeActionsFixAll = codeActionProvider.provideCodeActions(
           document,
           range,
-          { diagnostics: [] as Diagnostic[], only: CodeActionKind.SourceFixAll },
+          { diagnostics: [], triggerKind: CodeActionTriggerKind.Automatic, only: CodeActionKind.SourceFixAll },
           token.token
         );
 
@@ -62,7 +62,7 @@ suite("Unit Suite for BlockSortProvider", async () => {
         const codeActions = codeActionProvider.provideCodeActions(
           document,
           range,
-          { diagnostics: [] as Diagnostic[] },
+          { diagnostics: [], triggerKind: CodeActionTriggerKind.Invoke, only: undefined },
           token.token
         );
         const resolvedActions = codeActions.map((action) => codeActionProvider.resolveCodeAction(action, token.token));
