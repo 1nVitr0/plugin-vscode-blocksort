@@ -15,7 +15,7 @@ suite("Unit Suite for BlockSortProvider", async () => {
   codeActionKindTest.forEach(({ file, ranges, targetKinds, strict }, i) => {
     ranges.forEach((range, j) => {
       const [_, lang] = file.match(/\.(.*)\.fixture/) || ["", "generic"];
-      test.only(`Code Action Kind Tests (lang ${lang}) #${i}.${j}`, async () => {
+      test(`Code Action Kind Tests (lang ${lang}) #${i}.${j}`, async () => {
         const document = await workspace.openTextDocument(join(fixtureDir, file));
 
         const codeActions = codeActionProvider.provideCodeActions(document, range, { diagnostics: [] }, token.token);
