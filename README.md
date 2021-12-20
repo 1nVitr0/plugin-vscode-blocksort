@@ -113,3 +113,25 @@ This extension contributed the following settings:#
 - The extension does NOT check for code errors due to sorting
 - The extension assumes valid formatting, invalid formatting will probably result in invalid sorting
 - "Natural" sorting may break sorting of UUID strings containing a mix of numbers, letters and/or dashes
+
+## Contributors
+
+This theme is maintained by the following person:
+
+[![Aram Becker](https://avatars.githubusercontent.com/u/15647636?v=4&s=72)](https://github.com/1nVitr0) |
+:---: |
+[Aram Becker](https://github.com/1nVitr0) |
+
+The following users have contributed to the project:
+
+<i></i> | User | Commits
+---:|:---|:--
+[![karima](https://avatars.githubusercontent.com/u/48662020?v=4&s=48)]() | [karizma](https://github.com/karizma) | 1
+
+
+The following users have inspired features or noticed important issues:
+<i></i> | User | Feature
+--:|:--|:--
+[![Yamlcase](https://avatars.githubusercontent.com/u/27447701?v=4&s=48)](https://github.com/YAMLcase)) | [Yamlcase](https://github.com/YAMLcase) | Support for indent-style syntax
+<i></i> | [lavermil](https://github.com/lavermil) | Multilevel sorting
+[![Thomas Becker](https://avatars.githubusercontent.com/u/11942729?v=4&s=48)](https://github.com/centigrade-thomas-becker) | [Thomas Becker](https://github.com/centigrade-thomas-becker) | auto-sort on save
