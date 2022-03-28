@@ -21,7 +21,7 @@ import {
   WorkspaceEdit,
 } from "vscode";
 import BlockSortProvider from "./BlockSortProvider";
-import FormattingProvider from "./FormattingProvider";
+import BlockSortFormattingProvider from "./BlockSortFormattingProvider";
 
 interface CodeActionWithEditBuilder extends CodeAction {
   uri: Uri;
@@ -56,7 +56,7 @@ export default class BlockSortActionProvider
   private blockSortProviders: Map<Uri, BlockSortProvider> = new Map();
   private documentListeners: Map<Uri, Disposable[]> = new Map();
 
-  public constructor(private formattingProvider: FormattingProvider) {}
+  public constructor(private BlockSortFormattingProvider: BlockSortFormattingProvider) {}
 
   public provideCodeLenses(document: TextDocument, token: CancellationToken): ProviderResult<CodeLens[]> {
     if (!this.documentListeners.has(document.uri)) this.attachDocument(document, token);
@@ -67,8 +67,8 @@ export default class BlockSortActionProvider
     const markers = this.blockSortMarkers.get(document.uri);
     if (markers && markers.length > 0) {
       markers.forEach((position) => {
-        const range = this.getBlockMarkerRange(document, position);
-        const options = FormattingProvider.getBlockSortMarkerOptions(document, position);
+        const range = this.getBlockMarkerRange(document, position, token);
+        const options = BlockSortFormattingProvider.getBlockSortMarkerOptions(document, position);
         if (range) {
           codeLenses.push(
             new CodeLens(range, {
@@ -97,7 +97,7 @@ export default class BlockSortActionProvider
     const filteredMarkers: Position[] = [];
 
     for (const marker of markers) {
-      const markerRange = this.getBlockMarkerRange(document, marker);
+      const markerRange = this.getBlockMarkerRange(document, marker, token);
 
       if (!range || (markerRange && range.contains(markerRange) && !markerRange.isEqual(range))) {
         filteredMarkers.push(marker);
@@ -108,7 +108,7 @@ export default class BlockSortActionProvider
             title: "Sort Block",
             kind: BlockSortCodeActionKind.QuickFix,
             uri: document.uri,
-            editBuilder: () => this.formattingProvider.provideBlockMarkerFormattingEdits(document, marker),
+            editBuilder: () => this.BlockSortFormattingProvider.provideBlockMarkerFormattingEdits(document, [marker], token),
           },
         ];
       } else if (markerRange?.start.isAfter(range.end)) {
@@ -126,8 +126,8 @@ export default class BlockSortActionProvider
         uri: document.uri,
         editBuilder: () =>
           filteredMarkers.reduce<TextEdit[]>((edits, marker) => {
-            const options = FormattingProvider.getBlockSortMarkerOptions(document, marker);
-            return [...edits, ...this.formattingProvider.provideBlockMarkerFormattingEdits(document, marker)];
+            const options = BlockSortFormattingProvider.getBlockSortMarkerOptions(document, marker);
+            return [...edits, ...this.BlockSortFormattingProvider.provideBlockMarkerFormattingEdits(document, [marker], token)];
           }, []),
       },
     ];
@@ -175,10 +175,10 @@ export default class BlockSortActionProvider
     this.documentListeners.clear();
   }
 
-  private getBlockMarkerRange(document: TextDocument, position: Position): Range | undefined {
+  private getBlockMarkerRange(document: TextDocument, position: Position, token?: CancellationToken): Range | undefined {
     const blockSortProvider = this.blockSortProviders.get(document.uri);
-    const blockPosition = FormattingProvider.getNextBlockPosition(document, position);
-    return blockPosition ? blockSortProvider?.expandRange(new Selection(blockPosition, blockPosition)) : undefined;
+    const blockPosition = BlockSortFormattingProvider.getNextBlockPosition(document, position, token);
+    return blockPosition ? blockSortProvider?.expandRange(new Selection(blockPosition, blockPosition), 0, token) : undefined;
   }
 
   private updateBlockSortMarkers(
@@ -192,7 +192,7 @@ export default class BlockSortActionProvider
       if (markers.length) return markers;
 
       markers.push(
-        ...FormattingProvider.getBlockSortMarkers(document, undefined, token).map(({ range: { start } }) => start)
+        ...BlockSortFormattingProvider.getBlockSortMarkers(document, undefined, token).map(({ range: { start } }) => start)
       );
       this.blockSortMarkers.set(document.uri, markers);
       return markers;
@@ -215,7 +215,7 @@ export default class BlockSortActionProvider
       for (let i = markers.length - 1; i >= 0; i--) if (range.contains(markers[i])) markers.splice(i, 1);
 
       markers.push(
-        ...FormattingProvider.getBlockSortMarkers(document, range, token).map(({ range: { start } }) => start)
+        ...BlockSortFormattingProvider.getBlockSortMarkers(document, range, token).map(({ range: { start } }) => start)
       );
     }
 

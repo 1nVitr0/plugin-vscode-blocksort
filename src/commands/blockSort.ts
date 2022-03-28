@@ -1,7 +1,7 @@
 import { commands, InputBoxOptions, Selection, Range, TextEditor, TextEditorEdit, window } from "vscode";
 import BlockSortProvider from "../providers/BlockSortProvider";
 import ConfigurationProvider from "../providers/ConfigurationProvider";
-import FormattingProvider from "../providers/FormattingProvider";
+import BlockSortFormattingProvider from "../providers/BlockSortFormattingProvider";
 
 export function blockSort(
   editor: TextEditor | undefined,
@@ -15,7 +15,7 @@ export function blockSort(
 
   const { document, selection } = editor;
 
-  const edit = FormattingProvider.getBlockSortEdit(document, range ?? selection, { sortFunction, sortChildren });
+  const edit = BlockSortFormattingProvider.getBlockSortEdit(document, range ?? selection, { sortFunction, sortChildren });
   editBuilder.replace(edit.range, edit.newText);
   editor.selection = new Selection(edit.range.start, edit.range.end);
 }

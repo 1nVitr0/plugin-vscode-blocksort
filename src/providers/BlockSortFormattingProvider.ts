@@ -19,16 +19,18 @@ type BlockSortOptions = {
   sortChildren: number;
 };
 
-export default class FormattingProvider implements DocumentFormattingEditProvider, DocumentRangeFormattingEditProvider {
+export default class BlockSortFormattingProvider
+  implements DocumentFormattingEditProvider, DocumentRangeFormattingEditProvider
+{
   public static blockSortMarker = "@blocksort";
 
   public static getBlockSortMarkers(document: TextDocument, range?: Range, token?: CancellationToken): TextLine[] {
     const markers: TextLine[] = [];
     const comments = commentMarkers[document.languageId] ?? commentMarkers.default;
-    const markerPrefixes = comments.map((comment) => `${comment.start} ${FormattingProvider.blockSortMarker}`);
+    const markerPrefixes = comments.map((comment) => `${comment.start} ${BlockSortFormattingProvider.blockSortMarker}`);
 
     for (let i = range?.start.line ?? 0; i < (range?.end.line ?? document.lineCount); i++) {
-      if (token && token.isCancellationRequested) return markers;
+      if (token?.isCancellationRequested) return markers;
 
       const line = document.lineAt(i);
       if (markerPrefixes.some((prefix) => line.text.trim().startsWith(prefix))) markers.push(line);
@@ -54,11 +56,12 @@ export default class FormattingProvider implements DocumentFormattingEditProvide
     return { sortFunction, sortChildren: depth.includes("inf") ? Infinity : parseInt(depth, 10) };
   }
 
-  public static getNextBlockPosition(document: TextDocument, position: Position): Position | null {
+  public static getNextBlockPosition(document: TextDocument, position: Position, token?: CancellationToken): Position | null {
     let line = document.lineAt(position.line);
     const initialIndent = line.firstNonWhitespaceCharacterIndex;
 
     while (line.firstNonWhitespaceCharacterIndex <= initialIndent) {
+      if (token?.isCancellationRequested) return null;
       if (line.lineNumber >= document.lineCount - 1) return null;
       line = document.lineAt(line.lineNumber + 1);
     }
@@ -69,13 +72,14 @@ export default class FormattingProvider implements DocumentFormattingEditProvide
   public static getBlockSortEdit(
     document: TextDocument,
     position: Position | Range,
-    options: BlockSortOptions
+    options: BlockSortOptions,
+    token?: CancellationToken,
   ): TextEdit {
     const blockSort = new BlockSortProvider(document);
     const initialRange = "start" in position ? position : new Range(position, position);
-    const range = blockSort.expandRange(initialRange);
+    const range = blockSort.expandRange(initialRange, 0, token);
     const blocks = blockSort.getBlocks(range);
-    const sorted = blockSort.sortBlocks(blocks, options.sortFunction, options.sortChildren);
+    const sorted = blockSort.sortBlocks(blocks, options.sortFunction, options.sortChildren, token);
 
     return TextEdit.replace(range, sorted.join("\n"));
   }
@@ -83,14 +87,16 @@ export default class FormattingProvider implements DocumentFormattingEditProvide
   public static mapFilterBlockSortHeaders<T>(
     document: TextDocument,
     headers: (TextLine | Position)[],
-    callback: (position: Position, options: BlockSortOptions) => T
+    callback: (position: Position, options: BlockSortOptions, token?: CancellationToken) => T,
+    token?: CancellationToken
   ): T[] {
     const result = [];
     for (const line of headers) {
+      if (token?.isCancellationRequested) return result;
       const position = "range" in line ? line.range.start : line;
-      const nextBlockPosition = FormattingProvider.getNextBlockPosition(document, position);
-      const options = FormattingProvider.getBlockSortMarkerOptions(document, position);
-      if (nextBlockPosition) result.push(callback(nextBlockPosition, options));
+      const nextBlockPosition = BlockSortFormattingProvider.getNextBlockPosition(document, position, token);
+      const options = BlockSortFormattingProvider.getBlockSortMarkerOptions(document, position);
+      if (nextBlockPosition) result.push(callback(nextBlockPosition, options, token));
     }
 
     return result;
@@ -108,17 +114,22 @@ export default class FormattingProvider implements DocumentFormattingEditProvide
     document: TextDocument,
     range: Range | undefined,
     options?: FormattingOptions,
-    token?: CancellationToken
+    token?: CancellationToken,
   ): ProviderResult<TextEdit[]> {
-    const markers = FormattingProvider.getBlockSortMarkers(document, range, token);
-    return this.provideBlockMarkerFormattingEdits(document, ...markers);
+    const markers = BlockSortFormattingProvider.getBlockSortMarkers(document, range, token);
+    return this.provideBlockMarkerFormattingEdits(document, markers, token);
   }
 
-  public provideBlockMarkerFormattingEdits(document: TextDocument, ...positions: (Position | TextLine)[]): TextEdit[] {
-    return FormattingProvider.mapFilterBlockSortHeaders(
+  public provideBlockMarkerFormattingEdits(
+    document: TextDocument,
+    positions: (Position | TextLine)[],
+    token?: CancellationToken,
+  ): TextEdit[] {
+    return BlockSortFormattingProvider.mapFilterBlockSortHeaders(
       document,
       positions,
-      FormattingProvider.getBlockSortEdit.bind(this, document)
+      BlockSortFormattingProvider.getBlockSortEdit.bind(this, document),
+      token
     );
   }
 }

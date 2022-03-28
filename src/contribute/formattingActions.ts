@@ -1,10 +1,10 @@
 import { languages } from "vscode";
 import BlockSortActionProvider from "../providers/BlockSortActionProvider";
-import FormattingProvider from "../providers/FormattingProvider";
+import BlockSortFormattingProvider from "../providers/BlockSortFormattingProvider";
 import ConfigurationProvider from "../providers/ConfigurationProvider";
 
 export default function contributeFormattingActions() {
-  const formattingProvider = new FormattingProvider();
+  const formattingProvider = new BlockSortFormattingProvider();
   const codeActionsProvider = new BlockSortActionProvider(formattingProvider);
 
   const disposables = [

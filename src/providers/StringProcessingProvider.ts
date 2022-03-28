@@ -1,4 +1,4 @@
-import { Range, TextDocument, workspace } from 'vscode';
+import { CancellationToken, Range, TextDocument, workspace } from 'vscode';
 import { commentMarkers, commentRegex } from '../constants/comments';
 import { stringMarkers } from '../constants/strings';
 import ConfigurationProvider from './ConfigurationProvider';
@@ -38,7 +38,7 @@ export default class StringProcessingProvider {
     return (line.match(/^\s*/)?.pop() || '').length / indentWidth;
   }
 
-  public getIndentRange(text: string, checkIndentIgnore = true): { min: number; max: number } {
+  public getIndentRange(text: string, checkIndentIgnore = true, token?: CancellationToken): { min: number; max: number } {
     const lines = text.split(/\r?\n/);
     const indentWidth: number = workspace.getConfiguration('editor').get('tabSize') || 4;
 
@@ -46,6 +46,7 @@ export default class StringProcessingProvider {
     let max = 0;
 
     for (const line of lines) {
+      if (token?.isCancellationRequested) return { min, max };
       if (checkIndentIgnore && this.isIndentIgnoreLine(line)) continue;
       const indent = this.getIndent(line, indentWidth);
       if (indent < min) min = indent;
