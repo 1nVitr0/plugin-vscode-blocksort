@@ -1,10 +1,11 @@
-import { CancellationToken, Range, TextDocument } from "vscode";
+import { off } from "process";
+import { CancellationToken, Disposable, Range, TextDocument, TextDocumentChangeEvent, workspace } from "vscode";
 import ConfigurationProvider from "./ConfigurationProvider";
-import StringProcessingProvider, { Folding } from "./StringProcessingProvider";
+import StringProcessingProvider, { Folding, LineMeta } from "./StringProcessingProvider";
 
 type SortingStrategy = "asc" | "desc" | "ascNatural" | "descNatural";
 
-export default class BlockSortProvider {
+export default class BlockSortProvider implements Disposable {
   public static sort: Record<SortingStrategy, (a: string, b: string) => number> = {
     asc: (a, b) => (a > b ? 1 : a < b ? -1 : 0),
     desc: (a, b) => (a < b ? 1 : a > b ? -1 : 0),
@@ -12,6 +13,7 @@ export default class BlockSortProvider {
     descNatural: (a, b) =>
       BlockSortProvider.sort.desc(BlockSortProvider.padNumbers(a), BlockSortProvider.padNumbers(b)),
   };
+
   protected static padNumbers(line: string) {
     const { omitUuids, padding, sortNegativeValues } = ConfigurationProvider.getNaturalSortOptions();
     let result = line;
@@ -30,11 +32,18 @@ export default class BlockSortProvider {
   }
 
   private document: TextDocument;
+  private computedRanges: Range[] = [];
+  private documentLineMeta: LineMeta[] | null = null;
   private stringProcessor: StringProcessingProvider;
+  private disposables: Disposable[] = [];
 
   public constructor(document: TextDocument) {
     this.document = document;
     this.stringProcessor = new StringProcessingProvider(document);
+  }
+
+  public dispose() {
+    this.disposables.forEach((d) => d.dispose());
   }
 
   public sortBlocks(
@@ -72,29 +81,33 @@ export default class BlockSortProvider {
   }
 
   public getBlocks(range: Range, token?: CancellationToken): Range[] {
-    const startLine = range.start.line;
-    const text = this.document.getText(range);
-    const lines = text.split(/\r?\n/);
-    const firstLine = lines.shift() || "";
-    const initialIndent = this.stringProcessor.getIndent(firstLine);
+    if (!this.isComputed(range)) this.computeLineMeta([range], true, token);
+    if (!this.documentLineMeta) return []; //* TS hint, this never actually happens
+
+    const { start, end } = range;
+    const offset = start.line;
+    const startLineMeta = this.documentLineMeta[offset];
     const blocks: Range[] = [];
 
-    let currentBlock = firstLine;
-    let validBlock = this.stringProcessor.isValidLine(firstLine);
-    let folding = this.stringProcessor.getFolding(firstLine);
+    let currentBlock = startLineMeta.text ?? this.document.getText(new Range(start, start.translate(0, Infinity)));
+    let validBlock = startLineMeta.valid;
+    let folding = startLineMeta.folding;
     let lastStart = 0;
     let currentEnd = 0;
-    for (const line of lines) {
+
+    for (let i = offset + 1; i <= end.line; i++) {
       if (token?.isCancellationRequested) return [];
+
+      const lineMeta = this.documentLineMeta[i];
       if (
         validBlock &&
-        this.stringProcessor.stripComments(currentBlock).trim() &&
+        lineMeta.hasContent &&
         !this.stringProcessor.isIncompleteBlock(currentBlock) &&
-        (!this.stringProcessor.isIndentIgnoreLine(line) || this.stringProcessor.isCompleteBlock(currentBlock)) &&
-        this.stringProcessor.getIndent(line) === initialIndent &&
+        (!lineMeta.ignoreIndent || this.stringProcessor.isCompleteBlock(currentBlock)) &&
+        lineMeta.indent === startLineMeta.indent &&
         !this.stringProcessor.hasFolding(folding)
       ) {
-        blocks.push(this.document.validateRange(new Range(startLine + lastStart, 0, startLine + currentEnd, Infinity)));
+        blocks.push(this.document.validateRange(new Range(offset + lastStart, 0, offset + currentEnd, Infinity)));
         lastStart = currentEnd + 1;
         currentEnd = lastStart;
         currentBlock = "";
@@ -102,14 +115,14 @@ export default class BlockSortProvider {
       } else {
         currentEnd++;
       }
-      currentBlock += `\n${line}`;
-      if (this.stringProcessor.isValidLine(line)) validBlock = true;
-      folding = this.stringProcessor.getFolding(line, folding);
+      currentBlock += `\n${lineMeta.text ?? this.document.getText(new Range(start, start.translate(0, Infinity)))}`;
+      if (lineMeta.valid) validBlock = true;
+      folding = this.stringProcessor.mergeFolding(folding, lineMeta.folding);
     }
 
-    const remaining = this.document.validateRange(
-      new Range(startLine + lastStart, 0, startLine + currentEnd, Infinity)
-    );
+    // If the last block contains text, add it to the list
+    // Otherwise,  add the remaining range to the last block.
+    const remaining = this.document.validateRange(new Range(offset + lastStart, 0, offset + currentEnd, Infinity));
     if (this.document.getText(remaining).trim()) blocks.push(remaining);
     else if (blocks.length) blocks[blocks.length - 1] = new Range(blocks[blocks.length - 1].start, remaining.end);
 
@@ -117,15 +130,19 @@ export default class BlockSortProvider {
   }
 
   public getInnerBlocks(block: Range, token?: CancellationToken): Range[] {
-    const text = this.document.getText(block);
-    const lines = text.split(/\r?\n/);
-    const indent = this.stringProcessor.getIndentRange(text);
+    if (!this.isComputed(block)) this.computeLineMeta([block], true, token);
+    if (!this.documentLineMeta) return []; //* TS hint, this never actually happens
+
+    const indent = this.stringProcessor.getIndentRange(this.documentLineMeta.slice(block.start.line, block.end.line));
 
     let start = 0;
     let end = -1;
-    for (const line of lines) {
+    for (let i = block.start.line; i <= block.end.line; i++) {
       if (token?.isCancellationRequested) return [];
-      if (this.stringProcessor.getIndent(line) === indent.min) {
+
+      const lineMeta = this.documentLineMeta[i];
+
+      if (lineMeta.indent === indent.min) {
         if (end >= start) break;
         start++;
       }
@@ -137,6 +154,7 @@ export default class BlockSortProvider {
     return [];
   }
 
+  // TODO: Make this more efficient
   public expandRange(selection: Range, indent = 0, token?: CancellationToken): Range {
     const { stringProcessor } = this;
     let range: Range = this.document.validateRange(new Range(selection.start.line, 0, selection.end.line, Infinity));
@@ -158,8 +176,7 @@ export default class BlockSortProvider {
     )
       range = new Range(range.start.with(range.start.line - 1), range.end);
 
-    if (token?.isCancellationRequested || !selection.isEmpty)
-      return this.document.validateRange(range);
+    if (token?.isCancellationRequested || !selection.isEmpty) return this.document.validateRange(range);
 
     let indentRange = stringProcessor.getIndentRange(this.document.getText(range), true, token);
     const { min } = indentRange;
@@ -194,16 +211,63 @@ export default class BlockSortProvider {
     return this.document.validateRange(range);
   }
 
+  public watch(): void {
+    this.disposables.push(workspace.onDidChangeTextDocument(this.computeLineMeta, this, this.disposables));
+  }
+
+  private computeLineMeta(ranges?: Range[], withText?: boolean, token?: CancellationToken): void;
+  private computeLineMeta(e?: TextDocumentChangeEvent, withText?: boolean, token?: CancellationToken): void;
+  private computeLineMeta(e?: TextDocumentChangeEvent | Range[], withText?: boolean, token?: CancellationToken): void {
+    if (e && "document" in e && e.document !== this.document) return;
+    if (!this.documentLineMeta) this.documentLineMeta = Array(this.document.lineCount).fill(null);
+
+    const ranges: Range[] = e
+      ? "document" in e
+        ? e.contentChanges.map((c) => c.range)
+        : e
+      : [new Range(0, 0, this.document.lineCount, Infinity)];
+
+    for (let i = 0; i < ranges.length; i++) {
+      if (token?.isCancellationRequested) return;
+
+      const { start, end } = ranges[i];
+      const text = e && "document" in e ? e.contentChanges[i].text : this.document.getText(ranges[i]);
+      const lines = text.split(/\r?\n/);
+
+      this.documentLineMeta.splice(
+        start.line,
+        end.line - start.line + 1,
+        ...lines.map((line, j) => {
+          return {
+            line: start.line + j,
+            indent: this.stringProcessor.getIndent(line),
+            valid: this.stringProcessor.isValidLine(line),
+            folding: this.stringProcessor.getFolding(line),
+            ignoreIndent: this.stringProcessor.isIndentIgnoreLine(line),
+            hasContent: !!this.stringProcessor.stripComments(line).trim(),
+            multiBlockHeader: this.stringProcessor.isMultiBlockHeader(line),
+            text: withText ? line : null,
+          };
+        })
+      );
+
+      this.computedRanges.push(ranges[i]);
+    }
+  }
+
+  private isComputed(range: Range): boolean {
+    return this.computedRanges.some((r) => r.contains(range));
+  }
+
   private sortInnerBlocks(
     block: Range,
     sort: (a: string, b: string) => number = BlockSortProvider.sort.asc,
     sortChildren = 0,
-    token?: CancellationToken,
+    token?: CancellationToken
   ): string {
     if (sortChildren === 0) return this.document.getText(block);
 
     let blocks = this.getInnerBlocks(block, token);
-    // if (!blocks.length || (blocks.length === 1 && blocks[0].isSingleLine)) return this.document.getText(block);
 
     const head: Range = new Range(block.start, blocks[0]?.start || block.start);
     const tail: Range = new Range(blocks[blocks.length - 1]?.end || block.end, block.end);
@@ -221,7 +285,7 @@ export default class BlockSortProvider {
   private sortBlockHeaders(
     block: string,
     sort: (a: string, b: string) => number = BlockSortProvider.sort.asc,
-    token?: CancellationToken,
+    token?: CancellationToken
   ): string {
     let lines = block.split(/\r?\n/);
     const headers: string[] = [];

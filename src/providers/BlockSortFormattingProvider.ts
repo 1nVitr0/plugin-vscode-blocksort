@@ -56,7 +56,11 @@ export default class BlockSortFormattingProvider
     return { sortFunction, sortChildren: depth.includes("inf") ? Infinity : parseInt(depth, 10) };
   }
 
-  public static getNextBlockPosition(document: TextDocument, position: Position, token?: CancellationToken): Position | null {
+  public static getNextBlockPosition(
+    document: TextDocument,
+    position: Position,
+    token?: CancellationToken
+  ): Position | null {
     let line = document.lineAt(position.line);
     const initialIndent = line.firstNonWhitespaceCharacterIndex;
 
@@ -73,7 +77,7 @@ export default class BlockSortFormattingProvider
     document: TextDocument,
     position: Position | Range,
     options: BlockSortOptions,
-    token?: CancellationToken,
+    token?: CancellationToken
   ): TextEdit {
     const blockSort = new BlockSortProvider(document);
     const initialRange = "start" in position ? position : new Range(position, position);
@@ -114,7 +118,7 @@ export default class BlockSortFormattingProvider
     document: TextDocument,
     range: Range | undefined,
     options?: FormattingOptions,
-    token?: CancellationToken,
+    token?: CancellationToken
   ): ProviderResult<TextEdit[]> {
     const markers = BlockSortFormattingProvider.getBlockSortMarkers(document, range, token);
     return this.provideBlockMarkerFormattingEdits(document, markers, token);
@@ -123,7 +127,7 @@ export default class BlockSortFormattingProvider
   public provideBlockMarkerFormattingEdits(
     document: TextDocument,
     positions: (Position | TextLine)[],
-    token?: CancellationToken,
+    token?: CancellationToken
   ): TextEdit[] {
     return BlockSortFormattingProvider.mapFilterBlockSortHeaders(
       document,
