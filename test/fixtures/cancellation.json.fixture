@@ -1,0 +1,502 @@
+{
+  "result": {
+    "count": "1391",
+    "event": {
+      "date": "2011/04/11",
+      "description": " Former Ivorian President Laurent Gbagbo is arrested in his home in Abidjan by supporters of elected President Alassane Ouattara with support from French forces thereby ending the 2010\u20132011 Ivorian crisis and civil war.{{cite news|url=<a href=\"http://af.reuters.com/article/topNews/idAFJOE73A0MX20110411\">http://af.reuters.com/article/topNews/idAFJOE73A0MX20110411</a> |title=Gbagbo, wife in Ouattara's custody in I.Coast: UN amp#124 Top News amp#124 Reuters |publisher=Af.reuters.com |date=11 April 2011|accessdate=11 April 2011| archiveurl= <a href=\"http://web.archive.org/web/20110426045833/http://af.reuters.com/article/topNews/idAFJOE73A0MX20110411|\">http://web.archive.org/web/20110426045833/http://af.reuters.com/article/topNews/idAFJOE73A0MX20110411|</a> archivedate= 26 April 2011 !--DASHBot--| deadurl= no}}",
+      "lang": "en",
+      "category1": "April",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2011/04/29",
+      "description": " An estimated two billion people{{cite news |last=Grimley |first=Naomi |url=<a href=\"http://www.bbc.co.uk/news/world-13245069\">http://www.bbc.co.uk/news/world-13245069</a> |title=Royal wedding: The world watches William and Kate |publisher=BBC News |date=29 April 2011 |accessdate=16 May 2011}} watch the wedding of Prince William, Duke of Cambridge and Catherine Middleton at Westminster Abbey in London.",
+      "lang": "en",
+      "category1": "April",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2011/05/01",
+      "description": " U.S. President Barack Obama announces that Osama bin Laden, the founder and leader of the militant group Al-Qaeda, has been killed during an American military operation in Pakistan.{{cite news |last=Goldman |first=Adam |last2=Brummitt |first2=Chris |url=<a href=\"http://news.yahoo.com/s/ap/20110502/ap_on_re_us/us_bin_laden\">http://news.yahoo.com/s/ap/20110502/ap_on_re_us/us_bin_laden</a> |title=Bin Laden's demise: Long pursuit, burst of gunfire |agency=Associated Press |date=2 May 2011|accessdate=16 May 2011| archiveurl= <a href=\"http://web.archive.org/web/20110513040530/http://news.yahoo.com/s/ap/20110502/ap_on_re_us/us_bin_laden|\">http://web.archive.org/web/20110513040530/http://news.yahoo.com/s/ap/20110502/ap_on_re_us/us_bin_laden|</a> archivedate= 13 May 2011 !--DASHBot--| deadurl= no}}",
+      "lang": "en",
+      "category1": "May",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2011/05/16",
+      "description": " The European Union agree to \u20ac78ampnbspbillion rescue deal for Portugal. The bailout loan will be equally split between the European Financial Stabilisation Mechanism, the European Financial Stability Facility, and the International Monetary Fund.{{cite news | url=<a href=\"http://www.bbc.co.uk/news/business-13408497\">http://www.bbc.co.uk/news/business-13408497</a> | title=Portugal's 78bn euro bail-out is formally approved | work=BBC Business News | date=16 May 2011 | agency=BBC | accessdate=13 November 2011 | publisher=bbc.co.uk}}",
+      "lang": "en",
+      "category1": "May",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2011/05/26",
+      "description": " Former Bosnian Serb Army commander Ratko Mladi\u0107, wanted for genocide, war crimes and crimes against humanity, is arrested in Serbia.{{cite web|author=Interpol |url=<a href=\"http://www.interpol.int/public/Data/Wanted/Notices/Data/1995/54/1995_47754.asp\">http://www.interpol.int/public/Data/Wanted/Notices/Data/1995/54/1995_47754.asp</a> |archiveurl=<a href=\"http://web.archive.org/web/20090526144843/http://www.interpol.int/public/Data/Wanted/Notices/Data/1995/54/1995_47754.asp\">http://web.archive.org/web/20090526144843/http://www.interpol.int/public/Data/Wanted/Notices/Data/1995/54/1995_47754.asp</a> |archivedate=2009-05-26 |title=Interpol: Wanted MLADIC, Ratko |publisher=Interpol.int |accessdate=2011-05-26}}{{cite news|url=<a href=\"http://www.telegraph.co.uk/news/worldnews/europe/serbia/8537878/Ratko-Mladic-war-crimes-fugitive-arrested-in-Serbia.html|title=Ratko\">http://www.telegraph.co.uk/news/worldnews/europe/serbia/8537878/Ratko-Mladic-war-crimes-fugitive-arrested-in-Serbia.html|title=Ratko</a> Mladic: war crimes fugitive 'arrested in Serbia'|last=Wardrop|first=Murray|date=26 May 2011|work=The Daily Telegraph|publisher=Telegraph News and Media|accessdate=26 May 2011|location=London}}",
+      "lang": "en",
+      "category1": "May",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2011/06/04",
+      "description": " Chile's Puyehue volcano erupts, causing air traffic cancellations across South America, New Zealand, Australia and forcing over 3,000 people to evacuate.",
+      "lang": "en",
+      "category1": "June",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2011/06/05",
+      "description": " Arab Spring: Yemeni President Ali Abdullah Saleh travels to Saudi Arabia for treatment of an injury sustained during an attack on the presidential palace. Protesters celebrate his transfer of power to his Vice-President Abd al-Rab Mansur al-Hadi.{{cite news|url=<a href=\"http://www.washingtonpost.com/world/middle-east/speculation-grows-on-yemeni-presidents-condition/2011/06/04/AGpN9xIH_story.html\">http://www.washingtonpost.com/world/middle-east/speculation-grows-on-yemeni-presidents-condition/2011/06/04/AGpN9xIH_story.html</a> |title=Yemeni crowds celebrate after president transfers power, flies to Saudi Arabia|last=Londono|first=Ernesto|date=5 June 2011|work=The Washington Post|publisher=The Washington Post|accessdate=5 June 2011}}",
+      "lang": "en",
+      "category1": "June",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2011/06/12",
+      "description": " Arab Spring: Thousands of Syrians flee to Turkey as Syrian troops lay siege to Jisr ash-Shugur.{{cite news|url=<a href=\"http://www.rte.ie/news/2011/0612/syria.html\">http://www.rte.ie/news/2011/0612/syria.html</a> |title=UN in call over Syrian refugee crisis|date=12 June 2011|work=RTE|publisher=RTE|accessdate=12 June 2011}}",
+      "lang": "en",
+      "category1": "June",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2011/07/07",
+      "description": " The world's first artificial organ transplant is achieved, using an artificial windpipe coated with stem cells.{{cite news |title=Surgeons carry out first synthetic windpipe transplant |date=7 July 2011|work=BBC|publisher=BBC|accessdate=8 July 2011 |url=<a href=\"http://www.bbc.co.uk/news/health-14047670|\">http://www.bbc.co.uk/news/health-14047670|</a> archiveurl= <a href=\"http://web.archive.org/web/20110708015106/http://www.bbc.co.uk/news/health-14047670|\">http://web.archive.org/web/20110708015106/http://www.bbc.co.uk/news/health-14047670|</a> archivedate= 8 July 2011 !--DASHBot--| deadurl= no}}",
+      "lang": "en",
+      "category1": "July",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2011/07/09",
+      "description": " South Sudan secedes from Sudan, per the result of the independence referendum held in January.{{cite news|url=<a href=\"http://www.bbc.co.uk/news/world-africa-12070034\">http://www.bbc.co.uk/news/world-africa-12070034</a> |title=South Sudan: New nation|date=9 July 2011|work=BBC|publisher=BBC|accessdate=9 July 2011| archiveurl= <a href=\"http://web.archive.org/web/20110709112539/http://www.bbc.co.uk/news/world-africa-12070034|\">http://web.archive.org/web/20110709112539/http://www.bbc.co.uk/news/world-africa-12070034|</a> archivedate= 9 July 2011 !--DASHBot--| deadurl= no}}",
+      "lang": "en",
+      "category1": "July",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2011/07/09",
+      "description": "Goran Had\u017ei\u0107 is detained in Serbia, becoming the last of 161 people indicted by the International Criminal Tribunal for the former Yugoslavia.ampamp{{cite web|url=<a href=\"http://www.google.com/hostednews/ap/article/ALeqM5gN0BSyDw5sirbLulQXqgi4DslMtQ?docId=9188fbcd8b194ff79407247b3df94840|title=The\">http://www.google.com/hostednews/ap/article/ALeqM5gN0BSyDw5sirbLulQXqgi4DslMtQ?docId=9188fbcd8b194ff79407247b3df94840|title=The</a> Associated Press: Serbia arrests last Balkan war crimes fugitive|publisher=Google.com|accessdate=2011-07-21| archiveurl= <a href=\"http://web.archive.org/web/20110720111844/http://www.google.com/hostednews/ap/article/ALeqM5gN0BSyDw5sirbLulQXqgi4DslMtQ?docId=9188fbcd8b194ff79407247b3df94840|\">http://web.archive.org/web/20110720111844/http://www.google.com/hostednews/ap/article/ALeqM5gN0BSyDw5sirbLulQXqgi4DslMtQ?docId=9188fbcd8b194ff79407247b3df94840|</a> archivedate= 20 July 2011 amp!--DASHBot--amp| deadurl= no}}ampamp",
+      "lang": "en",
+      "category1": "July",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2011/07/09",
+      "description": "The United Nations declares a famine in southern Somalia, the first in over thirty years.ampamp{{cite news|url=<a href=\"http://www.cbc.ca/news/world/story/2011/07/18/un-famine-east-africa.html|title=Somalia\">http://www.cbc.ca/news/world/story/2011/07/18/un-famine-east-africa.html|title=Somalia</a> on verge of famine|date=18 July 2011|publisher=CBC News|accessdate=18 July 2011| archiveurl= <a href=\"http://web.archive.org/web/20110720035002/http://www.cbc.ca/news/world/story/2011/07/18/un-famine-east-africa.html|\">http://web.archive.org/web/20110720035002/http://www.cbc.ca/news/world/story/2011/07/18/un-famine-east-africa.html|</a> archivedate= 20 July 2011 amp!--DASHBot--amp| deadurl= no}}ampamp",
+      "lang": "en",
+      "category1": "July",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2011/07/21",
+      "description": " Space Shuttle Atlantis lands successfully at Kennedy Space Center after completing STS-135, concluding NASA's space shuttle program.ref name=quotlanding timesquot{{cite web|title=Atlantis Completes Final Space Shuttle Program Landing at 5:57 a.m. EDT|url=<a href=\"http://www.nasa.gov/mission_pages/shuttle/main/index.html|publisher=NASA|accessdate=21\">http://www.nasa.gov/mission_pages/shuttle/main/index.html|publisher=NASA|accessdate=21</a> July 2011|author=Staff|date=21|month=July|year=2011| archiveurl= <a href=\"http://web.archive.org/web/20110726190430/http://www.nasa.gov/mission_pages/shuttle/main/index.html|\">http://web.archive.org/web/20110726190430/http://www.nasa.gov/mission_pages/shuttle/main/index.html|</a> archivedate= 26 July 2011 !--DASHBot--| deadurl= no}}",
+      "lang": "en",
+      "category1": "July",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2011/07/22",
+      "description": " Anders Behring Breivik kills 77 people in twin terrorist attacks in Norway after a bombing in the Regjeringskvartalet government center in Oslo and a shooting at a political youth camp on the island of Ut\u00f8ya.{{Cite news | newspaper = The Wall Street Journal | date=23 July 2011 | accessdate=23 July 2011 | first1 = Charles | last1 = Duxbury | first2 = Kjetil | last2 = Hovland | url = <a href=\"http://online.wsj.com/article/SB10001424053111903461104576461862078291234.html?mod=WSJ_hp_LEFTTopStories\">http://online.wsj.com/article/SB10001424053111903461104576461862078291234.html?mod=WSJ_hp_LEFTTopStories</a> | title = Savage Terror Attacks | quote = ...at Least 87 Dead | postscript =.}}.{{Cite news | date=22 July 2011 | accessdate=23 July 2011 | first = Michael | last = Birnbaum | newspaper = The New York Times | url = <a href=\"http://www.nytimes.com/2011/07/23/world/europe/23oslo.html\">http://www.nytimes.com/2011/07/23/world/europe/23oslo.html</a> | title = At Least 80 Are Dead in Norway Shooting | first1 = Elisa | last1 = Mala | first2 = J David | last2 = Goodman | postscript=.| archiveurl= <a href=\"http://web.archive.org/web/20110722213708/http://www.nytimes.com/2011/07/23/world/europe/23oslo.html|\">http://web.archive.org/web/20110722213708/http://www.nytimes.com/2011/07/23/world/europe/23oslo.html|</a> archivedate= 22 July 2011 !--DASHBot--| deadurl= no}}.{{Cite news | date=22 July 2011 | accessdate=23 July 2011 | newspaper = The Washington Post | title = Norway attacks: At least 87 dead in shootings at youth conference, Oslo explosion | url = <a href=\"http://www.washingtonpost.com/world/europe/norways-capital-shaken-by-bomb-blast/2011/07/22/gIQABA6dTI_story.html\">http://www.washingtonpost.com/world/europe/norways-capital-shaken-by-bomb-blast/2011/07/22/gIQABA6dTI_story.html</a> | quote = ...at least 80 people shot to death at a youth political conference outside Oslo after a massive explosion in the capital\u2019s government district killed at least seven people, according to Norwegian police | postscript=. | first=William | last=Wan}}.{{cite news|url=<a href=\"http://www.rte.ie/news/2011/0730/oslo.html\">http://www.rte.ie/news/2011/0730/oslo.html</a> |title=Press say Breivik had planned other attacks|date=30 July 2011|work=RTE|publisher=RTE|accessdate=30 July 2011}}",
+      "lang": "en",
+      "category1": "July",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2011/07/22",
+      "description": "In Thailand over 12.8 million people are affected by severe flooding. The World Bank estimates damages at 1,440 billion baht (US$45 billion).ampref name=ampquottimeampquotamp{{cite news |url=<a href=\"http://www.time.com/time/world/article/0,8599,2101273,00.html\">http://www.time.com/time/world/article/0,8599,2101273,00.html</a> |title=Thailand cleans up Areas remain flooded |agency=Associated Press |publisher=Time |date=December 2, 2011}}ampamp Some areas are still six feet under water, and many factory areas remained closed at the end of the year. 815ampamp{{cite web|url=<a href=\"http://www.thejakartapost.com/news/2011/12/30/death-toll-thai-floods-rises-790.html\">http://www.thejakartapost.com/news/2011/12/30/death-toll-thai-floods-rises-790.html</a> |title=Death toll of Thai floods rises to 790 |publisher=Thejakartapost.com |date=2011-12-30 |accessdate=2012-05-06}}ampamp people are killed, with 58 of the country's 77 provinces affected.ampamp{{cite web|author=South East Asia correspondent , wires |url=<a href=\"http://www.abc.net.au/news/2011-10-05/27worst27-thai-floods-kill-2242c-threaten-bangkok/3221304/?site=sydney\">http://www.abc.net.au/news/2011-10-05/27worst27-thai-floods-kill-2242c-threaten-bangkok/3221304/?site=sydney</a> |title=ABC News Australia |publisher=Abc.net.au |date= |accessdate=2012-05-06}}ampamp",
+      "lang": "en",
+      "category1": "July",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2011/07/22",
+      "description": "Arab Spring: Because of the uncertaintities associated with a clamp-down of the free press, there are believed to be at least 121 people killed in a Syrian Army tank raid on the town of Hama and over 150 people are reportedly killed across the country.ampamp{{cite web|url=<a href=\"http://english.aljazeera.net/news/middleeast/2011/07/201173143432348733.html\">http://english.aljazeera.net/news/middleeast/2011/07/201173143432348733.html</a> |title=english.aljazeera.net |publisher=english.aljazeera.net |date= |accessdate=2012-05-06}}ampampampamp{{cite web|url=<a href=\"http://english.aljazeera.net/news/middleeast/2011/07/2011731183142996341.html\">http://english.aljazeera.net/news/middleeast/2011/07/2011731183142996341.html</a> |title=english.aljazeera.net |publisher=english.aljazeera.net |date= |accessdate=2012-05-06}}ampampampamp{{cite web|author=amp!--if IE 6amp amp!endif--amp |url=<a href=\"http://english.alarabiya.net/articles/2011/07/31/160188.html\">http://english.alarabiya.net/articles/2011/07/31/160188.html</a> |title=english.aljazeera.net |publisher=English.alarabiya.net |date=2011-07-31 |accessdate=2012-05-06}}ampamp The total dead throughout Syria may never be known, but an estimate as of September 24 is 3,000.",
+      "lang": "en",
+      "category1": "July",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2011/07/22",
+      "description": "NASA announces that its Mars Reconnaissance Orbiter has captured photographic evidence of possible liquid water on Mars during warm seasons.",
+      "lang": "en",
+      "category1": "August",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2011/07/22",
+      "description": "Juno, the first solar-powered spacecraft on a mission to Jupiter, is launched from Cape Canaveral Air Force Station.ampamp{{cite news|url=<a href=\"http://www.rte.ie/news/2011/0805/nasa.html\">http://www.rte.ie/news/2011/0805/nasa.html</a> |title=NASA launches mission to Jupiter|date=5 August 2011|work=RTE|publisher=RTE|accessdate=5 August 2011}}ampamp",
+      "lang": "en",
+      "category1": "August",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2011/08/20",
+      "description": "28 ampndash Arab Spring and the Libyan civil war: In the Battle of Tripoli, Libyan rebels take control of the nation's capital, effectively overthrowing the government of Muammar Gaddafi.{{cite web|url=<a href=\"http://blogs.aljazeera.net/liveblog/libya-aug-31-2011-1131\">http://blogs.aljazeera.net/liveblog/libya-aug-31-2011-1131</a> |title=Wednesday, August 31, 2011 - 09:31 GMT+3 - Libya |publisher=Blogs.aljazeera.net |date=2011-08-31 |accessdate=2012-05-06}}{{cite news|title=Gadhafi Family Members in Algeria, Ambassador Says|url=<a href=\"http://www.cnn.com/2011/WORLD/africa/08/29/libya.algeria.gadhafi/index.html?hpt=hp_c1|date\">http://www.cnn.com/2011/WORLD/africa/08/29/libya.algeria.gadhafi/index.html?hpt=hp_c1|date</a> = 29 August 2011 | accessdate=29 August 2011|author= Staff|publisher = CNN}}{{cite news | author = Staff | date = 23 August 2011 | url = <a href=\"http://www.bbc.co.uk/news/world-africa-14630702\">http://www.bbc.co.uk/news/world-africa-14630702</a> | title = Libya Unrest: Rebels Overun Gadhafi Tripoli Compound | publisher = BBC News | accessdate = 24 August 2011}}",
+      "lang": "en",
+      "category1": "August",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2011/09/05",
+      "description": " India and Bangladesh sign a pact to end their 40-year border demarcation dispute.{{cite web|url=<a href=\"http://ibnlive.in.com/news/indiabangladesh-sign-pact-on-border-demarcation/181937-3.html\">http://ibnlive.in.com/news/indiabangladesh-sign-pact-on-border-demarcation/181937-3.html</a> |title=India-Bangladesh sign pact on border demarcation |publisher=Ibnlive.in.com |date= |accessdate=2012-05-06}}",
+      "lang": "en",
+      "category1": "September",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2011/09/10",
+      "description": " Zanzibar ferry sinking: The ''MVampnbspSpice IslanderampnbspI'', carrying at least 800 people, sinks off the coast of Zanzibar, killing 240 people.ref name=quotxinhuaquot<a href=\"http://news.xinhuanet.com/english2010/world/2011-09/11/c_131133070.htm\">http://news.xinhuanet.com/english2010/world/2011-09/11/c_131133070.htm</a> 197 bodies retrieved in Tanzania ferry accident: Minister Xinhua 11th September 2011",
+      "lang": "en",
+      "category1": "September",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2011/09/12",
+      "description": " Approximately 100 people die after a petrol pipeline explodes in Nairobi.{{cite web|author=Hassan Lali |url=<a href=\"http://www.bbc.co.uk/news/world-africa-14879401\">http://www.bbc.co.uk/news/world-africa-14879401</a> |title=Kenya fire: Nairobi pipeline blaze 'kills at least 75' 'amp#39BBC'amp#39 |publisher=Bbc.co.uk |date=2011-09-12 |accessdate=2012-05-06}}",
+      "lang": "en",
+      "category1": "September",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2011/09/17",
+      "description": "  Occupy Wall Street protests begin in the United States. This develops into the Occupy movement which spreads to 82 countries by October.ref name=quotcnnquot{{Cite news|work=CNN tech|last=Saba|first=Michael|title=Twitter #occupywallstreet movement aims to mimic Iran|url=<a href=\"http://www.cnn.com/2011/09/16/tech/social-media/twitter-occupy-wall-street/index.html|date=September\">http://www.cnn.com/2011/09/16/tech/social-media/twitter-occupy-wall-street/index.html|date=September</a> 17, 2011|accessdate=September 17, 2011}}ref name=quotadbusters1quot{{cite web|url=<a href=\"http://www.adbusters.org/campaigns/occupywallstreet\">http://www.adbusters.org/campaigns/occupywallstreet</a> |title=Occupy Wall Street amp#124 September 17th |publisher=Adbusters.org|accessdate=October 6, 2011}}{{cite news|url=<a href=\"http://www.guardian.co.uk/world/2011/oct/25/egyptian-protesters-occupy-wall-street?newsfeed=true|title=Tahrir\">http://www.guardian.co.uk/world/2011/oct/25/egyptian-protesters-occupy-wall-street?newsfeed=true|title=Tahrir</a> Square protesters send message of solidarity to Occupy Wall Street|accessdate=15 November 2011|publisher=The Guardian|date=25 October 2011|location=London|first1=Jack|last1=Shenker|first2=Adam|last2=Gabbatt}}{{cite web|url =<a href=\"http://aljazeera.net/NR/exeres/F39F8293-C172-4018-9725-1E1184EED075.htm?GoogleStatID=9|title\">http://aljazeera.net/NR/exeres/F39F8293-C172-4018-9725-1E1184EED075.htm?GoogleStatID=9|title</a> = \u0627\u062d\u062a\u062c\u0627\u062c\u0627\u062a \u0628\u064082 \u062f\u0648\u0644\u0629 \u0644\u0644\u0645\u0637\u0627\u0644\u0628\u0629 \u0628\u0627\u0644\u0639\u062f\u0627\u0644\u0629| publisher = AlJazeera.net|accessdate = January 3, 2012}}ref name=quotguardianquot{{cite news |title=Occupy America: protests against Wall Street and inequality hit 70 cities |author=Joanna Walters|url=<a href=\"http://www.guardian.co.uk/world/2011/oct/08/occupy-america-protests-financial-crisis|newspaper=The\">http://www.guardian.co.uk/world/2011/oct/08/occupy-america-protests-financial-crisis|newspaper=The</a> Guardian |date=8 October 2011|accessdate=October 14, 2011 |location=London}}ref name=quottheatlanticquot{{cite news|title=Occupy the World: The '99 Percent' Movement Goes Global |author=Derek Thompson|url=<a href=\"http://www.theatlantic.com/business/archive/2011/10/occupy-the-world-the-99-percent-movement-goes-global/246757/\">http://www.theatlantic.com/business/archive/2011/10/occupy-the-world-the-99-percent-movement-goes-global/246757/</a> |newspaper=The Atlantic|date=Oct 15 2011 |accessdate=October 15, 2011}}{{cite news |title=Occupy Wall Street protests go global |author=Karla Adam|url=<a href=\"http://www.washingtonpost.com/world/europe/occupy-wall-street-protests-go-global/2011/10/15/gIQAp7kimL_story.html\">http://www.washingtonpost.com/world/europe/occupy-wall-street-protests-go-global/2011/10/15/gIQAp7kimL_story.html</a> |newspaper=The Washington Post |date=October 15, 2011 |accessdate=November 8, 2011}}{{cite news |title=Occupy Wall Street protests continue worldwide |author=Karla Adam |url= |newspaper=The Washington Post |date=October 16, 2011 |accessdate=November 8, 2011}}ref name=quotguardian2quot{{cite news|author=Joanna Walters in Seattle|url=<a href=\"http://www.guardian.co.uk/world/2011/oct/08/occupy-america-protests-financial-crisis\">http://www.guardian.co.uk/world/2011/oct/08/occupy-america-protests-financial-crisis</a> |title=Occupy America: protests against Wall Street and inequality hit 70 cities amp#124 World news amp#124 The Observer |work=The Guardian |location=UK |accessdate=October 13, 2011 |date=8 October 2011}}",
+      "lang": "en",
+      "category1": "September",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2011/09/19",
+      "description": " With 434 dead, the United Nations launches a $357 million appeal for victims of the 2011 Sindh floods in Pakistan.{{cite web|url=<a href=\"http://www.rferl.org/content/un_appeals_for_millions_to_help_pakistan_flood_victims/24332575.html\">http://www.rferl.org/content/un_appeals_for_millions_to_help_pakistan_flood_victims/24332575.html</a> |title=UN Appeals For $357 Million To Help Pakistan Flood Victims 'amp#39Radio Free Europe'amp#39 |publisher=Rferl.org |date=2011-09-19 |accessdate=2012-05-06}}",
+      "lang": "en",
+      "category1": "September",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2011/09/19",
+      "description": "2011 Mogadishu bombing: 100ampamp{{cite web|author=ampampnbsp |url=<a href=\"http://www.voanews.com/policy/editorials/africa/Murder-In-Mogadishu-131808193.html\">http://www.voanews.com/policy/editorials/africa/Murder-In-Mogadishu-131808193.html</a> |title=Murder In Mogadishu |publisher=Voanews.com |date=2011-10-13 |accessdate=2012-05-06}}ampamp people are killed in a car bombing in the Somali capital Mogadishu.ampamp{{cite web|url=<a href=\"http://www.hindustantimes.com/65-dead-in-Somali-car-bombing/Article1-753497.aspx\">http://www.hindustantimes.com/65-dead-in-Somali-car-bombing/Article1-753497.aspx</a> |title=Indo-Asian News Service via 'ampamp#39Hindustan Times'ampamp#39 |publisher=Hindustantimes.com |date=2011-10-04 |accessdate=2012-05-06}}ampamp",
+      "lang": "en",
+      "category1": "October",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2011/09/19",
+      "description": "The death toll from the flooding of Cambodia's Mekong River and attendant flash floods reaches 207.ampamp{{cite web|url=<a href=\"http://www.wfp.org/content/floods-claim-207-lives-cambodia\">http://www.wfp.org/content/floods-claim-207-lives-cambodia</a> |title=Floods claim 207 lives in Cambodia |publisher=Wfp.org |date= |accessdate=2012-05-06}}ampampampamp{{cite web|url=<a href=\"http://www.philstar.com/Article.aspx?articleId=733860ampamppublicationSubCategoryId=200\">http://www.philstar.com/Article.aspx?articleId=733860ampamppublicationSubCategoryId=200</a> |title=Xinhua via 'ampamp#39Philippines Star'ampamp#39 |publisher=Philstar.com |date=2011-10-04 |accessdate=2012-05-06}}ampamp",
+      "lang": "en",
+      "category1": "October",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2011/10/18",
+      "description": " Israel and the Palestinian militant organization Hamas begin a major prisoner swap, in which the captured Israeli Army soldier Gilad Shalit is released by Hamas in exchange for 1,027 Palestinian and Israeli-Arab prisoners held in Israel, including 280 prisoners serving life sentences for planning and perpetrating terror attacks.{{cite news| url=<a href=\"http://www.cnn.com/2011/10/18/world/meast/israel-prisoner-swap/index.html?hpt=hp_t1\">http://www.cnn.com/2011/10/18/world/meast/israel-prisoner-swap/index.html?hpt=hp_t1</a> | work=CNN | title=After 5 years in captivity, Shalit is back home - CNN.com | date=October 19, 2011}}{{cite news| url=<a href=\"http://www.guardian.co.uk/world/2011/oct/18/gilad-shalit-release-palestinian-exchange\">http://www.guardian.co.uk/world/2011/oct/18/gilad-shalit-release-palestinian-exchange</a> | location=London | work=The Guardian | title=Gilad Shalit release: Palestinian prisoner exchange getting under way | date=October 18, 2011}}{{cite web|url=<a href=\"http://www.jpost.com/DiplomacyAndPolitics/Article.aspx?id=242250\">http://www.jpost.com/DiplomacyAndPolitics/Article.aspx?id=242250</a> |title=Schalit reunites with parents, PM... JPost - Diplomacy amp Politics |publisher=Jpost.com |date=2011-10-18 |accessdate=2012-05-06}}",
+      "lang": "en",
+      "category1": "October",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2011/10/18",
+      "description": "Arab Spring and the Libyan civil war: Libyan leader Muammar Gaddafi is killed in Sirte, with National Transitional Council forces taking control of the city, and ending the war.ampamp{{cite web|url=<a href=\"http://english.aljazeera.net/news/africa/2011/10/20111020111520869621.html\">http://english.aljazeera.net/news/africa/2011/10/20111020111520869621.html</a> |title=NTC claims capture of Gaddafi - Africa |work=Al Jazeera English |date=2011-10-04 |accessdate=2011-10-20}}ampampampamp{{cite news|url=<a href=\"http://www.bbc.co.uk/news/world-africa-15387872\">http://www.bbc.co.uk/news/world-africa-15387872</a> |title=BBC News - Col Gaddafi killed |work=BBC|date= October 22, 2011|accessdate=2011-10-20}}ampampampamp{{cite news|url=<a href=\"http://uk.reuters.com/article/2011/10/20/uk-libya-gaddafi-death-idUKTRE79J2S320111020\">http://uk.reuters.com/article/2011/10/20/uk-libya-gaddafi-death-idUKTRE79J2S320111020</a> |title=Gaddafi dies of wounds - NTC official|work=Reuters UK|agency=Reuters|date= October 20, 2011|accessdate=2011-10-20 |first=Samia |last=Nakhoul}}ampampampamp{{cite web|url=<a href=\"http://english.aljazeera.net/news/africa/2011/10/20111020111520869621.html\">http://english.aljazeera.net/news/africa/2011/10/20111020111520869621.html</a> |title=Muammar Gaddafi 'killed' in gun battle - Africa |work=Al Jazeera English |date=2011-10-04 |accessdate=2011-10-20}}ampamp",
+      "lang": "en",
+      "category1": "October",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2011/10/18",
+      "description": "Basque separatist militant organisation ETA declares an end to its 43-year campaign of political violence, which has killed over 800 people since 1968.ampamp{{cite web|url=<a href=\"http://politica.elpais.com/politica/2011/10/19/actualidad/1319056094_153776.html\">http://politica.elpais.com/politica/2011/10/19/actualidad/1319056094_153776.html</a> |title=ETA pone fin a 43 a\u00f1os de terror ampamp#124 Pol\u00edtica ampamp#124 EL PA\u00cdS |publisher=Politica.elpais.com |date= |accessdate=2012-05-06}}ampamp",
+      "lang": "en",
+      "category1": "October",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2011/10/23",
+      "description": " A magnitude 7.2 Msubw/sub earthquake jolted eastern Turkey near the city of Van, killing 604 people, and damaging about 2,200 buildings.{{cite web|author=October 23, 2011 |url=<a href=\"http://earthquake-report.com/2011/10/23/very-strong-dangerous-earthquake-in-eastern-turkey/\">http://earthquake-report.com/2011/10/23/very-strong-dangerous-earthquake-in-eastern-turkey/</a> |title=2011 Van earthquake |publisher=Earthquake Report |date=2011-10-23 |accessdate=2012-05-06}}",
+      "lang": "en",
+      "category1": "October",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2011/10/27",
+      "description": " After an emergency meeting in Brussels, the European Union announced an agreement to tackle the European sovereign debt crisis which includes a writedown of 50% of Greek bonds, a recapitalisation of European banks and an increase of the bailout fund of the European Financial Stability Facility totaling to \u20ac1 trillion.ref name=BBCleaders{{cite news|title=Leaders agree eurozone debt deal after late-night talks|url=<a href=\"http://www.bbc.co.uk/news/world-europe-15472547|accessdate=27\">http://www.bbc.co.uk/news/world-europe-15472547|accessdate=27</a> October 2011|newspaper=BBC News|date=27 October 2011}}{{cite news|last=Bhatti|first=Jabeen|title=EU leaders reach a deal to tackle debt crisis|url=<a href=\"http://www.usatoday.com/money/world/story/2011-10-25/euro-summit/50919216/1?csp=34news|accessdate=27\">http://www.usatoday.com/money/world/story/2011-10-25/euro-summit/50919216/1?csp=34news|accessdate=27</a> October 2011|newspaper=USA Today|date=27 October 2011}}",
+      "lang": "en",
+      "category1": "October",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2011/10/27",
+      "description": "Date selected by the UN as the symbolic date when global population reaches seven billion.ampamp{{cite news|title=Population seven billion: UN sets out challenges|url=<a href=\"http://www.bbc.co.uk/news/world-15459643|publisher=BBC\">http://www.bbc.co.uk/news/world-15459643|publisher=BBC</a> News|date=2011-10-26|accessdate=2011-10-30}}ampamp",
+      "lang": "en",
+      "category1": "October",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2011/10/27",
+      "description": "UNESCO admitted Palestine as a member, following a vote in which 107 member states supported and 14 opposed.ampamp{{cite web|url=<a href=\"http://www.unesco.org/new/en/media-services/single-view/news/general_conference_admits_palestine_as_unesco_member_state/|title=General\">http://www.unesco.org/new/en/media-services/single-view/news/general_conference_admits_palestine_as_unesco_member_state/|title=General</a> Conference admits Palestine as UNESCO Member|date=2011-10-31|accessdate=2011-12-11}}ampamp",
+      "lang": "en",
+      "category1": "October",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2011/11/26",
+      "description": " The Mars Science Laboratory rover Curiosity, the most elaborate Martian exploration vehicle to date, is launched from the Kennedy Space Center. It lands on Mars on August 5, 2012.{{cite news | first=Marcia | last=Dunn | title=NASA launches world\u2019s largest rover to Mars  | url=<a href=\"http://www.theglobeandmail.com/news/technology/science/nasa-launches-worlds-largest-rover-to-mars/article2250839/\">http://www.theglobeandmail.com/news/technology/science/nasa-launches-worlds-largest-rover-to-mars/article2250839/</a> | location =Cape Canaveral, Florida | agency=The Associated Press | newspaper=The Globe and Mail | date=26 November 2011}}{{cite news | first=Irene | last=Klotz | title=NASA rover launched to seek out life clues on Mars | url=<a href=\"http://uk.reuters.com/article/2011/11/26/uk-space-mars-idUKTRE7AP0EV20111126\">http://uk.reuters.com/article/2011/11/26/uk-space-mars-idUKTRE7AP0EV20111126</a> | location=Cape Canaveral, Florida | date=27 November 2011 | agency=Reuters }}{{cite news | first= | last= | title=NASA launches new Mars rover  | url=<a href=\"http://www.aljazeera.com/video/americas/2011/11/2011112682011425406.html\">http://www.aljazeera.com/video/americas/2011/11/2011112682011425406.html</a> | location= | date=26 November 2011 | agency=Al Jazeera }}",
+      "lang": "en",
+      "category1": "November",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2011/12/15",
+      "description": " The United States formally declares an end to the Iraq War. While this ends the insurgency it begins another.{{cite news|title=US flag ceremony ends Iraq operation|url=<a href=\"http://www.bbc.co.uk/news/world-us-canada-16192105|publisher=BBC|accessdate=15\">http://www.bbc.co.uk/news/world-us-canada-16192105|publisher=BBC|accessdate=15</a> December 2011|date=December 15, 2011}}{{cite news |url=<a href=\"http://thehill.com/blogs/defcon-hill/operations/199581-panetta-marks-end-of-iraq-war-|title=\">http://thehill.com/blogs/defcon-hill/operations/199581-panetta-marks-end-of-iraq-war-|title=</a> Panetta marks Iraq war's end in Baghdad|date=December 15, 2011|work= DEFCON Hill \u2013 The HILL\u2019S Defense Blog  |first=Jonathan |last=Easley|accessdate=15 December 2011}}{{cite news |url=<a href=\"http://www.independent.co.uk/news/world/middle-east/us-lowers-flag-to-end-iraq-war-6277340.html|title=\">http://www.independent.co.uk/news/world/middle-east/us-lowers-flag-to-end-iraq-war-6277340.html|title=</a> US lowers flag to end Iraq war|date=December 15, 2011|agency=Associated Press |accessdate=15 December 2011}}{{cite news |url=<a href=\"http://montreal.ctv.ca/servlet/an/local/CTVNews/20111215/leon-panetta-us-war-iraq-111215/20111215/?hub=MontrealHome|title=\">http://montreal.ctv.ca/servlet/an/local/CTVNews/20111215/leon-panetta-us-war-iraq-111215/20111215/?hub=MontrealHome|title=</a> U.S. formally ends Iraq war with little fanfare|date=December 15, 2011|agency= Associated Press |accessdate=15 December 2011}}{{cite news |url=<a href=\"http://www.politico.com/news/stories/1211/70480.html|title=\">http://www.politico.com/news/stories/1211/70480.html|title=</a> Leon Panetta marks end of Iraq war|date=December 15, 2011|work= POLITICO.com  |first=Tim |last=Mak|accessdate=15 December 2011}}",
+      "lang": "en",
+      "category1": "December",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2011/12/16",
+      "description": " Tropical Storm Washi causes 1,268 flash flood fatalities in the Philippines with 85 people officially listed as missing.ref name=quotwashi officialquot{{cite web|url=<a href=\"http://www.ndrrmc.gov.ph/attachments/article/358/NDRRMC%20Update%20SitRep%20No%2023%20re%20TS%20SENDONG.pdf|title=Effects\">http://www.ndrrmc.gov.ph/attachments/article/358/NDRRMC%20Update%20SitRep%20No%2023%20re%20TS%20SENDONG.pdf|title=Effects</a> of Tropical Storm quotSendongquot (Washi) and Emergency Operations|date=30 December 2011|publisher=National Disaster Risk Reduction and Management Council|accessdate=1 January 2012|location=Phillippines}}",
+      "lang": "en",
+      "category1": "December",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2011/12/29",
+      "description": " Samoa and Tokelau move from east to west of the International Date Line, thereby skipping December 30, in order to align their time zones better with their main trading partners.ref name=quotwashi officialquot{{cite news|url=<a href=\"http://www.chicagotribune.com/news/nationworld/sns-ap-as-samoa-dateline,0,2803590.story|title=Back\">http://www.chicagotribune.com/news/nationworld/sns-ap-as-samoa-dateline,0,2803590.story|title=Back</a> to the future: Samoa and Tokelau to cross international date line, jump forward a day|date=21 December 2011|publisher=Chicago Tribune|accessdate=29 December 2011}}",
+      "lang": "en",
+      "category1": "December",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2012/01/23",
+      "description": " Iran\u2013European Union relations: The European Union adopts an embargo against Iran in protest of that nation's continued effort to enrich uranium.{{cite news|author=Jonathan Marcus |url=<a href=\"http://www.bbc.co.uk/news/world-europe-16674660\">http://www.bbc.co.uk/news/world-europe-16674660</a> |title='amp#39BBC News'amp#39 |publisher=Bbc.co.uk |date=2012-01-23 |accessdate=2012-05-06}}",
+      "lang": "en",
+      "category1": "January",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2012/02/01",
+      "description": " At least 79 people were killed and more than 1,000 were injured after a football match in Port Said, Egypt.ref name=quotcnnquot{{cite news|last2=Lee|first2=Ian|last1=Fahmy|first1=Mohamed Fadel|url=<a href=\"http://edition.cnn.com/2012/02/02/world/africa/egypt-soccer-deaths/index.html?hpt=hp_t1|accessdate=2\">http://edition.cnn.com/2012/02/02/world/africa/egypt-soccer-deaths/index.html?hpt=hp_t1|accessdate=2</a> February 2012|date= 2 February 2012|publisher=CNN|publisher=Turner Broadcasting System|title=Anger flares in Egypt after 79 die in soccer riot}}ref name=quotbbcquot{{cite news|url=<a href=\"http://www.bbc.co.uk/news/world-middle-east-16845841|accessdate=1\">http://www.bbc.co.uk/news/world-middle-east-16845841|accessdate=1</a> February 2012|date= 1 February 2012|publisher=BBC News|title=Egypt football violence leaves many dead in Port Said}}",
+      "lang": "en",
+      "category1": "February",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2012/02/06",
+      "description": " The Diamond Jubilee of Queen Elizabeth II marks the 60th anniversary of her accession to the thrones of the United Kingdom, Canada, Australia and New Zealand, and the 60th anniversary of her becoming Head of the Commonwealth.{{cite web|url=<a href=\"http://www.pch.gc.ca/eng/1296669421850/1296669769856|title=Official\">http://www.pch.gc.ca/eng/1296669421850/1296669769856|title=Official</a> Canadian website for the Diamond Jubilee of Elizabeth II|author=The Government of Canada|date=January 23, 2012|accessdate=January 23, 2012}}{{cite news | url=<a href=\"http://www.bbc.co.uk/news/uk-16896731\">http://www.bbc.co.uk/news/uk-16896731</a> | title=Diamond Jubilee: Queen celebrating 60-year reign | publisher=bbc.co.uk | work=BBC News UK | date=6 February 2012 | accessdate=6 February 2012}}",
+      "lang": "en",
+      "category1": "February",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2012/02/15",
+      "description": " A fire at a prison in Comayagua, Honduras kills 360.{{cite web | url = <a href=\"http://news.sky.com/home/world-news/article/16170448\">http://news.sky.com/home/world-news/article/16170448</a> | publisher= Sky News | title = Honduras Prison Fire Kills Hundreds Of Inmates| accessdate = February 15, 2012 |date = February 15, 2012}}",
+      "lang": "en",
+      "category1": "February",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2012/02/19",
+      "description": " Iran suspends oil exports to Britain and France following sanctions put in place by the European Union and the United States in January.{{cite news | url=<a href=\"http://edition.cnn.com/2012/02/19/world/meast/iran-oil-exports/index.html?hpt=wo_c2\">http://edition.cnn.com/2012/02/19/world/meast/iran-oil-exports/index.html?hpt=wo_c2</a> | title=Iran suspends oil exports to Britain and France | publisher=cnn.com | work=CNN News | date=19 February 2012 | accessdate=19 February 2012 | author=CNN Wire Staff}}",
+      "lang": "en",
+      "category1": "February",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2012/02/21",
+      "description": " Greek government debt crisis: Eurozone finance ministers reach an agreement on a second, \u20ac130-billion Greek bailout.{{cite news | url=<a href=\"http://www.smh.com.au/business/world-business/euro-zone-strikes-deal-on-greece-bailout-20120221-1tkxm.html\">http://www.smh.com.au/business/world-business/euro-zone-strikes-deal-on-greece-bailout-20120221-1tkxm.html</a> | title=Euro zone strikes deal on Greece bailout | publisher=www.smh.com.au | work=Reuters | date=21 February 2012 | accessdate=25 February 2012}}",
+      "lang": "en",
+      "category1": "February",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2012/02/27",
+      "description": " Arab Spring: As a result of ongoing protests, Yemeni President Ali Abdullah Saleh is succeeded by Vice President Abd Rabbuh Mansur Al-Hadi.{{cite news | url=<a href=\"http://www.bbc.co.uk/news/world-middle-east-17169216\">http://www.bbc.co.uk/news/world-middle-east-17169216</a> | title=Obama hails 'new beginning' for Yemen | publisher=bbc.co.uk | work=BBC News | date=25 February 2012 | accessdate=26 February 2012}}",
+      "lang": "en",
+      "category1": "February",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2012/03/04",
+      "description": " A series of explosions are reported at a munitions dump in Brazzaville, the capital of the Republic of the Congo, with at least 250 people dead.{{cite news|url=<a href=\"http://in.reuters.com/article/2012/03/04/congo-explosions-idINDEE82304620120304\">http://in.reuters.com/article/2012/03/04/congo-explosions-idINDEE82304620120304</a> |title=Reuters |publisher=In.reuters.com |date=2012-03-04 |accessdate=2012-05-06}}{{cite news|url=<a href=\"http://www.bbc.co.uk/news/world-africa-17249480\">http://www.bbc.co.uk/news/world-africa-17249480</a> |title=BBC |publisher=BBC |date=2012-03-04 |accessdate=2012-05-06}}",
+      "lang": "en",
+      "category1": "March",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2012/03/13",
+      "description": " After 244 years since its first publication, the ''Encyclop\u00e6dia Britannica'' discontinues its print edition.{{cite news |author=McCarthy, Tom |date=2012-03-13 |title=Encyclopedia Britannica halts print publication after 244 years |url=<a href=\"http://www.guardian.co.uk/books/2012/mar/13/encyclopedia-britannica-halts-print-publication?newsfeed=true\">http://www.guardian.co.uk/books/2012/mar/13/encyclopedia-britannica-halts-print-publication?newsfeed=true</a> |work=The Guardian |accessdate=2012-03-14}}",
+      "lang": "en",
+      "category1": "March",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2012/03/22",
+      "description": " The President of Mali, Amadou Toumani Tour\u00e9, is ousted in a coup d'\u00e9tat after mutinous soldiers attack government offices.{{cite news |url=<a href=\"http://www.nytimes.com/2012/03/23/world/africa/mali-coup-france-calls-for-elections.html\">http://www.nytimes.com/2012/03/23/world/africa/mali-coup-france-calls-for-elections.html</a> |title=Soldiers Declare Coup in Mali |author=Adam Nossiter |date=22 March 2012 |work=The New York Times |publisher=The New York Times Company |accessdate=22 March 2012}}",
+      "lang": "en",
+      "category1": "March",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2012/04/06",
+      "description": " The National Movement for the Liberation of Azawad unilaterally declares the independence of Azawad from Mali.{{cite news|url=<a href=\"http://www.france24.com/en/20120406-france-24-exclusive-tuareg-rebels-declare-independence-mlna-mali-ansar-dine-azawad|title=Tuareg\">http://www.france24.com/en/20120406-france-24-exclusive-tuareg-rebels-declare-independence-mlna-mali-ansar-dine-azawad|title=Tuareg</a> rebels declare independence in north Mali|publisher=France 24|date=2012-04-06|accessdate=2012-04-06}}",
+      "lang": "en",
+      "category1": "April",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2012/04/12",
+      "description": " Mutinous soldiers in Guinea-Bissau stage a coup d'\u00e9tat and take control of the capital city, Bissau. They arrest interim President Raimundo Pereira and leading presidential candidate Carlos Gomes J\u00fanior in the midst of a presidential election campaign.ref name=quotapquot{{cite web|url=<a href=\"http://www.google.com/hostednews/ap/article/ALeqM5gGdGd-oKyai6M1KEUxMzkKCkPAfQ?docId=8ed769267a0140e4974585dc57dcc99a\">http://www.google.com/hostednews/ap/article/ALeqM5gGdGd-oKyai6M1KEUxMzkKCkPAfQ?docId=8ed769267a0140e4974585dc57dcc99a</a> |title=The Associated Press: Military: Guinea-Bissau prime minister arrested |publisher=Google.com |date=2012-04-13 |accessdate=2012-05-06}}",
+      "lang": "en",
+      "category1": "April",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2012/04/13",
+      "description": " Kwangmy\u014fngs\u014fng-3, a North Korean Earth observation satellite, explodes shortly after launch. The United States and other countries had called the impending launch a violation of United Nations Security Council demands.ref name =quotNK_satellitequot/ The launch was planned to mark the centenary of the birth of Kim Il-sung, the founder of the republic.ref name =quotNK_satellitequot{{cite news|last=Choe|first=Sang-hun|title=North Korea Says It Will Launch Satellite Into Orbit|url=<a href=\"http://www.nytimes.com/2012/03/17/world/asia/north-korea-satellite-launch-missile-test.html|publisher=publisher=The</a> New York Times{{!}}Nytimes.com|accessdate=March 16, 2012|date=March 16, 2012}}",
+      "lang": "en",
+      "category1": "April",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2012/04/26",
+      "description": " Former Liberian President Charles Taylor is found guilty on 11 counts of aiding and abetting war crimes and crimes against humanity during the Sierra Leone Civil War.{{cite news | url=<a href=\"http://www.bbc.co.uk/news/world-africa-17864387\">http://www.bbc.co.uk/news/world-africa-17864387</a> | work=BBC | title= 'Taylor Sierra Leone war crimes verdiact welcomed' | date= 26 April 2012 | accessdate= 1 May 2012}}",
+      "lang": "en",
+      "category1": "April",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2012/05/02",
+      "description": " A pastel version of ''The Scream'', by Norwegian painter Edvard Munch, sells for US$120 million in a New York City auction, setting a new world record for an auctioned work of art.{{cite news|last=|first=|title=Edvard Munch's iconic artwork The Scream sold for $120m|url=<a href=\"http://www.bbc.co.uk/news/entertainment-arts-17926519|accessdate=3\">http://www.bbc.co.uk/news/entertainment-arts-17926519|accessdate=3</a> May 2012|date=3 May 2012|agency=BBC|work=BBC News}}{{cite news|last=Michaud|first=Chris|title=quotThe Screamquot sells for record $120 million at auction|url=<a href=\"http://www.reuters.com/article/2012/05/03/entertainment-us-thescream-auction-idUSBRE84200M20120503|accessdate=3\">http://www.reuters.com/article/2012/05/03/entertainment-us-thescream-auction-idUSBRE84200M20120503|accessdate=3</a> May 2012|date=3 May 2012|agency=Reuters}}",
+      "lang": "en",
+      "category1": "May",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2012/05/12",
+      "description": " August 12 ampndash The 2012 World Expo takes place in Yeosu, South Korea.ref name =quotExpo_2012quot<a href=\"http://eng.expo2012.kr/main.html\">http://eng.expo2012.kr/main.html</a> 2012 World Expo (English) Retrieved January 23, 2012.",
+      "lang": "en",
+      "category1": "May",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2012/05/22",
+      "description": " Tokyo Skytree, the tallest self-supporting tower in the world at 634 metres high, is opened to public.{{cite news|url=<a href=\"http://www.bbc.co.uk/news/world-asia-18141311\">http://www.bbc.co.uk/news/world-asia-18141311</a> |title=High winds mar opening of Tokyo's Skytree tower |publisher=BBC News |date=2012-05-22 |accessdate=2012-07-04}}",
+      "lang": "en",
+      "category1": "May",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2012/06/05",
+      "description": "6 ampndash The century's second and last solar transit of Venus occurs. The next pair are predicted to occur in 2117 and 2125.{{cite web|url=<a href=\"http://eclipse.gsfc.nasa.gov/OH/transit12.html|title=NASA\">http://eclipse.gsfc.nasa.gov/OH/transit12.html|title=NASA</a> Transit of Venus|author=NASA|accessdate=January 23, 2012}}",
+      "lang": "en",
+      "category1": "June",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2012/06/05",
+      "description": "Shenzhou 9, a Chinese spacecraft carrying three Chinese astronauts, including the first-ever female one, docked manually with an orbiting module Tiangong 1, first time as the country, making them as the third country, after the United States and Russia, to successfully perform the mission.ampamp{{cite news|url=<a href=\"http://online.wsj.com/article/SB10001424052702304782404577486793301606890.html?mod=googlenews_wsj|title=Chinese\">http://online.wsj.com/article/SB10001424052702304782404577486793301606890.html?mod=googlenews_wsj|title=Chinese</a> Spacecraft Docks With Orbiting Module|author=Wall Street Journal|accessdate=July 4, 2012|deadurl=yes}} {{Dead link|date=August 2012|bot=RjwilmsiBot}}ampamp",
+      "lang": "en",
+      "category1": "June",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2012/06/05",
+      "description": "Lonesome George, the last known individual of the Pinta Island Tortoise subspecies, dies at a Galapagos National Park, thus making the subspecies extinct.ampref name=ampquotLonesome George's Deathampquotamp{{cite news|title=Famed Galapagos tortoise dies|url=<a href=\"http://www.usatoday.com/tech/science/environment/story/2012-06-24/tortiose-species-extinct/55798794/1|publisher=USA\">http://www.usatoday.com/tech/science/environment/story/2012-06-24/tortiose-species-extinct/55798794/1|publisher=USA</a> Today | date=June 24, 2012}}ampamp",
+      "lang": "en",
+      "category1": "June",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2012/07/04",
+      "description": " CERN announces the discovery of a new particle with properties consistent with the Higgs boson after experiments at the Large Hadron Collider.ref name=cern1207{{cite news |url=<a href=\"http://press.web.cern.ch/press/PressReleases/Releases2012/PR17.12E.html\">http://press.web.cern.ch/press/PressReleases/Releases2012/PR17.12E.html</a> |title=CERN experiments observe particle consistent with long-sought Higgs boson |publisher=CERN press release |date=4 July 2012 |accessdate=4 July 2012}}ref name=cms1207{{cite web | url = <a href=\"http://cms.web.cern.ch/news/observation-new-particle-mass-125-gev\">http://cms.web.cern.ch/news/observation-new-particle-mass-125-gev</a> | title = Observation of a New Particle with a Mass of 125 GeV | first = Lucas | last = Taylor | date = 4 July 2012 | work = CMS Public Website | publisher = CERN}}ref name=atlas1207{{cite web|title=Latest Results from ATLAS Higgs Search |publisher=ATLAS|url=<a href=\"http://www.atlas.ch/news/2012/latest-results-from-higgs-search.html\">http://www.atlas.ch/news/2012/latest-results-from-higgs-search.html</a> |date=4 July 2012 |accessdate=4 July 2012}}<a href=\"http://www.youtube.com/watch?v=vXZ-yzwlwMw\">http://www.youtube.com/watch?v=vXZ-yzwlwMw</a> Video (04:38)ampnbsp\u2013 CERN Announcement (4 July 2012) Of Higgs Boson Discovery.ref name=quotNYT-20120704quot{{cite news |last=Overbye |first=Dennis |title=A New Particle Could Be Physics\u2019 Holy Grail |url=<a href=\"http://www.nytimes.com/2012/07/05/science/cern-physicists-may-have-discovered-higgs-boson-particle.html\">http://www.nytimes.com/2012/07/05/science/cern-physicists-may-have-discovered-higgs-boson-particle.html</a> |date=4 July 2012 |newspaper=New York Times |accessdate=4 July 2012 }}",
+      "lang": "en",
+      "category1": "July",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2012/07/27",
+      "description": " August 12 ampndash The 2012 Summer Olympics are held in London, United Kingdom.{{cite web|url=<a href=\"http://www.london2012.com/|title=London\">http://www.london2012.com/|title=London</a> 2012|accessdate=January 23, 2012}}",
+      "lang": "en",
+      "category1": "July",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2012/07/30",
+      "description": "31 ampndash In the worst power outage in world history, the 2012 India blackouts leave 620 million people without power.{{cite news|url=<a href=\"http://www.guardian.co.uk/world/2012/jul/31/india-blackout-electricity-power-cuts|title=India\">http://www.guardian.co.uk/world/2012/jul/31/india-blackout-electricity-power-cuts|title=India</a> blackouts leave 700 million without power|date=31 July 2012|author=Helen Pidd|accessdate=31 July 2012|work=The Guardian}}{{cite news|url=<a href=\"http://www.usatoday.com/news/world/story/2012-07-31/india-power-outage/56600520/1|author=Hriday\">http://www.usatoday.com/news/world/story/2012-07-31/india-power-outage/56600520/1|author=Hriday</a> Sarma and Ruby Russell|title=620 million without power in India after 3 power grids fail|date=31 July 2012|accessdate=31 July 2012|work=USA Today}}{{cite news|title=India's Mass Power Failure Worst Ever in World History|url=<a href=\"http://news.outlookindia.com/items.aspx?artid=770631|work=Outlook|agency=Press\">http://news.outlookindia.com/items.aspx?artid=770631|work=Outlook|agency=Press</a> Trust of India|date=1 August 2012|accessdate=1 August 2012}}",
+      "lang": "en",
+      "category1": "July",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2012/08/06",
+      "description": " ''Curiosity'', the Mars Science Laboratory mission's rover, successfully lands on Mars.ref name=MarsScienceLaboratory{{cite web|url=<a href=\"http://www.space.com/13501-nasa-mars-rover-curiosity-atlas5-rocket.html\">http://www.space.com/13501-nasa-mars-rover-curiosity-atlas5-rocket.html</a> |title=NASA's Next Mars Rover Hoisted Atop Rocket |publisher=Space.com |date= |accessdate=2011-11-04}}",
+      "lang": "en",
+      "category1": "August",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2012/08/06",
+      "description": "Researchers successfully perform the first implantation of an early prototype bionic eye with 24 electrodes.ampamp<a href=\"http://www.sciencedaily.com/releases/2012/08/120831065003.htmampamp\">http://www.sciencedaily.com/releases/2012/08/120831065003.htmampamp</a>",
+      "lang": "en",
+      "category1": "August",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2012/08/06",
+      "description": "Armenia severs diplomatic relations with Hungary, following the extradition to Azerbaijan and subsequent pardoning of Ramil Safarov, who was convicted of killing an Armenian soldier in Hungary in 2004. The move is also met with fierce criticism from other countries.ampamp<a href=\"http://www.montrealgazette.com/life/Azerbaijani+military+officer+serving+life+murder+Hungary+freed+when/7173300/story.htmlampamp\">http://www.montrealgazette.com/life/Azerbaijani+military+officer+serving+life+murder+Hungary+freed+when/7173300/story.htmlampamp</a>",
+      "lang": "en",
+      "category1": "August",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2012/09/07",
+      "description": " Canada officially cuts diplomatic ties with Iran by closing its embassy in Tehran and ordered the expulsion of Iranian diplomats from Ottawa, over support for Syria, nuclear plans and alleged rights abuses.{{cite news|url=<a href=\"http://www.guardian.co.uk/world/2012/sep/07/canada-cuts-diplomatic-ties-iran\">http://www.guardian.co.uk/world/2012/sep/07/canada-cuts-diplomatic-ties-iran</a> |title=Canada cuts diplomatic ties with Iran |publisher=The Guardian |date=2012-09-07 |accessdate=2012-09-08}}",
+      "lang": "en",
+      "category1": "September",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2012/09/11",
+      "description": " 18 ampndash  A series of protests is directed against United States diplomatic missions worldwide, as well as diplomatic missions of Germany, Switzerland and United Kingdom in some countries, after the screening of a Youtube trailer for the film ''Innocence of Muslims''. In Libya the attacks result in the deaths of the United States Ambassador to Libya J. Christopher Stevens, and 3 other Americans.{{cite news|url=<a href=\"http://www.latimes.com/news/la-mobile-christopher-stevens-killed-m,0,2291982.story?track=rss\">http://www.latimes.com/news/la-mobile-christopher-stevens-killed-m,0,2291982.story?track=rss</a> |title=Christopher Stevens, U.S. ambassador to Libya, killed in Benghazi |publisher=Los Angeles Times |date=2012-09-12 |accessdate=2012-09-12}}{{cite news|url=<a href=\"http://www.nytimes.com/2012/09/14/world/middleeast/mideast-turmoil-spreads-to-us-embassy-in-yemen.html?pagewanted=all\">http://www.nytimes.com/2012/09/14/world/middleeast/mideast-turmoil-spreads-to-us-embassy-in-yemen.html?pagewanted=all</a> |title=Turmoil Over Contentious Video Spreads to Yemen and Iran |publisher=The New York Times |date=2012-09-13 |accessdate=2012-09-13}}{{cite news|url=<a href=\"http://www.cbsnews.com/8301-202_162-57512841/widespread-protests-against-u.s-over-anti-muslim-film/\">http://www.cbsnews.com/8301-202_162-57512841/widespread-protests-against-u.s-over-anti-muslim-film/</a> |title=Widespread protests against U.S. over anti-Muslim film |publisher=CBS News |date=2012-09-14 |accessdate=2012-09-14}}{{cite news|url=<a href=\"http://www.telegraph.co.uk/news/worldnews/middleeast/9543241/US-embassy-in-Yemen-stormed-live.html\">http://www.telegraph.co.uk/news/worldnews/middleeast/9543241/US-embassy-in-Yemen-stormed-live.html</a> |title=Middle East protests against US embassies - live |publisher=The Telegraph |date=2012-09-14 |accessdate=2012-09-14}}",
+      "lang": "en",
+      "category1": "September",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2012/12/21",
+      "description": " The Mesoamerican Long Count calendar, notably used by the pre-Columbian Mayan civilization among others, completes a quotgreat cyclequot of thirteen ''b'ak'tuns'' (periods of 144,000 days each) since the mythical creation date of the calendar's current era.Susan Milbrath, Curator of Latin American Art and Archaeology, Florida Museum of Natural History, quoted in <a href=\"http://www.usatoday.com/tech/science/2007-03-27-maya-2012_n.htm\">http://www.usatoday.com/tech/science/2007-03-27-maya-2012_n.htm</a> ''USA Today'', Wednesday, March 28, 2007, p. 11D<a href=\"http://tulane.edu/news/newwave/062508_maya.cfm\">http://tulane.edu/news/newwave/062508_maya.cfm</a> quotThe Sky Is Not Fallingquot ''New Wave'', Tulane University, June 25, 2008.",
+      "lang": "en",
+      "category1": "December",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2012/12/31",
+      "description": " The first commitment period of the Kyoto Protocol ends.{{cite journal",
+      "lang": "en",
+      "category1": "December",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2012/12/31",
+      "description": "''Pleiades'', a proposed supercomputer built by Intel and SGI for NASA's Ames Research Center, will be completed, reaching a peak performance of 10 Petaflops (10 quadrillion floating point operations per second).ampamp{{cite web|url=<a href=\"http://www.nas.nasa.gov/News/Releases/2008/05-07-08.html\">http://www.nas.nasa.gov/News/Releases/2008/05-07-08.html</a> |title=NASA, Intel, SGI Plan to 'Soup Up' Supercomputer |publisher=Nas.nasa.gov |date= |accessdate=2010-06-02| archiveurl= <a href=\"http://web.archive.org/web/20100528021808/http://www.nas.nasa.gov/News/Releases/2008/05-07-08.html|\">http://web.archive.org/web/20100528021808/http://www.nas.nasa.gov/News/Releases/2008/05-07-08.html|</a> archivedate= 28 May 2010 amp!--DASHBot--amp| deadurl= no}}ampamp",
+      "lang": "en",
+      "category1": "Date unknown",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2012/12/31",
+      "description": "''Sequoia'', a proposed super computer built by IBM for the National Nuclear Security Administration will be completed, reaching a peak performance of 20 Petaflops.ampamp{{cite web|last=Gonsalves |first=Antone |url=<a href=\"http://www.informationweek.com/news/hardware/supercomputers/showArticle.jhtml?articleID=213000842ampampsubSection=News\">http://www.informationweek.com/news/hardware/supercomputers/showArticle.jhtml?articleID=213000842ampampsubSection=News</a> |title=IBM Tapped For 20-Petaflop Government Supercomputer |publisher=Informationweek.com |date= |accessdate=2010-06-02}}ampamp",
+      "lang": "en",
+      "category1": "Date unknown",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2012/12/31",
+      "description": "On the Sun, the solar maximum of Solar Cycle 24 in the 11-year sunspot cycle is forecast to occur. Solar Cycle 24 is regarded to have commenced January 2008, and on average will reach its peak of maximal sunspot activity around 2012.",
+      "lang": "en",
+      "category1": "Date unknown",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2012/12/31",
+      "description": "The Kars\u2013Tbilisi\u2013Baku railway across the Caucasus is scheduled to be completed sometime in 2012.ampamp''National Geographic'', August 2010, page 62.ampamp",
+      "lang": "en",
+      "category1": "Date unknown",
+      "granularity": "year"
+    }
+  }
+}

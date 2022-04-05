@@ -33,8 +33,7 @@
   ],
   "main": "./dist/extension.js",
   "contributes": {
-    "commands": [
-      {
+    "commands": [{
         "command": "blocksort.sortBlocksAsc",
         "title": "Sort Blocks Ascending",
         "category": "Sort",
@@ -71,107 +70,105 @@
         }
       }
     ],
-    "configuration": [
-      {
-        "title": "Block Sort",
-        "properties": {
-          "blocksort.defaultMultilevelDepth": {
-            "description": "Default depth used for depp (multilevel) sorting. Use `-1` for infinite depth",
-            "default": -1,
-            "type": "integer"
-          },
-          "blocksort.askForMultilevelDepth": {
-            "description": "Controls secondary dialog asking for multilevel Depth. When false, blocksort.defaultMultilevelDepth will be used",
-            "default": true,
-            "type": "boolean"
-          },
-          "blocksort.indentIgnoreMarkers": {
-            "description": "Lines starting with these will not be taken into account when checking indentation. This is ised for C++-Style blocks ('{' in separate line) and for non-bracketed blocks (begin-end style). '{', 'end.*' and 'esac|fi' are already provided ('end.* is a bit more complicated, feel free to submit issued when some instances do not work)').",
-            "default": [],
-            "type": "array",
-            "items": {
-              "type": "string",
-              "format": "regex"
-            }
-          },
-          "blocksort.completeBlockMarkers": {
-            "description": "Lines ending with these will be handled as completed blocks (e.g. one line JSON objects). '}' and '</.*?>' are already provided (again '</.*?>' is a bit more complicated, feel free to submit issued when some instances do not work)",
-            "default": [],
-            "type": "array",
-            "items": {
-              "type": "string",
-              "format": "regex"
-            }
-          },
-          "blocksort.foldingMarkers": {
-            "description": "Folding markers used to detect folding. Blocks will only be completed if all folding is 0. '()', '[]', '{}' and '<>' are already provided",
-            "type": "object",
-            "default": {},
-            "additionalProperties": {
-              "type": "object",
-              "properties": {
-                "start": {
-                  "type": "string",
-                  "format": "regex"
-                },
-                "end": {
-                  "type": "string",
-                  "format": "regex"
-                }
-              }
-            }
-          },
-          "blocksort.enableNaturalSorting": {
-            "type": "boolean",
-            "description": "Sort string containing numbers intuitively (`80` before `443`)",
-            "default": false
-          },
-          "blocksort.naturalSorting": {
-            "type": "object",
-            "description": "Settings for natural sorting",
-            "default": {
-              "enabled": false,
-              "padding": 9,
-              "omitUuids": false,
-              "sortNegativeValues": true
-            },
-            "required": [
-              "enabled"
-            ],
-            "additionalProperties": false,
-            "properties": {
-              "padding": {
-                "description": "For natural sorting numbers are padded with 0. For performance reasons the number of 0s is fixed to this value",
-                "default": 9,
-                "type": "number",
-                "minimum": "0",
-                "maximum": "16"
-              },
-              "omitUuids": {
-                "description": "Enables very basic UUID detection and automatically disables natural sorting for these values.  Might still fail for edge cases (like a number at the end of the UUID or on dashes)",
-                "default": false,
-                "type": "boolean"
-              },
-              "sortNegativeValues": {
-                "description": "Sort negative values before positive. Might fail, especially on UUIDs containing dashes",
-                "default": true,
-                "type": "boolean"
-              }
-            }
-          },
-          "blocksort.sortConsecutiveBlockHeaders": {
-            "description": "sort consecutive block headers (such as case or when)",
-            "type": "boolean",
-            "default": true
-          },
-          "blocksort.enableCodeLens": {
-            "description": "Display `Sort Blocks` code lens under `@blocksort` comments",
-            "type": "boolean",
-            "default": true
+    "configuration": [{
+      "title": "Block Sort",
+      "properties": {
+        "blocksort.defaultMultilevelDepth": {
+          "description": "Default depth used for depp (multilevel) sorting. Use `-1` for infinite depth",
+          "default": -1,
+          "type": "integer"
+        },
+        "blocksort.askForMultilevelDepth": {
+          "description": "Controls secondary dialog asking for multilevel Depth. When false, blocksort.defaultMultilevelDepth will be used",
+          "default": true,
+          "type": "boolean"
+        },
+        "blocksort.indentIgnoreMarkers": {
+          "description": "Lines starting with these will not be taken into account when checking indentation. This is ised for C++-Style blocks ('{' in separate line) and for non-bracketed blocks (begin-end style). '{', 'end.*' and 'esac|fi' are already provided ('end.* is a bit more complicated, feel free to submit issued when some instances do not work)').",
+          "default": [],
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "regex"
           }
+        },
+        "blocksort.completeBlockMarkers": {
+          "description": "Lines ending with these will be handled as completed blocks (e.g. one line JSON objects). '}' and '</.*?>' are already provided (again '</.*?>' is a bit more complicated, feel free to submit issued when some instances do not work)",
+          "default": [],
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "regex"
+          }
+        },
+        "blocksort.foldingMarkers": {
+          "description": "Folding markers used to detect folding. Blocks will only be completed if all folding is 0. '()', '[]', '{}' and '<>' are already provided",
+          "type": "object",
+          "default": {},
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "start": {
+                "type": "string",
+                "format": "regex"
+              },
+              "end": {
+                "type": "string",
+                "format": "regex"
+              }
+            }
+          }
+        },
+        "blocksort.enableNaturalSorting": {
+          "type": "boolean",
+          "description": "Sort string containing numbers intuitively (`80` before `443`)",
+          "default": false
+        },
+        "blocksort.naturalSorting": {
+          "type": "object",
+          "description": "Settings for natural sorting",
+          "default": {
+            "enabled": false,
+            "padding": 9,
+            "omitUuids": false,
+            "sortNegativeValues": true
+          },
+          "required": [
+            "enabled"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "padding": {
+              "description": "For natural sorting numbers are padded with 0. For performance reasons the number of 0s is fixed to this value",
+              "default": 9,
+              "type": "number",
+              "minimum": "0",
+              "maximum": "16"
+            },
+            "omitUuids": {
+              "description": "Enables very basic UUID detection and automatically disables natural sorting for these values.  Might still fail for edge cases (like a number at the end of the UUID or on dashes)",
+              "default": false,
+              "type": "boolean"
+            },
+            "sortNegativeValues": {
+              "description": "Sort negative values before positive. Might fail, especially on UUIDs containing dashes",
+              "default": true,
+              "type": "boolean"
+            }
+          }
+        },
+        "blocksort.sortConsecutiveBlockHeaders": {
+          "description": "sort consecutive block headers (such as case or when)",
+          "type": "boolean",
+          "default": true
+        },
+        "blocksort.enableCodeLens": {
+          "description": "Display `Sort Blocks` code lens under `@blocksort` comments",
+          "type": "boolean",
+          "default": true
         }
       }
-    ]
+    }]
   },
   "scripts": {
     "vscode:prepublish": "npm run package",
@@ -228,11 +225,11 @@
     "plugins": [
       "@semantic-release/commit-analyzer",
       "@semantic-release/release-notes-generator",
-      "@semantic-release/changelog",
-      [
+      "@semantic-release/changelog", [
         "@semantic-release/git",
         {
-          "message": "chore(release): ${nextRelease.version}\n\n${nextRelease.notes}"
+          "message": "chore(release): ${nextRelease.version}\n\n${nextRelease.notes}",
+          "assets": ["package.json", "CHANGELOG.md", "README.md"]
         }
       ],
       "@semantic-release/github"

@@ -130,6 +130,7 @@ The following users have contributed to the project:
 
 
 The following users have inspired features or noticed important issues:
+
 <i></i> | User | Feature
 --:|:--|:--
 [![Yamlcase](https://avatars.githubusercontent.com/u/27447701?v=4&s=48)](https://github.com/YAMLcase)) | [Yamlcase](https://github.com/YAMLcase) | Support for indent-style syntax
