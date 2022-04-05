@@ -71,7 +71,7 @@ export default class BlockSortProvider {
     return textBlocks;
   }
 
-  public getBlocks(range: Range): Range[] {
+  public getBlocks(range: Range, token?: CancellationToken): Range[] {
     const startLine = range.start.line;
     const text = this.document.getText(range);
     const lines = text.split(/\r?\n/);
@@ -85,6 +85,7 @@ export default class BlockSortProvider {
     let lastStart = 0;
     let currentEnd = 0;
     for (const line of lines) {
+      if (token?.isCancellationRequested) return [];
       if (
         validBlock &&
         this.stringProcessor.stripComments(currentBlock).trim() &&
@@ -132,7 +133,7 @@ export default class BlockSortProvider {
     }
 
     const intersection = block.intersection(new Range(block.start.line + start, 0, block.start.line + end, Infinity));
-    if (intersection && !intersection.isEmpty) return this.getBlocks(intersection);
+    if (intersection && !intersection.isEmpty) return this.getBlocks(intersection, token);
     return [];
   }
 

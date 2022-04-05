@@ -1,6 +1,6 @@
 import { Position, Range } from "vscode";
 
-interface BaseTest {
+export interface BaseTest {
   file: string;
   ranges: Range[];
 }
@@ -26,4 +26,8 @@ export interface ListOfKindTest<T> extends BaseTest {
 
 export interface BlockSortOptionsTest extends BaseTest {
   targetOptions: { sort: string[]; targetSort: string[]; targetDepth: number };
+}
+
+export interface CancellationTest extends BaseTest {
+  performanceThreshold: number;
 }
