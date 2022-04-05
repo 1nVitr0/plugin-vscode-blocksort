@@ -58,23 +58,24 @@ export default class BlockSortProvider implements Disposable {
 
     if (token?.isCancellationRequested) return [];
 
-    if (this.stringProcessor.isList(blocks) && textBlocks.length && !/,$/.test(textBlocks[textBlocks.length - 1])) {
-      textBlocks[textBlocks.length - 1] += ",";
-      this.applySort(textBlocks, sort);
-      textBlocks[textBlocks.length - 1] = textBlocks[textBlocks.length - 1].replace(/,\s*$/, "");
-    } else {
-      this.applySort(textBlocks, sort);
+    // Find common block separator, ignoring the last block
+    let separator = textBlocks.length > 1 ? this.stringProcessor.getBlockSeparator(textBlocks[0]) : "";
+    for (const block of textBlocks.slice(1, -1)) {
+      separator = this.stringProcessor.getBlockSeparator(block, separator);
+      if (!separator) break;
     }
+    // If last block has separator, we don't need to alter anything
+    if (textBlocks.length && textBlocks[textBlocks.length - 1].endsWith(separator)) separator = "";
 
-    if (token?.isCancellationRequested) return [];
+    this.applySort(textBlocks, sort);
 
-    if (textBlocks.length && !textBlocks[0].trim()) {
-      textBlocks.push(textBlocks.shift() || "");
-    } else if (textBlocks.length && /^\s*\r?\n/.test(textBlocks[0])) {
-      // For some reason a newline for the second block gets left behind sometimes
-      const front = !/\r?\n$/.test(textBlocks[0]) && textBlocks[1] && !/^\r?\n/.test(textBlocks[1]);
-      textBlocks[0] = textBlocks[0].replace(/^\s*\r?\n/, "");
-      textBlocks[front ? 0 : textBlocks.length - 1] += "\n";
+    if (separator) {
+      // Apply separator to all blocks except the last one
+      textBlocks = textBlocks.map((block, i) => {
+        if (i == textBlocks.length - 1 && block.endsWith(separator)) return block.slice(0, -separator.length);
+        else if (i < textBlocks.length - 1 && !block.endsWith(separator)) return block + separator;
+        else return block;
+      });
     }
 
     return textBlocks;
@@ -91,6 +92,9 @@ export default class BlockSortProvider implements Disposable {
 
     let currentBlock = startLineMeta.text ?? this.document.getText(new Range(start, start.translate(0, Infinity)));
     let validBlock = startLineMeta.valid;
+    let hasContent = startLineMeta.hasContent;
+    let completeBlock = startLineMeta.complete;
+    let incompleteBlock = startLineMeta.incomplete;
     let folding = startLineMeta.folding;
     let lastStart = 0;
     let currentEnd = 0;
@@ -99,11 +103,13 @@ export default class BlockSortProvider implements Disposable {
       if (token?.isCancellationRequested) return [];
 
       const lineMeta = this.documentLineMeta[i];
+      const text = lineMeta.text ?? this.document.getText(new Range(start, start.translate(0, Infinity)));
       if (
         validBlock &&
-        lineMeta.hasContent &&
-        !this.stringProcessor.isIncompleteBlock(currentBlock) &&
-        (!lineMeta.ignoreIndent || this.stringProcessor.isCompleteBlock(currentBlock)) &&
+        hasContent &&
+        text.trim() &&
+        !incompleteBlock &&
+        (!lineMeta.ignoreIndent || completeBlock) &&
         lineMeta.indent === startLineMeta.indent &&
         !this.stringProcessor.hasFolding(folding)
       ) {
@@ -112,11 +118,19 @@ export default class BlockSortProvider implements Disposable {
         currentEnd = lastStart;
         currentBlock = "";
         validBlock = false;
+        hasContent = false;
+        completeBlock = false;
+        incompleteBlock = false;
       } else {
         currentEnd++;
       }
-      currentBlock += `\n${lineMeta.text ?? this.document.getText(new Range(start, start.translate(0, Infinity)))}`;
+      currentBlock += `\n${text}`;
       if (lineMeta.valid) validBlock = true;
+      if (lineMeta.hasContent) {
+        hasContent = true;
+        completeBlock = lineMeta.complete;
+        incompleteBlock = lineMeta.incomplete;
+      }
       folding = this.stringProcessor.mergeFolding(folding, lineMeta.folding);
     }
 
@@ -246,6 +260,8 @@ export default class BlockSortProvider implements Disposable {
             ignoreIndent: this.stringProcessor.isIndentIgnoreLine(line),
             hasContent: !!this.stringProcessor.stripComments(line).trim(),
             multiBlockHeader: this.stringProcessor.isMultiBlockHeader(line),
+            complete: this.stringProcessor.isCompleteBlock(line),
+            incomplete: this.stringProcessor.isIncompleteBlock(line),
             text: withText ? line : null,
           };
         })

@@ -20,7 +20,7 @@ export const sortTests: CompareTest[] = [
   {
     file: "toplevel.ts.fixture",
     compareFile: "toplevel.ts.expect",
-    ranges: [new Range(0, 0, 59, 0)],
+    ranges: [new Range(0, 0, 58, 1)],
   },
   {
     file: "comments.ts.fixture",

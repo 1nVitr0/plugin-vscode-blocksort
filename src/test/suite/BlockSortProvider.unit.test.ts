@@ -87,7 +87,7 @@ suite("Unit Suite for BlockSortProvider", async () => {
         const blockSortProvider = new BlockSortProvider(document);
 
         const callback = blockSortProvider.getInnerBlocks.bind(blockSortProvider, range);
-        return assertRaceCancellation(callback, "getInnerBlocks", performanceThreshold);
+        await assertRaceCancellation(callback, "getInnerBlocks", performanceThreshold);
       });
 
       test(`Cancels getting Blocks (lang ${lang}) #${i}`, async () => {
@@ -95,7 +95,7 @@ suite("Unit Suite for BlockSortProvider", async () => {
         const blockSortProvider = new BlockSortProvider(document);
 
         const callback = blockSortProvider.getBlocks.bind(blockSortProvider, range);
-        return assertRaceCancellation(callback, "getBlocks", performanceThreshold);
+        await assertRaceCancellation(callback, "getBlocks", performanceThreshold);
       });
 
       test(`Cancels sorting Blocks (lang ${lang}) #${i}`, async () => {
@@ -109,7 +109,7 @@ suite("Unit Suite for BlockSortProvider", async () => {
           BlockSortProvider.sort.asc,
           Infinity
         );
-        return assertRaceCancellation(callback, "sortBlocks", performanceThreshold);
+        await assertRaceCancellation(callback, "sortBlocks", performanceThreshold);
       });
     });
   });

@@ -24,6 +24,8 @@ export interface LineMeta {
   ignoreIndent: boolean;
   hasContent: boolean;
   multiBlockHeader: boolean;
+  complete: boolean;
+  incomplete: boolean;
   text?: string | null;
 }
 
@@ -190,6 +192,18 @@ export default class StringProcessingProvider {
   public getFirstValidLine(lines: string[], trim = true): string | null {
     for (const line of lines) if (this.isValidLine(line)) return trim ? line.trim() : line;
     return null;
+  }
+
+  public getBlockSeparator(line: string, currentSeparator?: string): string {
+    if (typeof currentSeparator !== "string") return /[,\r\n]+$/g.exec(line)?.pop() || "";
+    if (!currentSeparator) return "";
+
+    const separator = /[,;\r\n]+$/g.exec(line)?.pop() || "";
+    const index = currentSeparator.indexOf(separator);
+
+    if (index < 0) return "";
+
+    return currentSeparator.slice(index);
   }
 
   public stripComments(text: string): string {
