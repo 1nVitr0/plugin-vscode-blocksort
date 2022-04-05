@@ -1,9 +1,9 @@
-import { Range, TextDocument, workspace } from 'vscode';
-import { commentMarkers, commentRegex } from '../constants/comments';
-import { stringMarkers } from '../constants/strings';
-import ConfigurationProvider from './ConfigurationProvider';
+import { CancellationToken, Range, TextDocument, workspace } from "vscode";
+import { commentMarkers, commentRegex } from "../constants/comments";
+import { stringMarkers } from "../constants/strings";
+import ConfigurationProvider from "./ConfigurationProvider";
 
-export type FoldingMarkerDefault = '()' | '[]' | '{}' | '<>';
+export type FoldingMarkerDefault = "()" | "[]" | "{}" | "<>";
 export type FoldingMarkerList<T extends string = string> = Record<
   T,
   { start: string; end: string; abortOnCurlyBrace?: boolean }
@@ -15,6 +15,19 @@ export interface FoldingLevel {
   indent?: number;
 }
 export type Folding<T extends string = string> = { [marker in keyof FoldingMarkerList<T>]: FoldingLevel };
+
+export interface LineMeta {
+  line: number;
+  indent: number;
+  valid: boolean;
+  folding: Folding;
+  ignoreIndent: boolean;
+  hasContent: boolean;
+  multiBlockHeader: boolean;
+  complete: boolean;
+  incomplete: boolean;
+  text?: string | null;
+}
 
 function initialFolding(): Folding {
   const foldingMarkers = ConfigurationProvider.getFoldingMarkers();
@@ -32,20 +45,25 @@ export default class StringProcessingProvider {
   }
 
   public getIndent(
-    line: string,
-    indentWidth: number = workspace.getConfiguration('editor').get('tabSize') || 4
+    line: string | LineMeta,
+    indentWidth: number = workspace.getConfiguration("editor").get("tabSize") || 4
   ): number {
-    return (line.match(/^\s*/)?.pop() || '').length / indentWidth;
+    return typeof line == "string" ? (line.match(/^\s*/)?.pop() || "").length / indentWidth : line.indent;
   }
 
-  public getIndentRange(text: string, checkIndentIgnore = true): { min: number; max: number } {
-    const lines = text.split(/\r?\n/);
-    const indentWidth: number = workspace.getConfiguration('editor').get('tabSize') || 4;
+  public getIndentRange(
+    text: string | LineMeta[],
+    checkIndentIgnore = true,
+    token?: CancellationToken
+  ): { min: number; max: number } {
+    const lines = typeof text == "string" ? text.split(/\r?\n/) : text;
+    const indentWidth: number = workspace.getConfiguration("editor").get("tabSize") || 4;
 
     let min = Infinity;
     let max = 0;
 
     for (const line of lines) {
+      if (token?.isCancellationRequested) return { min, max };
       if (checkIndentIgnore && this.isIndentIgnoreLine(line)) continue;
       const indent = this.getIndent(line, indentWidth);
       if (indent < min) min = indent;
@@ -61,8 +79,8 @@ export default class StringProcessingProvider {
 
     const lines = text.split(/\r?\n/);
     let markerKeys = Object.keys(foldingMarkers);
-    markerKeys.splice(markerKeys.indexOf('{}'), 1);
-    markerKeys.push('{}'); // ensure '{}' is last to make abort on curly braces possible
+    markerKeys.splice(markerKeys.indexOf("{}"), 1);
+    markerKeys.push("{}"); // ensure '{}' is last to make abort on curly braces possible
 
     for (const line of lines) {
       const sanitized = this.stripStrings(this.stripComments(line)).trim();
@@ -76,6 +94,20 @@ export default class StringProcessingProvider {
         folding.level += open - close;
       }
     }
+    return result;
+  }
+
+  public mergeFolding(...folding: Folding[]): Folding {
+    const result: Folding = {};
+
+    for (const f of folding) {
+      for (const key of Object.keys(f)) {
+        const folding = result[key] || { level: 0 };
+        folding.level += f[key].level;
+        result[key] = folding;
+      }
+    }
+
     return result;
   }
 
@@ -93,57 +125,61 @@ export default class StringProcessingProvider {
     if (!blocks.length) return false;
 
     const first = this.document.getText(blocks[0]).trim();
-    return Array.from(first).pop() === ',';
+    return Array.from(first).pop() === ",";
   }
 
-  public isIndentIgnoreLine(line: string): boolean {
+  public isIndentIgnoreLine(line: string | LineMeta): boolean {
+    if (typeof line != "string") return line.ignoreIndent;
+
     const indentIgnoreMarkers = ConfigurationProvider.getIndentIgnoreMarkers();
-    const comment = commentRegex[this.document.languageId || 'default'] || commentRegex.default;
-    const indentIgnoreRegex = `^\\s*(?:${indentIgnoreMarkers.join('|')})(?:${comment}|\\s*)*$`;
+    const comment = commentRegex[this.document.languageId || "default"] || commentRegex.default;
+    const indentIgnoreRegex = `^\\s*(?:${indentIgnoreMarkers.join("|")})(?:${comment}|\\s*)*$`;
     return new RegExp(indentIgnoreRegex).test(line);
   }
 
   public isCompleteBlock(block: string): boolean {
     const completeBlockMarkers = ConfigurationProvider.getCompleteBlockMarkers();
-    const comment = commentRegex[this.document.languageId || 'default'] || commentRegex.default;
-    const completeBlockRegex = `(?:${completeBlockMarkers.join('|')})(?:,|;)?(?:${comment}|\\s*)*(?:,|;)?$`;
-    return new RegExp(completeBlockRegex, 'g').test(block);
+    const comment = commentRegex[this.document.languageId || "default"] || commentRegex.default;
+    const completeBlockRegex = `(?:${completeBlockMarkers.join("|")})(?:,|;)?(?:${comment}|\\s*)*(?:,|;)?$`;
+    return new RegExp(completeBlockRegex, "g").test(block);
   }
 
   public isIncompleteBlock(block: string): boolean {
-    const comment = commentRegex[this.document.languageId || 'default'] || commentRegex.default;
+    const comment = commentRegex[this.document.languageId || "default"] || commentRegex.default;
     const incompleteBlockRegex = ConfigurationProvider.getIncompleteBlockRegex()
       .replace(/\$$/, `(?:${comment}|\\s*)*$`)
       .replace(/^\^/, `^(?:${comment}|\\s*)*`);
-    return new RegExp(incompleteBlockRegex, 'g').test(block);
+    return new RegExp(incompleteBlockRegex, "g").test(block);
   }
 
   public isMultiBlockHeader(block: string): boolean {
-    const comment = commentRegex[this.document.languageId || 'default'] || commentRegex.default;
+    const comment = commentRegex[this.document.languageId || "default"] || commentRegex.default;
     const blockHeaderRegex = ConfigurationProvider.getMultiBlockHeaderRegex()
       .replace(/\$$/, `(?:${comment}|\\s*)*$`)
       .replace(/^\^/, `^(?:${comment}|\\s*)*`);
-    return new RegExp(blockHeaderRegex, 'g').test(block);
+    return new RegExp(blockHeaderRegex, "g").test(block);
   }
 
   public isForceFirstBlock(block: string): boolean {
-    const comment = commentRegex[this.document.languageId || 'default'] || commentRegex.default;
+    const comment = commentRegex[this.document.languageId || "default"] || commentRegex.default;
     const firstRegex = ConfigurationProvider.getForceBlockHeaderFirstRegex()
       .replace(/\$$/, `(?:${comment}|\\s*)*\\n`)
       .replace(/^\^/, `^(?:${comment}|\\s*)*`);
-    return new RegExp(firstRegex, 'g').test(block);
+    return new RegExp(firstRegex, "g").test(block);
   }
 
   public isForceLastBlock(block: string): boolean {
-    const comment = commentRegex[this.document.languageId || 'default'] || commentRegex.default;
+    const comment = commentRegex[this.document.languageId || "default"] || commentRegex.default;
     const lastRegex = ConfigurationProvider.getForceBlockHeaderLastRegex()
       .replace(/\$$/, `(?:${comment}|\\s*)*\\n`)
       .replace(/^\^/, `^(?:${comment}|\\s*)*`);
-    return new RegExp(lastRegex, 'g').test(block);
+    return new RegExp(lastRegex, "g").test(block);
   }
 
-  public isValidLine(line: string): boolean {
-    const comment = commentRegex[this.document.languageId || 'default'] || commentRegex.default;
+  public isValidLine(line: string | LineMeta): boolean {
+    if (typeof line != "string") return line.valid;
+
+    const comment = commentRegex[this.document.languageId || "default"] || commentRegex.default;
     const hasFolding = this.hasFolding(this.getFolding(line));
     return (
       !/^\s*$/.test(line) &&
@@ -158,30 +194,42 @@ export default class StringProcessingProvider {
     return null;
   }
 
+  public getBlockSeparator(line: string, currentSeparator?: string): string {
+    if (typeof currentSeparator !== "string") return /[,\r\n]+$/g.exec(line)?.pop() || "";
+    if (!currentSeparator) return "";
+
+    const separator = /[,;\r\n]+$/g.exec(line)?.pop() || "";
+    const index = currentSeparator.indexOf(separator);
+
+    if (index < 0) return "";
+
+    return currentSeparator.slice(index);
+  }
+
   public stripComments(text: string): string {
     return this.stripBlocksFromText(
       text,
-      commentMarkers[this.document.languageId || 'default'] || commentMarkers.default
+      commentMarkers[this.document.languageId || "default"] || commentMarkers.default
     );
   }
 
   public stripStrings(text: string): string {
     return this.stripBlocksFromText(
       text,
-      stringMarkers[this.document.languageId || 'default'] || stringMarkers.default
+      stringMarkers[this.document.languageId || "default"] || stringMarkers.default
     );
   }
 
   public stripDecorators(text: string): string {
-    return text.replace(/^\s*@.*/g, '');
+    return text.replace(/^\s*@.*/g, "");
   }
 
   private stripBlocksFromText(text: string, blocks: { start: string; end: string }[]): string {
     let result = text;
     for (const { start, end } of blocks) {
-      const regex = new RegExp(`${start}(?:${end === '\\n' ? '.' : '[\\s\\S]'}*?)(?:${end}|$)`);
+      const regex = new RegExp(`${start}(?:${end === "\\n" ? "." : "[\\s\\S]"}*?)(?:${end}|$)`);
       let strip: string;
-      while ((strip = result.replace(regex, '')) !== result) result = strip;
+      while ((strip = result.replace(regex, "")) !== result) result = strip;
     }
 
     return result;

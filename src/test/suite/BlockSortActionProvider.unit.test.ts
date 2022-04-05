@@ -2,13 +2,13 @@ import * as assert from "assert";
 import { join } from "path";
 import { CancellationTokenSource, CodeActionKind, window, workspace } from "vscode";
 import BlockSortActionProvider from "../../providers/BlockSortActionProvider";
-import FormattingProvider from "../../providers/FormattingProvider";
+import BlockSortFormattingProvider from "../../providers/BlockSortFormattingProvider";
 import { codeActionKindTest, codeActionResultTest, codeLensTest, fixtureDir } from "../fixtures";
 
 suite("Unit Suite for BlockSortProvider", async () => {
   window.showInformationMessage("Start tests for BlockSortProvider.");
 
-  const formattingProvider = new FormattingProvider();
+  const formattingProvider = new BlockSortFormattingProvider();
   const codeActionProvider = new BlockSortActionProvider(formattingProvider);
   const token = new CancellationTokenSource();
 
