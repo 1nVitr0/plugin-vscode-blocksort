@@ -29,7 +29,7 @@ export default class BlockSortFormattingProvider
     const comments = commentMarkers[document.languageId] ?? commentMarkers.default;
     const markerPrefixes = comments.map((comment) => `${comment.start} ${BlockSortFormattingProvider.blockSortMarker}`);
 
-    for (let i = range?.start.line ?? 0; i < (range?.end.line ?? document.lineCount); i++) {
+    for (let i = range?.start.line ?? 0; i <= (range?.end.line ?? document.lineCount - 1); i++) {
       if (token?.isCancellationRequested) return markers;
 
       const line = document.lineAt(i);
