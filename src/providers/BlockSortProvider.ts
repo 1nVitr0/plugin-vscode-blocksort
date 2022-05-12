@@ -1,5 +1,5 @@
 import { off } from "process";
-import { CancellationToken, Disposable, Range, TextDocument, TextDocumentChangeEvent, workspace } from "vscode";
+import { CancellationToken, Disposable, Range, TextDocument, TextDocumentChangeEvent, TextEdit, workspace } from "vscode";
 import ConfigurationProvider from "./ConfigurationProvider";
 import StringProcessingProvider, { Folding, LineMeta } from "./StringProcessingProvider";
 
@@ -50,9 +50,10 @@ export default class BlockSortProvider implements Disposable {
     blocks: Range[],
     sort: (a: string, b: string) => number = BlockSortProvider.sort.asc,
     sortChildren = 0,
+    edits?: TextEdit[],
     token?: CancellationToken
   ): string[] {
-    let textBlocks = blocks.map((block) => this.sortInnerBlocks(block, sort, sortChildren, token));
+    let textBlocks = blocks.map((block) => this.sortInnerBlocks(block, sort, sortChildren, edits, token));
     if (ConfigurationProvider.getSortConsecutiveBlockHeaders())
       textBlocks = textBlocks.map((block) => this.sortBlockHeaders(block, sort, token));
 
@@ -279,9 +280,10 @@ export default class BlockSortProvider implements Disposable {
     block: Range,
     sort: (a: string, b: string) => number = BlockSortProvider.sort.asc,
     sortChildren = 0,
+    edits?: TextEdit[],
     token?: CancellationToken
   ): string {
-    if (sortChildren === 0) return this.document.getText(block);
+    if (sortChildren === 0) return this.getEditedText(block, edits, token);
 
     let blocks = this.getInnerBlocks(block, token);
 
@@ -293,9 +295,42 @@ export default class BlockSortProvider implements Disposable {
 
     return (
       this.document.getText(head) +
-      this.sortBlocks(blocks, sort, sortChildren - 1, token).join("\n") +
+      this.sortBlocks(blocks, sort, sortChildren - 1, edits, token).join("\n") +
       this.document.getText(tail)
     );
+  }
+
+  private getEditedText(block: Range, edits?: TextEdit[], token?: CancellationToken): string {
+    const containedEdits = [];
+    for (let i = (edits?.length ?? 0) - 1; i >= 0; i--) {
+      if (token?.isCancellationRequested) return "";
+      if (block.contains(edits![i].range)) containedEdits.push(...edits!?.splice(i, 1));
+    }
+
+    if (!containedEdits.length) return this.document.getText(block);
+
+    const text = this.document.getText(block);
+    const lines = text.split(/\r?\n/);
+    containedEdits.sort((a, b) => a.range.start.line - b.range.start.line);
+
+    let lineOffset = 0;
+    while (containedEdits.length) {
+      if (token?.isCancellationRequested) return "";
+      const edit = containedEdits.shift()!;
+      const { start, end } = edit.range;
+      const editLines = edit.newText.split(/\r?\n/);
+
+      lines.splice(start.line - block.start.line, end.line - block.start.line, ...editLines);
+
+      lineOffset += editLines.length - (end.line - start.line);
+      containedEdits.forEach((edit) => {
+        if (edit.range.start.line > end.line) {
+          edit.range = edit.range.with(edit.range.start.translate(lineOffset), edit.range.end.translate(lineOffset));
+        }
+      });
+    }
+
+    return lines.join("\n");
   }
 
   private sortBlockHeaders(
