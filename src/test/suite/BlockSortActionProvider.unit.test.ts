@@ -3,7 +3,7 @@ import { join } from "path";
 import { CancellationTokenSource, CodeActionKind, window, workspace } from "vscode";
 import BlockSortActionProvider from "../../providers/BlockSortActionProvider";
 import BlockSortFormattingProvider from "../../providers/BlockSortFormattingProvider";
-import { codeActionKindTest, codeActionResultTest, codeLensTest, fixtureDir } from "../fixtures";
+import { codeActionKindTest, codeActionResultTest, codeLensTest, fixAllTest, fixtureDir } from "../fixtures";
 
 suite("Unit Suite for BlockSortProvider", async () => {
   window.showInformationMessage("Start tests for BlockSortProvider.");
@@ -90,6 +90,30 @@ suite("Unit Suite for BlockSortProvider", async () => {
 
         assert.deepStrictEqual(codeLensRanges, targetRanges, "code lenses do not match");
       });
+    });
+  });
+
+  fixAllTest.forEach(({ file, compareFile }, i) => {
+    const descriptor = file.match(/\.(.*)\.fixture/);
+    const [_, lang] = descriptor || ["", "generic", "generic"];
+    test(`FixALl Code Action Compare test(lang ${lang}) #${i}`, async () => {
+      const compareDocument = await workspace.openTextDocument(join(fixtureDir, compareFile));
+      const document = await workspace.openTextDocument(join(fixtureDir, file));
+
+      const codeActions = codeActionProvider.provideCodeActions(
+        document,
+        undefined,
+        { diagnostics: [], only: CodeActionKind.SourceFixAll },
+        token.token
+      );
+      const resolvedActions = codeActions.map((action) => codeActionProvider.resolveCodeAction(action, token.token));
+
+      for (const { edit } of resolvedActions) if (edit) await workspace.applyEdit(edit);
+
+      const sorted = document.getText();
+      const compareSorted = compareDocument.getText();
+
+      assert.strictEqual(sorted, compareSorted, "sorted ranges are not equal");
     });
   });
 });

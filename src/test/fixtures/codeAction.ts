@@ -48,3 +48,11 @@ export const codeLensTest: RangeTest[] = [
     targetRanges: [new Range(4, 0, 12, 7), new Range(19, 0, 27, 7), new Range(34, 0, 42, 7), new Range(49, 0, 75, 7)],
   },
 ];
+
+export const fixAllTest: CompareTest[] = [
+  {
+    file: "markers-nested.yml.fixture",
+    compareFile: "markers-nested.yml.expect",
+    ranges: [new Range(0, 0, 88, 0)],
+  },
+];

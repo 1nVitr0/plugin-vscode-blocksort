@@ -108,7 +108,7 @@ export default class BlockSortActionProvider
             title: "Sort Block",
             kind: BlockSortCodeActionKind.QuickFix,
             uri: document.uri,
-            editBuilder: () => this.BlockSortFormattingProvider.provideBlockMarkerFormattingEdits(document, [marker], token),
+            editBuilder: () => this.BlockSortFormattingProvider.provideBlockMarkerFormattingEdits(document, [marker], [], token),
           },
         ];
       } else if (markerRange?.start.isAfter(range.end)) {
@@ -125,10 +125,17 @@ export default class BlockSortActionProvider
         kind: BlockSortCodeActionKind.SourceFixAll,
         uri: document.uri,
         editBuilder: () =>
-          filteredMarkers.reduce<TextEdit[]>((edits, marker) => {
-            const options = BlockSortFormattingProvider.getBlockSortMarkerOptions(document, marker);
-            return [...edits, ...this.BlockSortFormattingProvider.provideBlockMarkerFormattingEdits(document, [marker], token)];
-          }, []),
+          filteredMarkers
+            .sort((a, b) => b.character - a.character)
+            .reduce<TextEdit[]>((edits, marker) => {
+              const newEdits = this.BlockSortFormattingProvider.provideBlockMarkerFormattingEdits(
+                document,
+                [marker],
+                edits,
+                token
+              );
+              return [...edits, ...newEdits];
+            }, []),
       },
     ];
   }
@@ -192,31 +199,45 @@ export default class BlockSortActionProvider
       if (markers.length) return markers;
 
       markers.push(
-        ...BlockSortFormattingProvider.getBlockSortMarkers(document, undefined, token).map(({ range: { start } }) => start)
+        ...BlockSortFormattingProvider.getBlockSortMarkers(document, undefined, token).map(
+          ({ range: { start }, firstNonWhitespaceCharacterIndex }) =>
+            start.translate(0, firstNonWhitespaceCharacterIndex)
+        )
       );
       this.blockSortMarkers.set(document.uri, markers);
       return markers;
     }
 
-    for (const change of changes) {
+    let lineOffset = 0;
+    for (const change of changes.sort((a, b) => a.range.start.compareTo(b.range.start))) {
       if (token.isCancellationRequested) return markers;
       const { range, text } = change;
-      const lineCountBefore = range.end.line - range.start.line + 1;
+      const { start, end } = range;
+      const lineCountBefore = end.line - start.line + 1;
       const lines = text.split("\n");
 
       // If line count changes, update all markers after the change
-      if (lineCountBefore !== lines.length) {
-        const lineCountChange = lines.length - lineCountBefore;
+      const lineCountChange = lines.length - lineCountBefore;
+      if (lineCountChange) {
         for (let i = 0; i < markers.length; i++)
-          if (markers[i].isAfter(range.end)) markers[i] = markers[i].translate(lineCountChange, 0);
+          if (markers[i].isAfter(end)) markers[i] = markers[i].translate(lineCountChange, 0);
       }
 
       // Delete and recreate all markers inside the changed range
-      for (let i = markers.length - 1; i >= 0; i--) if (range.contains(markers[i])) markers.splice(i, 1);
+      for (let i = markers.length - 1; i >= 0; i--) {
+        if (range.contains(markers[i]) || start.line == markers[i].line || end.line == markers[i].line)
+          markers.splice(i, 1);
+      }
 
       markers.push(
-        ...BlockSortFormattingProvider.getBlockSortMarkers(document, range, token).map(({ range: { start } }) => start)
+        ...BlockSortFormattingProvider.getBlockSortMarkers(
+          document,
+          range.with(start.translate(lineOffset), end.translate(lineCountChange)),
+          token
+        ).map(({ range: { start } }) => start)
       );
+
+      lineOffset += lineCountChange;
     }
 
     markers.sort((a, b) => a.compareTo(b));
