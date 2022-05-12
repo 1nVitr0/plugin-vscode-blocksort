@@ -108,7 +108,7 @@ export default class BlockSortActionProvider
             title: "Sort Block",
             kind: BlockSortCodeActionKind.QuickFix,
             uri: document.uri,
-            editBuilder: () => this.BlockSortFormattingProvider.provideBlockMarkerFormattingEdits(document, [marker], token),
+            editBuilder: () => this.BlockSortFormattingProvider.provideBlockMarkerFormattingEdits(document, [marker], [], token),
           },
         ];
       } else if (markerRange?.start.isAfter(range.end)) {
@@ -125,10 +125,17 @@ export default class BlockSortActionProvider
         kind: BlockSortCodeActionKind.SourceFixAll,
         uri: document.uri,
         editBuilder: () =>
-          filteredMarkers.reduce<TextEdit[]>((edits, marker) => {
-            const options = BlockSortFormattingProvider.getBlockSortMarkerOptions(document, marker);
-            return [...edits, ...this.BlockSortFormattingProvider.provideBlockMarkerFormattingEdits(document, [marker], token)];
-          }, []),
+          filteredMarkers
+            .sort((a, b) => b.character - a.character)
+            .reduce<TextEdit[]>((edits, marker) => {
+              const newEdits = this.BlockSortFormattingProvider.provideBlockMarkerFormattingEdits(
+                document,
+                [marker],
+                edits,
+                token
+              );
+              return [...edits, ...newEdits];
+            }, []),
       },
     ];
   }
@@ -192,7 +199,10 @@ export default class BlockSortActionProvider
       if (markers.length) return markers;
 
       markers.push(
-        ...BlockSortFormattingProvider.getBlockSortMarkers(document, undefined, token).map(({ range: { start } }) => start)
+        ...BlockSortFormattingProvider.getBlockSortMarkers(document, undefined, token).map(
+          ({ range: { start }, firstNonWhitespaceCharacterIndex }) =>
+            start.translate(0, firstNonWhitespaceCharacterIndex)
+        )
       );
       this.blockSortMarkers.set(document.uri, markers);
       return markers;
