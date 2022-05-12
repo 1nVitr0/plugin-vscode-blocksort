@@ -1,6 +1,86 @@
 # Changelog
 
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+## [0.8.1](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v0.8.0...v0.8.1) (2022-05-12)
+
+
+### Bug Fixes
+
+* correctly sort nested [@blocksort](https://github.com/blocksort) markers ([606beae](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/606beae162150762560f6101acec24d45efa8d77))
+* correctly update blocksort code lenses ([b61a8ba](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/b61a8ba8ee1eced6311924a1eba1aa14c712a924))
+
+
+# [0.8.0](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v0.7.3...v0.8.0) (2022-04-05)
+
+
+### Bug Fixes
+
+* implement CancellationToken over full sorting process ([38fe3f8](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/38fe3f87b1db8ca47da380383d763fa26dba4bb6))
+
+### Features
+
+* vastly improve performance with line caching ([2affb0c](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/2affb0cbb60967926c6431614819b6b39d79f096))
+
+### Performance Improvements
+
+* prevent getting text multiple times ([20ce02a](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/20ce02af43a5a98015659907a418fd0020b7b9a2))
+
+
+## [0.7.3](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v0.7.2...v0.7.3) (2022-01-24)
+
+
+### Bug Fixes
+
+* upgrade dependencies ([f7ffda0](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/f7ffda0599ab78dcb998083ceb46b87118efefcc))
+
+## [0.7.2](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v0.7.1...v0.7.2) (2021-12-16)
+
+
+### Bug Fixes
+
+* back revert engine change ([ed4eec5](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/ed4eec55986f300af51828bc729e0b65f3caae50))
+* bug multilevel sorting working for unbalanced objects ([5c7a9bb](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/5c7a9bbd27b4f3889d7de50634dfd7e04017bc62))
+* white_check_mark provide correct code action kinds ([6de6de7](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/6de6de7b485a9dd20cb014142d849e05d196b194))
+* annotation: white_check_mark allow inifinite depth ([2b63574](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/2b635745869597148392d33a8379a63f242b6632))
+* commands: bug fix error on multilevel sorting ([e9deedb](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/e9deedb60cd06daafc46946eecadeeb80330ee6b))
+* dont auto sort markers with invalid positions ([7695c3d](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/7695c3d6b1f963bc3864bacb5834b24a71347d88))
+
+
+## [0.7.1](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v0.7.0...v0.7.1) (2021-12-14)
+
+
+### Bug Fixes
+
+* apply blocksort code lens for correct range ([f15532f](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/f15532fb8b44391bd73320685f818ad65a22fa05))
+* fix caching for blocksortcode actions ([5f4a891](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/5f4a891bbe1bb9331823d80120de45054cd17b4e))
+* make code lenses optional ([20e23c7](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/20e23c7fd279fbdd5ce237d937947908c0b7aa0e))
+* use natural sorting settings for formatting and code actions ([680501a](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/680501a5718a88e3022a6b44ae8009bd25f37b93))
+
+
+# [0.7.0](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v0.6.2...v0.7.0) (2021-12-13)
+
+
+### Features
+
+* activate extension after startup to enable new features ([edb05a5](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/edb05a50a1a1a79825b4f5ad157b30ed6927d0ba))
+* add code actions, lenses and formatting ([dcf9cda](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/dcf9cdab82253198d26d152664675a23093ff152))
+* migrate to new formatting provider ([ae6254b](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/ae6254bca6f0041871121ce65512af15c28e1f78))
+
+
+## [0.6.2](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v0.6.1...v0.6.2) (2021-07-09)
+
+
+### Bug Fixes
+
+* fix infinite call stack depth on multilevel sort ([c1f5e29](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/c1f5e295c07c3fd7341a599f0654e0fcdca08999))
+* force last block now working as intended ([18de840](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/18de840106ee104d4e57181519d9b305e775d8c4))
+
+## [0.6.1](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v0.6.0...v0.6.1) (2021-06-14)
+
+
+### Bug Fixes
+
+* update documentation ([d30f207](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/d30f20774c8e763270e247ff18f330af99ec152f))
+
 
 # [0.6.0](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v0.5.1...v0.6.0) (2021-06-14)
 
