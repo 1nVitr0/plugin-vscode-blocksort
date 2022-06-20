@@ -1,3 +1,10 @@
+## [0.8.3](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v0.8.2...v0.8.3) (2022-06-20)
+
+
+### Bug Fixes
+
+* upgrade dependencies ([7ff51a8](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/7ff51a844b20edf3671091c956726a938d65e803))
+
 # Changelog
 
 ## [0.8.1](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v0.8.0...v0.8.1) (2022-05-12)
