@@ -3,6 +3,8 @@ import { Position, Range } from "vscode";
 export interface BaseTest {
   file: string;
   ranges: Range[];
+  only?: boolean;
+  skip?: boolean;
 }
 
 export interface CompareTest extends BaseTest {

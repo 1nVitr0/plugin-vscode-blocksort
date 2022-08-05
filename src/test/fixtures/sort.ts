@@ -52,4 +52,10 @@ export const sortTests: CompareTest[] = [
     compareFile: "block.txt.expect",
     ranges: [new Range(0, 0, 16, 8)],
   },
+  {
+    file: "generics.ts.fixture",
+    compareFile: "generics.ts.expect",
+    ranges: [new Range(0, 0, 6, 115)],
+    only: true,
+  },
 ];
