@@ -1,6 +1,6 @@
 import * as assert from "assert";
 import { join } from "path";
-import { CancellationTokenSource, CodeActionKind, window, workspace } from "vscode";
+import { CancellationTokenSource, CodeActionKind, languages, window, workspace } from "vscode";
 import BlockSortActionProvider from "../../providers/BlockSortActionProvider";
 import BlockSortFormattingProvider from "../../providers/BlockSortFormattingProvider";
 import { codeActionKindTest, codeActionResultTest, codeLensTest, fixAllTest, fixtureDir } from "../fixtures";
@@ -100,9 +100,10 @@ suite("Unit Suite for BlockSortProvider", async () => {
     const descriptor = file.match(/\.(.*)\.fixture/);
     const [_, lang] = descriptor || ["", "generic", "generic"];
     const testFunc = only ? test.only : skip ? test.skip : test;
-    testFunc(`FixALl Code Action Compare test(lang ${lang}) #${i}`, async () => {
+    testFunc(`FixAlsl Code Action Compare test(lang ${lang}) #${i}`, async () => {
       const compareDocument = await workspace.openTextDocument(join(fixtureDir, compareFile));
       const document = await workspace.openTextDocument(join(fixtureDir, file));
+      await languages.setTextDocumentLanguage(document, lang);
 
       const codeActions = codeActionProvider.provideCodeActions(
         document,

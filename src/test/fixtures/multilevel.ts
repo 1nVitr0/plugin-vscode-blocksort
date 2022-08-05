@@ -3,13 +3,13 @@ import { CompareTest } from "../suite/types";
 
 export const multilevelSortTests: CompareTest[] = [
   {
-    file: "multilevel.txt.fixture",
-    compareFile: "multilevel.txt.expect",
+    file: "multilevel.plaintext.fixture",
+    compareFile: "multilevel.plaintext.expect",
     ranges: [new Range(0, 0, 16, 8)],
   },
   {
-    file: "multilevel.ts.fixture",
-    compareFile: "multilevel.ts.expect",
+    file: "multilevel.typescript.fixture",
+    compareFile: "multilevel.typescript.expect",
     ranges: [new Range(1, 0, 18, 20)],
   },
 ];

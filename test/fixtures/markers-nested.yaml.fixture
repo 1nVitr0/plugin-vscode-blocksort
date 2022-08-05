@@ -1,4 +1,4 @@
-// @blocksort asc
+# @blocksort asc
 a:
   d:
     d:
@@ -21,7 +21,7 @@ a:
       - 1
       - 4
       - 3
-  // @blocksort asc
+  # @blocksort asc
   a:
     d:
       - 2
@@ -64,7 +64,7 @@ a:
       - 1
       - 4
       - 3
-  // @blocksort desc 2
+  # @blocksort desc 2
   c:
     d:
       - 2

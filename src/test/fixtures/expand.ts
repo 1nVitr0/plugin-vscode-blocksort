@@ -3,7 +3,7 @@ import { RangeTest } from "../suite/types";
 
 export const expandTests: RangeTest[] = [
   {
-    file: "expand.ts.fixture",
+    file: "expand.typescript.fixture",
     ranges: [new Range(3, 9, 3, 9)],
     targetRanges: [new Range(3, 0, 16, 20)],
   },
@@ -13,7 +13,7 @@ export const expandTests: RangeTest[] = [
     targetRanges: [new Range(2, 0, 4, 13), new Range(19, 0, 21, 11), new Range(0, 0, 32, 2)],
   },
   {
-    file: "expand.rb.fixture",
+    file: "expand.ruby.fixture",
     ranges: [new Range(1, 5, 1, 5)],
     targetRanges: [new Range(1, 0, 8, 48)],
   },

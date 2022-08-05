@@ -1,6 +1,6 @@
 import { strict as assert } from "assert";
 import { join } from "path";
-import { window, workspace, Selection, CancellationTokenSource, CancellationToken } from "vscode";
+import { window, workspace, Selection, CancellationTokenSource, CancellationToken, languages } from "vscode";
 import BlockSortProvider from "../../providers/BlockSortProvider";
 import { expandTests, fixtureDir, sortTests, multilevelSortTests, cancelSortTests } from "../fixtures";
 import { CompareTest } from "./types";
@@ -20,6 +20,7 @@ function sortTest(
       testFunc(`${title} (${type}, lang ${lang}) #${i}`, async () => {
         const compareDocument = await workspace.openTextDocument(join(fixtureDir, compareFile));
         const document = await workspace.openTextDocument(join(fixtureDir, file));
+        await languages.setTextDocumentLanguage(document, lang);
         const blockSortProvider = new BlockSortProvider(document);
 
         const blocks = blockSortProvider.getBlocks(range);
@@ -68,6 +69,7 @@ suite("Unit Suite for BlockSortProvider", async () => {
         const testFunc = only ? test.only : skip ? test.skip : test;
         testFunc(`Expands selection (lang ${lang}) #${i}`, async () => {
           const document = await workspace.openTextDocument(join(fixtureDir, file));
+          await languages.setTextDocumentLanguage(document, lang);
           const blockSortProvider = new BlockSortProvider(document);
           const selection = new Selection(position.start, position.end);
           const expanded = blockSortProvider.expandRange(selection);
@@ -87,6 +89,7 @@ suite("Unit Suite for BlockSortProvider", async () => {
       const testFunc = only ? test.only : skip ? test.skip : test;
       testFunc(`Cancels getting Inner Blocks (lang ${lang}) #${i}`, async () => {
         const document = await workspace.openTextDocument(join(fixtureDir, file));
+        await languages.setTextDocumentLanguage(document, lang);
         const blockSortProvider = new BlockSortProvider(document);
 
         const callback = blockSortProvider.getInnerBlocks.bind(blockSortProvider, range);
@@ -95,6 +98,7 @@ suite("Unit Suite for BlockSortProvider", async () => {
 
       testFunc(`Cancels getting Blocks (lang ${lang}) #${i}`, async () => {
         const document = await workspace.openTextDocument(join(fixtureDir, file));
+        await languages.setTextDocumentLanguage(document, lang);
         const blockSortProvider = new BlockSortProvider(document);
 
         const callback = blockSortProvider.getBlocks.bind(blockSortProvider, range);
@@ -103,6 +107,7 @@ suite("Unit Suite for BlockSortProvider", async () => {
 
       testFunc(`Cancels sorting Blocks (lang ${lang}) #${i}`, async () => {
         const document = await workspace.openTextDocument(join(fixtureDir, file));
+        await languages.setTextDocumentLanguage(document, lang);
         const blockSortProvider = new BlockSortProvider(document);
         const blocks = blockSortProvider.getBlocks(range);
 
