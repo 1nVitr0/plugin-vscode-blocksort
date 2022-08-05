@@ -89,6 +89,7 @@
             "description": "Lines starting with these will not be taken into account when checking indentation. This is ised for C++-Style blocks ('{' in separate line) and for non-bracketed blocks (begin-end style). '{', 'end.*' and 'esac|fi' are already provided ('end.* is a bit more complicated, feel free to submit issued when some instances do not work)').",
             "default": [],
             "type": "array",
+            "scope": "language-overridable",
             "items": {
               "type": "string",
               "format": "regex"
@@ -98,6 +99,7 @@
             "description": "Lines ending with these will be handled as completed blocks (e.g. one line JSON objects). '}' and '</.*?>' are already provided (again '</.*?>' is a bit more complicated, feel free to submit issued when some instances do not work)",
             "default": [],
             "type": "array",
+            "scope": "language-overridable",
             "items": {
               "type": "string",
               "format": "regex"
@@ -106,6 +108,7 @@
           "blocksort.foldingMarkers": {
             "description": "Folding markers used to detect folding. Blocks will only be completed if all folding is 0. '()', '[]', '{}' and '<>' are already provided",
             "type": "object",
+            "scope": "language-overridable",
             "default": {},
             "additionalProperties": {
               "type": "object",
@@ -162,6 +165,7 @@
           "blocksort.sortConsecutiveBlockHeaders": {
             "description": "sort consecutive block headers (such as case or when)",
             "type": "boolean",
+            "scope": "language-overridable",
             "default": true
           },
           "blocksort.enableCodeLens": {
@@ -171,7 +175,39 @@
           }
         }
       }
-    ]
+    ],
+    "configurationDefaults": {
+      "[xml]": {
+        "blocksort.foldingMarkers": {
+          "<>": {
+            "start": "<[a-zA-Z0-9\\-_=\\s]+",
+            "end": "<\\/[a-zA-Z0-9\\-_=\\s]+|\\/>"
+          }
+        }
+      },
+      "[html]": {
+        "blocksort.foldingMarkers": {
+          "<>": {
+            "start": "<(?!(?:\\/|area|base|br|col|command|embed|hr|img|input|keygen|link|meta|param|source|track|wbr)(?:[\\s\\/]|>))[a-zA-Z0-9\\-_=\\s>]+",
+            "end": "<\\/[a-zA-Z0-9\\-_=\\s]+|\\/>"
+          }
+        }
+      },
+      "[php]": {
+        "blocksort.foldingMarkers": {
+          "<>": {
+            "start": "<(?!(?:\\/|area|base|br|col|command|embed|hr|img|input|keygen|link|meta|param|source|track|wbr)(?:[\\s\\/]|>))[a-zA-Z0-9\\-_=\\s>]+",
+            "end": "<\\/[a-zA-Z0-9\\-_=\\s]+|\\/>"
+          }
+        }
+      },
+      "[jsx-tags]": {
+        "<>": {
+          "start": "<(?!(?:\\/|area|base|br|col|command|embed|hr|img|input|keygen|link|meta|param|source|track|wbr)(?:[\\s\\/]|>))[a-zA-Z0-9\\-_=\\s>]+",
+          "end": "<\\/[a-zA-Z0-9\\-_=\\s]+|\\/>"
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run package",
