@@ -108,7 +108,8 @@ export default class BlockSortActionProvider
             title: "Sort Block",
             kind: BlockSortCodeActionKind.QuickFix,
             uri: document.uri,
-            editBuilder: () => this.BlockSortFormattingProvider.provideBlockMarkerFormattingEdits(document, [marker], [], token),
+            editBuilder: () =>
+              this.BlockSortFormattingProvider.provideBlockMarkerFormattingEdits(document, [marker], [], token),
           },
         ];
       } else if (markerRange?.start.isAfter(range.end)) {
@@ -182,10 +183,16 @@ export default class BlockSortActionProvider
     this.documentListeners.clear();
   }
 
-  private getBlockMarkerRange(document: TextDocument, position: Position, token?: CancellationToken): Range | undefined {
+  private getBlockMarkerRange(
+    document: TextDocument,
+    position: Position,
+    token?: CancellationToken
+  ): Range | undefined {
     const blockSortProvider = this.blockSortProviders.get(document.uri);
     const blockPosition = BlockSortFormattingProvider.getNextBlockPosition(document, position, token);
-    return blockPosition ? blockSortProvider?.expandRange(new Selection(blockPosition, blockPosition), 0, token) : undefined;
+    return blockPosition
+      ? blockSortProvider?.expandRange(new Selection(blockPosition, blockPosition), 0, token)
+      : undefined;
   }
 
   private updateBlockSortMarkers(
