@@ -1,11 +1,11 @@
-import { workspace } from "vscode";
+import { TextDocument, workspace } from "vscode";
 import { FoldingMarkerDefault, FoldingMarkerList } from "./StringProcessingProvider";
 
 const defaultFoldingMarkers: FoldingMarkerList<FoldingMarkerDefault> = {
   "()": { start: "\\(", end: "\\)" },
   "[]": { start: "\\[", end: "\\]" },
   "{}": { start: "\\{", end: "\\}" },
-  "<>": { start: "<[a-zA-Z0-9\\-_=\\s]+", end: "<\\/[a-zA-Z0-9\\-_=\\s]+" },
+  "<>": { start: "<", end: ">" },
 };
 
 const defaultCompleteBlockMarkers = ["\\}", "<\\/[a-zA-Z0-9\\-_=\\s]+"];
@@ -27,19 +27,20 @@ export interface NaturalSortOptions {
 export default class ConfigurationProvider {
   public static invalidatingConfigurationKeys: string[] = ["enableNaturalSorting", "enableCodeLens"];
 
-  public static getFoldingMarkers(): FoldingMarkerList {
-    const additional: FoldingMarkerList = workspace.getConfiguration("blocksort").get("foldingMarkers") || {};
+  public static getFoldingMarkers(document?: TextDocument): FoldingMarkerList {
+    const additional: FoldingMarkerList = workspace.getConfiguration("blocksort", document).get("foldingMarkers") || {};
+    const y = { ...workspace.getConfiguration("blocksort", document).get<FoldingMarkerList>("foldingMarkers") };
     return { ...defaultFoldingMarkers, ...additional };
   }
 
-  public static getCompleteBlockMarkers(): string[] {
-    const additional: string[] = workspace.getConfiguration("blocksort").get("completeBlockMarkers") || [];
+  public static getCompleteBlockMarkers(document?: TextDocument): string[] {
+    const additional: string[] = workspace.getConfiguration("blocksort", document).get("completeBlockMarkers") || [];
     return [...additional, ...defaultCompleteBlockMarkers];
   }
 
-  public static getSortConsecutiveBlockHeaders(): boolean {
+  public static getSortConsecutiveBlockHeaders(document?: TextDocument): boolean {
     const configuration: boolean | undefined = workspace
-      .getConfiguration("blocksort")
+      .getConfiguration("blocksort", document)
       .get("sortConsecutiveBlockHeaders");
     return configuration === undefined ? true : configuration;
   }
@@ -70,8 +71,8 @@ export default class ConfigurationProvider {
     return "(if|when|else|case|for|foreach|else|elsif|while|def|then|default)\\s*('([^']|(?<=\\\\)')*'|\"([^\"]|(?<=\\\\)\")*\"|`([^`]|(?<=\\\\)`)*`|[A-Za-z_+\\-*/%<>d.,s]*)*\\s*(.*:)?$";
   }
 
-  public static getIndentIgnoreMarkers(): string[] {
-    const additional: string[] = workspace.getConfiguration("blocksort").get("indentIgnoreMarkers") || [];
+  public static getIndentIgnoreMarkers(document?: TextDocument): string[] {
+    const additional: string[] = workspace.getConfiguration("blocksort", document).get("indentIgnoreMarkers") || [];
     return [...additional, ...defaultIndentIgnoreMarkers];
   }
 

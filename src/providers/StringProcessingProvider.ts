@@ -29,8 +29,8 @@ export interface LineMeta {
   text?: string | null;
 }
 
-function initialFolding(): Folding {
-  const foldingMarkers = ConfigurationProvider.getFoldingMarkers();
+function initialFolding(document: TextDocument): Folding {
+  const foldingMarkers = ConfigurationProvider.getFoldingMarkers(document);
   return Object.keys(foldingMarkers).reduce<Folding>((r, key) => {
     r[key] = { level: 0 };
     return r;
@@ -53,18 +53,19 @@ export default class StringProcessingProvider {
 
   public getIndentRange(
     text: string | LineMeta[],
+    document: TextDocument,
     checkIndentIgnore = true,
     token?: CancellationToken
   ): { min: number; max: number } {
     const lines = typeof text == "string" ? text.split(/\r?\n/) : text;
-    const indentWidth: number = workspace.getConfiguration("editor").get("tabSize") || 4;
+    const indentWidth: number = workspace.getConfiguration("editor", document).get("tabSize") || 4;
 
     let min = Infinity;
     let max = 0;
 
     for (const line of lines) {
       if (token?.isCancellationRequested) return { min, max };
-      if (checkIndentIgnore && this.isIndentIgnoreLine(line)) continue;
+      if (checkIndentIgnore && this.isIndentIgnoreLine(line, document)) continue;
       const indent = this.getIndent(line, indentWidth);
       if (indent < min) min = indent;
       if (indent > max) max = indent;
@@ -73,8 +74,13 @@ export default class StringProcessingProvider {
     return { min, max };
   }
 
-  public getFolding(text: string, initial: Folding = initialFolding(), validate = false): Folding {
-    const foldingMarkers = ConfigurationProvider.getFoldingMarkers();
+  public getFolding(
+    text: string,
+    document: TextDocument,
+    initial: Folding = initialFolding(document),
+    validate = false
+  ): Folding {
+    const foldingMarkers = ConfigurationProvider.getFoldingMarkers(document);
     const result: Folding = { ...initial };
 
     const lines = text.split(/\r?\n/);
@@ -128,17 +134,17 @@ export default class StringProcessingProvider {
     return Array.from(first).pop() === ",";
   }
 
-  public isIndentIgnoreLine(line: string | LineMeta): boolean {
+  public isIndentIgnoreLine(line: string | LineMeta, document: TextDocument): boolean {
     if (typeof line != "string") return line.ignoreIndent;
 
-    const indentIgnoreMarkers = ConfigurationProvider.getIndentIgnoreMarkers();
+    const indentIgnoreMarkers = ConfigurationProvider.getIndentIgnoreMarkers(document);
     const comment = commentRegex[this.document.languageId || "default"] || commentRegex.default;
     const indentIgnoreRegex = `^\\s*(?:${indentIgnoreMarkers.join("|")})(?:${comment}|\\s*)*$`;
     return new RegExp(indentIgnoreRegex).test(line);
   }
 
-  public isCompleteBlock(block: string): boolean {
-    const completeBlockMarkers = ConfigurationProvider.getCompleteBlockMarkers();
+  public isCompleteBlock(block: string, document: TextDocument): boolean {
+    const completeBlockMarkers = ConfigurationProvider.getCompleteBlockMarkers(document);
     const comment = commentRegex[this.document.languageId || "default"] || commentRegex.default;
     const completeBlockRegex = `(?:${completeBlockMarkers.join("|")})(?:,|;)?(?:${comment}|\\s*)*(?:,|;)?$`;
     return new RegExp(completeBlockRegex, "g").test(block);
@@ -176,11 +182,11 @@ export default class StringProcessingProvider {
     return new RegExp(lastRegex, "g").test(block);
   }
 
-  public isValidLine(line: string | LineMeta): boolean {
+  public isValidLine(line: string | LineMeta, document: TextDocument): boolean {
     if (typeof line != "string") return line.valid;
 
     const comment = commentRegex[this.document.languageId || "default"] || commentRegex.default;
-    const hasFolding = this.hasFolding(this.getFolding(line));
+    const hasFolding = this.hasFolding(this.getFolding(line, document));
     return (
       !/^\s*$/.test(line) &&
       !/^\s*@/.test(line) &&
@@ -189,8 +195,8 @@ export default class StringProcessingProvider {
     );
   }
 
-  public getFirstValidLine(lines: string[], trim = true): string | null {
-    for (const line of lines) if (this.isValidLine(line)) return trim ? line.trim() : line;
+  public getFirstValidLine(lines: string[], document: TextDocument, trim = true): string | null {
+    for (const line of lines) if (this.isValidLine(line, document)) return trim ? line.trim() : line;
     return null;
   }
 
