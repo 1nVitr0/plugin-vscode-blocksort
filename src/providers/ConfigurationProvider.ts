@@ -29,7 +29,7 @@ export default class ConfigurationProvider {
 
   public static getFoldingMarkers(): FoldingMarkerList {
     const additional: FoldingMarkerList = workspace.getConfiguration("blocksort").get("foldingMarkers") || {};
-    return { ...additional, ...defaultFoldingMarkers };
+    return { ...defaultFoldingMarkers, ...additional };
   }
 
   public static getCompleteBlockMarkers(): string[] {
