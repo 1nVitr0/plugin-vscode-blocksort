@@ -1,3 +1,15 @@
+# [0.9.0](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v0.8.4...v0.9.0) (2022-08-05)
+
+
+### Bug Fixes
+
+* support self closing / void xml tags ([ab5ca38](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/ab5ca38ef6dc4b62f846eedbe30069e5756019d4))
+
+
+### Features
+
+* add language support for extension settings ([505c4b4](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/505c4b4face5ffb20c170960b288b8b14ce6bb76))
+
 ## [0.8.4](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v0.8.3...v0.8.4) (2022-08-05)
 
 
