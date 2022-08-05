@@ -1,3 +1,10 @@
+## [0.8.4](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v0.8.3...v0.8.4) (2022-08-05)
+
+
+### Bug Fixes
+
+* allow overriding folding markers ([960f711](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/960f711c9bfb011f1c2e76678e76f233a512101c))
+
 ## [0.8.3](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v0.8.2...v0.8.3) (2022-06-20)
 
 
