@@ -3,8 +3,8 @@ import { CompareTest } from "../suite/types";
 
 export const sortTests: CompareTest[] = [
   {
-    file: "block.ts.fixture",
-    compareFile: "block.ts.expect",
+    file: "block.typescript.fixture",
+    compareFile: "block.typescript.expect",
     ranges: [new Range(3, 0, 13, 22), new Range(19, 0, 33, 8), new Range(39, 0, 47, 8)],
   },
   {
@@ -13,23 +13,23 @@ export const sortTests: CompareTest[] = [
     ranges: [new Range(2, 0, 4, 17), new Range(21, 0, 23, 15)],
   },
   {
-    file: "block.rb.fixture",
-    compareFile: "block.rb.expect",
+    file: "block.ruby.fixture",
+    compareFile: "block.ruby.expect",
     ranges: [new Range(3, 0, 10, 46), new Range(15, 0, 25, 3), new Range(29, 0, 39, 3), new Range(43, 0, 55, 11)],
   },
   {
-    file: "toplevel.ts.fixture",
-    compareFile: "toplevel.ts.expect",
+    file: "toplevel.typescript.fixture",
+    compareFile: "toplevel.typescript.expect",
     ranges: [new Range(0, 0, 58, 1)],
   },
   {
-    file: "comments.ts.fixture",
-    compareFile: "comments.ts.expect",
+    file: "comments.typescript.fixture",
+    compareFile: "comments.typescript.expect",
     ranges: [new Range(1, 0, 17, 3)],
   },
   {
-    file: "formatting.ts.fixture",
-    compareFile: "formatting.ts.expect",
+    file: "formatting.typescript.fixture",
+    compareFile: "formatting.typescript.expect",
     ranges: [new Range(1, 0, 14, 68)],
   },
   {
@@ -43,13 +43,23 @@ export const sortTests: CompareTest[] = [
     ranges: [new Range(3, 0, 34, 11), new Range(45, 0, 48, 64)],
   },
   {
-    file: "case.ts.fixture",
-    compareFile: "case.ts.expect",
+    file: "case.typescript.fixture",
+    compareFile: "case.typescript.expect",
     ranges: [new Range(1, 0, 12, 18)],
   },
   {
-    file: "block.txt.fixture",
-    compareFile: "block.txt.expect",
+    file: "block.plaintext.fixture",
+    compareFile: "block.plaintext.expect",
     ranges: [new Range(0, 0, 16, 8)],
+  },
+  {
+    file: "generics.typescript.fixture",
+    compareFile: "generics.typescript.expect",
+    ranges: [new Range(0, 0, 6, 115)],
+  },
+  {
+    file: "self-closing.html.fixture",
+    compareFile: "self-closing.html.expect",
+    ranges: [new Range(0, 0, 5, 34)],
   },
 ];

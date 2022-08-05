@@ -1,0 +1,7 @@
+export abstract class BaseAgent extends BaseRuntimeObject<'agent'> implements Agent {}
+export abstract class BaseClient extends BaseRuntimeObject<'client'> implements Client {}
+export abstract class BaseExecutionSink<T> extends BaseRuntimeObject<'sink:execute'> implements ExecutionSink<T> {}
+export abstract class BaseReaderSink<T> extends BaseRuntimeObject<'sink:read'> implements ReaderSink<T> {}
+export abstract class BaseTask extends BaseRuntimeObject<'task'> implements Task {}
+export abstract class BaseTraversalSink extends BaseRuntimeObject<'sink:traverse'> implements TraversalSink {}
+export abstract class BaseWriterSink<T> extends BaseRuntimeObject<'sink:write'> implements WriterSink<T> {}

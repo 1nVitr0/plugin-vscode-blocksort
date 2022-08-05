@@ -16,6 +16,7 @@ Sort Blocks instead of lines! Works for all major programming languages includin
 - [Code Actions / Auto Sorting](#code-actions--auto-sorting)
 - [Extension Settings](#extension-settings)
 - [Known Issues](#known-issues)
+- [Contributors](#contributors)
 
 ## Features
 
@@ -81,31 +82,76 @@ some:
     - code
     - (will be
   sorted:
+    - any level)
     - up to
-    - 9 levels)
 ```
 
 ## Extension Settings
 
-This extension contributed the following settings:#
+This extension contributed the following settings:
 
-`defaultMultilevelDepth`: Default depth used for deep sorting.
+- `defaultMultilevelDepth`: Default depth used for deep sorting.
+  - Default: `-1` (infinite)
+- `askForMultilevelDepth`: Skip aksing for multilevel depth and always use `defaultMultilevelDepth`.
+  - Default: `true`
+- `indentIgnoreMarkers`: List of regex markers that when matched will result in ignoring the indentation of the current line. This is for example used for c-style `{` in a new line. The markers are always assumed to be at teh start of the line, but can be preceded by spaces and comments.
+  - Default: `[]`
+  - *Language Overridable*
+- `completeBlockMarkers`: List of markers that complete a block. They are assumed to be at the end of a line, but can be succeeded by comments or end-of-line markers (`,` or `;`).
+  - Default: `[]`
+  - *Language Overridable*
+- `foldingMarkers`: Dictionary of folding markers. They are supplied set a key-value style, the key being a human-readable ultra-short description of the folding markers.
+  - Default:
+    - global: `{}`
+    - `[xml]`:
+      ```json
+      {
+        "<>": {
+          "start": "<[a-zA-Z0-9\\-_=\\s]+"
+           "end": "<\\/[a-zA-Z0-9\\-_=\\s]+|\\/>"
+        }
+      }
+      ```
+    - `[html]`, `[php]`, `[jsx-tags]`:
+      ```json
+      {
+        "<>": {
+          "start": "<[a-zA-Z0-9\\-_=\\s]+"
+           "end": "<\\/[a-zA-Z0-9\\-_=\\s]+|\\/>"
+        }
+      }
+      ```
+  - *Language Overridable*
+- `enableNaturalSorting`: Enables the natural sorting behavior for lines containing numbers.
+  - Default: `false`
+- `naturalSorting`: Options for the natural sorting behavior. Only takes effect if `enableNaturalSorting` is true.
+  - Default:
+    ```json
+    {
+      "enabled": false,
+      "padding": 9,
+      "omitUuids": false,
+      "sortNegativeValues": true
+    }
+    ```
+- `sortConsecutiveBlockHeaders`: sorts consecutive block headers, such as a list of `case` statements.
+  - Default: `true`
+  - *Language Overridable*
+- `enableCodeLens`: enables / disables code lenses shown over blocks annotated with `@blocksort`
+  - Default: `true`
 
-`askForMultilevelDepth`: Skip aksing for multilevel depth and always use `defaultMultilevelDepth`.
+Settings marked as *Language Overridable* can be specified on a per-language basis using the notation:
 
-`indentIgnoreMarkers`: List of regex markers that when matched will result in ignoring the indentation of the current line. This is for example used for c-style `{` in a new line. The markers are always assumed to be at teh start of the line, but can be preceded by spaces and comments.
-
-`completeBlockMarkers`: List of markers that complete a block. They are assumed to be at the end of a line, but can be succeeded by comments or end-of-line markers (`,` or `;`).
-
-`foldingMarkers`: Dictionary of folding markers. They are supplied set a key-value style, the key being a human-readable ultra-short description of the folding markers.
-
-`enableNaturalSorting`: Enables the natural sorting behavior for lines containing numbers.
-
-`naturalSorting`: Options for the natural sorting behavior. Only takes effect if `enableNaturalSorting` is true.
-
-`sortConsecutiveBlockHeaders`: sorts consecutive block headers, such as a list of `case` statements.
-
-`enableCodeLens`: enables / disables code lenses shown over blocks annotated with `@blocksort`
+```json
+"[typescript]": {
+  "blocksort.foldingMarkers": {
+    "<>": {
+      "start": "<>",
+      "end": "</>"
+    }
+  }
+}
+```
 
 ## Known Issues
 
@@ -124,15 +170,16 @@ This theme is maintained by the following person:
 
 The following users have contributed to the project:
 
-<i></i> | User | Commits
----:|:---|:--
-[![karima](https://avatars.githubusercontent.com/u/48662020?v=4&s=48)]() | [karizma](https://github.com/karizma) | 1
+|                                                                  <i></i> | User                                  | Commits |
+| -----------------------------------------------------------------------: | :------------------------------------ | :------ |
+| [![karima](https://avatars.githubusercontent.com/u/48662020?v=4&s=48)]() | [karizma](https://github.com/karizma) | 1       |
 
 
 The following users have inspired features or noticed important issues:
 
-<i></i> | User | Feature
---:|:--|:--
-[![Yamlcase](https://avatars.githubusercontent.com/u/27447701?v=4&s=48)](https://github.com/YAMLcase)) | [Yamlcase](https://github.com/YAMLcase) | Support for indent-style syntax
-<i></i> | [lavermil](https://github.com/lavermil) | Multilevel sorting
-[![Thomas Becker](https://avatars.githubusercontent.com/u/11942729?v=4&s=48)](https://github.com/centigrade-thomas-becker) | [Thomas Becker](https://github.com/centigrade-thomas-becker) | auto-sort on save
+|                                                                                                                               <i></i> | User                                                                    | Feature                              |
+| ------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------- | :----------------------------------- |
+|                                [![Yamlcase](https://avatars.githubusercontent.com/u/27447701?v=4&s=48)](https://github.com/YAMLcase)) | [Yamlcase](https://github.com/YAMLcase)                                 | Support for indent-style syntax      |
+|         [<img src="https://avatars.githubusercontent.com/u/2105693?v=4&s=48" width="48" alt="lavermil">](https://github.com/lavermil) | [lavermil](https://github.com/lavermil)                                 | Multilevel sorting                   |
+| [![centigrade-thomas-becker](https://avatars.githubusercontent.com/u/11942729?v=4&s=48)](https://github.com/centigrade-thomas-becker) | [centigrade-thomas-becker](https://github.com/centigrade-thomas-becker) | auto-sort on save                    |
+|                                     [![axefrog](https://avatars.githubusercontent.com/u/298883?v=4&s=48)](https://github.com/axefrog) | [axefrog](https://github.com/axefrog)                                   | language specific extension settings |

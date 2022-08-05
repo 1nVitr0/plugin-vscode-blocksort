@@ -1,6 +1,6 @@
 import * as assert from "assert";
 import { join } from "path";
-import { CancellationTokenSource, CodeActionKind, window, workspace } from "vscode";
+import { CancellationTokenSource, CodeActionKind, languages, window, workspace } from "vscode";
 import BlockSortActionProvider from "../../providers/BlockSortActionProvider";
 import BlockSortFormattingProvider from "../../providers/BlockSortFormattingProvider";
 import { codeActionKindTest, codeActionResultTest, codeLensTest, fixAllTest, fixtureDir } from "../fixtures";
@@ -12,10 +12,11 @@ suite("Unit Suite for BlockSortProvider", async () => {
   const codeActionProvider = new BlockSortActionProvider(formattingProvider);
   const token = new CancellationTokenSource();
 
-  codeActionKindTest.forEach(({ file, ranges, targetKinds, strict }, i) => {
+  codeActionKindTest.forEach(({ file, ranges, targetKinds, strict, only, skip }, i) => {
     ranges.forEach((range, j) => {
       const [_, lang] = file.match(/\.(.*)\.fixture/) || ["", "generic"];
-      test(`Code Action Kind Tests (lang ${lang}) #${i}.${j}`, async () => {
+      const testFunc = only ? test.only : skip ? test.skip : test;
+      testFunc(`Code Action Kind Tests (lang ${lang}) #${i}.${j}`, async () => {
         const document = await workspace.openTextDocument(join(fixtureDir, file));
 
         const codeActions = codeActionProvider.provideCodeActions(
@@ -52,11 +53,12 @@ suite("Unit Suite for BlockSortProvider", async () => {
     });
   });
 
-  codeActionResultTest.forEach(({ file, ranges, compareFile }, i) => {
+  codeActionResultTest.forEach(({ file, ranges, compareFile, only, skip }, i) => {
     ranges.forEach((range, j) => {
       const descriptor = file.match(/\.(.*)\.fixture/);
       const [_, lang] = descriptor || ["", "generic", "generic"];
-      test(`Code Action Compare test(lang ${lang}) #${i}.${j}`, async () => {
+      const testFunc = only ? test.only : skip ? test.skip : test;
+      testFunc(`Code Action Compare test(lang ${lang}) #${i}.${j}`, async () => {
         const compareDocument = await workspace.openTextDocument(join(fixtureDir, compareFile));
         const document = await workspace.openTextDocument(join(fixtureDir, file));
 
@@ -78,11 +80,12 @@ suite("Unit Suite for BlockSortProvider", async () => {
     });
   });
 
-  codeLensTest.forEach(({ file, ranges, targetRanges }) => {
+  codeLensTest.forEach(({ file, ranges, targetRanges, only, skip }) => {
     ranges.forEach((range, i) => {
       const descriptor = file.match(/\.(.*)\.fixture/);
       const [_, lang] = descriptor || ["", "generic", "generic"];
-      test(`Code Lens test(lang ${lang}) #${i}`, async () => {
+      const testFunc = only ? test.only : skip ? test.skip : test;
+      testFunc(`Code Lens test(lang ${lang}) #${i}`, async () => {
         const document = await workspace.openTextDocument(join(fixtureDir, file));
 
         const codeLenses = await codeActionProvider.provideCodeLenses(document, token.token);
@@ -93,12 +96,14 @@ suite("Unit Suite for BlockSortProvider", async () => {
     });
   });
 
-  fixAllTest.forEach(({ file, compareFile }, i) => {
+  fixAllTest.forEach(({ file, compareFile, only, skip }, i) => {
     const descriptor = file.match(/\.(.*)\.fixture/);
     const [_, lang] = descriptor || ["", "generic", "generic"];
-    test(`FixALl Code Action Compare test(lang ${lang}) #${i}`, async () => {
+    const testFunc = only ? test.only : skip ? test.skip : test;
+    testFunc(`FixAlsl Code Action Compare test(lang ${lang}) #${i}`, async () => {
       const compareDocument = await workspace.openTextDocument(join(fixtureDir, compareFile));
       const document = await workspace.openTextDocument(join(fixtureDir, file));
+      await languages.setTextDocumentLanguage(document, lang);
 
       const codeActions = codeActionProvider.provideCodeActions(
         document,

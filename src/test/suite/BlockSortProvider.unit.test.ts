@@ -1,6 +1,6 @@
 import { strict as assert } from "assert";
 import { join } from "path";
-import { window, workspace, Selection, CancellationTokenSource, CancellationToken } from "vscode";
+import { window, workspace, Selection, CancellationTokenSource, CancellationToken, languages } from "vscode";
 import BlockSortProvider from "../../providers/BlockSortProvider";
 import { expandTests, fixtureDir, sortTests, multilevelSortTests, cancelSortTests } from "../fixtures";
 import { CompareTest } from "./types";
@@ -12,13 +12,15 @@ function sortTest(
   sort: (a: string, b: string) => number = BlockSortProvider.sort.asc,
   sortChildren = 0
 ) {
-  tests.forEach(({ file, compareFile, ranges }) => {
+  tests.forEach(({ file, compareFile, ranges, only, skip }) => {
     ranges.forEach((range, i) => {
       const descriptor = file.match(/(.*)\.(.*)\.fixture/);
       const [_, type, lang] = descriptor || ["", "generic", "generic"];
-      test(`${title} (${type}, lang ${lang}) #${i}`, async () => {
+      const testFunc = only ? test.only : skip ? test.skip : test;
+      testFunc(`${title} (${type}, lang ${lang}) #${i}`, async () => {
         const compareDocument = await workspace.openTextDocument(join(fixtureDir, compareFile));
         const document = await workspace.openTextDocument(join(fixtureDir, file));
+        await languages.setTextDocumentLanguage(document, lang);
         const blockSortProvider = new BlockSortProvider(document);
 
         const blocks = blockSortProvider.getBlocks(range);
@@ -59,13 +61,15 @@ async function assertRaceCancellation<T>(
 suite("Unit Suite for BlockSortProvider", async () => {
   window.showInformationMessage("Start tests for BlockSortProvider.");
 
-  expandTests.forEach(({ file, ranges, targetRanges }) => {
+  expandTests.forEach(({ file, ranges, targetRanges, only, skip }) => {
     ranges
       .map((range, i) => ({ position: range, target: targetRanges[i] }))
       .forEach(({ position, target }, i) => {
         const [_, lang] = file.match(/\.(.*)\.fixture/) || ["", "generic"];
-        test(`Expands selection (lang ${lang}) #${i}`, async () => {
+        const testFunc = only ? test.only : skip ? test.skip : test;
+        testFunc(`Expands selection (lang ${lang}) #${i}`, async () => {
           const document = await workspace.openTextDocument(join(fixtureDir, file));
+          await languages.setTextDocumentLanguage(document, lang);
           const blockSortProvider = new BlockSortProvider(document);
           const selection = new Selection(position.start, position.end);
           const expanded = blockSortProvider.expandRange(selection);
@@ -79,27 +83,31 @@ suite("Unit Suite for BlockSortProvider", async () => {
   sortTest(multilevelSortTests, "Deep Sort Blocks", BlockSortProvider.sort.asc, -1);
   sortTest(naturalSortTests, "Natural Sort Blocks", BlockSortProvider.sort.ascNatural, 0);
 
-  cancelSortTests.forEach(({ file, ranges, performanceThreshold }) => {
+  cancelSortTests.forEach(({ file, ranges, performanceThreshold, only, skip }) => {
     ranges.forEach((range, i) => {
       const [_, lang] = file.match(/\.(.*)\.fixture/) || ["", "generic"];
-      test(`Cancels getting Inner Blocks (lang ${lang}) #${i}`, async () => {
+      const testFunc = only ? test.only : skip ? test.skip : test;
+      testFunc(`Cancels getting Inner Blocks (lang ${lang}) #${i}`, async () => {
         const document = await workspace.openTextDocument(join(fixtureDir, file));
+        await languages.setTextDocumentLanguage(document, lang);
         const blockSortProvider = new BlockSortProvider(document);
 
         const callback = blockSortProvider.getInnerBlocks.bind(blockSortProvider, range);
         await assertRaceCancellation(callback, "getInnerBlocks", performanceThreshold);
       });
 
-      test(`Cancels getting Blocks (lang ${lang}) #${i}`, async () => {
+      testFunc(`Cancels getting Blocks (lang ${lang}) #${i}`, async () => {
         const document = await workspace.openTextDocument(join(fixtureDir, file));
+        await languages.setTextDocumentLanguage(document, lang);
         const blockSortProvider = new BlockSortProvider(document);
 
         const callback = blockSortProvider.getBlocks.bind(blockSortProvider, range);
         await assertRaceCancellation(callback, "getBlocks", performanceThreshold);
       });
 
-      test(`Cancels sorting Blocks (lang ${lang}) #${i}`, async () => {
+      testFunc(`Cancels sorting Blocks (lang ${lang}) #${i}`, async () => {
         const document = await workspace.openTextDocument(join(fixtureDir, file));
+        await languages.setTextDocumentLanguage(document, lang);
         const blockSortProvider = new BlockSortProvider(document);
         const blocks = blockSortProvider.getBlocks(range);
 

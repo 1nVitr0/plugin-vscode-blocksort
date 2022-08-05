@@ -1,5 +1,13 @@
 import { off } from "process";
-import { CancellationToken, Disposable, Range, TextDocument, TextDocumentChangeEvent, TextEdit, workspace } from "vscode";
+import {
+  CancellationToken,
+  Disposable,
+  Range,
+  TextDocument,
+  TextDocumentChangeEvent,
+  TextEdit,
+  workspace,
+} from "vscode";
 import ConfigurationProvider from "./ConfigurationProvider";
 import StringProcessingProvider, { Folding, LineMeta } from "./StringProcessingProvider";
 
@@ -54,7 +62,7 @@ export default class BlockSortProvider implements Disposable {
     token?: CancellationToken
   ): string[] {
     let textBlocks = blocks.map((block) => this.sortInnerBlocks(block, sort, sortChildren, edits, token));
-    if (ConfigurationProvider.getSortConsecutiveBlockHeaders())
+    if (ConfigurationProvider.getSortConsecutiveBlockHeaders(this.document))
       textBlocks = textBlocks.map((block) => this.sortBlockHeaders(block, sort, token));
 
     if (token?.isCancellationRequested) return [];
@@ -148,7 +156,10 @@ export default class BlockSortProvider implements Disposable {
     if (!this.isComputed(block)) this.computeLineMeta([block], true, token);
     if (!this.documentLineMeta) return []; //* TS hint, this never actually happens
 
-    const indent = this.stringProcessor.getIndentRange(this.documentLineMeta.slice(block.start.line, block.end.line));
+    const indent = this.stringProcessor.getIndentRange(
+      this.documentLineMeta.slice(block.start.line, block.end.line),
+      this.document
+    );
 
     let start = 0;
     let end = -1;
@@ -179,7 +190,7 @@ export default class BlockSortProvider implements Disposable {
       !token?.isCancellationRequested &&
       range.end.line < this.document.lineCount &&
       this.stringProcessor.totalOpenFolding(
-        (folding = stringProcessor.getFolding(this.document.getText(range), undefined, true))
+        (folding = stringProcessor.getFolding(this.document.getText(range), this.document, undefined, true))
       ) > 0
     )
       range = new Range(range.start, range.end.with(range.end.line + 1));
@@ -187,38 +198,41 @@ export default class BlockSortProvider implements Disposable {
     while (
       !token?.isCancellationRequested &&
       range.start.line > 0 &&
-      stringProcessor.totalOpenFolding((folding = stringProcessor.getFolding(this.document.getText(range)))) < 0
+      stringProcessor.totalOpenFolding(
+        (folding = stringProcessor.getFolding(this.document.getText(range), this.document))
+      ) < 0
     )
       range = new Range(range.start.with(range.start.line - 1), range.end);
 
     if (token?.isCancellationRequested || !selection.isEmpty) return this.document.validateRange(range);
 
-    let indentRange = stringProcessor.getIndentRange(this.document.getText(range), true, token);
+    let indentRange = stringProcessor.getIndentRange(this.document.getText(range), this.document, true, token);
     const { min } = indentRange;
 
     while (
       !token?.isCancellationRequested &&
       range.start.line > 0 &&
-      stringProcessor.getIndentRange(this.document.getText(range), false, token).min >= min
+      stringProcessor.getIndentRange(this.document.getText(range), this.document, false, token).min >= min
     )
       range = new Range(range.start.line - 1, 0, range.end.line, range.end.character);
-    if (stringProcessor.getIndentRange(this.document.getText(range), false, token).min < min)
+    if (stringProcessor.getIndentRange(this.document.getText(range), this.document, false, token).min < min)
       range = new Range(range.start.line + 1, 0, range.end.line, range.end.character);
 
     while (
       !token?.isCancellationRequested &&
       range.end.line < this.document.lineCount &&
-      stringProcessor.getIndentRange(this.document.getText(range), false, token).min >= min
+      stringProcessor.getIndentRange(this.document.getText(range), this.document, false, token).min >= min
     )
       range = new Range(range.start.line, 0, range.end.line + 1, Infinity);
-    if (stringProcessor.getIndentRange(this.document.getText(range), false, token).min < min)
+    if (stringProcessor.getIndentRange(this.document.getText(range), this.document, false, token).min < min)
       range = new Range(range.start.line, 0, range.end.line - 1, Infinity);
 
     while (
       !token?.isCancellationRequested &&
       range.start.line < range.end.line &&
       stringProcessor.isIndentIgnoreLine(
-        this.document.getText(range.with(range.start, range.start.with(range.start.line, Infinity)))
+        this.document.getText(range.with(range.start, range.start.with(range.start.line, Infinity))),
+        this.document
       )
     )
       range = range.with(range.start.with(range.start.line + 1, 0));
@@ -236,6 +250,7 @@ export default class BlockSortProvider implements Disposable {
     if (e && "document" in e && e.document !== this.document) return;
     if (!this.documentLineMeta) this.documentLineMeta = Array(this.document.lineCount).fill(null);
 
+    const tabSize: number = workspace.getConfiguration("editor", this.document).get("tabSize") || 4;
     const ranges: Range[] = e
       ? "document" in e
         ? e.contentChanges.map((c) => c.range)
@@ -255,13 +270,13 @@ export default class BlockSortProvider implements Disposable {
         ...lines.map((line, j) => {
           return {
             line: start.line + j,
-            indent: this.stringProcessor.getIndent(line),
-            valid: this.stringProcessor.isValidLine(line),
-            folding: this.stringProcessor.getFolding(line),
-            ignoreIndent: this.stringProcessor.isIndentIgnoreLine(line),
+            indent: this.stringProcessor.getIndent(line, tabSize),
+            valid: this.stringProcessor.isValidLine(line, this.document),
+            folding: this.stringProcessor.getFolding(line, this.document),
+            ignoreIndent: this.stringProcessor.isIndentIgnoreLine(line, this.document),
             hasContent: !!this.stringProcessor.stripComments(line).trim(),
             multiBlockHeader: this.stringProcessor.isMultiBlockHeader(line),
-            complete: this.stringProcessor.isCompleteBlock(line),
+            complete: this.stringProcessor.isCompleteBlock(line, this.document),
             incomplete: this.stringProcessor.isIncompleteBlock(line),
             text: withText ? line : null,
           };
