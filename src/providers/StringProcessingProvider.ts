@@ -148,34 +148,22 @@ export default class StringProcessingProvider {
   }
 
   public isIncompleteBlock(block: string): boolean {
-    const comment = commentRegex[this.document.languageId || "default"] || commentRegex.default;
-    const incompleteBlockRegex = ConfigurationProvider.getIncompleteBlockRegex()
-      .replace(/\$$/, `(?:${comment}|\\s*)*$`)
-      .replace(/^\^/, `^(?:${comment}|\\s*)*`);
+    const incompleteBlockRegex = this.extendLineAnchors(ConfigurationProvider.getIncompleteBlockRegex(this.document));
     return new RegExp(incompleteBlockRegex, "g").test(block);
   }
 
   public isMultiBlockHeader(block: string): boolean {
-    const comment = commentRegex[this.document.languageId || "default"] || commentRegex.default;
-    const blockHeaderRegex = ConfigurationProvider.getMultiBlockHeaderRegex()
-      .replace(/\$$/, `(?:${comment}|\\s*)*$`)
-      .replace(/^\^/, `^(?:${comment}|\\s*)*`);
+    const blockHeaderRegex = this.extendLineAnchors(ConfigurationProvider.getMultiBlockHeaderRegex(this.document));
     return new RegExp(blockHeaderRegex, "g").test(block);
   }
 
   public isForceFirstBlock(block: string): boolean {
-    const comment = commentRegex[this.document.languageId || "default"] || commentRegex.default;
-    const firstRegex = ConfigurationProvider.getForceBlockHeaderFirstRegex()
-      .replace(/\$$/, `(?:${comment}|\\s*)*\\n`)
-      .replace(/^\^/, `^(?:${comment}|\\s*)*`);
+    const firstRegex = this.extendLineAnchors(ConfigurationProvider.getForceBlockHeaderFirstRegex(this.document));
     return new RegExp(firstRegex, "g").test(block);
   }
 
   public isForceLastBlock(block: string): boolean {
-    const comment = commentRegex[this.document.languageId || "default"] || commentRegex.default;
-    const lastRegex = ConfigurationProvider.getForceBlockHeaderLastRegex()
-      .replace(/\$$/, `(?:${comment}|\\s*)*\\n`)
-      .replace(/^\^/, `^(?:${comment}|\\s*)*`);
+    const lastRegex = this.extendLineAnchors(ConfigurationProvider.getForceBlockHeaderLastRegex(this.document));
     return new RegExp(lastRegex, "g").test(block);
   }
 
@@ -198,10 +186,10 @@ export default class StringProcessingProvider {
   }
 
   public getBlockSeparator(line: string, currentSeparator?: string): string {
-    if (typeof currentSeparator !== "string") return /[,\r\n]+$/g.exec(line)?.pop() || "";
+    if (typeof currentSeparator !== "string") return /[,\r?\n]+$/g.exec(line)?.pop() || "";
     if (!currentSeparator) return "";
 
-    const separator = /[,;\r\n]+$/g.exec(line)?.pop() || "";
+    const separator = /[,;\r?\n]+$/g.exec(line)?.pop() || "";
     const index = currentSeparator.indexOf(separator);
 
     if (index < 0) return "";
@@ -227,10 +215,15 @@ export default class StringProcessingProvider {
     return text.replace(/^\s*@.*/g, "");
   }
 
+  private extendLineAnchors(regex: string): string {
+    const comment = commentRegex[this.document.languageId || "default"] || commentRegex.default;
+    return regex.replace(/\$$/, `(?:${comment}|\\s*)*\\r?\\n`).replace(/^\^/, `^(?:${comment}|\\s*)*`);
+  }
+
   private stripBlocksFromText(text: string, blocks: { start: string; end: string }[]): string {
     let result = text;
     for (const { start, end } of blocks) {
-      const regex = new RegExp(`${start}(?:${end === "\\n" ? "." : "[\\s\\S]"}*?)(?:${end}|$)`);
+      const regex = new RegExp(`${start}(?:${end === "\\r?\\n" ? "." : "[\\s\\S]"}*?)(?:${end}|$)`);
       let strip: string;
       while ((strip = result.replace(regex, "")) !== result) result = strip;
     }

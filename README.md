@@ -172,6 +172,18 @@ This extension contributed the following settings:
 - `enableRangeFormatting`: Document selector for selecting documents to select formatting for. Only matching documents will have a `Sort with` entry
   - Default: `true`
   - If `true` will copy value from `enableDocumentFormatting`
+- `forceBlockHeaderFirstRegex`: Regex to match block headers that should be sorted first. `^` and `$` will be expanded to allow comments
+  - Default: `^$`
+  - *Language Overridable*
+- `forceBlockHeaderLastRegex`: Regex to match block headers that should be sorted last. `^` and `$` will be expanded to allow comments
+  - Default: ``^(\\s*(when|case)\\s*('([^']|(?<=\\\\)')*'|\"([^\"]|(?<=\\\\)\")*\"|`([^`]|(?<=\\\\)`)*`|[A-Za-z_+\\-*/%<>d.,s]*)*\\s*(.*:)?\\n?\\r?)*\\s*default|else(?!\\s?if)\\s*:?$``
+  - *Language Overridable*
+- `multiBlockHeaderRegex`: Regex for multi-block-headers such as a list of `case` statements under each other. `^` and `$` will be expanded to allow comments
+  - Default: ``^(when|case|default|else)\\s*('([^']|(?<=\\\\)')*'|\"([^\"]|(?<=\\\\)\")*\"|`([^`]|(?<=\\\\)`)*`|[A-Za-z_+\\-*/%<>d.,s]*)*\\s*(.*:)?$``
+  - *Language Overridable*
+- `incompleteBlockRegex`: Regex for incomplete blocks. `^` and `$` will be expanded to allow comments
+  - Default: ``(if|when|else|case|for|foreach|else|elsif|while|def|then|default)\\s*('([^']|(?<=\\\\)')*'|\"([^\"]|(?<=\\\\)\")*\"|`([^`]|(?<=\\\\)`)*`|[A-Za-z_+\\-*/%<>d.,s]*)*\\s*(.*:)?$``
+  - *Language Overridable*
 
 Settings marked as *Language Overridable* can be specified on a per-language basis using the notation:
 

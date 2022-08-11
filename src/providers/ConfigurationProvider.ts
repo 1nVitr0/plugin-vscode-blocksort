@@ -37,6 +37,10 @@ export interface BlockSortConfiguration {
   enableCodeActions: DocumentSelector | boolean;
   enableDocumentFormatting: DocumentSelector | boolean;
   enableRangeFormatting: DocumentSelector | boolean;
+  forceBlockHeaderFirstRegex: string;
+  forceBlockHeaderLastRegex: string;
+  multiBlockHeaderRegex: string;
+  incompleteBlockRegex: string;
 }
 
 export default class ConfigurationProvider {
@@ -75,20 +79,29 @@ export default class ConfigurationProvider {
     return configuration === undefined ? true : configuration;
   }
 
-  public static getForceBlockHeaderFirstRegex(): string {
-    return "$^";
+  public static getForceBlockHeaderFirstRegex(document?: TextDocument): string {
+    return ConfigurationProvider.getConfiguration(document).forceBlockHeaderFirstRegex || "$^";
   }
 
-  public static getForceBlockHeaderLastRegex(): string {
-    return "^(\\s*(when|case)\\s*('([^']|(?<=\\\\)')*'|\"([^\"]|(?<=\\\\)\")*\"|`([^`]|(?<=\\\\)`)*`|[A-Za-z_+\\-*/%<>d.,s]*)*\\s*(.*:)?\\n?\\r?)*\\s*default|else(?!\\s?if)\\s*:?$";
+  public static getForceBlockHeaderLastRegex(document?: TextDocument): string {
+    return (
+      ConfigurationProvider.getConfiguration(document).forceBlockHeaderLastRegex ||
+      "^(\\s*(when|case)\\s*('([^']|(?<=\\\\)')*'|\"([^\"]|(?<=\\\\)\")*\"|`([^`]|(?<=\\\\)`)*`|[A-Za-z_+\\-*/%<>d.,s]*)*\\s*(.*:)?\\n?\\r?)*\\s*default|else(?!\\s?if)\\s*:?$"
+    );
   }
 
-  public static getMultiBlockHeaderRegex(): string {
-    return "^(when|case|default|else)\\s*('([^']|(?<=\\\\)')*'|\"([^\"]|(?<=\\\\)\")*\"|`([^`]|(?<=\\\\)`)*`|[A-Za-z_+\\-*/%<>d.,s]*)*\\s*(.*:)?$";
+  public static getMultiBlockHeaderRegex(document?: TextDocument): string {
+    return (
+      ConfigurationProvider.getConfiguration(document).multiBlockHeaderRegex ||
+      "^(when|case|default|else)\\s*('([^']|(?<=\\\\)')*'|\"([^\"]|(?<=\\\\)\")*\"|`([^`]|(?<=\\\\)`)*`|[A-Za-z_+\\-*/%<>d.,s]*)*\\s*(.*:)?$"
+    );
   }
 
-  public static getIncompleteBlockRegex(): string {
-    return "(if|when|else|case|for|foreach|else|elsif|while|def|then|default)\\s*('([^']|(?<=\\\\)')*'|\"([^\"]|(?<=\\\\)\")*\"|`([^`]|(?<=\\\\)`)*`|[A-Za-z_+\\-*/%<>d.,s]*)*\\s*(.*:)?$";
+  public static getIncompleteBlockRegex(document?: TextDocument): string {
+    return (
+      ConfigurationProvider.getConfiguration(document).incompleteBlockRegex ||
+      "(if|when|else|case|for|foreach|else|elsif|while|def|then|default)\\s*('([^']|(?<=\\\\)')*'|\"([^\"]|(?<=\\\\)\")*\"|`([^`]|(?<=\\\\)`)*`|[A-Za-z_+\\-*/%<>d.,s]*)*\\s*(.*:)?$"
+    );
   }
 
   public static getIndentIgnoreMarkers(document?: TextDocument): string[] {
