@@ -113,12 +113,20 @@ export default class BlockSortFormattingProvider
     return result;
   }
 
-  public enableDocumentFormattingEdits(
+  public provideDocumentFormattingEdits(
     document: TextDocument,
     options?: FormattingOptions,
     token?: CancellationToken
   ): ProviderResult<TextEdit[]> {
     return this.provideDocumentRangeFormattingEdits(document, undefined, options, token);
+  }
+
+  public enableDocumentFormattingEdits(
+    document: TextDocument,
+    options?: FormattingOptions,
+    token?: CancellationToken
+  ): ProviderResult<TextEdit[]> {
+    return this.provideDocumentFormattingEdits(document, options, token);
   }
 
   public provideDocumentRangeFormattingEdits(

@@ -1,4 +1,4 @@
-import { ConfigurationChangeEvent, ExtensionContext, workspace } from "vscode";
+import { ExtensionContext, workspace } from "vscode";
 import contributeFormattingActions from "./contribute/formattingActions";
 import contributeCommands from "./contribute/commands";
 import ConfigurationProvider from "./providers/ConfigurationProvider";
