@@ -6,7 +6,7 @@ import ConfigurationProvider from "./ConfigurationProvider";
 export type FoldingMarkerDefault = "()" | "[]" | "{}" | "<>";
 export type FoldingMarkerList<T extends string = string> = Record<
   T,
-  { start: string; end: string; abortOnCurlyBrace?: boolean }
+  { start: string; end: string; abortOnCurlyBrace?: boolean } | null
 >;
 export interface FoldingLevel {
   level: number;
@@ -31,9 +31,9 @@ export interface LineMeta {
 
 function initialFolding(document: TextDocument): Folding {
   const foldingMarkers = ConfigurationProvider.getFoldingMarkers(document);
-  return Object.keys(foldingMarkers).reduce<Folding>((r, key) => {
-    r[key] = { level: 0 };
-    return r;
+  return Object.entries(foldingMarkers).reduce<Folding>((folding, [key, marker]) => {
+    if (marker) folding[key] = { level: 0 };
+    return folding;
   }, {});
 }
 
@@ -74,12 +74,7 @@ export default class StringProcessingProvider {
     return { min, max };
   }
 
-  public getFolding(
-    text: string,
-    document: TextDocument,
-    initial: Folding = initialFolding(document),
-    validate = false
-  ): Folding {
+  public getFolding(text: string, document: TextDocument, initial: Folding = initialFolding(document)): Folding {
     const foldingMarkers = ConfigurationProvider.getFoldingMarkers(document);
     const result: Folding = { ...initial };
 
@@ -90,9 +85,11 @@ export default class StringProcessingProvider {
 
     for (const line of lines) {
       const sanitized = this.stripStrings(this.stripComments(line)).trim();
-      for (const key of Object.keys(foldingMarkers)) {
+      for (const [key, marker] of Object.entries(foldingMarkers)) {
+        if (!marker) continue;
+
         const folding = result[key] || { level: 0 };
-        const { start, end } = foldingMarkers[key];
+        const { start, end } = marker;
 
         const open = sanitized.split(new RegExp(start)).length - 1;
         const close = sanitized.split(new RegExp(end)).length - 1;

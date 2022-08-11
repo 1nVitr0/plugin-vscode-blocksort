@@ -190,8 +190,8 @@ export default class BlockSortActionProvider
   ): Range | undefined {
     const blockSortProvider = this.blockSortProviders.get(document.uri);
     const blockPosition = BlockSortFormattingProvider.getNextBlockPosition(document, position, token);
-    return blockPosition
-      ? blockSortProvider?.expandRange(new Selection(blockPosition, blockPosition), 0, token)
+    return blockPosition && blockSortProvider
+      ? blockSortProvider.trimRange(blockSortProvider.expandRange(new Selection(blockPosition, blockPosition), token))
       : undefined;
   }
 
