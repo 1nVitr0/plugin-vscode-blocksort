@@ -86,7 +86,7 @@ export default class BlockSortFormattingProvider
   ): TextEdit {
     const blockSort = new BlockSortProvider(document);
     const initialRange = "start" in position ? position : new Range(position, position);
-    const range = blockSort.expandRange(initialRange, 0, token);
+    const range = blockSort.trimRange(blockSort.expandRange(initialRange, token));
     const blocks = blockSort.getBlocks(range, token);
     const sorted = blockSort.sortBlocks(blocks, options.sortFunction, options.sortChildren, options.edits, token);
 
