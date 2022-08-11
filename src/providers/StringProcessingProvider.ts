@@ -158,12 +158,15 @@ export default class StringProcessingProvider {
   }
 
   public isForceFirstBlock(block: string): boolean {
-    const firstRegex = this.extendLineAnchors(ConfigurationProvider.getForceBlockHeaderFirstRegex(this.document));
+    const firstRegex = this.extendLineAnchors(
+      ConfigurationProvider.getForceBlockHeaderFirstRegex(this.document),
+      false
+    );
     return new RegExp(firstRegex, "g").test(block);
   }
 
   public isForceLastBlock(block: string): boolean {
-    const lastRegex = this.extendLineAnchors(ConfigurationProvider.getForceBlockHeaderLastRegex(this.document));
+    const lastRegex = this.extendLineAnchors(ConfigurationProvider.getForceBlockHeaderLastRegex(this.document), false);
     return new RegExp(lastRegex, "g").test(block);
   }
 
@@ -215,9 +218,11 @@ export default class StringProcessingProvider {
     return text.replace(/^\s*@.*/g, "");
   }
 
-  private extendLineAnchors(regex: string): string {
+  private extendLineAnchors(regex: string, keepEndLine = true): string {
     const comment = commentRegex[this.document.languageId || "default"] || commentRegex.default;
-    return regex.replace(/\$$/, `(?:${comment}|\\s*)*\\r?\\n`).replace(/^\^/, `^(?:${comment}|\\s*)*`);
+    return regex
+      .replace(/\$$/, `(?:${comment}|\\s*)*${keepEndLine ? "$" : "\\r?\\n"}`)
+      .replace(/^\^/, `^(?:${comment}|\\s*)*`);
   }
 
   private stripBlocksFromText(text: string, blocks: { start: string; end: string }[]): string {
