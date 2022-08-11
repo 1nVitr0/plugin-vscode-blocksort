@@ -1,3 +1,24 @@
+# [0.10.0](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v0.9.0...v0.10.0) (2022-08-11)
+
+
+### Bug Fixes
+
+* allow ignoring folding markers ([40b1305](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/40b1305db79a5af6f03c040acdc0bf195fc4d517))
+* avoid catastrphic regex backtracking ([b43933c](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/b43933c1e3f9192cefddc41041a86fc17961af15))
+* duplicate provideDocumentFormattingEdits compatibility for compatibility ([7494262](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/7494262e6402964c3dcfc1e4ada3711ba3797f53))
+* trim empty lines from block selection ([e46a924](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/e46a9246a2c52ffaa53093e023e0f5481b4e8c76))
+
+
+### Features
+
+* make  formatting and code actions configurable ([197963f](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/197963fdcaff8dfd9353f40fc240905e602b2815))
+* make block regexes configurable ([9de1919](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/9de191964b420057011b05a57e255bb03e743311))
+
+
+### Performance Improvements
+
+* cache configuration for each document ([934bf76](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/934bf76a51ae81ccd6e1397aa78676aa467da199))
+
 # [0.9.0](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v0.8.4...v0.9.0) (2022-08-05)
 
 
