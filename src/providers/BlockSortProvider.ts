@@ -1,4 +1,3 @@
-import { off } from "process";
 import {
   CancellationToken,
   Disposable,
@@ -180,8 +179,7 @@ export default class BlockSortProvider implements Disposable {
     return [];
   }
 
-  // TODO: Make this more efficient
-  public expandRange(selection: Range, indent = 0, token?: CancellationToken): Range {
+  public expandRange(selection: Range, token?: CancellationToken): Range {
     const { stringProcessor } = this;
     let range: Range = this.document.validateRange(new Range(selection.start.line, 0, selection.end.line, Infinity));
     let folding: Folding;
@@ -190,7 +188,7 @@ export default class BlockSortProvider implements Disposable {
       !token?.isCancellationRequested &&
       range.end.line < this.document.lineCount &&
       this.stringProcessor.totalOpenFolding(
-        (folding = stringProcessor.getFolding(this.document.getText(range), this.document, undefined, true))
+        (folding = stringProcessor.getFolding(this.document.getText(range), this.document, undefined))
       ) > 0
     )
       range = new Range(range.start, range.end.with(range.end.line + 1));
@@ -238,6 +236,16 @@ export default class BlockSortProvider implements Disposable {
       range = range.with(range.start.with(range.start.line + 1, 0));
 
     return this.document.validateRange(range);
+  }
+
+  public trimRange(selection: Range): Range {
+    let start = selection.start.line;
+    let end = selection.end.line;
+
+    while (start < end && this.document.lineAt(start).isEmptyOrWhitespace) start++;
+    while (end > start && this.document.lineAt(end).isEmptyOrWhitespace) end--;
+
+    return this.document.validateRange(new Range(start, 0, end, Infinity));
   }
 
   public watch(): void {

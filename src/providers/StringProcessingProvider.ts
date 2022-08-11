@@ -6,7 +6,7 @@ import ConfigurationProvider from "./ConfigurationProvider";
 export type FoldingMarkerDefault = "()" | "[]" | "{}" | "<>";
 export type FoldingMarkerList<T extends string = string> = Record<
   T,
-  { start: string; end: string; abortOnCurlyBrace?: boolean }
+  { start: string; end: string; abortOnCurlyBrace?: boolean } | null
 >;
 export interface FoldingLevel {
   level: number;
@@ -31,9 +31,9 @@ export interface LineMeta {
 
 function initialFolding(document: TextDocument): Folding {
   const foldingMarkers = ConfigurationProvider.getFoldingMarkers(document);
-  return Object.keys(foldingMarkers).reduce<Folding>((r, key) => {
-    r[key] = { level: 0 };
-    return r;
+  return Object.entries(foldingMarkers).reduce<Folding>((folding, [key, marker]) => {
+    if (marker) folding[key] = { level: 0 };
+    return folding;
   }, {});
 }
 
@@ -74,12 +74,7 @@ export default class StringProcessingProvider {
     return { min, max };
   }
 
-  public getFolding(
-    text: string,
-    document: TextDocument,
-    initial: Folding = initialFolding(document),
-    validate = false
-  ): Folding {
+  public getFolding(text: string, document: TextDocument, initial: Folding = initialFolding(document)): Folding {
     const foldingMarkers = ConfigurationProvider.getFoldingMarkers(document);
     const result: Folding = { ...initial };
 
@@ -90,9 +85,11 @@ export default class StringProcessingProvider {
 
     for (const line of lines) {
       const sanitized = this.stripStrings(this.stripComments(line)).trim();
-      for (const key of Object.keys(foldingMarkers)) {
+      for (const [key, marker] of Object.entries(foldingMarkers)) {
+        if (!marker) continue;
+
         const folding = result[key] || { level: 0 };
-        const { start, end } = foldingMarkers[key];
+        const { start, end } = marker;
 
         const open = sanitized.split(new RegExp(start)).length - 1;
         const close = sanitized.split(new RegExp(end)).length - 1;
@@ -151,34 +148,25 @@ export default class StringProcessingProvider {
   }
 
   public isIncompleteBlock(block: string): boolean {
-    const comment = commentRegex[this.document.languageId || "default"] || commentRegex.default;
-    const incompleteBlockRegex = ConfigurationProvider.getIncompleteBlockRegex()
-      .replace(/\$$/, `(?:${comment}|\\s*)*$`)
-      .replace(/^\^/, `^(?:${comment}|\\s*)*`);
+    const incompleteBlockRegex = this.extendLineAnchors(ConfigurationProvider.getIncompleteBlockRegex(this.document));
     return new RegExp(incompleteBlockRegex, "g").test(block);
   }
 
   public isMultiBlockHeader(block: string): boolean {
-    const comment = commentRegex[this.document.languageId || "default"] || commentRegex.default;
-    const blockHeaderRegex = ConfigurationProvider.getMultiBlockHeaderRegex()
-      .replace(/\$$/, `(?:${comment}|\\s*)*$`)
-      .replace(/^\^/, `^(?:${comment}|\\s*)*`);
+    const blockHeaderRegex = this.extendLineAnchors(ConfigurationProvider.getMultiBlockHeaderRegex(this.document));
     return new RegExp(blockHeaderRegex, "g").test(block);
   }
 
   public isForceFirstBlock(block: string): boolean {
-    const comment = commentRegex[this.document.languageId || "default"] || commentRegex.default;
-    const firstRegex = ConfigurationProvider.getForceBlockHeaderFirstRegex()
-      .replace(/\$$/, `(?:${comment}|\\s*)*\\n`)
-      .replace(/^\^/, `^(?:${comment}|\\s*)*`);
+    const firstRegex = this.extendLineAnchors(
+      ConfigurationProvider.getForceBlockHeaderFirstRegex(this.document),
+      false
+    );
     return new RegExp(firstRegex, "g").test(block);
   }
 
   public isForceLastBlock(block: string): boolean {
-    const comment = commentRegex[this.document.languageId || "default"] || commentRegex.default;
-    const lastRegex = ConfigurationProvider.getForceBlockHeaderLastRegex()
-      .replace(/\$$/, `(?:${comment}|\\s*)*\\n`)
-      .replace(/^\^/, `^(?:${comment}|\\s*)*`);
+    const lastRegex = this.extendLineAnchors(ConfigurationProvider.getForceBlockHeaderLastRegex(this.document), false);
     return new RegExp(lastRegex, "g").test(block);
   }
 
@@ -201,10 +189,10 @@ export default class StringProcessingProvider {
   }
 
   public getBlockSeparator(line: string, currentSeparator?: string): string {
-    if (typeof currentSeparator !== "string") return /[,\r\n]+$/g.exec(line)?.pop() || "";
+    if (typeof currentSeparator !== "string") return /[,\r?\n]+$/g.exec(line)?.pop() || "";
     if (!currentSeparator) return "";
 
-    const separator = /[,;\r\n]+$/g.exec(line)?.pop() || "";
+    const separator = /[,;\r?\n]+$/g.exec(line)?.pop() || "";
     const index = currentSeparator.indexOf(separator);
 
     if (index < 0) return "";
@@ -230,10 +218,17 @@ export default class StringProcessingProvider {
     return text.replace(/^\s*@.*/g, "");
   }
 
+  private extendLineAnchors(regex: string, keepEndLine = true): string {
+    const comment = commentRegex[this.document.languageId || "default"] || commentRegex.default;
+    return regex
+      .replace(/\$$/, `(?:${comment}|\\s*)*${keepEndLine ? "$" : "\\r?\\n"}`)
+      .replace(/^\^/, `^(?:${comment}|\\s*)*`);
+  }
+
   private stripBlocksFromText(text: string, blocks: { start: string; end: string }[]): string {
     let result = text;
     for (const { start, end } of blocks) {
-      const regex = new RegExp(`${start}(?:${end === "\\n" ? "." : "[\\s\\S]"}*?)(?:${end}|$)`);
+      const regex = new RegExp(`${start}(?:${end === "\\r?\\n" ? "." : "[\\s\\S]"}*?)(?:${end}|$)`);
       let strip: string;
       while ((strip = result.replace(regex, "")) !== result) result = strip;
     }

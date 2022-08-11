@@ -103,19 +103,35 @@ This extension contributed the following settings:
 - `askForMultilevelDepth`: Skip asking for multilevel depth and always use `defaultMultilevelDepth`.
   - Default: `true`
 - `indentIgnoreMarkers`: List of regex markers that when matched will result in ignoring the indentation of the current line. This is for example used for c-style `{` in a new line. The markers are always assumed to be at teh start of the line, but can be preceded by spaces and comments.
-  - Default: `[]`
+  - Default:
+    ```json
+    [
+      "{",
+      "end(?:for(?:each)?|if|while|case|def)?\\s*?([\\.\\[\\->\\|\\s]\\s*(?:[$A-Za-z0-9_+\\-\\*\\/\\^\\%\\<\\>\\=\\!\\?\\:]*|'[^']*?'|'[']*?'|\"[^\"]*?\"|`[^`]*?`)\\s*[\\]\\|]?\\s*)*",
+      "esac|fi"
+    ]
+    ```
   - *Language Overridable*
 - `completeBlockMarkers`: List of markers that complete a block. They are assumed to be at the end of a line, but can be succeeded by comments or end-of-line markers (`,` or `;`).
-  - Default: `[]`
+  - Default: `["\\}", "<\\/[a-zA-Z0-9\\-_=\\s]+"]`
   - *Language Overridable*
 - `foldingMarkers`: Dictionary of folding markers. They are supplied set a key-value style, the key being a human-readable ultra-short description of the folding markers.
+  - Base Options are always applied unless overridden in the dictionary, if null is specified, the marker is ignored:
+    ```json
+    {
+      "()": { "start": "\\(", "end": "\\)" },
+      "[]": { "start": "\\[", "end": "\\]" },
+      "{}": { "start": "\\{", "end": "\\}" },
+      "<>": { "start": "<", "end": ">" },
+    }
+    ```
   - Default:
     - global: `{}`
     - `[xml]`:
       ```json
       {
         "<>": {
-          "start": "<[a-zA-Z0-9\\-_=\\s]+"
+          "start": "<[a-zA-Z0-9\\-_=\\s]+",
            "end": "<\\/[a-zA-Z0-9\\-_=\\s]+|\\/>"
         }
       }
@@ -124,7 +140,7 @@ This extension contributed the following settings:
       ```json
       {
         "<>": {
-          "start": "<(?!(?:\\/|area|base|br|col|command|embed|hr|img|input|keygen|link|meta|param|source|track|wbr)(?:[\\s\\/]|>))[a-zA-Z0-9\\-_=\\s>]+"
+          "start": "<(?!(?:\\/|area|base|br|col|command|embed|hr|img|input|keygen|link|meta|param|source|track|wbr)(?:[\\s\\/]|>))[a-zA-Z0-9\\-_=\\s>]+",
            "end": "<\\/[a-zA-Z0-9\\-_=\\s]+|\\/>"
         }
       }
@@ -147,6 +163,27 @@ This extension contributed the following settings:
   - *Language Overridable*
 - `enableCodeLens`: enables / disables code lenses shown over blocks annotated with `@blocksort`
   - Default: `true`
+  - If `true` will copy value from `enableCodeActions`
+- `enableCodeActions`: enables / disables code actions used for sorting blocks annotated with `@blocksort`, this will have an effect on `fixAll` code actions
+  - Default: "*"
+  - Will be overridden with `enableCodeLens` when set to `false` to avoid non-functioning code lenses
+- `enableDocumentFormatting`: Document selector for selecting documents to select formatting for. Only matching documents will have a `Sort with` entry
+  - Default: `*`
+- `enableRangeFormatting`: Document selector for selecting documents to select formatting for. Only matching documents will have a `Sort with` entry
+  - Default: `true`
+  - If `true` will copy value from `enableDocumentFormatting`
+- `forceBlockHeaderFirstRegex`: Regex to match block headers that should be sorted first. `^` and `$` will be expanded to allow comments
+  - Default: `^$`
+  - *Language Overridable*
+- `forceBlockHeaderLastRegex`: Regex to match block headers that should be sorted last. `^` and `$` will be expanded to allow comments
+  - Default: ``^(\\s*(when|case)\\s*('([^']|(?<=\\\\)')*'|\"([^\"]|(?<=\\\\)\")*\"|`([^`]|(?<=\\\\)`)*`|[A-Za-z_+\\-*/%<>d.,s]*)*\\s*(.*:)?\\n?\\r?)*\\s*default|else(?!\\s?if)\\s*:?$``
+  - *Language Overridable*
+- `multiBlockHeaderRegex`: Regex for multi-block-headers such as a list of `case` statements under each other. `^` and `$` will be expanded to allow comments
+  - Default: ``^(when|case|default|else)\\s*('([^']|(?<=\\\\)')*'|\"([^\"]|(?<=\\\\)\")*\"|`([^`]|(?<=\\\\)`)*`|[A-Za-z_+\\-*/%<>d.,s]*)*\\s*(.*:)?$``
+  - *Language Overridable*
+- `incompleteBlockRegex`: Regex for incomplete blocks. `^` and `$` will be expanded to allow comments
+  - Default: ``(if|when|else|case|for|foreach|else|elsif|while|def|then|default)\\s*('([^']|(?<=\\\\)')*'|\"([^\"]|(?<=\\\\)\")*\"|`([^`]|(?<=\\\\)`)*`|[A-Za-z_+\\-*/%<>d.,s]*)*\\s*(.*:)?$``
+  - *Language Overridable*
 
 Settings marked as *Language Overridable* can be specified on a per-language basis using the notation:
 
