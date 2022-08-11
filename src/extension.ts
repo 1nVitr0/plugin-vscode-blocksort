@@ -12,6 +12,8 @@ export function activate(context: ExtensionContext) {
           deactivate(context);
           activate(context);
           break;
+        } else {
+          ConfigurationProvider.onConfigurationChanged();
         }
       }
     })

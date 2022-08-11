@@ -1,4 +1,4 @@
-import { TextDocument, workspace } from "vscode";
+import { ConfigurationScope, TextDocument, workspace, WorkspaceConfiguration } from "vscode";
 import { FoldingMarkerDefault, FoldingMarkerList } from "./StringProcessingProvider";
 
 const defaultFoldingMarkers: FoldingMarkerList<FoldingMarkerDefault> = {
@@ -24,34 +24,47 @@ export interface NaturalSortOptions {
   sortNegativeValues: boolean;
 }
 
+export interface BlockSortConfiguration {
+  defaultMultilevelDepth: number;
+  askForMultilevelDepth: boolean;
+  indentIgnoreMarkers: string[];
+  completeBlockMarkers: string[];
+  foldingMarkers: FoldingMarkerList;
+  enableNaturalSorting: boolean;
+  naturalSorting: NaturalSortOptions;
+  sortConsecutiveBlockHeaders: boolean;
+  enableCodeLens: boolean;
+}
+
 export default class ConfigurationProvider {
-  public static invalidatingConfigurationKeys: string[] = ["enableNaturalSorting", "enableCodeLens"];
+  public static readonly invalidatingConfigurationKeys: string[] = ["enableNaturalSorting", "enableCodeLens"];
+
+  private static configuration: Map<ConfigurationScope | undefined, WorkspaceConfiguration & BlockSortConfiguration> =
+    new Map();
 
   public static getFoldingMarkers(document?: TextDocument): FoldingMarkerList {
-    const additional: FoldingMarkerList = workspace.getConfiguration("blocksort", document).get("foldingMarkers") || {};
-    const y = { ...workspace.getConfiguration("blocksort", document).get<FoldingMarkerList>("foldingMarkers") };
+    const additional: FoldingMarkerList = ConfigurationProvider.getConfiguration(document).foldingMarkers || {};
     return { ...defaultFoldingMarkers, ...additional };
   }
 
   public static getCompleteBlockMarkers(document?: TextDocument): string[] {
-    const additional: string[] = workspace.getConfiguration("blocksort", document).get("completeBlockMarkers") || [];
+    const additional: string[] = ConfigurationProvider.getConfiguration(document).completeBlockMarkers || [];
     return [...additional, ...defaultCompleteBlockMarkers];
   }
 
   public static getSortConsecutiveBlockHeaders(document?: TextDocument): boolean {
-    const configuration: boolean | undefined = workspace
-      .getConfiguration("blocksort", document)
-      .get("sortConsecutiveBlockHeaders");
+    const configuration: boolean | undefined =
+      ConfigurationProvider.getConfiguration(document).sortConsecutiveBlockHeaders;
     return configuration === undefined ? true : configuration;
   }
 
   public static getDefaultMultilevelDepth(): number {
-    const configuration: number | undefined = workspace.getConfiguration("blocksort").get("defaultMultilevelDepth");
+    const configuration: number | undefined = ConfigurationProvider.getConfiguration().defaultMultilevelDepth;
     return configuration === undefined ? -1 : configuration;
   }
 
   public static getAskForMultilevelDepth(): boolean {
-    const configuration: boolean | undefined = workspace.getConfiguration("blocksort").get("askForMultilevelDepth");
+    const configuration: boolean | undefined = ConfigurationProvider.getConfiguration().askForMultilevelDepth;
     return configuration === undefined ? true : configuration;
   }
 
@@ -72,13 +85,12 @@ export default class ConfigurationProvider {
   }
 
   public static getIndentIgnoreMarkers(document?: TextDocument): string[] {
-    const additional: string[] = workspace.getConfiguration("blocksort", document).get("indentIgnoreMarkers") || [];
+    const additional: string[] = ConfigurationProvider.getConfiguration(document).indentIgnoreMarkers || [];
     return [...additional, ...defaultIndentIgnoreMarkers];
   }
 
   public static getNaturalSortOptions(): NaturalSortOptions {
-    const configuration: Partial<NaturalSortOptions> =
-      workspace.getConfiguration("blocksort").get("naturalSorting") || {};
+    const configuration: Partial<NaturalSortOptions> = ConfigurationProvider.getConfiguration().naturalSorting || {};
     return {
       enabled: false,
       padding: 9,
@@ -89,10 +101,26 @@ export default class ConfigurationProvider {
   }
 
   public static getEnableNaturalSorting(): boolean {
-    return !!workspace.getConfiguration("blocksort").get("enableNaturalSorting");
+    return ConfigurationProvider.getConfiguration().enableNaturalSorting;
   }
 
   public static getEnableCodeLens(): boolean {
-    return !!workspace.getConfiguration("blocksort").get("enableCodeLens");
+    return ConfigurationProvider.getConfiguration().enableCodeLens;
+  }
+
+  public static onConfigurationChanged(): void {
+    ConfigurationProvider.configuration.clear();
+  }
+
+  private static getConfiguration(scope?: ConfigurationScope): BlockSortConfiguration & WorkspaceConfiguration {
+    if (ConfigurationProvider.configuration.has(scope)) {
+      return ConfigurationProvider.configuration.get(scope) as BlockSortConfiguration & WorkspaceConfiguration;
+    } else {
+      const configuration = workspace.getConfiguration("blocksort", scope) as BlockSortConfiguration &
+        WorkspaceConfiguration;
+      ConfigurationProvider.configuration.set(scope, configuration);
+
+      return configuration;
+    }
   }
 }

@@ -103,19 +103,35 @@ This extension contributed the following settings:
 - `askForMultilevelDepth`: Skip asking for multilevel depth and always use `defaultMultilevelDepth`.
   - Default: `true`
 - `indentIgnoreMarkers`: List of regex markers that when matched will result in ignoring the indentation of the current line. This is for example used for c-style `{` in a new line. The markers are always assumed to be at teh start of the line, but can be preceded by spaces and comments.
-  - Default: `[]`
+  - Default:
+    ```json
+    [
+      "{",
+      "end(?:for(?:each)?|if|while|case|def)?\\s*?([\\.\\[\\->\\|\\s]\\s*(?:[$A-Za-z0-9_+\\-\\*\\/\\^\\%\\<\\>\\=\\!\\?\\:]*|'[^']*?'|'[']*?'|\"[^\"]*?\"|`[^`]*?`)\\s*[\\]\\|]?\\s*)*",
+      "esac|fi"
+    ]
+    ```
   - *Language Overridable*
 - `completeBlockMarkers`: List of markers that complete a block. They are assumed to be at the end of a line, but can be succeeded by comments or end-of-line markers (`,` or `;`).
-  - Default: `[]`
+  - Default: `["\\}", "<\\/[a-zA-Z0-9\\-_=\\s]+"]`
   - *Language Overridable*
 - `foldingMarkers`: Dictionary of folding markers. They are supplied set a key-value style, the key being a human-readable ultra-short description of the folding markers.
+  - Base Options are always applied unless overridden in the dictionary, if null is specified, the marker is ignored:
+    ```json
+    {
+      "()": { "start": "\\(", "end": "\\)" },
+      "[]": { "start": "\\[", "end": "\\]" },
+      "{}": { "start": "\\{", "end": "\\}" },
+      "<>": { "start": "<", "end": ">" },
+    }
+    ```
   - Default:
     - global: `{}`
     - `[xml]`:
       ```json
       {
         "<>": {
-          "start": "<[a-zA-Z0-9\\-_=\\s]+"
+          "start": "<[a-zA-Z0-9\\-_=\\s]+",
            "end": "<\\/[a-zA-Z0-9\\-_=\\s]+|\\/>"
         }
       }
@@ -124,7 +140,7 @@ This extension contributed the following settings:
       ```json
       {
         "<>": {
-          "start": "<(?!(?:\\/|area|base|br|col|command|embed|hr|img|input|keygen|link|meta|param|source|track|wbr)(?:[\\s\\/]|>))[a-zA-Z0-9\\-_=\\s>]+"
+          "start": "<(?!(?:\\/|area|base|br|col|command|embed|hr|img|input|keygen|link|meta|param|source|track|wbr)(?:[\\s\\/]|>))[a-zA-Z0-9\\-_=\\s>]+",
            "end": "<\\/[a-zA-Z0-9\\-_=\\s]+|\\/>"
         }
       }
