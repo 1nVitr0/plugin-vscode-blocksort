@@ -163,6 +163,15 @@ This extension contributed the following settings:
   - *Language Overridable*
 - `enableCodeLens`: enables / disables code lenses shown over blocks annotated with `@blocksort`
   - Default: `true`
+  - If `true` will copy value from `enableCodeActions`
+- `enableCodeActions`: enables / disables code actions used for sorting blocks annotated with `@blocksort`, this will have an effect on `fixAll` code actions
+  - Default: "*"
+  - Will be overridden with `enableCodeLens` when set to `false` to avoid non-functioning code lenses
+- `enableDocumentFormatting`: Document selector for selecting documents to select formatting for. Only matching documents will have a `Sort with` entry
+  - Default: `*`
+- `enableRangeFormatting`: Document selector for selecting documents to select formatting for. Only matching documents will have a `Sort with` entry
+  - Default: `true`
+  - If `true` will copy value from `enableDocumentFormatting`
 
 Settings marked as *Language Overridable* can be specified on a per-language basis using the notation:
 

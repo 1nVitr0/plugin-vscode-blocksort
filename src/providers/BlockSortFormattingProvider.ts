@@ -113,7 +113,7 @@ export default class BlockSortFormattingProvider
     return result;
   }
 
-  public provideDocumentFormattingEdits(
+  public enableDocumentFormattingEdits(
     document: TextDocument,
     options?: FormattingOptions,
     token?: CancellationToken

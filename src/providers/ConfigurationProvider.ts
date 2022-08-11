@@ -1,4 +1,4 @@
-import { ConfigurationScope, TextDocument, workspace, WorkspaceConfiguration } from "vscode";
+import { ConfigurationScope, DocumentSelector, TextDocument, workspace, WorkspaceConfiguration } from "vscode";
 import { FoldingMarkerDefault, FoldingMarkerList } from "./StringProcessingProvider";
 
 const defaultFoldingMarkers: FoldingMarkerList<FoldingMarkerDefault> = {
@@ -33,11 +33,18 @@ export interface BlockSortConfiguration {
   enableNaturalSorting: boolean;
   naturalSorting: NaturalSortOptions;
   sortConsecutiveBlockHeaders: boolean;
-  enableCodeLens: boolean;
+  enableCodeLens: DocumentSelector | boolean;
+  enableCodeActions: DocumentSelector | boolean;
+  enableDocumentFormatting: DocumentSelector | boolean;
+  enableRangeFormatting: DocumentSelector | boolean;
 }
 
 export default class ConfigurationProvider {
-  public static readonly invalidatingConfigurationKeys: string[] = ["enableNaturalSorting", "enableCodeLens"];
+  public static readonly invalidatingConfigurationKeys: string[] = [
+    "enableNaturalSorting",
+    "enableCodeLens",
+    "provideFormatting",
+  ];
 
   private static configuration: Map<ConfigurationScope | undefined, WorkspaceConfiguration & BlockSortConfiguration> =
     new Map();
@@ -104,8 +111,30 @@ export default class ConfigurationProvider {
     return ConfigurationProvider.getConfiguration().enableNaturalSorting;
   }
 
-  public static getEnableCodeLens(): boolean {
-    return ConfigurationProvider.getConfiguration().enableCodeLens;
+  public static getEnableCodeLens(): DocumentSelector | boolean {
+    const codeLens = ConfigurationProvider.getConfiguration().enableCodeLens;
+    if (codeLens === true) {
+      return ConfigurationProvider.getConfiguration().enableCodeActions || codeLens;
+    }
+
+    return codeLens;
+  }
+
+  public static getEnableCodeActions(): DocumentSelector | boolean {
+    return ConfigurationProvider.getConfiguration().enableCodeActions;
+  }
+
+  public static getenableDocumentFormatting(): DocumentSelector | boolean {
+    return ConfigurationProvider.getConfiguration().enableDocumentFormatting;
+  }
+
+  public static getenableRangeFormatting(): DocumentSelector | boolean {
+    const formatting = ConfigurationProvider.getConfiguration().enableRangeFormatting;
+    if (formatting === true) {
+      return ConfigurationProvider.getConfiguration().enableRangeFormatting || formatting;
+    }
+
+    return formatting;
   }
 
   public static onConfigurationChanged(): void {

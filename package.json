@@ -168,10 +168,185 @@
             "scope": "language-overridable",
             "default": true
           },
+          "blocksort.enableCodeActions": {
+            "description": "Enable code actions for sorting `@blocksort` comments, also used in `fixAll` code action. Gets overridden by enableCodeLens when disabled",
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "language": {
+                    "type": "string"
+                  },
+                  "scheme": {
+                    "type": "string"
+                  },
+                  "pattern": {
+                    "type": "string",
+                    "format": "glob"
+                  }
+                }
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "language": {
+                      "type": "string"
+                    },
+                    "scheme": {
+                      "type": "string"
+                    },
+                    "pattern": {
+                      "type": "string",
+                      "format": "glob"
+                    }
+                  }
+                }
+              }
+            ],
+            "default": "*"
+          },
           "blocksort.enableCodeLens": {
             "description": "Display `Sort Blocks` code lens under `@blocksort` comments",
-            "type": "boolean",
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "language": {
+                    "type": "string"
+                  },
+                  "scheme": {
+                    "type": "string"
+                  },
+                  "pattern": {
+                    "type": "string",
+                    "format": "glob"
+                  }
+                }
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "language": {
+                      "type": "string"
+                    },
+                    "scheme": {
+                      "type": "string"
+                    },
+                    "pattern": {
+                      "type": "string",
+                      "format": "glob"
+                    }
+                  }
+                }
+              }
+            ],
             "default": true
+          },
+          "blocksort.enableDocumentFormatting": {
+            "description": "Enable formatting provider for a the specified document selector(s)",
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "language": {
+                    "type": "string"
+                  },
+                  "scheme": {
+                    "type": "string"
+                  },
+                  "pattern": {
+                    "type": "string",
+                    "format": "glob"
+                  }
+                }
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "language": {
+                      "type": "string"
+                    },
+                    "scheme": {
+                      "type": "string"
+                    },
+                    "pattern": {
+                      "type": "string",
+                      "format": "glob"
+                    }
+                  }
+                }
+              }
+            ],
+            "default": "*"
+          },
+          "blocksort.enableRangeFormatting": {
+            "description": "Enable formatting provider for a the specified document selector(s)",
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "language": {
+                    "type": "string"
+                  },
+                  "scheme": {
+                    "type": "string"
+                  },
+                  "pattern": {
+                    "type": "string",
+                    "format": "glob"
+                  }
+                }
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "language": {
+                      "type": "string"
+                    },
+                    "scheme": {
+                      "type": "string"
+                    },
+                    "pattern": {
+                      "type": "string",
+                      "format": "glob"
+                    }
+                  }
+                }
+              }
+            ],
+            "default": "*"
           }
         }
       }
