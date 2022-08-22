@@ -120,6 +120,10 @@ export default class ConfigurationProvider {
     };
   }
 
+  public static getKeepAppendedNewlines(): boolean {
+    return ConfigurationProvider.getConfiguration().keepAppendedNewlines;
+  }
+
   public static getEnableNaturalSorting(): boolean {
     return ConfigurationProvider.getConfiguration().enableNaturalSorting;
   }

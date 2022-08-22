@@ -4,8 +4,8 @@ import { RangeTest } from "../suite/types";
 export const expandTests: RangeTest[] = [
   {
     file: "expand.typescript.fixture",
-    ranges: [new Range(3, 9, 3, 9), new Range(20, 0, 24, 0)],
-    targetRanges: [new Range(3, 0, 16, 20), new Range(21, 0, 23, 1)],
+    ranges: [new Range(3, 9, 3, 9), new Range(22, 0, 24, 0)],
+    targetRanges: [new Range(3, 0, 16, 20), new Range(22, 0, 26, 3)],
   },
   {
     file: "expand.cpp.fixture",

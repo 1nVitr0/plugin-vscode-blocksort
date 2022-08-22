@@ -1,8 +1,8 @@
 # Block Sort
 
-[![Visual Studio Code extension 1nVitr0blocksort](https://vsmarketplacebadge.apphb.com/version/1nVitr0.blocksort.svg)](https://marketplace.visualstudio.com/items?itemName=1nVitr0.blocksort)
-[![Installs for Visual Studio Code extension 1nVitr0.blocksort](https://vsmarketplacebadge.apphb.com/installs/1nVitr0.blocksort.svg)](https://marketplace.visualstudio.com/items?itemName=1nVitr0.blocksort)
-[![Rating for Visual Studio Code extension 1nVitr0.blocksort](https://vsmarketplacebadge.apphb.com/rating/1nVitr0.blocksort.svg)](https://marketplace.visualstudio.com/items?itemName=1nVitr0.blocksort)
+[![Visual Studio Code extension 1nVitr0blocksort](https://img.shields.io/visual-studio-marketplace/v/1nVitr0.blocksort?logo=visualstudiocode)](https://marketplace.visualstudio.com/items?itemName=1nVitr0.blocksort)
+[![Installs for Visual Studio Code extension 1nVitr0.blocksort](https://img.shields.io/visual-studio-marketplace/i/1nVitr0.blocksort?logo=visualstudiocode)](https://marketplace.visualstudio.com/items?itemName=1nVitr0.blocksort)
+[![Rating for Visual Studio Code extension 1nVitr0.blocksort](https://img.shields.io/visual-studio-marketplace/r/1nVitr0.blocksort?logo=visualstudiocode)](https://marketplace.visualstudio.com/items?itemName=1nVitr0.blocksort)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
 ![Sort Blocks instead of lines!](https://raw.githubusercontent.com/1nVitr0/plugin-vscode-blocksort/main/resources/demo.gif)

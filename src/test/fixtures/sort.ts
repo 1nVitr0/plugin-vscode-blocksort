@@ -15,7 +15,7 @@ export const sortTests: CompareTest[] = [
   {
     file: "block.ruby.fixture",
     compareFile: "block.ruby.expect",
-    ranges: [new Range(3, 0, 10, 46), new Range(15, 0, 25, 3), new Range(29, 0, 39, 3), new Range(43, 0, 55, 11)],
+    ranges: [new Range(3, 0, 10, 48), new Range(15, 0, 25, 5), new Range(29, 0, 39, 5), new Range(43, 0, 55, 13)],
   },
   {
     file: "toplevel.typescript.fixture",
