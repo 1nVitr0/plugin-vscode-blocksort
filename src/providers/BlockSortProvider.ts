@@ -66,6 +66,22 @@ export default class BlockSortProvider implements Disposable {
 
     if (token?.isCancellationRequested) return [];
 
+    let suffixes = [];
+    // If appended newlines are kept, remove and save all appended newlines
+    if (ConfigurationProvider.getKeepAppendedNewlines()) {
+      for (let i = 0; i < textBlocks.length; i++) {
+        if (textBlocks[i].endsWith("\r\n")) {
+          suffixes.push("\r\n");
+          textBlocks[i] = textBlocks[i].slice(0, -2);
+        } else if (textBlocks[i].endsWith("\n")) {
+          suffixes.push("\n");
+          textBlocks[i] = textBlocks[i].slice(0, -1);
+        } else {
+          suffixes.push("");
+        }
+      }
+    }
+
     // Find common block separator, ignoring the last block
     let separator = textBlocks.length > 1 ? this.stringProcessor.getBlockSeparator(textBlocks[0]) : "";
     for (const block of textBlocks.slice(1, -1)) {
@@ -84,6 +100,12 @@ export default class BlockSortProvider implements Disposable {
         else if (i < textBlocks.length - 1 && !block.endsWith(separator)) return block + separator;
         else return block;
       });
+    }
+
+    if (suffixes) {
+      for (let i = 0; i < textBlocks.length; i++) {
+        if (suffixes[i]) textBlocks[i] += suffixes[i];
+      }
     }
 
     return textBlocks;
@@ -105,8 +127,8 @@ export default class BlockSortProvider implements Disposable {
     let incompleteBlock = startLineMeta.incomplete;
     let folding = startLineMeta.folding;
     let lastStart = 0;
-    let currentEnd = 0;
 
+    let currentEnd = 0;
     for (let i = offset + 1; i <= end.line; i++) {
       if (token?.isCancellationRequested) return [];
 
@@ -179,61 +201,110 @@ export default class BlockSortProvider implements Disposable {
     return [];
   }
 
+  private expandRangeUp(range: Range, folding: Folding, indent: number, token?: CancellationToken): [Range, Folding] {
+    let nextLine = Math.max(range.start.line - 1, 0);
+    if (!this.isComputed(range)) this.computeLineMeta([range], true, token);
+    if (!this.isComputed(nextLine)) this.computeLineMeta(nextLine, true, token);
+    if (!this.documentLineMeta) return [range, folding]; //* TS hint, this never actually happens
+
+    const { stringProcessor } = this;
+    let previousRange = range;
+    let previousFolding = folding;
+
+    let line = range.start.line;
+    while (
+      line > 0 &&
+      (stringProcessor.totalOpenFolding(folding) > 0 ||
+        this.documentLineMeta[line - 1].indent >= indent ||
+        !this.documentLineMeta[line - 1].hasContent)
+    ) {
+      if (token?.isCancellationRequested) return [range, folding];
+      previousRange = range;
+      previousFolding = folding;
+
+      line--;
+      const addedRange = new Range(line, 0, line, Infinity);
+      range = range.union(addedRange);
+
+      nextLine = Math.max(line - 1, 0);
+      if (!this.isComputed(nextLine)) this.computeLineMeta(nextLine, true, token);
+
+      folding = stringProcessor.mergeFolding(folding, this.documentLineMeta[line].folding);
+    }
+
+    if (line == 0 && stringProcessor.totalOpenFolding(folding) > 0) {
+      range = previousRange;
+      folding = previousFolding;
+    }
+
+    return [range, folding];
+  }
+
+  private expandRangeDown(range: Range, folding: Folding, indent: number, token?: CancellationToken): [Range, Folding] {
+    let nextLine = Math.min(range.end.line + 1, this.document.lineCount - 1);
+    if (!this.isComputed(range)) this.computeLineMeta([range], true, token);
+    if (!this.isComputed(nextLine)) this.computeLineMeta(nextLine, true, token);
+    if (!this.documentLineMeta) return [range, folding]; //* TS hint, this never actually happens
+
+    const { stringProcessor } = this;
+    let previousRange = range;
+    let previousFolding = folding;
+
+    let line = range.end.line;
+    while (
+      line < this.document.lineCount - 1 &&
+      (stringProcessor.totalOpenFolding(folding) > 0 ||
+        this.documentLineMeta[line + 1].indent >= indent ||
+        !this.documentLineMeta[line + 1].hasContent)
+    ) {
+      if (token?.isCancellationRequested) return [range, folding];
+      previousRange = range;
+      previousFolding = folding;
+
+      line++;
+      const addedRange = new Range(line, 0, line, Infinity);
+      range = range.union(addedRange);
+
+      nextLine = Math.min(line + 1, this.document.lineCount - 1);
+      if (!this.isComputed(nextLine)) this.computeLineMeta(nextLine, true, token);
+
+      folding = stringProcessor.mergeFolding(folding, this.documentLineMeta[line].folding);
+    }
+
+    if (line == 0 && stringProcessor.totalOpenFolding(folding) > 0) {
+      range = previousRange;
+      folding = previousFolding;
+    }
+
+    return [range, folding];
+  }
+
   public expandRange(selection: Range, token?: CancellationToken): Range {
     const { stringProcessor } = this;
     let range: Range = this.document.validateRange(new Range(selection.start.line, 0, selection.end.line, Infinity));
-    let folding: Folding;
+    if (!this.isComputed(range)) this.computeLineMeta([range], true, token);
+    if (!this.documentLineMeta) return range; //* TS hint, this never actually happens
 
-    while (
-      !token?.isCancellationRequested &&
-      range.end.line < this.document.lineCount &&
-      this.stringProcessor.totalOpenFolding(
-        (folding = stringProcessor.getFolding(this.document.getText(range), this.document, undefined))
-      ) > 0
-    )
-      range = new Range(range.start, range.end.with(range.end.line + 1));
+    const { min: indent } = stringProcessor.getIndentRange(
+      this.documentLineMeta.slice(range.start.line, range.end.line + 1),
+      this.document
+    );
 
-    while (
-      !token?.isCancellationRequested &&
-      range.start.line > 0 &&
-      stringProcessor.totalOpenFolding(
-        (folding = stringProcessor.getFolding(this.document.getText(range), this.document))
-      ) < 0
-    )
-      range = new Range(range.start.with(range.start.line - 1), range.end);
+    let folding: Folding = {};
+    for (let i = range.start.line; i <= range.end.line; i++) {
+      if (token?.isCancellationRequested) return range;
 
-    if (token?.isCancellationRequested || !selection.isEmpty) return this.document.validateRange(range);
+      const lineMeta = this.documentLineMeta[i];
+      folding = stringProcessor.mergeFolding(folding, lineMeta.folding);
+    }
 
-    let indentRange = stringProcessor.getIndentRange(this.document.getText(range), this.document, true, token);
-    const { min } = indentRange;
-
-    while (
-      !token?.isCancellationRequested &&
-      range.start.line > 0 &&
-      stringProcessor.getIndentRange(this.document.getText(range), this.document, false, token).min >= min
-    )
-      range = new Range(range.start.line - 1, 0, range.end.line, range.end.character);
-    if (stringProcessor.getIndentRange(this.document.getText(range), this.document, false, token).min < min)
-      range = new Range(range.start.line + 1, 0, range.end.line, range.end.character);
-
-    while (
-      !token?.isCancellationRequested &&
-      range.end.line < this.document.lineCount &&
-      stringProcessor.getIndentRange(this.document.getText(range), this.document, false, token).min >= min
-    )
-      range = new Range(range.start.line, 0, range.end.line + 1, Infinity);
-    if (stringProcessor.getIndentRange(this.document.getText(range), this.document, false, token).min < min)
-      range = new Range(range.start.line, 0, range.end.line - 1, Infinity);
-
-    while (
-      !token?.isCancellationRequested &&
-      range.start.line < range.end.line &&
-      stringProcessor.isIndentIgnoreLine(
-        this.document.getText(range.with(range.start, range.start.with(range.start.line, Infinity))),
-        this.document
-      )
-    )
-      range = range.with(range.start.with(range.start.line + 1, 0));
+    if (stringProcessor.totalOpenFolding(folding) > 0) {
+      [range, folding] = this.expandRangeDown(range, folding, indent, token);
+      [range, folding] = this.expandRangeUp(range, folding, indent, token);
+    } else {
+      [range, folding] = this.expandRangeUp(range, folding, indent, token);
+      [range, folding] = this.expandRangeDown(range, folding, indent, token);
+    }
 
     return this.document.validateRange(range);
   }
@@ -252,50 +323,64 @@ export default class BlockSortProvider implements Disposable {
     this.disposables.push(workspace.onDidChangeTextDocument(this.computeLineMeta, this, this.disposables));
   }
 
-  private computeLineMeta(ranges?: Range[], withText?: boolean, token?: CancellationToken): void;
-  private computeLineMeta(e?: TextDocumentChangeEvent, withText?: boolean, token?: CancellationToken): void;
-  private computeLineMeta(e?: TextDocumentChangeEvent | Range[], withText?: boolean, token?: CancellationToken): void {
-    if (e && "document" in e && e.document !== this.document) return;
+  private computeLineMeta(line: number, withText?: boolean, token?: CancellationToken): LineMeta;
+  private computeLineMeta(ranges?: Range[], withText?: boolean, token?: CancellationToken): LineMeta[];
+  private computeLineMeta(e?: TextDocumentChangeEvent, withText?: boolean, token?: CancellationToken): LineMeta[];
+  private computeLineMeta(
+    e?: TextDocumentChangeEvent | Range[] | number,
+    withText?: boolean,
+    token?: CancellationToken
+  ): LineMeta[] | LineMeta {
+    if (e && typeof e == "object" && "document" in e && e.document !== this.document) return [];
     if (!this.documentLineMeta) this.documentLineMeta = Array(this.document.lineCount).fill(null);
 
     const tabSize: number = workspace.getConfiguration("editor", this.document).get("tabSize") || 4;
     const ranges: Range[] = e
-      ? "document" in e
+      ? typeof e == "number"
+        ? [new Range(e, 0, e, Infinity)]
+        : "document" in e
         ? e.contentChanges.map((c) => c.range)
         : e
       : [new Range(0, 0, this.document.lineCount, Infinity)];
 
+    const result = [];
     for (let i = 0; i < ranges.length; i++) {
-      if (token?.isCancellationRequested) return;
+      if (token?.isCancellationRequested) return result;
 
       const { start, end } = ranges[i];
-      const text = e && "document" in e ? e.contentChanges[i].text : this.document.getText(ranges[i]);
+      const text =
+        e && typeof e == "object" && "document" in e ? e.contentChanges[i].text : this.document.getText(ranges[i]);
       const lines = text.split(/\r?\n/);
 
-      this.documentLineMeta.splice(
-        start.line,
-        end.line - start.line + 1,
-        ...lines.map((line, j) => {
-          return {
-            line: start.line + j,
-            indent: this.stringProcessor.getIndent(line, tabSize),
-            valid: this.stringProcessor.isValidLine(line, this.document),
-            folding: this.stringProcessor.getFolding(line, this.document),
-            ignoreIndent: this.stringProcessor.isIndentIgnoreLine(line, this.document),
-            hasContent: !!this.stringProcessor.stripComments(line).trim(),
-            multiBlockHeader: this.stringProcessor.isMultiBlockHeader(line),
-            complete: this.stringProcessor.isCompleteBlock(line, this.document),
-            incomplete: this.stringProcessor.isIncompleteBlock(line),
-            text: withText ? line : null,
-          };
-        })
-      );
+      const lineMetas = lines.map((line, j) => {
+        return {
+          line: start.line + j,
+          indent: this.stringProcessor.getIndent(line, tabSize),
+          valid: this.stringProcessor.isValidLine(line, this.document),
+          folding: this.stringProcessor.getFolding(line, this.document),
+          ignoreIndent: this.stringProcessor.isIndentIgnoreLine(line, this.document),
+          hasContent: !!this.stringProcessor.stripComments(line).trim(),
+          multiBlockHeader: this.stringProcessor.isMultiBlockHeader(line),
+          complete: this.stringProcessor.isCompleteBlock(line, this.document),
+          incomplete: this.stringProcessor.isIncompleteBlock(line),
+          text: withText ? line : null,
+        };
+      });
+
+      this.documentLineMeta.splice(start.line, end.line - start.line + 1, ...lineMetas);
+      result.push(...lineMetas);
 
       this.computedRanges.push(ranges[i]);
     }
+
+    return typeof e == "number" ? result[0] : result;
   }
 
-  private isComputed(range: Range): boolean {
+  private isComputed(line: number): boolean;
+  private isComputed(range: Range): boolean;
+  private isComputed(rangeOrLine: Range | number): boolean {
+    const range = typeof rangeOrLine == "number" ? new Range(rangeOrLine, 0, rangeOrLine, Infinity) : rangeOrLine;
+
     return this.computedRanges.some((r) => r.contains(range));
   }
 

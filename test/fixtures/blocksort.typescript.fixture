@@ -1,0 +1,25 @@
+// @blocksort asc
+class Test {
+  public c: string;
+  public a: string;
+  public b: number;
+
+  public constructor(a: string, b: number, c: string) {
+    this.a = a;
+    this.b = b;
+    this.c = c;
+  }
+
+  public joinAC(): string {
+    return this.a + this.c;
+  }
+
+  public joinABC(): string {
+    const {a, b, c} = this;
+    return `${a}${b}${c}`;
+  }
+
+  public incrementB(n: number) {
+    this.b += n;
+  }
+}
