@@ -1,3 +1,20 @@
+# [1.0.0](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v0.10.0...v1.0.0) (2022-08-22)
+
+
+### Bug Fixes
+
+* expand auto selection into white spaces ([fde1904](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/fde19040d1dbb850f9e324ac73a13c592e82fef7))
+
+
+### Features
+
+* keep appended newlines in-place when sorting ([312229b](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/312229b894df62f4939d59ba1c9f40783bc9311b))
+
+
+### BREAKING CHANGES
+
+* Selection now expands both ways until hitting the surrounding block margins
+
 # [0.10.0](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v0.9.0...v0.10.0) (2022-08-11)
 
 
