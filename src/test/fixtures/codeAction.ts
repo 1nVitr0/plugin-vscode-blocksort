@@ -55,4 +55,9 @@ export const fixAllTest: CompareTest[] = [
     compareFile: "markers-nested.yaml.expect",
     ranges: [new Range(0, 0, 88, 0)],
   },
+  {
+    file: "blocksort.typescript.fixture",
+    compareFile: "blocksort.typescript.expect",
+    ranges: [new Range(0, 0, 25, 0)],
+  },
 ];

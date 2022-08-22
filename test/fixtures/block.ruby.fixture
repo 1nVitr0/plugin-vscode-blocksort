@@ -1,56 +1,57 @@
 // Switch statement
-
-case n
-when 2, 5, 7
-  puts 'second'
-when 0
-  puts 'first'
-when 1
-  puts 'second'
-else
-  puts 'Only single-digit numbers are allowed'
-end
-
+block {
+  case n
+  when 2, 5, 7
+    puts 'second'
+  when 0
+    puts 'first'
+  when 1
+    puts 'second'
+  else
+    puts 'Only single-digit numbers are allowed'
+  end
+}
 // Method definitions
+block {
+  def methodB
+    code
+  end
 
-def methodB
-  code
-end
+  def methodC
+    code
+  end
 
-def methodC
-  code
-end
-
-def methodA
-  code
-end
-
+  def methodA
+    code
+  end
+}
 // Method calls
+block {
+  methodB do
+    code
+  end
 
-methodB do
-  code
-end
+  methodC do
+    code
+  end
 
-methodC do
-  code
-end
-
-methodA do
-  code
-end
-
+  methodA do
+    code
+  end
+}
 // Lists
+block {
+  listB.each do |vars|
+    code
+  end.map do |vars|
+    code
+  end
 
-listB.each do |vars|
-  code
-end.map do |vars|
-  code
-end
+  listC.each do |vars|
+    code
+  end.reverse
 
-listC.each do |vars|
-  code
-end.reverse
-
-listA.each do |vars|
-  code
-end
+  listA.each do |vars|
+    code
+  end
+}

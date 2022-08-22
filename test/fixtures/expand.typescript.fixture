@@ -21,4 +21,8 @@ class Test {
 
 class Test2 {
   public test: string;
+
+  public constructor(test: string) {
+    this.test = test;
+  }
 }
