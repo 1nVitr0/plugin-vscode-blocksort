@@ -5,6 +5,6 @@ export const cancelSortTests: CancellationTest[] = [
   {
     file: "cancellation.json.fixture",
     ranges: [new Range(3, 0, 499, 7)],
-    performanceThreshold: 10,
+    performanceThreshold: 8,
   },
 ];

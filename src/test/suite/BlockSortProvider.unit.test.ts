@@ -54,7 +54,7 @@ async function assertRaceCancellation<T>(
 
   assert.ok(
     performance > performanceThreshold,
-    `Cancellation of ${name} did not increase performance above ${performanceThreshold}x`
+    `Cancellation of ${name} performance increase ${performance} not above ${performanceThreshold}x`
   );
 }
 

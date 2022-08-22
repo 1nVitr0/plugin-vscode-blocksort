@@ -375,6 +375,12 @@
             "description": "Regex for incomplete blocks. `^` and `$` will be expanded to allow comments",
             "scope": "language-overridable",
             "default": "(if|when|else|case|for|foreach|else|elsif|while|def|then|default)\\s*('([^']|(?<=\\\\)')*'|\"([^\"]|(?<=\\\\)\")*\"|`([^`]|(?<=\\\\)`)*`|[A-Za-z_+\\-*/%<>d.,s]*)*\\s*(.*:)?$"
+          },
+          "blocksort.keepAppendedNewlines": {
+            "type": "boolean",
+            "description": "Keep appsended newlines when sorting blocks",
+            "scope": "language-overridable",
+            "default": true
           }
         }
       }

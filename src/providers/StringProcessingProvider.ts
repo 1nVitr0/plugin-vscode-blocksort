@@ -132,7 +132,7 @@ export default class StringProcessingProvider {
   }
 
   public isIndentIgnoreLine(line: string | LineMeta, document: TextDocument): boolean {
-    if (typeof line != "string") return line.ignoreIndent;
+    if (typeof line != "string") return line.ignoreIndent || !line.hasContent;
 
     const indentIgnoreMarkers = ConfigurationProvider.getIndentIgnoreMarkers(document);
     const comment = commentRegex[this.document.languageId || "default"] || commentRegex.default;

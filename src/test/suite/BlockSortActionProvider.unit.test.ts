@@ -100,7 +100,7 @@ suite("Unit Suite for BlockSortProvider", async () => {
     const descriptor = file.match(/\.(.*)\.fixture/);
     const [_, lang] = descriptor || ["", "generic", "generic"];
     const testFunc = only ? test.only : skip ? test.skip : test;
-    testFunc(`FixAlsl Code Action Compare test(lang ${lang}) #${i}`, async () => {
+    testFunc(`FixAll Code Action Compare test(lang ${lang}) #${i}`, async () => {
       const compareDocument = await workspace.openTextDocument(join(fixtureDir, compareFile));
       const document = await workspace.openTextDocument(join(fixtureDir, file));
       await languages.setTextDocumentLanguage(document, lang);
