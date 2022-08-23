@@ -2,20 +2,30 @@ import { commands, InputBoxOptions, Selection, Range, TextEditor, TextEditorEdit
 import BlockSortProvider from "../providers/BlockSortProvider";
 import ConfigurationProvider from "../providers/ConfigurationProvider";
 import BlockSortFormattingProvider from "../providers/BlockSortFormattingProvider";
+import { BlockSortOptions } from "../providers/BlockSortFormattingProvider";
 
 export function blockSort(
   editor: TextEditor | undefined,
   editBuilder: TextEditorEdit,
   range: Range | null,
-  sortFunction: (a: string, b: string) => number,
-  sortChildren = 0
+  options: BlockSortOptions
 ) {
   if (!editor) editor = window.activeTextEditor;
   if (!editor) return;
 
+  const {
+    sortFunction,
+    sortChildren = 0,
+    expandSelection = ConfigurationProvider.getAlwaysExpandOverSeparators() ? "full" : "local",
+  } = options;
+
   const { document, selection } = editor;
 
-  const edit = BlockSortFormattingProvider.getBlockSortEdit(document, range ?? selection, { sortFunction, sortChildren });
+  const edit = BlockSortFormattingProvider.getBlockSortEdit(document, range ?? selection, {
+    sortFunction,
+    sortChildren,
+    expandSelection,
+  });
   editBuilder.replace(edit.range, edit.newText);
   editor.selection = new Selection(edit.range.start, edit.range.end);
 }
@@ -23,7 +33,7 @@ export function blockSort(
 function blockSortMultilevel(sortFunction: (a: string, b: string) => number) {
   const defaultDepth = ConfigurationProvider.getDefaultMultilevelDepth();
   if (!ConfigurationProvider.getAskForMultilevelDepth())
-    return commands.executeCommand("blocksort._sortBlocks", null, sortFunction, defaultDepth);
+    return commands.executeCommand("blocksort._sortBlocks", null, { sortFunction, sortChildren: defaultDepth });
 
   let options: InputBoxOptions = {
     prompt: "Indentation Depth: ",
@@ -34,20 +44,20 @@ function blockSortMultilevel(sortFunction: (a: string, b: string) => number) {
 
   window.showInputBox(options).then((value) => {
     if (value === undefined) return;
-    commands.executeCommand("blocksort._sortBlocks", null, sortFunction, parseInt(value));
+    commands.executeCommand("blocksort._sortBlocks", null, { sortFunction, sortChildren: parseInt(value) });
   });
 }
 
 export function blockSortAsc(editor: TextEditor, editBuilder: TextEditorEdit) {
   const naturalSorting = ConfigurationProvider.getEnableNaturalSorting();
   const sortFunction = naturalSorting ? BlockSortProvider.sort.ascNatural : BlockSortProvider.sort.asc;
-  blockSort(editor, editBuilder, null, sortFunction);
+  blockSort(editor, editBuilder, null, { sortFunction });
 }
 
 export function blockSortDesc(editor: TextEditor, editBuilder: TextEditorEdit) {
   const naturalSorting = ConfigurationProvider.getEnableNaturalSorting();
   const sortFunction = naturalSorting ? BlockSortProvider.sort.descNatural : BlockSortProvider.sort.desc;
-  blockSort(editor, editBuilder, null, sortFunction);
+  blockSort(editor, editBuilder, null, { sortFunction });
 }
 
 export function blockSortMultilevelAsc() {

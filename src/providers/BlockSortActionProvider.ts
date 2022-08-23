@@ -75,7 +75,7 @@ export default class BlockSortActionProvider
               tooltip: "Apply blocksort action",
               title: "Sort block",
               command: "blocksort._sortBlocks",
-              arguments: [range, options.sortFunction, options.sortChildren],
+              arguments: [range, options.sortFunction, options],
             })
           );
         }
@@ -191,7 +191,9 @@ export default class BlockSortActionProvider
     const blockSortProvider = this.blockSortProviders.get(document.uri);
     const blockPosition = BlockSortFormattingProvider.getNextBlockPosition(document, position, token);
     return blockPosition && blockSortProvider
-      ? blockSortProvider.trimRange(blockSortProvider.expandRange(new Selection(blockPosition, blockPosition), token))
+      ? blockSortProvider.trimRange(
+          blockSortProvider.expandRange(new Selection(blockPosition, blockPosition), true, token)
+        )
       : undefined;
   }
 
@@ -232,7 +234,7 @@ export default class BlockSortActionProvider
 
       // Delete and recreate all markers inside the changed range
       for (let i = markers.length - 1; i >= 0; i--) {
-        if (range.contains(markers[i]) || start.line == markers[i].line || end.line == markers[i].line)
+        if (range.contains(markers[i]) || start.line === markers[i].line || end.line === markers[i].line)
           markers.splice(i, 1);
       }
 
