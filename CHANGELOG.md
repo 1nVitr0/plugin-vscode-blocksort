@@ -1,3 +1,11 @@
+# [1.1.0](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v1.0.0...v1.1.0) (2022-08-23)
+
+
+### Features
+
+* add  local and full selection expansion modes ([bbb8b1f](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/bbb8b1fa7447a77a62d32e72bf31b4408a8f7f9c))
+* add commands for selection expansion ([579d8b9](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/579d8b93ea2ba7713c4fea3713b8486f1456a59d))
+
 # [1.0.0](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v0.10.0...v1.0.0) (2022-08-22)
 
 
