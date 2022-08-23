@@ -201,7 +201,13 @@ export default class BlockSortProvider implements Disposable {
     return [];
   }
 
-  private expandRangeUp(range: Range, folding: Folding, indent: number, token?: CancellationToken): [Range, Folding] {
+  private expandRangeUp(
+    range: Range,
+    folding: Folding,
+    indent: number,
+    expandOverNewlines = false,
+    token?: CancellationToken
+  ): [Range, Folding] {
     let nextLine = Math.max(range.start.line - 1, 0);
     if (!this.isComputed(range)) this.computeLineMeta([range], true, token);
     if (!this.isComputed(nextLine)) this.computeLineMeta(nextLine, true, token);
@@ -216,7 +222,7 @@ export default class BlockSortProvider implements Disposable {
       line > 0 &&
       (stringProcessor.totalOpenFolding(folding) > 0 ||
         this.documentLineMeta[line - 1].indent >= indent ||
-        !this.documentLineMeta[line - 1].hasContent)
+        (expandOverNewlines && !this.documentLineMeta[line - 1].hasContent))
     ) {
       if (token?.isCancellationRequested) return [range, folding];
       previousRange = range;
@@ -240,7 +246,13 @@ export default class BlockSortProvider implements Disposable {
     return [range, folding];
   }
 
-  private expandRangeDown(range: Range, folding: Folding, indent: number, token?: CancellationToken): [Range, Folding] {
+  private expandRangeDown(
+    range: Range,
+    folding: Folding,
+    indent: number,
+    expandOverNewlines = false,
+    token?: CancellationToken
+  ): [Range, Folding] {
     let nextLine = Math.min(range.end.line + 1, this.document.lineCount - 1);
     if (!this.isComputed(range)) this.computeLineMeta([range], true, token);
     if (!this.isComputed(nextLine)) this.computeLineMeta(nextLine, true, token);
@@ -255,7 +267,7 @@ export default class BlockSortProvider implements Disposable {
       line < this.document.lineCount - 1 &&
       (stringProcessor.totalOpenFolding(folding) > 0 ||
         this.documentLineMeta[line + 1].indent >= indent ||
-        !this.documentLineMeta[line + 1].hasContent)
+        (expandOverNewlines && !this.documentLineMeta[line + 1].hasContent))
     ) {
       if (token?.isCancellationRequested) return [range, folding];
       previousRange = range;
@@ -279,7 +291,7 @@ export default class BlockSortProvider implements Disposable {
     return [range, folding];
   }
 
-  public expandRange(selection: Range, token?: CancellationToken): Range {
+  public expandRange(selection: Range, expandOverNewlines = false, token?: CancellationToken): Range {
     const { stringProcessor } = this;
     let range: Range = this.document.validateRange(new Range(selection.start.line, 0, selection.end.line, Infinity));
     if (!this.isComputed(range)) this.computeLineMeta([range], true, token);
@@ -299,11 +311,11 @@ export default class BlockSortProvider implements Disposable {
     }
 
     if (stringProcessor.totalOpenFolding(folding) > 0) {
-      [range, folding] = this.expandRangeDown(range, folding, indent, token);
-      [range, folding] = this.expandRangeUp(range, folding, indent, token);
+      [range, folding] = this.expandRangeDown(range, folding, indent, expandOverNewlines, token);
+      [range, folding] = this.expandRangeUp(range, folding, indent, expandOverNewlines, token);
     } else {
-      [range, folding] = this.expandRangeUp(range, folding, indent, token);
-      [range, folding] = this.expandRangeDown(range, folding, indent, token);
+      [range, folding] = this.expandRangeUp(range, folding, indent, expandOverNewlines, token);
+      [range, folding] = this.expandRangeDown(range, folding, indent, expandOverNewlines, token);
     }
 
     return this.document.validateRange(range);

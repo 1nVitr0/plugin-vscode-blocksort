@@ -14,9 +14,10 @@ import { commentMarkers } from "../constants/comments";
 import BlockSortProvider from "./BlockSortProvider";
 import ConfigurationProvider from "./ConfigurationProvider";
 
-type BlockSortOptions = {
+export type BlockSortOptions = {
   sortFunction: (a: string, b: string) => number;
-  sortChildren: number;
+  sortChildren?: number;
+  expandSelection?: boolean | "local" | "full";
   /**
    * Mutable array of previous edits.
    * Edits that are merged into the current edit are removed from this array.
@@ -58,7 +59,11 @@ export default class BlockSortFormattingProvider
       ? BlockSortProvider.sort.asc
       : BlockSortProvider.sort.desc;
 
-    return { sortFunction, sortChildren: depth.includes("inf") ? Infinity : parseInt(depth, 10) };
+    return {
+      sortFunction,
+      sortChildren: depth.includes("inf") ? Infinity : parseInt(depth, 10),
+      expandSelection: "full",
+    };
   }
 
   public static getNextBlockPosition(
@@ -80,17 +85,30 @@ export default class BlockSortFormattingProvider
 
   public static getBlockSortEdit(
     document: TextDocument,
-    position: Position | Range,
+    selection: Position | Range,
     options: BlockSortOptions,
     token?: CancellationToken
   ): TextEdit {
     const blockSort = new BlockSortProvider(document);
-    const initialRange = "start" in position ? position : new Range(position, position);
-    const range = blockSort.trimRange(blockSort.expandRange(initialRange, token));
+    const range = BlockSortFormattingProvider.expandSelection(document, selection, options, token);
     const blocks = blockSort.getBlocks(range, token);
     const sorted = blockSort.sortBlocks(blocks, options.sortFunction, options.sortChildren, options.edits, token);
 
     return TextEdit.replace(range, sorted.join("\n"));
+  }
+
+  public static expandSelection(
+    document: TextDocument,
+    selection: Position | Range,
+    options: Pick<BlockSortOptions, "expandSelection">,
+    token?: CancellationToken
+  ): Range {
+    const blockSort = new BlockSortProvider(document);
+    const initialRange = "start" in selection ? selection : new Range(selection, selection);
+
+    if (options.expandSelection == false) return initialRange;
+
+    return blockSort.trimRange(blockSort.expandRange(initialRange, options.expandSelection == "full", token));
   }
 
   public static mapFilterBlockSortHeaders<T>(

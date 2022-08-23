@@ -124,6 +124,10 @@ export default class ConfigurationProvider {
     return ConfigurationProvider.getConfiguration().keepAppendedNewlines;
   }
 
+  public static getAlwaysExpandOverSeparators(): boolean {
+    return ConfigurationProvider.getConfiguration().alwaysExpandOverSeparators;
+  }
+
   public static getEnableNaturalSorting(): boolean {
     return ConfigurationProvider.getConfiguration().enableNaturalSorting;
   }
