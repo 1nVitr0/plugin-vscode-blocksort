@@ -106,9 +106,9 @@ export default class BlockSortFormattingProvider
     const blockSort = new BlockSortProvider(document);
     const initialRange = "start" in selection ? selection : new Range(selection, selection);
 
-    if (options.expandSelection == false) return initialRange;
+    if (options.expandSelection === false) return initialRange;
 
-    return blockSort.trimRange(blockSort.expandRange(initialRange, options.expandSelection == "full", token));
+    return blockSort.trimRange(blockSort.expandRange(initialRange, options.expandSelection === "full", token));
   }
 
   public static mapFilterBlockSortHeaders<T>(

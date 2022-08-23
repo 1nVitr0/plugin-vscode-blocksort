@@ -96,7 +96,7 @@ export default class BlockSortProvider implements Disposable {
     if (separator) {
       // Apply separator to all blocks except the last one
       textBlocks = textBlocks.map((block, i) => {
-        if (i == textBlocks.length - 1 && block.endsWith(separator)) return block.slice(0, -separator.length);
+        if (i === textBlocks.length - 1 && block.endsWith(separator)) return block.slice(0, -separator.length);
         else if (i < textBlocks.length - 1 && !block.endsWith(separator)) return block + separator;
         else return block;
       });
@@ -238,7 +238,7 @@ export default class BlockSortProvider implements Disposable {
       folding = stringProcessor.mergeFolding(folding, this.documentLineMeta[line].folding);
     }
 
-    if (line == 0 && stringProcessor.totalOpenFolding(folding) > 0) {
+    if (line === 0 && stringProcessor.totalOpenFolding(folding) > 0) {
       range = previousRange;
       folding = previousFolding;
     }
@@ -283,7 +283,7 @@ export default class BlockSortProvider implements Disposable {
       folding = stringProcessor.mergeFolding(folding, this.documentLineMeta[line].folding);
     }
 
-    if (line == 0 && stringProcessor.totalOpenFolding(folding) > 0) {
+    if (line === 0 && stringProcessor.totalOpenFolding(folding) > 0) {
       range = previousRange;
       folding = previousFolding;
     }
@@ -343,12 +343,12 @@ export default class BlockSortProvider implements Disposable {
     withText?: boolean,
     token?: CancellationToken
   ): LineMeta[] | LineMeta {
-    if (e && typeof e == "object" && "document" in e && e.document !== this.document) return [];
+    if (e && typeof e === "object" && "document" in e && e.document !== this.document) return [];
     if (!this.documentLineMeta) this.documentLineMeta = Array(this.document.lineCount).fill(null);
 
     const tabSize: number = workspace.getConfiguration("editor", this.document).get("tabSize") || 4;
     const ranges: Range[] = e
-      ? typeof e == "number"
+      ? typeof e === "number"
         ? [new Range(e, 0, e, Infinity)]
         : "document" in e
         ? e.contentChanges.map((c) => c.range)
@@ -361,7 +361,7 @@ export default class BlockSortProvider implements Disposable {
 
       const { start, end } = ranges[i];
       const text =
-        e && typeof e == "object" && "document" in e ? e.contentChanges[i].text : this.document.getText(ranges[i]);
+        e && typeof e === "object" && "document" in e ? e.contentChanges[i].text : this.document.getText(ranges[i]);
       const lines = text.split(/\r?\n/);
 
       const lineMetas = lines.map((line, j) => {
@@ -385,13 +385,13 @@ export default class BlockSortProvider implements Disposable {
       this.computedRanges.push(ranges[i]);
     }
 
-    return typeof e == "number" ? result[0] : result;
+    return typeof e === "number" ? result[0] : result;
   }
 
   private isComputed(line: number): boolean;
   private isComputed(range: Range): boolean;
   private isComputed(rangeOrLine: Range | number): boolean {
-    const range = typeof rangeOrLine == "number" ? new Range(rangeOrLine, 0, rangeOrLine, Infinity) : rangeOrLine;
+    const range = typeof rangeOrLine === "number" ? new Range(rangeOrLine, 0, rangeOrLine, Infinity) : rangeOrLine;
 
     return this.computedRanges.some((r) => r.contains(range));
   }

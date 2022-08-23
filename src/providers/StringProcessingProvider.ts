@@ -48,7 +48,7 @@ export default class StringProcessingProvider {
     line: string | LineMeta,
     indentWidth: number = workspace.getConfiguration("editor").get("tabSize") || 4
   ): number {
-    return typeof line == "string" ? (line.match(/^\s*/)?.pop() || "").length / indentWidth : line.indent;
+    return typeof line === "string" ? (line.match(/^\s*/)?.pop() || "").length / indentWidth : line.indent;
   }
 
   public getIndentRange(
@@ -57,7 +57,7 @@ export default class StringProcessingProvider {
     checkIndentIgnore = true,
     token?: CancellationToken
   ): { min: number; max: number } {
-    const lines = typeof text == "string" ? text.split(/\r?\n/) : text;
+    const lines = typeof text === "string" ? text.split(/\r?\n/) : text;
     const indentWidth: number = workspace.getConfiguration("editor", document).get("tabSize") || 4;
 
     let min = Infinity;
@@ -132,7 +132,7 @@ export default class StringProcessingProvider {
   }
 
   public isIndentIgnoreLine(line: string | LineMeta, document: TextDocument): boolean {
-    if (typeof line != "string") return line.ignoreIndent || !line.hasContent;
+    if (typeof line !== "string") return line.ignoreIndent || !line.hasContent;
 
     const indentIgnoreMarkers = ConfigurationProvider.getIndentIgnoreMarkers(document);
     const comment = commentRegex[this.document.languageId || "default"] || commentRegex.default;
@@ -171,7 +171,7 @@ export default class StringProcessingProvider {
   }
 
   public isValidLine(line: string | LineMeta, document: TextDocument): boolean {
-    if (typeof line != "string") return line.valid;
+    if (typeof line !== "string") return line.valid;
 
     const comment = commentRegex[this.document.languageId || "default"] || commentRegex.default;
     const hasFolding = this.hasFolding(this.getFolding(line, document));

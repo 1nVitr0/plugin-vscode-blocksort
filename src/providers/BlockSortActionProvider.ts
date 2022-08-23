@@ -234,7 +234,7 @@ export default class BlockSortActionProvider
 
       // Delete and recreate all markers inside the changed range
       for (let i = markers.length - 1; i >= 0; i--) {
-        if (range.contains(markers[i]) || start.line == markers[i].line || end.line == markers[i].line)
+        if (range.contains(markers[i]) || start.line === markers[i].line || end.line === markers[i].line)
           markers.splice(i, 1);
       }
 
