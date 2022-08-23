@@ -17,4 +17,16 @@ export const expandTests: RangeTest[] = [
     ranges: [new Range(1, 5, 1, 5)],
     targetRanges: [new Range(1, 0, 8, 48)],
   },
+  {
+    file: "expandLocal.typescript.fixture",
+    ranges: [new Range(1, 0, 2, 19)],
+    targetRanges: [new Range(1, 0, 3, 19)],
+    expandOverNewlines: false,
+  },
+  {
+    file: "expandFull.typescript.fixture",
+    ranges: [new Range(1, 0, 2, 19)],
+    targetRanges: [new Range(1, 0, 15, 3)],
+    expandOverNewlines: true,
+  },
 ];

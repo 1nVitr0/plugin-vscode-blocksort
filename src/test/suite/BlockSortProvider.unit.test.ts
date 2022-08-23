@@ -61,7 +61,7 @@ async function assertRaceCancellation<T>(
 suite("Unit Suite for BlockSortProvider", async () => {
   window.showInformationMessage("Start tests for BlockSortProvider.");
 
-  expandTests.forEach(({ file, ranges, targetRanges, only, skip }) => {
+  expandTests.forEach(({ file, ranges, targetRanges, expandOverNewlines, only, skip }) => {
     ranges
       .map((range, i) => ({ position: range, target: targetRanges[i] }))
       .forEach(({ position, target }, i) => {
@@ -72,7 +72,7 @@ suite("Unit Suite for BlockSortProvider", async () => {
           await languages.setTextDocumentLanguage(document, lang);
           const blockSortProvider = new BlockSortProvider(document);
           const selection = new Selection(position.start, position.end);
-          const expanded = blockSortProvider.trimRange(blockSortProvider.expandRange(selection));
+          const expanded = blockSortProvider.trimRange(blockSortProvider.expandRange(selection, expandOverNewlines));
 
           assert.deepStrictEqual(expanded, target, "range did not expand correctly");
         });

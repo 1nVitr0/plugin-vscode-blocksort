@@ -13,6 +13,7 @@ export interface CompareTest extends BaseTest {
 
 export interface RangeTest extends BaseTest {
   targetRanges: Range[];
+  expandOverNewlines?: boolean;
 }
 
 export interface PositionTest extends BaseTest {

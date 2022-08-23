@@ -1,0 +1,17 @@
+class Test {
+  public a: string;
+  public b: string;
+  public c: string;
+
+  public constructor(a: string, b: string, c: string) {
+    this.a = a;
+    this.b = b;
+    this.c = c;
+  }
+
+  public swapAB() {
+    const x = a;
+    this.a = b;
+    this.b = a;
+  }
+}
