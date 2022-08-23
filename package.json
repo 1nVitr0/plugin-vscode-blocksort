@@ -69,6 +69,24 @@
           "dark": "resources/icon_desc_dark.svg",
           "light": "resources/icon_desc.svg"
         }
+      },
+      {
+        "command": "blocksort.expandSelectionLocally",
+        "title": "Expand current Selection to surrounding Block",
+        "category": "Select",
+        "icon": {
+          "dark": "resources/icon_expand_dark.svg",
+          "light": "resources/icon_expand.svg"
+        }
+      },
+      {
+        "command": "blocksort.expandSelectionFull",
+        "title": "Expand current Selection fully (including separating Newlines) to the surrounding Block",
+        "category": "Select",
+        "icon": {
+          "dark": "resources/icon_expand_dark.svg",
+          "light": "resources/icon_expand.svg"
+        }
       }
     ],
     "configuration": [
@@ -378,9 +396,13 @@
           },
           "blocksort.keepAppendedNewlines": {
             "type": "boolean",
-            "description": "Keep appsended newlines when sorting blocks",
-            "scope": "language-overridable",
+            "description": "Keep appended newlines when sorting blocks",
             "default": true
+          },
+          "blocksort.alwaysExpandOverSeparators": {
+            "type": "boolean",
+            "description": "Always expand selection over separators when sorting blocks",
+            "default": false
           }
         }
       }
