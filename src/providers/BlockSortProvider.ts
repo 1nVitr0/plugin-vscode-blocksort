@@ -201,14 +201,16 @@ export default class BlockSortProvider implements Disposable {
     return [];
   }
 
-  private expandRangeUp(
+  private expandRangeInDirection(
     range: Range,
-    folding: Folding,
-    indent: number,
-    expandOverNewlines = false,
+    { folding, indent }: { folding: Folding; indent: number },
+    { expandOverNewlines = false, direction }: { expandOverNewlines?: boolean; direction: number },
     token?: CancellationToken
   ): [Range, Folding] {
-    let nextLine = Math.max(range.start.line - 1, 0);
+    const { lineCount } = this.document;
+    const getNextLine = (line: number) => (direction > 0 ? Math.min(line + 1, lineCount - 1) : Math.max(line - 1, 0));
+
+    let nextLine = direction > 0 ? getNextLine(range.end.line) : getNextLine(range.start.line);
     if (!this.isComputed(range)) this.computeLineMeta([range], true, token);
     if (!this.isComputed(nextLine)) this.computeLineMeta(nextLine, true, token);
     if (!this.documentLineMeta) return [range, folding]; //* TS hint, this never actually happens
@@ -217,70 +219,33 @@ export default class BlockSortProvider implements Disposable {
     let previousRange = range;
     let previousFolding = folding;
 
-    let line = range.start.line;
+    let line = direction > 0 ? range.end.line : range.start.line;
+    let lastIndent = this.documentLineMeta[line].indent;
+    let skippedLine = false;
     while (
-      line > 0 &&
+      (direction > 0 ? line < lineCount - 1 : line > 0) &&
       (stringProcessor.totalOpenFolding(folding) > 0 ||
-        this.documentLineMeta[line - 1].indent >= indent ||
-        (expandOverNewlines && !this.documentLineMeta[line - 1].hasContent))
+        (skippedLine && !expandOverNewlines
+          ? this.documentLineMeta[line + direction].indent > indent
+          : this.documentLineMeta[line + direction].indent >= indent) ||
+        (expandOverNewlines && !this.documentLineMeta[line + direction].hasContent) ||
+        (lastIndent > indent && !this.documentLineMeta[line + direction].hasContent))
     ) {
       if (token?.isCancellationRequested) return [range, folding];
       previousRange = range;
       previousFolding = folding;
 
-      line--;
+      line += direction;
       const addedRange = new Range(line, 0, line, Infinity);
       range = range.union(addedRange);
 
-      nextLine = Math.max(line - 1, 0);
+      nextLine = getNextLine(line);
       if (!this.isComputed(nextLine)) this.computeLineMeta(nextLine, true, token);
 
-      folding = stringProcessor.mergeFolding(folding, this.documentLineMeta[line].folding);
-    }
-
-    if (line === 0 && stringProcessor.totalOpenFolding(folding) > 0) {
-      range = previousRange;
-      folding = previousFolding;
-    }
-
-    return [range, folding];
-  }
-
-  private expandRangeDown(
-    range: Range,
-    folding: Folding,
-    indent: number,
-    expandOverNewlines = false,
-    token?: CancellationToken
-  ): [Range, Folding] {
-    let nextLine = Math.min(range.end.line + 1, this.document.lineCount - 1);
-    if (!this.isComputed(range)) this.computeLineMeta([range], true, token);
-    if (!this.isComputed(nextLine)) this.computeLineMeta(nextLine, true, token);
-    if (!this.documentLineMeta) return [range, folding]; //* TS hint, this never actually happens
-
-    const { stringProcessor } = this;
-    let previousRange = range;
-    let previousFolding = folding;
-
-    let line = range.end.line;
-    while (
-      line < this.document.lineCount - 1 &&
-      (stringProcessor.totalOpenFolding(folding) > 0 ||
-        this.documentLineMeta[line + 1].indent >= indent ||
-        (expandOverNewlines && !this.documentLineMeta[line + 1].hasContent))
-    ) {
-      if (token?.isCancellationRequested) return [range, folding];
-      previousRange = range;
-      previousFolding = folding;
-
-      line++;
-      const addedRange = new Range(line, 0, line, Infinity);
-      range = range.union(addedRange);
-
-      nextLine = Math.min(line + 1, this.document.lineCount - 1);
-      if (!this.isComputed(nextLine)) this.computeLineMeta(nextLine, true, token);
-
-      folding = stringProcessor.mergeFolding(folding, this.documentLineMeta[line].folding);
+      const { folding: currentFolding, indent, hasContent } = this.documentLineMeta[line];
+      folding = stringProcessor.mergeFolding(folding, currentFolding);
+      if (lastIndent > indent && !hasContent) skippedLine = true;
+      if (hasContent && indent > lastIndent) lastIndent = indent;
     }
 
     if (line === 0 && stringProcessor.totalOpenFolding(folding) > 0) {
@@ -297,6 +262,8 @@ export default class BlockSortProvider implements Disposable {
     if (!this.isComputed(range)) this.computeLineMeta([range], true, token);
     if (!this.documentLineMeta) return range; //* TS hint, this never actually happens
 
+    const up = { expandOverNewlines, direction: -1 };
+    const down = { expandOverNewlines, direction: 1 };
     const { min: indent } = stringProcessor.getIndentRange(
       this.documentLineMeta.slice(range.start.line, range.end.line + 1),
       this.document
@@ -311,11 +278,11 @@ export default class BlockSortProvider implements Disposable {
     }
 
     if (stringProcessor.totalOpenFolding(folding) > 0) {
-      [range, folding] = this.expandRangeDown(range, folding, indent, expandOverNewlines, token);
-      [range, folding] = this.expandRangeUp(range, folding, indent, expandOverNewlines, token);
+      [range, folding] = this.expandRangeInDirection(range, { folding, indent }, down, token);
+      [range, folding] = this.expandRangeInDirection(range, { folding, indent }, up, token);
     } else {
-      [range, folding] = this.expandRangeUp(range, folding, indent, expandOverNewlines, token);
-      [range, folding] = this.expandRangeDown(range, folding, indent, expandOverNewlines, token);
+      [range, folding] = this.expandRangeInDirection(range, { folding, indent }, up, token);
+      [range, folding] = this.expandRangeInDirection(range, { folding, indent }, down, token);
     }
 
     return this.document.validateRange(range);

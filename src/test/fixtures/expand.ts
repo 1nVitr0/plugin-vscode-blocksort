@@ -10,7 +10,7 @@ export const expandTests: RangeTest[] = [
   {
     file: "expand.cpp.fixture",
     ranges: [new Range(2, 6, 2, 6), new Range(19, 4, 19, 4), new Range(0, 1, 0, 1)],
-    targetRanges: [new Range(2, 0, 4, 13), new Range(19, 0, 21, 11), new Range(0, 0, 32, 2)],
+    targetRanges: [new Range(2, 0, 4, 13), new Range(19, 0, 21, 11), new Range(0, 0, 15, 2)],
   },
   {
     file: "expand.ruby.fixture",
