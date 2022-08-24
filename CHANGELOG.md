@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v1.1.0...v1.1.1) (2022-08-24)
+
+
+### Bug Fixes
+
+* expand selection over newlines in indented block ([4c19233](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/4c192334f53837d4f451d32bce0bb6ccd9127c30))
+
 # [1.1.0](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v1.0.0...v1.1.0) (2022-08-23)
 
 
