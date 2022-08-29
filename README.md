@@ -48,6 +48,11 @@ This extension contributed the following commands:
 
 `Sort Blocks Deep Descending (Multilevel)`: Sorts the selected code blocks in descending order, including nested blocks up to a specified depth.
 
+`Expand current Selection to surrounding Block`: Expand curren selection locally to surrounding lines in block.
+
+`Expand current Selection fully (including separating Newlines) to the surrounding Block`: Expand curren selection to complete surrounding block.
+
+
 ***
 
 ## Code Actions / Auto Sorting
@@ -106,9 +111,9 @@ This extension contributed the following settings:
   - Default:
     ```json
     [
-      "{",
       "end(?:for(?:each)?|if|while|case|def)?\\s*?([\\.\\[\\->\\|\\s]\\s*(?:[$A-Za-z0-9_+\\-\\*\\/\\^\\%\\<\\>\\=\\!\\?\\:]*|'[^']*?'|'[']*?'|\"[^\"]*?\"|`[^`]*?`)\\s*[\\]\\|]?\\s*)*",
-      "esac|fi"
+      "esac|fi",
+      "{"
     ]
     ```
   - *Language Overridable*
@@ -184,6 +189,28 @@ This extension contributed the following settings:
 - `incompleteBlockRegex`: Regex for incomplete blocks. `^` and `$` will be expanded to allow comments
   - Default: ``(if|when|else|case|for|foreach|else|elsif|while|def|then|default)\\s*('([^']|(?<=\\\\)')*'|\"([^\"]|(?<=\\\\)\")*\"|`([^`]|(?<=\\\\)`)*`|[A-Za-z_+\\-*/%<>d.,s]*)*\\s*(.*:)?$``
   - *Language Overridable*
+- `keepAppendedNewlines`: Keep appended Newlines in place when sorting
+  - Default: `true`
+- `expandSelection`: Expand Selection options
+  - Default:
+    ```json
+    {
+      "expandLocally": true,
+      "expandOverEmptyLines": false,
+      "foldingComplete": true,
+      "indentationComplete": true
+    }
+    ```
+- `expandSelection`: Expand Cursor to selection options
+  - Default:
+    ```json
+    {
+      "expandLocally": true,
+      "expandOverEmptyLines": false,
+      "foldingComplete": true,
+      "indentationComplete": true
+    }
+    ```
 
 Settings marked as *Language Overridable* can be specified on a per-language basis using the notation:
 
