@@ -3,7 +3,7 @@ import BlockSortFormattingProvider from "../providers/BlockSortFormattingProvide
 
 export function expandSelectionLocally(editor: TextEditor) {
   const range = BlockSortFormattingProvider.expandSelection(editor.document, editor.selection, {
-    expandSelection: "local",
+    expandSelection: { expandLocally: true, foldingComplete: true, indentationComplete: true },
   });
 
   editor.selection = new Selection(range.start, range.end);
@@ -11,7 +11,12 @@ export function expandSelectionLocally(editor: TextEditor) {
 
 export function expandSelectionFull(editor: TextEditor) {
   const range = BlockSortFormattingProvider.expandSelection(editor.document, editor.selection, {
-    expandSelection: "full",
+    expandSelection: {
+      expandLocally: true,
+      expandOverEmptyLines: true,
+      foldingComplete: true,
+      indentationComplete: true,
+    },
   });
 
   editor.selection = new Selection(range.start, range.end);

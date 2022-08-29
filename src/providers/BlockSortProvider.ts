@@ -7,12 +7,24 @@ import {
   TextEdit,
   workspace,
 } from "vscode";
+import { ExpandSelectionOptions } from "../types/BlockSortOptions";
 import ConfigurationProvider from "./ConfigurationProvider";
 import StringProcessingProvider, { Folding, LineMeta } from "./StringProcessingProvider";
+import { expandSelectionFull } from "../commands/expandSelection";
 
 type SortingStrategy = "asc" | "desc" | "ascNatural" | "descNatural";
+interface ExpandDirectionOptions extends ExpandSelectionOptions {
+  direction: 1 | -1;
+}
 
 export default class BlockSortProvider implements Disposable {
+  protected static expandSelectionFull: ExpandSelectionOptions = {
+    expandLocally: true,
+    expandOverEmptyLines: true,
+    foldingComplete: true,
+    indentationComplete: true,
+  };
+
   public static sort: Record<SortingStrategy, (a: string, b: string) => number> = {
     asc: (a, b) => (a > b ? 1 : a < b ? -1 : 0),
     desc: (a, b) => (a < b ? 1 : a > b ? -1 : 0),
@@ -204,7 +216,7 @@ export default class BlockSortProvider implements Disposable {
   private expandRangeInDirection(
     range: Range,
     { folding, indent }: { folding: Folding; indent: number },
-    { expandOverNewlines = false, direction }: { expandOverNewlines?: boolean; direction: number },
+    { direction, ...expand }: ExpandDirectionOptions,
     token?: CancellationToken
   ): [Range, Folding] {
     const { lineCount } = this.document;
@@ -221,15 +233,9 @@ export default class BlockSortProvider implements Disposable {
 
     let line = direction > 0 ? range.end.line : range.start.line;
     let lastIndent = this.documentLineMeta[line].indent;
-    let skippedLine = false;
     while (
       (direction > 0 ? line < lineCount - 1 : line > 0) &&
-      (stringProcessor.totalOpenFolding(folding) > 0 ||
-        (skippedLine && !expandOverNewlines
-          ? this.documentLineMeta[line + direction].indent > indent
-          : this.documentLineMeta[line + direction].indent >= indent) ||
-        (expandOverNewlines && !this.documentLineMeta[line + direction].hasContent) ||
-        (lastIndent > indent && !this.documentLineMeta[line + direction].hasContent))
+      this.isExpandLine(this.documentLineMeta[line + direction], { folding, indent, lastIndent }, expand)
     ) {
       if (token?.isCancellationRequested) return [range, folding];
       previousRange = range;
@@ -244,8 +250,7 @@ export default class BlockSortProvider implements Disposable {
 
       const { folding: currentFolding, indent, hasContent } = this.documentLineMeta[line];
       folding = stringProcessor.mergeFolding(folding, currentFolding);
-      if (lastIndent > indent && !hasContent) skippedLine = true;
-      if (hasContent && indent > lastIndent) lastIndent = indent;
+      if (hasContent) lastIndent = indent;
     }
 
     if (line === 0 && stringProcessor.totalOpenFolding(folding) > 0) {
@@ -256,14 +261,30 @@ export default class BlockSortProvider implements Disposable {
     return [range, folding];
   }
 
-  public expandRange(selection: Range, expandOverNewlines = false, token?: CancellationToken): Range {
+  private isExpandLine(
+    { hasContent, indent }: LineMeta,
+    { folding, indent: minIndent, lastIndent }: { folding: Folding; indent: number; lastIndent: number },
+    { expandLocally, expandOverEmptyLines, foldingComplete, indentationComplete }: ExpandSelectionOptions
+  ): boolean {
+    return !!(
+      (expandLocally && hasContent && indent >= minIndent) ||
+      (expandOverEmptyLines && !hasContent) ||
+      (indentationComplete && (indent > minIndent || (lastIndent > minIndent && !hasContent))) ||
+      (foldingComplete && this.stringProcessor.totalOpenFolding(folding) != 0)
+    );
+  }
+
+  public expandRange(selection: Range, expand: boolean | ExpandSelectionOptions, token?: CancellationToken): Range {
     const { stringProcessor } = this;
     let range: Range = this.document.validateRange(new Range(selection.start.line, 0, selection.end.line, Infinity));
     if (!this.isComputed(range)) this.computeLineMeta([range], true, token);
     if (!this.documentLineMeta) return range; //* TS hint, this never actually happens
 
-    const up = { expandOverNewlines, direction: -1 };
-    const down = { expandOverNewlines, direction: 1 };
+    if (expand === false) return range;
+
+    const expandOptions: ExpandSelectionOptions = expand === true ? BlockSortProvider.expandSelectionFull : expand;
+    const up: ExpandDirectionOptions = { ...expandOptions, direction: -1 };
+    const down: ExpandDirectionOptions = { ...expandOptions, direction: 1 };
     const { min: indent } = stringProcessor.getIndentRange(
       this.documentLineMeta.slice(range.start.line, range.end.line + 1),
       this.document

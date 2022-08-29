@@ -21,12 +21,12 @@ export const expandTests: RangeTest[] = [
     file: "expandLocal.typescript.fixture",
     ranges: [new Range(1, 0, 2, 19)],
     targetRanges: [new Range(1, 0, 3, 19)],
-    expandOverNewlines: false,
+    expand: { expandLocally: true },
   },
   {
     file: "expandFull.typescript.fixture",
     ranges: [new Range(1, 0, 2, 19)],
     targetRanges: [new Range(1, 0, 15, 3)],
-    expandOverNewlines: true,
+    expand: true,
   },
 ];

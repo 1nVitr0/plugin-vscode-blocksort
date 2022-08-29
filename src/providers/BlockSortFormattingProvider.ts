@@ -11,19 +11,9 @@ import {
   DocumentRangeFormattingEditProvider,
 } from "vscode";
 import { commentMarkers } from "../constants/comments";
+import { BlockSortOptions } from "../types/BlockSortOptions";
 import BlockSortProvider from "./BlockSortProvider";
 import ConfigurationProvider from "./ConfigurationProvider";
-
-export type BlockSortOptions = {
-  sortFunction: (a: string, b: string) => number;
-  sortChildren?: number;
-  expandSelection?: boolean | "local" | "full";
-  /**
-   * Mutable array of previous edits.
-   * Edits that are merged into the current edit are removed from this array.
-   */
-  edits?: TextEdit[];
-};
 
 export default class BlockSortFormattingProvider
   implements DocumentFormattingEditProvider, DocumentRangeFormattingEditProvider
@@ -62,7 +52,7 @@ export default class BlockSortFormattingProvider
     return {
       sortFunction,
       sortChildren: depth.includes("inf") ? Infinity : parseInt(depth, 10),
-      expandSelection: "full",
+      expandSelection: true,
     };
   }
 
@@ -108,7 +98,7 @@ export default class BlockSortFormattingProvider
 
     if (options.expandSelection === false) return initialRange;
 
-    return blockSort.trimRange(blockSort.expandRange(initialRange, options.expandSelection === "full", token));
+    return blockSort.trimRange(blockSort.expandRange(initialRange, options.expandSelection!, token));
   }
 
   public static mapFilterBlockSortHeaders<T>(

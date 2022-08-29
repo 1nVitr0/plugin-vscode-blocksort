@@ -396,13 +396,80 @@
           },
           "blocksort.keepAppendedNewlines": {
             "type": "boolean",
-            "description": "Keep appended newlines when sorting blocks",
+            "description": "Keep appended newlines in place when sorting blocks",
             "default": true
           },
-          "blocksort.alwaysExpandOverSeparators": {
-            "type": "boolean",
-            "description": "Always expand selection over separators when sorting blocks",
-            "default": false
+          "blocksort.expandSelection": {
+            "oneOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "object",
+                "minProperties": 1,
+                "properties": {
+                  "expandLocally": {
+                    "type": "boolean",
+                    "description": "Expand selection locally while in the same blocks (stopping at empty lines)"
+                  },
+                  "expandOverEmptyLines": {
+                    "type": "boolean",
+                    "description": "Expand selection over empty lines"
+                  },
+                  "foldingComplete": {
+                    "type": "boolean",
+                    "description": "Expand selection, so that all folding markers are closed"
+                  },
+                  "indentationComplete": {
+                    "type": "boolean",
+                    "description": "Expand selection, so that all indentation is complete"
+                  }
+                }
+              }
+            ],
+            "description": "Expand selection when sorting blocks",
+            "default": {
+              "expandLocally": true,
+              "expandOverEmptyLines": false,
+              "foldingComplete": true,
+              "indentationComplete": true
+            }
+          }
+        },
+        "blocksort.expandCursor": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "object",
+              "minProperties": 1,
+              "properties": {
+                "expandLocally": {
+                  "type": "boolean",
+                  "description": "Expand selection locally while in the same blocks (stopping at empty lines)"
+                },
+                "expandOverEmptyLines": {
+                  "type": "boolean",
+                  "description": "Expand selection over empty lines"
+                },
+                "foldingComplete": {
+                  "type": "boolean",
+                  "description": "Expand selection, so that all folding markers are closed"
+                },
+                "indentationComplete": {
+                  "type": "boolean",
+                  "description": "Expand selection, so that all indentation is complete"
+                }
+              }
+            }
+          ],
+          "description": "Expand cursor to selection when sorting blocks",
+          "default": {
+            "expandLocally": true,
+            "expandOverEmptyLines": false,
+            "foldingComplete": true,
+            "indentationComplete": true
           }
         }
       }
