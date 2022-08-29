@@ -16,7 +16,9 @@ export function blockSort(
   const {
     sortFunction,
     sortChildren = 0,
-    expandSelection = ConfigurationProvider.getExpandSelection(),
+    expandSelection = range?.isEmpty
+      ? ConfigurationProvider.getExpandCursor()
+      : ConfigurationProvider.getExpandSelection(),
   } = options;
 
   const { document, selection } = editor;
