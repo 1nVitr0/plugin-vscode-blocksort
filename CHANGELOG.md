@@ -1,3 +1,12 @@
+# [1.2.0](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v1.1.1...v1.2.0) (2022-08-29)
+
+
+### Features
+
+* add options for expanding the current selection ([af60598](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/af60598c84814db050cb08a37a5a44a94b1fb317))
+* additional options for expanding single cursors ([d4964a0](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/d4964a0c772b0df52529f4d293d213b940691502))
+* allow more control over the selection expansion ([4ec08eb](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/4ec08eb604efdedc960964c83d847d80b5e10a26))
+
 ## [1.1.1](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v1.1.0...v1.1.1) (2022-08-24)
 
 
