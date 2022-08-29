@@ -7,10 +7,14 @@ import {
   TextEdit,
   workspace,
 } from "vscode";
+import { ExpandSelectionOptions } from "../types/BlockSortOptions";
 import ConfigurationProvider from "./ConfigurationProvider";
 import StringProcessingProvider, { Folding, LineMeta } from "./StringProcessingProvider";
 
 type SortingStrategy = "asc" | "desc" | "ascNatural" | "descNatural";
+interface ExpandDirectionOptions extends ExpandSelectionOptions {
+  direction: 1 | -1;
+}
 
 export default class BlockSortProvider implements Disposable {
   public static sort: Record<SortingStrategy, (a: string, b: string) => number> = {
@@ -204,7 +208,7 @@ export default class BlockSortProvider implements Disposable {
   private expandRangeInDirection(
     range: Range,
     { folding, indent }: { folding: Folding; indent: number },
-    { expandOverNewlines = false, direction }: { expandOverNewlines?: boolean; direction: number },
+    { expandOverEmptyLines = false, direction }: ExpandDirectionOptions,
     token?: CancellationToken
   ): [Range, Folding] {
     const { lineCount } = this.document;
@@ -225,10 +229,10 @@ export default class BlockSortProvider implements Disposable {
     while (
       (direction > 0 ? line < lineCount - 1 : line > 0) &&
       (stringProcessor.totalOpenFolding(folding) > 0 ||
-        (skippedLine && !expandOverNewlines
+        (skippedLine && !expandOverEmptyLines
           ? this.documentLineMeta[line + direction].indent > indent
           : this.documentLineMeta[line + direction].indent >= indent) ||
-        (expandOverNewlines && !this.documentLineMeta[line + direction].hasContent) ||
+        (expandOverEmptyLines && !this.documentLineMeta[line + direction].hasContent) ||
         (lastIndent > indent && !this.documentLineMeta[line + direction].hasContent))
     ) {
       if (token?.isCancellationRequested) return [range, folding];
@@ -256,14 +260,20 @@ export default class BlockSortProvider implements Disposable {
     return [range, folding];
   }
 
-  public expandRange(selection: Range, expandOverNewlines = false, token?: CancellationToken): Range {
+  public expandRange(selection: Range, expand: boolean | ExpandSelectionOptions, token?: CancellationToken): Range {
     const { stringProcessor } = this;
     let range: Range = this.document.validateRange(new Range(selection.start.line, 0, selection.end.line, Infinity));
     if (!this.isComputed(range)) this.computeLineMeta([range], true, token);
     if (!this.documentLineMeta) return range; //* TS hint, this never actually happens
 
-    const up = { expandOverNewlines, direction: -1 };
-    const down = { expandOverNewlines, direction: 1 };
+    const up: ExpandDirectionOptions = {
+      expandOverEmptyLines: typeof expand === "boolean" ? expand : !!expand.expandOverEmptyLines,
+      direction: -1,
+    };
+    const down: ExpandDirectionOptions = {
+      expandOverEmptyLines: typeof expand === "boolean" ? expand : !!expand.expandOverEmptyLines,
+      direction: 1,
+    };
     const { min: indent } = stringProcessor.getIndentRange(
       this.documentLineMeta.slice(range.start.line, range.end.line + 1),
       this.document

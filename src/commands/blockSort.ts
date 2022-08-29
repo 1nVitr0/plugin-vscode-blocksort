@@ -2,7 +2,7 @@ import { commands, InputBoxOptions, Selection, Range, TextEditor, TextEditorEdit
 import BlockSortProvider from "../providers/BlockSortProvider";
 import ConfigurationProvider from "../providers/ConfigurationProvider";
 import BlockSortFormattingProvider from "../providers/BlockSortFormattingProvider";
-import { BlockSortOptions } from "../providers/BlockSortFormattingProvider";
+import { BlockSortOptions } from "../types/BlockSortOptions";
 
 export function blockSort(
   editor: TextEditor | undefined,
@@ -16,7 +16,7 @@ export function blockSort(
   const {
     sortFunction,
     sortChildren = 0,
-    expandSelection = ConfigurationProvider.getAlwaysExpandOverSeparators() ? "full" : "local",
+    expandSelection = ConfigurationProvider.getExpandSelection(),
   } = options;
 
   const { document, selection } = editor;

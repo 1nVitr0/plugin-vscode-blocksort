@@ -1,4 +1,5 @@
 import { ConfigurationScope, DocumentSelector, TextDocument, workspace, WorkspaceConfiguration } from "vscode";
+import { ExpandSelectionOptions } from "../types/BlockSortOptions";
 import { FoldingMarkerDefault, FoldingMarkerList } from "./StringProcessingProvider";
 
 const defaultFoldingMarkers: FoldingMarkerList<FoldingMarkerDefault> = {
@@ -124,8 +125,8 @@ export default class ConfigurationProvider {
     return ConfigurationProvider.getConfiguration().keepAppendedNewlines;
   }
 
-  public static getAlwaysExpandOverSeparators(): boolean {
-    return ConfigurationProvider.getConfiguration().alwaysExpandOverSeparators;
+  public static getExpandSelection(): boolean | ExpandSelectionOptions {
+    return ConfigurationProvider.getConfiguration().expandSelection;
   }
 
   public static getEnableNaturalSorting(): boolean {
