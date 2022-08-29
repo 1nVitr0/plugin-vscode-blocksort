@@ -1,4 +1,5 @@
 import { Position, Range } from "vscode";
+import { ExpandSelectionOptions } from "../../types/BlockSortOptions";
 
 export interface BaseTest {
   file: string;
@@ -13,7 +14,7 @@ export interface CompareTest extends BaseTest {
 
 export interface RangeTest extends BaseTest {
   targetRanges: Range[];
-  expandOverNewlines?: boolean;
+  expand?: boolean | ExpandSelectionOptions;
 }
 
 export interface PositionTest extends BaseTest {

@@ -1,6 +1,7 @@
 import { TextEdit } from "vscode";
 
 export interface ExpandSelectionOptions {
+  expandLocally?: boolean;
   expandOverEmptyLines?: boolean;
   foldingComplete?: boolean;
   indentationComplete?: boolean;

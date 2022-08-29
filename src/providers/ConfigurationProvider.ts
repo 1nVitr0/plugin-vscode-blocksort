@@ -129,6 +129,10 @@ export default class ConfigurationProvider {
     return ConfigurationProvider.getConfiguration().expandSelection;
   }
 
+  public static getExpandCursor(): boolean | ExpandSelectionOptions {
+    return ConfigurationProvider.getConfiguration().expandCursor;
+  }
+
   public static getEnableNaturalSorting(): boolean {
     return ConfigurationProvider.getConfiguration().enableNaturalSorting;
   }
