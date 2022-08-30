@@ -39,7 +39,7 @@ The blocks are sorted purely by their content, so while decorators are supported
 ## Commands
 
 <details>
-<summary>This extension contributed the following commands:</summary>
+<summary>This extension contributes the following commands:</summary>
 
 `Sort Blocks Ascending`: Sorts the selected code blocks in ascending order. If no code blocks are selected, a selection for the deepest block the cursor is currently positioned in is generated.
 
