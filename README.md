@@ -38,7 +38,8 @@ The blocks are sorted purely by their content, so while decorators are supported
 
 ## Commands
 
-This extension contributed the following commands:
+<details>
+<summary>This extension contributed the following commands:</summary>
 
 `Sort Blocks Ascending`: Sorts the selected code blocks in ascending order. If no code blocks are selected, a selection for the deepest block the cursor is currently positioned in is generated.
 
@@ -51,13 +52,14 @@ This extension contributed the following commands:
 `Expand current Selection to surrounding Block`: Expand curren selection locally to surrounding lines in block.
 
 `Expand current Selection fully (including separating Newlines) to the surrounding Block`: Expand curren selection to complete surrounding block.
-
+</details>
 
 ***
 
 ## Code Actions / Auto Sorting
 
-The extension provides the following code actions:
+<details>
+<summary>The extension provides the following code actions:</summary>
 
 `source.fixAll.blocksort`: This can be executed on save to auto-sort all blocks following a `@blocksort` marker.
 
@@ -96,12 +98,14 @@ some:
     - up to
     - any level)
 ```
+</details>
 
 ***
 
 ## Extension Settings
 
-This extension contributed the following settings:
+<details>
+<summary>This extension contributed the following settings:</summary>
 
 - `defaultMultilevelDepth`: Default depth used for deep sorting.
   - Default: `-1` (infinite)
@@ -224,6 +228,7 @@ Settings marked as *Language Overridable* can be specified on a per-language bas
   }
 }
 ```
+</details>
 
 ***
 
