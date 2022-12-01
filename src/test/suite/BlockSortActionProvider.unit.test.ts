@@ -18,6 +18,7 @@ suite("Unit Suite for BlockSortProvider", async () => {
       const testFunc = only ? test.only : skip ? test.skip : test;
       testFunc(`Code Action Kind Tests (lang ${lang}) #${i}.${j}`, async () => {
         const document = await workspace.openTextDocument(join(fixtureDir, file));
+        await languages.setTextDocumentLanguage(document, lang);
 
         const codeActions = codeActionProvider.provideCodeActions(
           document,
@@ -61,6 +62,7 @@ suite("Unit Suite for BlockSortProvider", async () => {
       testFunc(`Code Action Compare test(lang ${lang}) #${i}.${j}`, async () => {
         const compareDocument = await workspace.openTextDocument(join(fixtureDir, compareFile));
         const document = await workspace.openTextDocument(join(fixtureDir, file));
+        await languages.setTextDocumentLanguage(document, lang);
 
         const codeActions = codeActionProvider.provideCodeActions(
           document,
@@ -87,6 +89,7 @@ suite("Unit Suite for BlockSortProvider", async () => {
       const testFunc = only ? test.only : skip ? test.skip : test;
       testFunc(`Code Lens test(lang ${lang}) #${i}`, async () => {
         const document = await workspace.openTextDocument(join(fixtureDir, file));
+        await languages.setTextDocumentLanguage(document, lang);
 
         const codeLenses = await codeActionProvider.provideCodeLenses(document, token.token);
         const codeLensRanges = codeLenses?.map((codeLens) => codeLens.range);

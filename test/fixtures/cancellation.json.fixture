@@ -2,6 +2,1007 @@
   "result": {
     "count": "1391",
     "event": {
+      "date": "2009",
+      "description": "Austria, Japan, Mexico, Turkey, and Uganda assume their seats on the United Nations Security Council.",
+      "lang": "en",
+      "category1": "January",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009",
+      "description": "Asunci\u00f3n, the capital of Paraguay, becomes the American Capital of Culture and Vilnius and Linz become the European Capitals of Culture.",
+      "lang": "en",
+      "category1": "January",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009",
+      "description": "Slovakia adopts the euro as its national currency, replacing the Slovak koruna.ampamp{{cite news | url = <a href=\"http://business.timesonline.co.uk/tol/business/economics/article5414398.ece\">http://business.timesonline.co.uk/tol/business/economics/article5414398.ece</a> | location=London | work=The Times | first1=Rory | last1=Watson | title=Slovakia adopts the euro on January 1 | date=December 29, 2008| accessdate= 9 March 2010 amp!--DASHBot--amp}}ampamp",
+      "lang": "en",
+      "category1": "January",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/01/03",
+      "description": " Israel launches a ground invasion of the Gaza Strip as the Gaza War enters its second week.{{cite news|url=<a href=\"http://www.nytimes.com/2009/01/04/world/middleeast/04mideast.html?_r=2amphp|title=Israeli\">http://www.nytimes.com/2009/01/04/world/middleeast/04mideast.html?_r=2amphp|title=Israeli</a> Troops Launch Attack on Gaza|publisher=New York Times|accessdate=2009-10-09|date=2009-01-03 | first1=Isabel | last1=Kershner | first2=Taghreed | last2=El-Khodary}}",
+      "lang": "en",
+      "category1": "January",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/01/07",
+      "description": " Russia shuts off all gas supplies to Europe through Ukraine. Prime Minister Vladimir Putin publicly endorses the move and urges greater international involvement in the energy dispute.{{cite web |title=Europeans shiver as Russia cuts gas shipments |url=<a href=\"http://www.msnbc.msn.com/id/28515983/\">http://www.msnbc.msn.com/id/28515983/</a> | accessdate= 9 March 2010 !--DASHBot--}}",
+      "lang": "en",
+      "category1": "January",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/01/13",
+      "description": " Ethiopian military forces begin pulling out of Somalia, where they have tried to maintain order for nearly two years.ref name=quotbbc-somali-joyquot{{cite news|first=|last=|coauthors=|title=Somali joy as Ethiopians withdraw  | date= 2009-01-13|publisher=BBC News|url=<a href=\"http://news.bbc.co.uk/2/hi/africa/7825626.stm|work=News\">http://news.bbc.co.uk/2/hi/africa/7825626.stm|work=News</a> article|page=2|accessdate=2009-01-25| archiveurl= <a href=\"http://web.archive.org/web/20090121142216/http://news.bbc.co.uk/2/hi/africa/7825626.stm|\">http://web.archive.org/web/20090121142216/http://news.bbc.co.uk/2/hi/africa/7825626.stm|</a> archivedate= 21 January 2009 !--DASHBot--| deadurl= no}}",
+      "lang": "en",
+      "category1": "January",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/01/17",
+      "description": " Israel announces a unilateral ceasefire in the Gaza War. It comes into effect the following day,ref name=quotceasefirequot{{cite news|title=Israel declares ceasefire in Gaza|publisher=BBC|date=January 17, 2009|url=<a href=\"http://news.bbc.co.uk/2/hi/middle_east/7835794.stm|accessdate=January\">http://news.bbc.co.uk/2/hi/middle_east/7835794.stm|accessdate=January</a> 17, 2009| archiveurl= <a href=\"http://web.archive.org/web/20090119124946/http://news.bbc.co.uk/2/hi/middle_east/7835794.stm|\">http://web.archive.org/web/20090119124946/http://news.bbc.co.uk/2/hi/middle_east/7835794.stm|</a> archivedate= 19 January 2009 !--DASHBot--| deadurl= no}} on which Hamas declares a ceasefire of its own.ref name=haaretz18Jan2{{cite web|last=Issacharoff |first=Avi |url=<a href=\"http://haaretz.com/hasen/spages/1056490.html\">http://haaretz.com/hasen/spages/1056490.html</a> |title=Haaretz, January 18, 2009 |publisher=Haaretz.com |date=2008-04-02 |accessdate=2010-08-23}}{{cite news | url = <a href=\"http://www.cnn.com/2009/WORLD/meast/01/18/israel.gaza/index.html\">http://www.cnn.com/2009/WORLD/meast/01/18/israel.gaza/index.html</a> | work=CNN | title=Hamas, Israel set independent cease-fires | date=January 18, 2009| accessdate= 9 March 2010 !--DASHBot--}}{{cite news | url = <a href=\"http://news.bbc.co.uk/2/hi/middle_east/7836205.stm\">http://news.bbc.co.uk/2/hi/middle_east/7836205.stm</a> | work=BBC News | title=Hamas announces ceasefire in Gaza | date=January 18, 2009| accessdate= 9 March 2010 !--DASHBot--}}",
+      "lang": "en",
+      "category1": "January",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/01/21",
+      "description": " Israel completes its withdrawal from the Gaza Strip.{{cite news | url = <a href=\"http://news.bbc.co.uk/1/hi/world/middle_east/7841902.stm\">http://news.bbc.co.uk/1/hi/world/middle_east/7841902.stm</a> | accessdate = July 7, 2009 | work=BBC News | title=Last Israeli troops 'leave Gaza' | date=January 21, 2009}} Intermittent air strikes by both sides of the preceding war continue in the weeks to follow.<a href=\"http://www.haaretz.com/hasen/spages/1067516.html\">http://www.haaretz.com/hasen/spages/1067516.html</a> At least six Gaza rockets hit southern Israel ampndash Haaretz ampndash Israel News. Haaretz. Retrieved on 2009-07-07.<a href=\"http://fr.jpost.com/servlet/Satellite?pagename=JPost/JPArticle/ShowFullampcid=1235410720483\">http://fr.jpost.com/servlet/Satellite?pagename=JPost/JPArticle/ShowFullampcid=1235410720483</a> Kassam rocket strikes Eshkol Region|Israel|Jerusalem Post. Jpost.com. Retrieved on 2009-07-07.{{cite news|title='Five rockets' fired into Israel|publisher=BBC|date=February 28, 2009|url=<a href=\"http://news.bbc.co.uk/2/hi/middle_east/7916555.stm|accessdate=February\">http://news.bbc.co.uk/2/hi/middle_east/7916555.stm|accessdate=February</a> 28, 2009| archiveurl= <a href=\"http://web.archive.org/web/20090228235142/http://news.bbc.co.uk/2/hi/middle_east/7916555.stm|\">http://web.archive.org/web/20090228235142/http://news.bbc.co.uk/2/hi/middle_east/7916555.stm|</a> archivedate= 28 February 2009 !--DASHBot--| deadurl= no}}",
+      "lang": "en",
+      "category1": "January",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/01/22",
+      "description": " Congolese rebel leader Laurent Nkunda is captured by Rwandan forces after crossing over the border into Rwanda.{{cite news | url = <a href=\"http://www.guardian.co.uk/world/2009/jan/23/laurent-nkunda-congo-rwanda\">http://www.guardian.co.uk/world/2009/jan/23/laurent-nkunda-congo-rwanda</a> | location=London | work=The Guardian | first=Matthew | last=Weaver | title=Congo and Rwanda forces arrest rebel leader Laurent Nkunda | date=January 23, 2009| accessdate= 9 March 2010 !--DASHBot--}}",
+      "lang": "en",
+      "category1": "January",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/01/22",
+      "description": "The first trial at the International Criminal Court is held. Former Union of Congolese Patriots leader Thomas Lubanga is accused of training child soldiers to kill, pillage, and rape.ampamp<a href=\"http://www.bloomberg.com/apps/news?pid=20601116ampampsid=a_4iKnLHRml4ampamprefer=africa\">http://www.bloomberg.com/apps/news?pid=20601116ampampsid=a_4iKnLHRml4ampamprefer=africa</a> Congo Warlord Pleads Not Guilty at ICC\u2019s First Trial (Update1). Bloomberg.com (2009-01-26). Retrieved on 2009-07-07.ampamp",
+      "lang": "en",
+      "category1": "January",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/01/22",
+      "description": "The Icelandic government and banking system collapse Prime Minister Geir Haarde immediately resigns.ampamp{{cite news | url = <a href=\"http://www.guardian.co.uk/world/2009/jan/27/iceland-prime-minister-resignation\">http://www.guardian.co.uk/world/2009/jan/27/iceland-prime-minister-resignation</a> | accessdate = July 7, 2009 | location=London | work=The Guardian | first=Mark | last=Tran | title=Icelandic PM becomes world's first leader to step down over banking system crisis | date=January 27, 2009}}ampamp",
+      "lang": "en",
+      "category1": "January",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/01/22",
+      "description": "Patriarch Kirill I of Moscow is enthroned as the Patriarch of the Russian Orthodox Church.ampamp{{cite news|url=<a href=\"http://news.bbc.co.uk/2/hi/europe/7863385.stm|title=Orthodox\">http://news.bbc.co.uk/2/hi/europe/7863385.stm|title=Orthodox</a> Church enthrones leader|date=2009-02-01|accessdate=2009-07-16|publisher=BBC}}ampamp",
+      "lang": "en",
+      "category1": "February",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/01/22",
+      "description": "J\u00f3hanna Sigur\u00f0ard\u00f3ttir is appointed as the new Prime Minister of Iceland, becoming the world's first openly lesbian head of government.ampamp{{cite news|url = <a href=\"http://news.bbc.co.uk/1/hi/world/europe/7863923.stm|title\">http://news.bbc.co.uk/1/hi/world/europe/7863923.stm|title</a> = First gay PM for Iceland cabinet|publisher = BBC News|date = 1 February 2009|accessdate = 2009-07-16}}ampamp",
+      "lang": "en",
+      "category1": "February",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/02/07",
+      "description": " The deadliest bushfires in Australian history begin they kill 173, injure 500 more, and leave 7,500 homeless. The fires come after Melbourne records the highest-ever temperature (46.4\u00b0C, 115\u00b0F) of any capital city in Australia. The majority of the fires are ignited by either fallen or clashing power lines or deliberately lit.",
+      "lang": "en",
+      "category1": "February",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/02/08",
+      "description": " The Taliban releases a video of Polish geologist Piotr Sta\u0144czak, whom they had abducted a few months earlier, being beheaded. It is the first killing of a Western hostage in Pakistan since American journalist Daniel Pearl was executed in 2002.{{cite news | url = <a href=\"http://www.nytimes.com/2009/02/10/world/asia/10pstan.html\">http://www.nytimes.com/2009/02/10/world/asia/10pstan.html</a> | work=The New York Times | first=Salman | last=Masood | title=Video of Beheading of Pole Held by Taliban Is Real, Official Says | date=February 10, 2009| accessdate= 9 March 2010 !--DASHBot--| archiveurl= <a href=\"http://web.archive.org/web/20100323065430/http://www.nytimes.com/2009/02/10/world/asia/10pstan.html|\">http://web.archive.org/web/20100323065430/http://www.nytimes.com/2009/02/10/world/asia/10pstan.html|</a> archivedate= 23 March 2010| deadurl= no}}",
+      "lang": "en",
+      "category1": "February",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/02/10",
+      "description": " A Russian and an American satellite collide over Siberia, creating a large amount of space debris.<a href=\"http://abcnews.go.com/Technology/wireStory?id=6860864\">http://abcnews.go.com/Technology/wireStory?id=6860864</a> Crash of US, Russian Satellites a Threat in Space ampndash ABC News. Abcnews.go.com. Retrieved on 2009-07-07.",
+      "lang": "en",
+      "category1": "February",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/02/11",
+      "description": " Morgan Tsvangirai is sworn in as the new Prime Minister of Zimbabwe following the power-sharing deal with President Robert Mugabe signed in September 2008.{{cite news|url=<a href=\"http://news.bbc.co.uk/1/hi/world/africa/7882762.stm|title=Tsvangirai\">http://news.bbc.co.uk/1/hi/world/africa/7882762.stm|title=Tsvangirai</a> sworn in Zimbabwe PM |date=2009-02-11|work=BBC News|publisher=BBC|accessdate=2009-02-11| archiveurl= <a href=\"http://web.archive.org/web/20090211091821/http://news.bbc.co.uk/1/hi/world/africa/7882762.stm|\">http://web.archive.org/web/20090211091821/http://news.bbc.co.uk/1/hi/world/africa/7882762.stm|</a> archivedate= 11 February 2009 !--DASHBot--| deadurl= no}}",
+      "lang": "en",
+      "category1": "February",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/02/17",
+      "description": " The JEM rebel group in Darfur, Sudan sign a pact with the Sudanese government, planning a ceasefire within the next three months.<a href=\"http://abcnews.go.com/International/wireStory?id=6894843\">http://abcnews.go.com/International/wireStory?id=6894843</a> Sudan, Darfur Rebel Group Sign Peace Framework ampndash ABC News. Abcnews.go.com. Retrieved on 2009-07-07.",
+      "lang": "en",
+      "category1": "February",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/02/26",
+      "description": " Former Serbian president Milan Milutinovi\u0107 is acquitted by the International Criminal Tribunal for the former Yugoslavia regarding war crimes during the Kosovo War.{{cite news|url=<a href=\"http://uk.reuters.com/article/homepageCrisis/idUKLQ706014._CH_.2420|title=Ex-Serbian\">http://uk.reuters.com/article/homepageCrisis/idUKLQ706014._CH_.2420|title=Ex-Serbian</a> president acquitted of Kosovo war crimes |date=2009-02-26|work=Reed Stevenson|publisher=Reuters|accessdate=2009-03-11| archiveurl= <a href=\"http://web.archive.org/web/20090301111046/http://uk.reuters.com/article/homepageCrisis/idUKLQ706014._CH_.2420|\">http://web.archive.org/web/20090301111046/http://uk.reuters.com/article/homepageCrisis/idUKLQ706014._CH_.2420|</a> archivedate= 1 March 2009 !--DASHBot--| deadurl= no}}",
+      "lang": "en",
+      "category1": "February",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/03/02",
+      "description": " The President of Guinea-Bissau, Jo\u00e3o Bernardo Vieira, is assassinated during an armed attack on his residence in Bissau.{{cite news | url = <a href=\"http://edition.cnn.com/2009/WORLD/africa/03/02/guineabissau.general/index.html\">http://edition.cnn.com/2009/WORLD/africa/03/02/guineabissau.general/index.html</a> | accessdate = July 7, 2009 | work=CNN | title=President of Guinea-Bissau assassinated | date=March 2, 2009}}",
+      "lang": "en",
+      "category1": "March",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/03/03",
+      "description": " Gunmen attack a bus carrying Sri Lankan cricketers in Lahore, Pakistan, killing eight people and injuring several others.{{cite news|url=<a href=\"http://news.bbc.co.uk/1/hi/world/south_asia/7920260.stm|title=\">http://news.bbc.co.uk/1/hi/world/south_asia/7920260.stm|title=</a> Gunmen shoot Sri Lanka cricketers|date= 3 March 2009|work= BBC News|accessdate= 3 March 2009| archiveurl= <a href=\"http://web.archive.org/web/20090304111158/http://news.bbc.co.uk/1/hi/world/south_asia/7920260.stm|\">http://web.archive.org/web/20090304111158/http://news.bbc.co.uk/1/hi/world/south_asia/7920260.stm|</a> archivedate= 4 March 2009 !--DASHBot--| deadurl= no}}",
+      "lang": "en",
+      "category1": "March",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/03/04",
+      "description": " The International Criminal Court (ICC) issues an arrest warrant for Sudanese President Omar Hassan al-Bashir for war crimes and crimes against humanity in Darfur. Al-Bashir is the first sitting head of state to be indicted by the ICC since its establishment in 2002.{{cite news|url=<a href=\"http://www.reuters.com/article/latestCrisis/idUS123622821727|title=VIDEO:\">http://www.reuters.com/article/latestCrisis/idUS123622821727|title=VIDEO:</a> ICC issues arrest warrant for Bashir|date= 4 March 2009|work= Reuters|accessdate= 4 March 2009}}",
+      "lang": "en",
+      "category1": "March",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/03/07",
+      "description": " NASA's Kepler Mission, a space photometer which will search for extrasolar planets in the Milky Way galaxy, is launched from Cape Canaveral Air Force Station, Florida, USA.",
+      "lang": "en",
+      "category1": "March",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/03/17",
+      "description": " The President of Madagascar, Marc Ravalomanana, is overthrown in a ''coup d'\u00e9tat'', following a month of rallies in Antananarivo. The military appoints opposition leader Andry Rajoelina as the new president.{{cite news|url=<a href=\"http://news.bbc.co.uk/1/hi/world/africa/7948196.stm|title=\">http://news.bbc.co.uk/1/hi/world/africa/7948196.stm|title=</a> Madagascar president forced out |date= 17 March 2009|work= BBC News|accessdate= 17 March 2009| archiveurl= <a href=\"http://web.archive.org/web/20090319061800/http://news.bbc.co.uk/1/hi/world/africa/7948196.stm|\">http://web.archive.org/web/20090319061800/http://news.bbc.co.uk/1/hi/world/africa/7948196.stm|</a> archivedate= 19 March 2009 !--DASHBot--| deadurl= no}}",
+      "lang": "en",
+      "category1": "March",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/04/01",
+      "description": " Albania and Croatia are admitted to the North Atlantic Treaty Organization (NATO).",
+      "lang": "en",
+      "category1": "April",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/04/02",
+      "description": "  The second G-20 summit, involving state leaders rather than the usual finance ministers, meets in London. Its main focus is an ongoing global financial crisis.",
+      "lang": "en",
+      "category1": "April",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/04/03",
+      "description": "April 4 ampndash  The 21st NATO Summit is held, 60 years after the founding of the organization. Former Danish Prime Minister Anders Fogh Rasmussen is appointed as the new Secretary General of NATO.",
+      "lang": "en",
+      "category1": "April",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/04/05",
+      "description": " North Korea launches the Kwangmy\u014fngs\u014fng-2 rocket, prompting an emergency meeting ofampmdashbut no official reaction fromampmdashthe United Nations Security Council.{{cite news|url=<a href=\"http://edition.cnn.com/2009/WORLD/asiapcf/04/05/nkorea.worldreax/?iref=mpstoryview|title=\">http://edition.cnn.com/2009/WORLD/asiapcf/04/05/nkorea.worldreax/?iref=mpstoryview|title=</a> U.N. Security Council to meet on N. Korea launch |date= April 5, 2009|work= CNN|accessdate= April 5, 2009}}",
+      "lang": "en",
+      "category1": "April",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/04/06",
+      "description": " A 6.3 magnitude earthquake strikes near L'Aquila, Italy, killing nearly 300 and injuring more than 1,500.{{cite news|url=<a href=\"http://news.bbc.co.uk/2/hi/europe/7986727.stm\">http://news.bbc.co.uk/2/hi/europe/7986727.stm</a> |title=BBC: Italian rescuers work into night |publisher=BBC News |date=2009-04-07 |accessdate=2010-08-23}}",
+      "lang": "en",
+      "category1": "April",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/04/07",
+      "description": " Former Peruvian President Alberto Fujimori is sentenced to 25 years in prison for ordering killings and kidnappings by security forces.",
+      "lang": "en",
+      "category1": "April",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/04/10",
+      "description": " A political crisis begins in Fiji when President Josefa Iloilo suspends the nation's Constitution, dismisses all judges and constitutional appointees and assumes all governance in the country after the Court of Appeal rules that the government of Prime Minister Frank Bainimarama is illegal.ref name=ta{{cite news |first=|last=|title=Fijian president Ratu Josefa Iloilo abolishes constitution, sacks judiciary and assumes power",
+      "lang": "en",
+      "category1": "April",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/04/11",
+      "description": "April 12 ampndash The Fourth East Asia Summit is postponed after Thai Prime Minister Abhisit Vejjajiva declares a state of emergency in Bangkok and surrounding areas.ref name=quotAP-2009-04-12quot{{cite news|url=<a href=\"http://www.google.com/hostednews/ap/article/ALeqM5g8-DEMtAE9q4i4ySQ0eV_qZefmRQD97GQ08G0|title=AP\">http://www.google.com/hostednews/ap/article/ALeqM5g8-DEMtAE9q4i4ySQ0eV_qZefmRQD97GQ08G0|title=AP</a> Top News at 4:00 a.m. EDT|date=12 April 2009|agency=Associated Press|accessdate=2009-04-12| archiveurl= <a href=\"http://web.archive.org/web/20090417051741/http://www.google.com/hostednews/ap/article/ALeqM5g8-DEMtAE9q4i4ySQ0eV_qZefmRQD97GQ08G0|\">http://web.archive.org/web/20090417051741/http://www.google.com/hostednews/ap/article/ALeqM5g8-DEMtAE9q4i4ySQ0eV_qZefmRQD97GQ08G0|</a> archivedate= 17 April 2009 !--DASHBot--| deadurl= yes}}ref name=quotBBC-2009-04-12quot{{cite news|url=<a href=\"http://news.bbc.co.uk/1/hi/world/asia-pacific/7995606.stm|title=AP\">http://news.bbc.co.uk/1/hi/world/asia-pacific/7995606.stm|title=AP</a> Top News at 4:00 a.m. EDT|date=12 April 2009|publisher=BBC News|accessdate=2009-04-12| archiveurl= <a href=\"http://web.archive.org/web/20090414180946/http://news.bbc.co.uk/1/hi/world/asia-pacific/7995606.stm|\">http://web.archive.org/web/20090414180946/http://news.bbc.co.uk/1/hi/world/asia-pacific/7995606.stm|</a> archivedate= 14 April 2009 !--DASHBot--| deadurl= no}}",
+      "lang": "en",
+      "category1": "April",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/04/12",
+      "description": " U.S. Navy  rescues Captain Richard Phillips killing three pirates, and capturing a fourth.",
+      "lang": "en",
+      "category1": "April",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/04/17",
+      "description": " Thirty-four heads of state and government meet in Port of Spain, Trinidad for the 5th Summit of the Americas.",
+      "lang": "en",
+      "category1": "April",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/04/18",
+      "description": " Roxana Saberi, an Iranian-American journalist, is sentenced to eight years in prison for espionage by an Iranian court.{{cite news|url=<a href=\"http://edition.cnn.com/2009/WORLD/meast/04/18/iran.us.journalist/index.html?iref=newssearch|title=\">http://edition.cnn.com/2009/WORLD/meast/04/18/iran.us.journalist/index.html?iref=newssearch|title=</a> Iran sentences U.S. journalist to 8 years |date= April 18, 2009|work= CNN|accessdate= April 20, 2009| archiveurl= <a href=\"http://web.archive.org/web/20090423121643/http://edition.cnn.com/2009/WORLD/meast/04/18/iran.us.journalist/index.html?iref=newssearch|\">http://web.archive.org/web/20090423121643/http://edition.cnn.com/2009/WORLD/meast/04/18/iran.us.journalist/index.html?iref=newssearch|</a> archivedate= 23 April 2009 !--DASHBot--| deadurl= no}} She is released the following month, after an appeals court reduces and suspends her sentence.",
+      "lang": "en",
+      "category1": "April",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/04/21",
+      "description": " UNESCO launches The World Digital Library.{{cite news|url=<a href=\"http://www.washingtonpost.com/wp-dyn/content/article/2009/04/20/AR2009042001324.html?hpid=sec-world|title=\">http://www.washingtonpost.com/wp-dyn/content/article/2009/04/20/AR2009042001324.html?hpid=sec-world|title=</a> U.N. Launches Library Of World's Knowledge |date= April 21, 2009|work= The Washington Post Company|accessdate= April 21, 2009 | first=Edward | last=Cody}}",
+      "lang": "en",
+      "category1": "April",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/04/24",
+      "description": " The World Health Organization expresses concern at the spread of influenza from Mexico and the United States to other countries.ref name=quotwho_statement_2009-04-25quot{{cite web |url=<a href=\"http://www.who.int/mediacentre/news/statements/2009/h1n1_20090425/en/index.html\">http://www.who.int/mediacentre/news/statements/2009/h1n1_20090425/en/index.html</a> |title=Statement by WHO Director-General, Dr Margaret Chan 25 April 2009 \u2014 Swine influenza |publisher=World Health Organization |date=2009-04-25 |accessdate=2009-04-26 | archiveurl= <a href=\"http://web.archive.org/web/20090428084007/http://www.who.int/mediacentre/news/statements/2009/h1n1_20090425/en/index.html|\">http://web.archive.org/web/20090428084007/http://www.who.int/mediacentre/news/statements/2009/h1n1_20090425/en/index.html|</a> archivedate= 28 April 2009 !--DASHBot--| deadurl= no}}{{cite news|last=Bell |first=Alistair |url=<a href=\"http://www.reuters.com/article/domesticNews/idUSTRE53N22820090424?feedType=RSSampfeedName=domesticNewsamprpc=22ampsp=true|title=Deadly\">http://www.reuters.com/article/domesticNews/idUSTRE53N22820090424?feedType=RSSampfeedName=domesticNewsamprpc=22ampsp=true|title=Deadly</a> new flu strain erupts in Mexico, U.S |publisher=Reuters.com |date= April 24, 2009|accessdate=2010-08-23}}{{cite web|url=<a href=\"http://www.bloomberg.com/apps/news?pid=20601087ampsid=awMeiF_SLkGsamprefer=home|title=\">http://www.bloomberg.com/apps/news?pid=20601087ampsid=awMeiF_SLkGsamprefer=home|title=</a> Canadian Governments Confirm Six Cases of Swine Flu (Update2) |date= April 26, 2009|work= Bloomberg L.P.|accessdate= April 26, 2009}} International cases and resulting deaths are confirmed.",
+      "lang": "en",
+      "category1": "April",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/04/29",
+      "description": " Amidst Russia's effort to improve relations with NATO and with the West in general, NATO expels two Russian diplomats from NATO headquarters in Brussels over a spy scandal in Estonia. Russia's Foreign Ministry criticises the expulsions.{{cite news|url=<a href=\"http://uk.reuters.com/article/gc07/idUKTRE53T3T520090430|title=\">http://uk.reuters.com/article/gc07/idUKTRE53T3T520090430|title=</a> NATO expels two Russians over Estonia spy scandal |date= April 30, 2009|work= Reuters|accessdate= May 7, 2009| archiveurl= <a href=\"http://web.archive.org/web/20090503114315/http://uk.reuters.com/article/gc07/idUKTRE53T3T520090430|\">http://web.archive.org/web/20090503114315/http://uk.reuters.com/article/gc07/idUKTRE53T3T520090430|</a> archivedate= 3 May 2009 !--DASHBot--| deadurl= no}}",
+      "lang": "en",
+      "category1": "April",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/04/29",
+      "description": "The third C40 Large Cities Climate Leadership Group meets in Seoul.",
+      "lang": "en",
+      "category1": "May",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/04/29",
+      "description": "Following more than a quarter-century of fighting, the Sri Lankan Civil War ends with the total military defeat of the LTTE.ampamp{{cite web|url=<a href=\"http://www.nationalpost.com/story.html?id=1605285|title=Sri\">http://www.nationalpost.com/story.html?id=1605285|title=Sri</a> Lanka\u2019s long war reaches end, Tigers defeated|author=C. Bryson Hull and Ranga Sirilal amp!-- BOT GENERATED AUTHOR --amp|archiveurl=<a href=\"http://www.webcitation.org/5hRWbsWHv|archivedate=2009-06-11|deadurl=no|accessdate=2009-05-31}}ampampampamp{{cite\">http://www.webcitation.org/5hRWbsWHv|archivedate=2009-06-11|deadurl=no|accessdate=2009-05-31}}ampampampamp{{cite</a> web|url=<a href=\"http://www.express.co.uk/posts/view/102140/|title=Sri-Lanka-liberated-from-terror|\">http://www.express.co.uk/posts/view/102140/|title=Sri-Lanka-liberated-from-terror|</a> accessdate= 9 March 2010 amp!--DASHBot--amp}}ampamp",
+      "lang": "en",
+      "category1": "May",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/05/19",
+      "description": " Sri Lanka announces victory in its 27 year war against the terrorist organisation Liberation Tigers of Tamil Eelam.",
+      "lang": "en",
+      "category1": "May",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/05/23",
+      "description": " Former President of South Korea Roh Moo-hyun, under investigation for alleged bribery during his presidential term, commits suicide.{{cite news|title=Ex-S Korea leader 'kills himself'|work=BBC News|date=2009-05-23| accessdate=2009-05-23|url=<a href=\"http://news.bbc.co.uk/2/hi/asia-pacific/8064799.stm|\">http://news.bbc.co.uk/2/hi/asia-pacific/8064799.stm|</a> archiveurl= <a href=\"http://web.archive.org/web/20090523011859/http://news.bbc.co.uk/2/hi/asia-pacific/8064799.stm|\">http://web.archive.org/web/20090523011859/http://news.bbc.co.uk/2/hi/asia-pacific/8064799.stm|</a> archivedate= 23 May 2009 !--DASHBot--| deadurl= no}}",
+      "lang": "en",
+      "category1": "May",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/05/25",
+      "description": " North Korea announces that it has conducted a second successful nuclear test in the province of North Hamgyong. The United Nations Security Council condemns the reported test.{{cite news |first= |last= |coauthors= |title=UN Security Council Condemns North Korea Nuclear Test (Update1)|work=Bloomberg |page= |date=May 25, 2009 |accessdate=May 31, 2009 |quote= |url=<a href=\"http://www.bloomberg.com/apps/news?pid=20601089ampsid=aOoNPErMuqyg}}\">http://www.bloomberg.com/apps/news?pid=20601089ampsid=aOoNPErMuqyg}}</a>",
+      "lang": "en",
+      "category1": "May",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/06/01",
+      "description": " Air France Flight 447, en route from Rio de Janeiro, Brazil, to Paris, crashes into the Atlantic Ocean, killing all 228 on board.",
+      "lang": "en",
+      "category1": "June",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/06/11",
+      "description": " The outbreak of the H1N1 influenza strain, commonly referred to as quotswine fluquot, is deemed a global pandemic,ref name=quotWHO level 6quot{{cite web|url=<a href=\"http://www.who.int/mediacentre/news/statements/2009/h1n1_pandemic_phase6_20090611/en/index.html|title=World\">http://www.who.int/mediacentre/news/statements/2009/h1n1_pandemic_phase6_20090611/en/index.html|title=World</a> now at the start of 2009 influenza pandemic| publisher=World Health Organization|date=2009-06-11|accessdate=2009-06-30| archiveurl= <a href=\"http://web.archive.org/web/20090701182352/http://www.who.int/mediacentre/news/statements/2009/h1n1_pandemic_phase6_20090611/en/index.html|\">http://web.archive.org/web/20090701182352/http://www.who.int/mediacentre/news/statements/2009/h1n1_pandemic_phase6_20090611/en/index.html|</a> archivedate= 1 July 2009 !--DASHBot--| deadurl= no}} becoming the first condition since the Hong Kong flu of 1967ampndash1968 to receive this designation.",
+      "lang": "en",
+      "category1": "June",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/06/13",
+      "description": " Following the apparent reelection of Iranian president Mahmoud Ahmadinejad, supporters of defeated candidate Mir-Hossein Mousavi accuse the government of fraud, and launch a series of sustained protests.{{cite web|url=<a href=\"http://www.mcclatchydc.com/homepage/story/70136.html\">http://www.mcclatchydc.com/homepage/story/70136.html</a> |title=Mcclatchydc.com |publisher=Mcclatchydc.com |date= |accessdate=2010-08-23}}",
+      "lang": "en",
+      "category1": "June",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/06/18",
+      "description": " NASA launches the Lunar Reconnaissance Orbiter/LCROSS probes to the Moon, the first American lunar mission since Lunar Prospector in 1998.",
+      "lang": "en",
+      "category1": "June",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/06/20",
+      "description": " The death of Neda Agha-Soltan, an Iranian student shot during a protest, is captured on what soon becomes a viral video that helps to turn Neda into an international symbol of the civil unrest following the presidential election.",
+      "lang": "en",
+      "category1": "June",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/06/21",
+      "description": " As a step toward total independence from the Kingdom of Denmark, Greenland assumes control over its law enforcement, judicial affairs, and natural resources. Greenlandic becomes the official language.{{cite news|url=<a href=\"http://news.bbc.co.uk/2/hi/europe/8111292.stm\">http://news.bbc.co.uk/2/hi/europe/8111292.stm</a> |title=BBC: Self-rule introduced in Greenland |publisher=BBC News |date=2009-06-21 |accessdate=2010-08-23| archiveurl= <a href=\"http://web.archive.org/web/20100708113841/http://news.bbc.co.uk/2/hi/europe/8111292.stm|\">http://web.archive.org/web/20100708113841/http://news.bbc.co.uk/2/hi/europe/8111292.stm|</a> archivedate= 8 July 2010 !--DASHBot--| deadurl= no}}",
+      "lang": "en",
+      "category1": "June",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/06/25",
+      "description": " The death of American entertainer Michael Jackson triggers an outpouring of worldwide grief. Online, reactions to the event cripple several major websites and services, as the abundance of people accessing the web addresses pushes internet traffic to potentially unprecedented and historic levels.{{cite news|author=By  Linnie Rawlinson and Nick Hunt CNN |url=<a href=\"http://www.cnn.com/2009/TECH/06/26/michael.jackson.internet/index.html\">http://www.cnn.com/2009/TECH/06/26/michael.jackson.internet/index.html</a> |title=Jackson dies, almost takes Internet with him |publisher=CNN |date=2009-06-26 |accessdate=2010-08-23| archiveurl= <a href=\"http://web.archive.org/web/20100827234155/http://www.cnn.com/2009/TECH/06/26/michael.jackson.internet/index.html|\">http://web.archive.org/web/20100827234155/http://www.cnn.com/2009/TECH/06/26/michael.jackson.internet/index.html|</a> archivedate= 27 August 2010 !--DASHBot--| deadurl= no}}{{cite news|last=Shiels |first=Maggie |url=<a href=\"http://news.bbc.co.uk/2/hi/technology/8120324.stm\">http://news.bbc.co.uk/2/hi/technology/8120324.stm</a> |title=BBC: Web slows after Jackson's death |publisher=BBC News |date=2009-06-26 |accessdate=2010-08-23}}{{cite news | url = <a href=\"http://www.nytimes.com/2009/06/27/us/27Jackson.html?_r=1amppagewanted=2ampem\">http://www.nytimes.com/2009/06/27/us/27Jackson.html?_r=1amppagewanted=2ampem</a> | work=The New York Times | first=Jennifer | last=Steinhauer | title=Medication Is a Focus of Jackson Inquiry | date=June 27, 2009| accessdate= 9 March 2010 !--DASHBot--}}{{cite news|last=Cohen |first=Noam |url=<a href=\"http://mediadecoder.blogs.nytimes.com/2009/06/26/with-jackson-entry-wikipedia-may-have-set-a-record/\">http://mediadecoder.blogs.nytimes.com/2009/06/26/with-jackson-entry-wikipedia-may-have-set-a-record/</a> |title='amp#39New York Times'amp#39: With Jackson entry, Wikipedia may have set a record |publisher=Mediadecoder.blogs.nytimes.com |date=2009-06-26 |accessdate=2010-08-23| archiveurl= <a href=\"http://web.archive.org/web/20100717234909/http://mediadecoder.blogs.nytimes.com/2009/06/26/with-jackson-entry-wikipedia-may-have-set-a-record/|\">http://web.archive.org/web/20100717234909/http://mediadecoder.blogs.nytimes.com/2009/06/26/with-jackson-entry-wikipedia-may-have-set-a-record/|</a> archivedate= 17 July 2010 !--DASHBot--| deadurl= no}}",
+      "lang": "en",
+      "category1": "June",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/06/28",
+      "description": " The Supreme Court of Honduras orders the arrest and exile of President Manuel Zelaya, claiming he was violating the nation's constitution by holding a referendum to stay in power.{{cite news|url=<a href=\"http://news.bbc.co.uk/2/hi/americas/8123126.stm\">http://news.bbc.co.uk/2/hi/americas/8123126.stm</a> |title=Honduran leader forced into exile |publisher=BBC News |date=2009-06-28 |accessdate=2010-08-23}} The ouster is condemned by the United Nations, the Organization of American States,ref name=quotWB-2009-06-29quot{{cite web|url=<a href=\"http://www.worldbulletin.net/news_detail.php?id=44074|title=OAS\">http://www.worldbulletin.net/news_detail.php?id=44074|title=OAS</a> condemns Honduras coup, demands return of Zelaya|first=Reuters|date=2009-06-29|publisher=World Bulletin|accessdate=2009-06-29}} and multiple nations around the world.",
+      "lang": "en",
+      "category1": "June",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/06/30",
+      "description": " Yemenia Flight 626 crashes off the coast of Moroni, Comoros, killing all but one of the 153 passengers and crew.{{cite news | url = <a href=\"http://news.bbc.co.uk/2/hi/africa/8127812.stm\">http://news.bbc.co.uk/2/hi/africa/8127812.stm</a> | title = Girl survives Yemen plane crash | publisher = BBC News | accessdate= 1 July 2009| date=1 July 2009}}",
+      "lang": "en",
+      "category1": "June",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/07/04",
+      "description": " The Organization of American States suspends Honduras due to the country's recent political crisis after its refusal to reinstate President Zelaya.{{cite news | url = <a href=\"http://www.reuters.com/article/newsOne/idUSN0211965120090705\">http://www.reuters.com/article/newsOne/idUSN0211965120090705</a> | accessdate = July 7, 2009 | work=Reuters | title=Ousted Honduran leader departs on flight for home | date=July 5, 2009}}<a href=\"http://www.laprensa.hn/var/laprensa_site/storage/original/application/1659977598ae64c30e434a0e40f9329b.pdf\">http://www.laprensa.hn/var/laprensa_site/storage/original/application/1659977598ae64c30e434a0e40f9329b.pdf</a> Laprensa.hn {{es icon}}",
+      "lang": "en",
+      "category1": "July",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/07/05",
+      "description": " Over 150 are killed when a few thousand ethnic Uyghurs target local Han Chinese during major rioting in \u00dcr\u00fcmqi, Xinjiang.",
+      "lang": "en",
+      "category1": "July",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/07/07",
+      "description": " A public memorial service is held for musician Michael Jackson. It is regarded as one of the most prominent funerals of all time.ref name=Allen{{cite news | url = <a href=\"http://www.telegraph.co.uk/culture/music/michael-jackson/5771156/Michael-Jackson-memorial-service-the-biggest-celebrity-send-off-of-all-time.html\">http://www.telegraph.co.uk/culture/music/michael-jackson/5771156/Michael-Jackson-memorial-service-the-biggest-celebrity-send-off-of-all-time.html</a> | location=London | work=The Daily Telegraph | first=Nick | last=Allen | title=Michael Jackson memorial service: the biggest celebrity send-off of all time | date=July 7, 2009| accessdate= 9 March 2010 !--DASHBot--}}ref name=ScottScott, Jeffry. <a href=\"http://www.accessatlanta.com/services/content/entertainment/stories/2009/07/08/jackson_funeral_ratings.html?cxtype=rssampcxsvc=7ampcxcat=4\">http://www.accessatlanta.com/services/content/entertainment/stories/2009/07/08/jackson_funeral_ratings.html?cxtype=rssampcxsvc=7ampcxcat=4</a> quotJackson memorial second most-watched in TV historyquot. ''The Atlanta Journal-Constitution'', 8 July 2009.ref name=Hinckley{{cite news | url = <a href=\"http://www.nydailynews.com/entertainment/michael_jackson/2009/07/08/2009-07-08_michael_jacksons_memorial_2nd_mostwatched_funeral_ever_after_princess_di_say_nie.html\">http://www.nydailynews.com/entertainment/michael_jackson/2009/07/08/2009-07-08_michael_jacksons_memorial_2nd_mostwatched_funeral_ever_after_princess_di_say_nie.html</a> | location=New York | work=Daily News | first1=Daivd | last1=Hinckley | first2=Richard | last2=Huff | title=Michael Jackson's memorial 2nd most-watched funeral ever, after Princess Di, say Nielsen ratings | date=July 8, 2009| accessdate= 9 March 2010 !--DASHBot--}}",
+      "lang": "en",
+      "category1": "July",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/07/15",
+      "description": " Caspian Airlines Flight 7908 crashes near Qazvin, Iran, killing all 168 on board.",
+      "lang": "en",
+      "category1": "July",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/07/16",
+      "description": " Iceland's national parliament, the Althingi, votes to pursue joining the EU.ref name=HelgasonHelgason, Gudjon and Meera Selva. <a href=\"http://news.yahoo.com/s/ap/20090716/ap_on_re_eu/eu_iceland_eu\">http://news.yahoo.com/s/ap/20090716/ap_on_re_eu/eu_iceland_eu</a> quotIceland's parliament votes to join EUquot. ''Yahoo! News'', 16 July 2009.",
+      "lang": "en",
+      "category1": "July",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/07/22",
+      "description": " The longest total solar eclipse of the 21st century, lasting up to 6 minutes and 38.8 seconds, occurs over parts of Asia and the Pacific Ocean.",
+      "lang": "en",
+      "category1": "July",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/08/03",
+      "description": " Bolivia becomes the first South American country to declare the right of indigenous people to govern themselves.{{cite web | url = <a href=\"http://www.la-razon.com/versiones/20090803_006808/nota_249_855052.htm\">http://www.la-razon.com/versiones/20090803_006808/nota_249_855052.htm</a> | title = Evo inicia la implementaci\u00f3n de la autonom\u00eda ind\u00edgena con fiesta   | publisher = La Raz\u00f3n | accessdate= September 1, 2009| date= August 3, 2009|archiveurl=<a href=\"http://www.webcitation.org/5jZkD0Osr|archivedate=2009-09-05|deadurl=no}}\">http://www.webcitation.org/5jZkD0Osr|archivedate=2009-09-05|deadurl=no}}</a> {{sp icon|archiveurl=<a href=\"http://www.webcitation.org/5jZkD0Osr|archivedate=2009-09-05|deadurl=no}}\">http://www.webcitation.org/5jZkD0Osr|archivedate=2009-09-05|deadurl=no}}</a>",
+      "lang": "en",
+      "category1": "August",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/08/04",
+      "description": " North Korean leader Kim Jong-il pardons two American journalists, who had been arrested and imprisoned for illegal entry earlier in the year, after former U.S. President Bill Clinton meets with Kim in North Korea.{{cite news | url = <a href=\"http://www.reuters.com/article/politicsNews/idUSN0418415720090804\">http://www.reuters.com/article/politicsNews/idUSN0418415720090804</a> | title = Clinton leaves North Korea with pardoned journalists | publisher = Reuters | accessdate= August 5, 2009| date= August 4, 2009 | first=Steve | last=Gorman}}",
+      "lang": "en",
+      "category1": "August",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/08/07",
+      "description": " Typhoon Morakot hits Taiwan, killing 500 and stranding more than 1,000 via the worst flooding on the island in half a century.{{cite news|title=Taiwan president under fire for go it alone handling of typhoon accepts US aid|publisher=Telegraph|date=August 16, 2009|url=<a href=\"http://www.telegraph.co.uk/news/worldnews/asia/taiwan/6038112/Taiwan-president-under-fire-for-go-it-alone-handling-of-typhoon-accepts-US-aid.html|accessdate=August\">http://www.telegraph.co.uk/news/worldnews/asia/taiwan/6038112/Taiwan-president-under-fire-for-go-it-alone-handling-of-typhoon-accepts-US-aid.html|accessdate=August</a> 16, 2009 | location=London | first=Peter | last=Foster}}",
+      "lang": "en",
+      "category1": "August",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/08/20",
+      "description": " Abdelbaset al-Megrahi, imprisoned for the 1988 bombing of Pan Am Flight 103, is released by the Scottish government on compassionate grounds as he has terminal prostate cancer. He returns to his native Libya.{{cite web|url=<a href=\"http://www.ktla.com/news/nationworld/sns-ap-af-libya-double-celebration,0,3923469.story\">http://www.ktla.com/news/nationworld/sns-ap-af-libya-double-celebration,0,3923469.story</a> |title=Lockerbie bomber's possible release offers new undercurrent to Libya's revolution celebration |publisher=KTLA |date= |accessdate=2009-08-21}} {{Dead link|date=September 2010|bot=H3llBot}}",
+      "lang": "en",
+      "category1": "August",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/09/25",
+      "description": " At the G-20 Pittsburgh summit, world leaders announce that the G-20 will assume greater leverage over the world economy, replacing the role of the G-8, in an effort to prevent another financial crisis like that in 2008.{{cite news|url=<a href=\"http://news.bbc.co.uk/2/hi/business/8274046.stm\">http://news.bbc.co.uk/2/hi/business/8274046.stm</a> |title=BBC News |publisher=BBC News |date=2009-09-26 |accessdate=2010-08-23}}",
+      "lang": "en",
+      "category1": "September",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/09/26",
+      "description": " Typhoon Ketsana begins to cause record amounts of rainfall in Manila, Philippines, leading to the declaration of a quotstate of calamityquot in 25 provinces.{{cite web|url=<a href=\"http://www.mb.com.ph/articles/222277/ondoys-flood-worst-history-pagasa\">http://www.mb.com.ph/articles/222277/ondoys-flood-worst-history-pagasa</a> |title=MB.com |publisher=MB.com |date=1967-06-07 |accessdate=2010-08-23}}",
+      "lang": "en",
+      "category1": "September",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/09/28",
+      "description": " At least 157 demonstrators are killed in a clash with the Guinean military.",
+      "lang": "en",
+      "category1": "September",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/09/29",
+      "description": " An 8.3-magnitude earthquake triggers a tsunami near the Samoan Islands. Many communities and harbors in Samoa and American Samoa are destroyed, and at least 189 are killed.",
+      "lang": "en",
+      "category1": "September",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/09/30",
+      "description": " A 7.6-magnitude earthquake strikes just off the coast of Sumatra, killing around 1,000 in Indonesia.{{cite news|url=<a href=\"http://news.bbc.co.uk/1/hi/world/asia-pacific/8282670.stm\">http://news.bbc.co.uk/1/hi/world/asia-pacific/8282670.stm</a> |title=BBC News |publisher=BBC News |date=2009-09-30 |accessdate=2010-08-23}}",
+      "lang": "en",
+      "category1": "September",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/10/01",
+      "description": " Paleontologists announce the discovery of an ''Ardipithecus ramidus'' fossil skeleton, deeming it the oldest remains of a human ancestor yet found.{{cite journal|last=Hanson|first=Brooks|date=2009-10-02|title=Light on the Origin of Man|url=<a href=\"http://www.sciencemag.org/content/326/5949/60.1.full|journal=journal=Science</a> (journal)|Science|volume=326|issue=5949|pages=60\u201361|doi=10.1126/science.326.5949.60-a|accessdate=2011-11-02}}",
+      "lang": "en",
+      "category1": "October",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/10/01",
+      "description": "The International Olympic Committee awards the 2016 Summer Olympics to Rio de Janeiro.",
+      "lang": "en",
+      "category1": "October",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/10/01",
+      "description": "Ireland holds a second referendum on the EU's Lisbon Treaty. The amendment is approved by the Irish electorate,ampref name=RTE_20091003_Yesamp{{cite web|url=<a href=\"http://www.rte.ie/news/2009/1003/eulisbon1.html|title=67%\">http://www.rte.ie/news/2009/1003/eulisbon1.html|title=67%</a> vote Yes to Lisbon Treaty|work=RT\u00c9 News|date=3 October 2009|accessdate=3 October 2009| archiveurl= <a href=\"http://web.archive.org/web/20091005155154/http://www.rte.ie/news/2009/1003/eulisbon1.html|\">http://web.archive.org/web/20091005155154/http://www.rte.ie/news/2009/1003/eulisbon1.html|</a> archivedate= 5 October 2009 amp!--DASHBot--amp| deadurl= no}}ampampampref name=ref.ieamp{{cite web|url=<a href=\"http://www.referendum.ie/referendum/current/index.asp?ballotid=79|title=Results\">http://www.referendum.ie/referendum/current/index.asp?ballotid=79|title=Results</a> received at the Central Count Centre for the Referendum on Treaty of Lisbon 2009|date=3 October 2009|accessdate=3 October 2009| archiveurl= <a href=\"http://web.archive.org/web/20091004235315/http://www.referendum.ie/referendum/current/index.asp?ballotid=79|\">http://web.archive.org/web/20091004235315/http://www.referendum.ie/referendum/current/index.asp?ballotid=79|</a> archivedate= 4 October 2009 amp!--DASHBot--amp| deadurl= no}} {{Dead link|date=September 2010|bot=H3llBot}}ampampampamp{{cite news|url=<a href=\"http://www.time.com/time/world/article/0,8599,1927731,00.html|work=TIME|title=\">http://www.time.com/time/world/article/0,8599,1927731,00.html|work=TIME|title=</a> Irish Ayes on Lisbon Treaty Have Europe Smiling|date=4 October 2009|accessdate=4 October 2009| archiveurl= <a href=\"http://web.archive.org/web/20091005191607/http://www.time.com/time/world/article/0,8599,1927731,00.html|\">http://web.archive.org/web/20091005191607/http://www.time.com/time/world/article/0,8599,1927731,00.html|</a> archivedate= 5 October 2009 amp!--DASHBot--amp| deadurl= no}}ampampampamp{{cite news|url=<a href=\"http://www.rte.ie/news/2009/0708/eulisbon.html|title=Lisbon\">http://www.rte.ie/news/2009/0708/eulisbon.html|title=Lisbon</a> II referendum set for 2 October|work=RT\u00c9 News|date=8 July 2009|accessdate=8 July 2009}}ampampampamp{{cite news|url=<a href=\"http://news.bbc.co.uk/2/hi/europe/8140269.stm|title=Irish\">http://news.bbc.co.uk/2/hi/europe/8140269.stm|title=Irish</a> treaty vote set for October|work=BBC News|date=8 July 2009|accessdate=8 July 2009}}ampamp having been rejected in the Lisbon I referendum held in June 2008.",
+      "lang": "en",
+      "category1": "October",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/10/20",
+      "description": " European astronomers discover 32 exoplanets.{{cite web|url=<a href=\"http://uk.news.yahoo.com/22/20091019/tsc-oukoe-uk-space-planets-1df2b7e.html|title=European\">http://uk.news.yahoo.com/22/20091019/tsc-oukoe-uk-space-planets-1df2b7e.html|title=European</a> scientists find trawl of 32 new planets|publisher=Reuters|accessdate=2009-10-20|date=2009-10-19|coauthors=Maggie Fox and Jackie Frank| archiveurl= <a href=\"http://web.archive.org/web/20091022120543/http://uk.news.yahoo.com/22/20091019/tsc-oukoe-uk-space-planets-1df2b7e.html|\">http://web.archive.org/web/20091022120543/http://uk.news.yahoo.com/22/20091019/tsc-oukoe-uk-space-planets-1df2b7e.html|</a> archivedate= 22 October 2009 !--DASHBot--| deadurl= no}} {{Dead link|date=September 2010|bot=H3llBot}}",
+      "lang": "en",
+      "category1": "October",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/10/20",
+      "description": "The Czech Republic becomes the final member-state of the European Union to sign the Treaty of Lisbon, thereby permitting that document's initiation into European law.ampamp{{cite news|url=<a href=\"http://www.cnn.com/2009/WORLD/europe/11/03/czech.eu.lisbon.treaty/index.html\">http://www.cnn.com/2009/WORLD/europe/11/03/czech.eu.lisbon.treaty/index.html</a> |title=CCN.com |publisher=Cnn.com |date=2009-11-03 |accessdate=2010-08-23}}ampamp",
+      "lang": "en",
+      "category1": "November",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/10/20",
+      "description": "The Prime Minister of Belgium, Herman Van Rompuy, is designated the first permanent President of the European Council,ampamp{{cite web|url=<a href=\"http://news.sky.com/skynews/Home/World-News/Tony-Blair-Has-Dropped-Out-Of-The-Race-To-Be-EU-President-As-Herman-Van-Rompuy-Gets-The-Nod/Article/200911315457404?lpos=World_News_Carousel_Region_0ampamplid=ARTICLE_15457404_Tony_Blair_Has_Dropped_Out_Of_The_Race_To_Be_EU_President_As_Herman_Van_Rompuy_Gets_The_Nod|title=Tony\">http://news.sky.com/skynews/Home/World-News/Tony-Blair-Has-Dropped-Out-Of-The-Race-To-Be-EU-President-As-Herman-Van-Rompuy-Gets-The-Nod/Article/200911315457404?lpos=World_News_Carousel_Region_0ampamplid=ARTICLE_15457404_Tony_Blair_Has_Dropped_Out_Of_The_Race_To_Be_EU_President_As_Herman_Van_Rompuy_Gets_The_Nod|title=Tony</a> Blair Has Dropped Out Of The Race To Be EU President As Herman Van Rompuy Gets The Nod - World News - Sky News|accessdate=2009-11-20| archiveurl= <a href=\"http://web.archive.org/web/20091122075535/http://news.sky.com/skynews/Home/World-News/Tony-Blair-Has-Dropped-Out-Of-The-Race-To-Be-EU-President-As-Herman-Van-Rompuy-Gets-The-Nod/Article/200911315457404?lpos=World_News_Carousel_Region_0ampamplid=ARTICLE_15457404_Tony_Blair_Has_Dropped_Out_Of_The_Race_To_Be_EU_President_As_Herman_Van_Rompuy_Gets_The_Nod|\">http://web.archive.org/web/20091122075535/http://news.sky.com/skynews/Home/World-News/Tony-Blair-Has-Dropped-Out-Of-The-Race-To-Be-EU-President-As-Herman-Van-Rompuy-Gets-The-Nod/Article/200911315457404?lpos=World_News_Carousel_Region_0ampamplid=ARTICLE_15457404_Tony_Blair_Has_Dropped_Out_Of_The_Race_To_Be_EU_President_As_Herman_Van_Rompuy_Gets_The_Nod|</a> archivedate= 22 November 2009 amp!--DASHBot--amp| deadurl= no}}ampamp a position he takes up on 1 December 2009.ampref name=ampquotconsilium.europa.euampquotamp{{cite web|url=<a href=\"http://www.consilium.europa.eu/showFocus.aspx?id=1ampampfocusId=416ampamplang=en\">http://www.consilium.europa.eu/showFocus.aspx?id=1ampampfocusId=416ampamplang=en</a> |title=Europa.eu |publisher=Consilium.europa.eu |date= |accessdate=2010-08-23}}ampampampamp{{cite web|url=<a href=\"http://www.se2009.eu/en/meetings_news/2009/11/12/webcast_one_week_to_go_until_crucial_summit|title=Webcast:\">http://www.se2009.eu/en/meetings_news/2009/11/12/webcast_one_week_to_go_until_crucial_summit|title=Webcast:</a> One week to go until crucial summit ampampndash Swedish Presidency of the European Union|accessdate=2009-11-20|date=2009-11-20| archiveurl= <a href=\"http://web.archive.org/web/20091115130855/http://www.se2009.eu/en/meetings_news/2009/11/12/webcast_one_week_to_go_until_crucial_summit|\">http://web.archive.org/web/20091115130855/http://www.se2009.eu/en/meetings_news/2009/11/12/webcast_one_week_to_go_until_crucial_summit|</a> archivedate= 15 November 2009 amp!--DASHBot--amp| deadurl= yes}}ampampampampThe Treaty of Lisbon entered into force on 1 December 2009 the six-month rotating presidency of the European Council ceased to exist (as the provision for its existence has been erased from the Treaties in force), and the new office of President of the European Council came into being. The appointment of Herman van Rompuy as President of the European Council became effective on the date of the entry into force of the Treaty of Lisbon. Also, article 6 of the Protocol ''on transitional provisions'' annexed to the Treaty of Lisbon provided that on the date of the entry into force of the Treaty, the terms of office of the High Representative for the common foreign and security policy and of the Deputy Secretary General of the Council ceased, with the Council electing a Secretary General. <a href=\"http://register.consilium.europa.eu/pdf/en/08/st06/st06655.en08.pdf\">http://register.consilium.europa.eu/pdf/en/08/st06/st06655.en08.pdf</a> register.consilium.europa.euampamp",
+      "lang": "en",
+      "category1": "November",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/11/13",
+      "description": " Having analyzed the data from the LCROSS lunar impact, NASA announces that it has found a quotsignificantquot quantity of water in the Moon's Cabeus crater.{{cite press release|url=<a href=\"http://www.nasa.gov/home/hqnews/2009/nov/HQ_09-265_LCROSS_Confirms_Water.html|title=NASA\">http://www.nasa.gov/home/hqnews/2009/nov/HQ_09-265_LCROSS_Confirms_Water.html|title=NASA</a>'s LCROSS Impacts Confirm Water in Lunar Crater|publisher=NASA|date=2009-11-13|accessdate=2009-11-21|quote=Preliminary data from NASA's Lunar Crater Observation and Sensing Satellite, or LCROSS, indicates the mission successfully uncovered water in a permanently shadowed lunar crater.|archiveurl=<a href=\"http://www.webcitation.org/query?url=http%3A%2F%2Fwww.nasa.gov%2Fhome%2Fhqnews%2F2009%2Fnov%2FHQ_09-265_LCROSS_Confirms_Water.htmlampdate=2009-11-21|archivedate=2009-11-21}}{{cite\">http://www.webcitation.org/query?url=http%3A%2F%2Fwww.nasa.gov%2Fhome%2Fhqnews%2F2009%2Fnov%2FHQ_09-265_LCROSS_Confirms_Water.htmlampdate=2009-11-21|archivedate=2009-11-21}}{{cite</a> news|url=<a href=\"http://www.cnn.com/2009/TECH/space/11/13/water.moon.nasa/index.html|publisher=CNN|title=NASA\">http://www.cnn.com/2009/TECH/space/11/13/water.moon.nasa/index.html|publisher=CNN|title=NASA</a> finds 'significant' water on moon|date=2009-11-13|accessdate=2009-11-21| archiveurl= <a href=\"http://web.archive.org/web/20091116064753/http://www.cnn.com/2009/TECH/space/11/13/water.moon.nasa/index.html?|\">http://web.archive.org/web/20091116064753/http://www.cnn.com/2009/TECH/space/11/13/water.moon.nasa/index.html?|</a> archivedate= 16 November 2009 !--DASHBot--| deadurl= no}}",
+      "lang": "en",
+      "category1": "November",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/11/20",
+      "description": " CERN restarts the Large Hadron Collider particle accelerator in Geneva, Switzerland they had shut it down on September 19, 2008.{{cite news|url=<a href=\"http://www.nytimes.com/2009/11/21/science/21collider.html|title=Proton\">http://www.nytimes.com/2009/11/21/science/21collider.html|title=Proton</a> Beams Are on Track at Collider|date=2009-11-20|accessdate=2009-11-21|publisher=The New York Times|author=Overbye, Dennis| archiveurl= <a href=\"http://web.archive.org/web/20091124042238/http://www.nytimes.com/2009/11/21/science/21collider.html|\">http://web.archive.org/web/20091124042238/http://www.nytimes.com/2009/11/21/science/21collider.html|</a> archivedate= 24 November 2009 !--DASHBot--| deadurl= no}}{{cite news|url=<a href=\"http://news.bbc.co.uk/1/hi/7626256.stm|title=Hadron\">http://news.bbc.co.uk/1/hi/7626256.stm|title=Hadron</a> Collider forced to halt|date=2008-09-19|accessdate=2009-11-21|publisher=BBC News Online}}",
+      "lang": "en",
+      "category1": "November",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/11/23",
+      "description": " In the Philippines, at least 58 are abducted and killed in an election-related massacre in the province of Maguindanao. This appears to be the deadliest attack on journalists in recent history.ref name=pdi{{cite news|first=Alcuin|last=Papa|title=Maguindanao massacre worst-ever for journalists |url=<a href=\"http://politics.inquirer.net/view.php?db=1amparticle=20091126-238554\">http://politics.inquirer.net/view.php?db=1amparticle=20091126-238554</a> |work=Philippine Daily Inquirer|publisher=|date=2009-11-26 |accessdate=2009-11-26}} {{Dead link|date=September 2010|bot=H3llBot}}",
+      "lang": "en",
+      "category1": "November",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/11/27",
+      "description": " Dubai requests a debt deferment following its massive renovation and development projects, as well as the late 2000s economic crisis. The announcement causes global stock markets to drop.{{cite news|url=<a href=\"http://www.chicagotribune.com/business/chi-tc-biz-dubai-1127-1128-nov28,0,190827.story\">http://www.chicagotribune.com/business/chi-tc-biz-dubai-1127-1128-nov28,0,190827.story</a> |title=ChicagoTribune.com |publisher=ChicagoTribune.com |date= |accessdate=2010-08-23}}",
+      "lang": "en",
+      "category1": "November",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/12/01",
+      "description": " The Treaty of Lisbon comes into force.{{cite news|url=<a href=\"http://news.bbc.co.uk/2/hi/europe/8340664.stm\">http://news.bbc.co.uk/2/hi/europe/8340664.stm</a> |title=BBC News |publisher=BBC News |date=2009-11-03 |accessdate=2010-08-23}}",
+      "lang": "en",
+      "category1": "December",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/12/07",
+      "description": " December 18 ampndash The UNFCCC's United Nations Climate Change Conference 2009 conference is held in Copenhagen, Denmark.{{cite web|url=<a href=\"http://www.cop15.dk/en\">http://www.cop15.dk/en</a> |title=COP15, United Nations Climate Change Conference, Copenhagen 2009. Dates put back 1 week due to previous clash with Muslim period of Ramadan |publisher=Cop15.dk |date= |accessdate=2010-08-23}}",
+      "lang": "en",
+      "category1": "December",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2009/12/16",
+      "description": " Astronomers discover GJ1214b, the first-known exoplanet on which water could exist.{{cite news|url=<a href=\"http://www.telegraph.co.uk/science/space/6826763/Waterworld-planet-six-times-the-size-of-Earth-discovered.html\">http://www.telegraph.co.uk/science/space/6826763/Waterworld-planet-six-times-the-size-of-Earth-discovered.html</a> |title=Waterworld planet six times the size of Earth discovered |publisher=Telegraph.co.uk |date=2009-12-17 |accessdate=2010-08-23 | location=London| archiveurl= <a href=\"http://web.archive.org/web/20100804171505/http://www.telegraph.co.uk/science/space/6826763/Waterworld-planet-six-times-the-size-of-Earth-discovered.html|\">http://web.archive.org/web/20100804171505/http://www.telegraph.co.uk/science/space/6826763/Waterworld-planet-six-times-the-size-of-Earth-discovered.html|</a> archivedate= 4 August 2010 !--DASHBot--| deadurl= no}}",
+      "lang": "en",
+      "category1": "December",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/01/03",
+      "description": " The United States and the United Kingdom close their embassies in Yemen due to the ongoing security threat by Al Qaeda.",
+      "lang": "en",
+      "category1": "January",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/01/04",
+      "description": " The tallest man-made structure to date, the Burj Khalifa in Dubai, United Arab Emirates, is officially opened.ref name=quotUSAtodayquot{{cite news|url=<a href=\"http://content.usatoday.com/communities/ondeadline/post/2010/01/dubai-opens-world-tallest-building/1|title=Dubai\">http://content.usatoday.com/communities/ondeadline/post/2010/01/dubai-opens-world-tallest-building/1|title=Dubai</a> opens world's tallest building|date=January 2, 2010|work=USA Today|accessdate=4 January 2010|location=Dubai|first=Douglas|last=Stanglin}}ref name=quotopeningquot{{cite news|url=<a href=\"http://gulfnews.com/business/property/uae/official-opening-of-iconic-burj-dubai-announced-1.523471|title=Official\">http://gulfnews.com/business/property/uae/official-opening-of-iconic-burj-dubai-announced-1.523471|title=Official</a> Opening of Iconic Burj Dubai Announced|work=Gulfnews|date=4 November 2009|accessdate=4 November 2009| archiveurl= <a href=\"http://web.archive.org/web/20091106052129/http://gulfnews.com/business/property/uae/official-opening-of-iconic-burj-dubai-announced-1.523471|\">http://web.archive.org/web/20091106052129/http://gulfnews.com/business/property/uae/official-opening-of-iconic-burj-dubai-announced-1.523471|</a> archivedate= 6 November 2009 !--DASHBot--| deadurl= no}}ref name=quotnews.bbc.co.ukquot{{cite news|url=<a href=\"http://news.bbc.co.uk/2/hi/business/8439618.stm|title=World\">http://news.bbc.co.uk/2/hi/business/8439618.stm|title=World</a>'s tallest building opens in Dubai|date=2010-01-04|work=BBC News|accessdate=2010-01-04| archiveurl= <a href=\"http://web.archive.org/web/20100105054239/http://news.bbc.co.uk/2/hi/business/8439618.stm|\">http://web.archive.org/web/20100105054239/http://news.bbc.co.uk/2/hi/business/8439618.stm|</a> archivedate= 5 January 2010 !--DASHBot--| deadurl= no}}",
+      "lang": "en",
+      "category1": "January",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/01/08",
+      "description": " The Togo national football team is involved in an attack in Angola, and as a result withdraws from the Africa Cup of Nations.{{cite news |url=<a href=\"http://news.bbc.co.uk/sport2/hi/football/africa/8449611.stm\">http://news.bbc.co.uk/sport2/hi/football/africa/8449611.stm</a> |title=Togo withdraw from Africa Cup of Nations |publisher=BBC Sport |date=2010-01-09 |accessdate=2009-01-09}}",
+      "lang": "en",
+      "category1": "January",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/01/12",
+      "description": " A 7.0-magnitude earthquake occurs in Haiti, devastating the nation's capital, Port-au-Prince. With a confirmed death toll over 230,000ref name=quotMiamiHerald13quot{{cite news|url=<a href=\"http://www.miamiherald.com/582/story/1422279.html|title=Haiti\">http://www.miamiherald.com/582/story/1422279.html|title=Haiti</a> president describes `unimaginable' catastrophe thousands feared dead|date=13 January 2010|publisher=Miami Herald|accessdate=13 January 2010| archiveurl= <a href=\"http://web.archive.org/web/20100218061630/http://www.miamiherald.com/582/story/1422279.html|\">http://web.archive.org/web/20100218061630/http://www.miamiherald.com/582/story/1422279.html|</a> archivedate= 18 February 2010 !--DASHBot--| deadurl= no}}ref name=quotCNN13quot{{cite news|url=<a href=\"http://edition.cnn.com/2010/WORLD/americas/01/13/haiti.earthquake/index.html|title=Hundreds\">http://edition.cnn.com/2010/WORLD/americas/01/13/haiti.earthquake/index.html|title=Hundreds</a> of thousands may have died in Haiti quake, PM says|date=13 January 2010|publisher=CNN|accessdate=13 January 2010| archiveurl= <a href=\"http://web.archive.org/web/20100114024958/http://edition.cnn.com/2010/WORLD/americas/01/13/haiti.earthquake/index.html|\">http://web.archive.org/web/20100114024958/http://edition.cnn.com/2010/WORLD/americas/01/13/haiti.earthquake/index.html|</a> archivedate= 14 January 2010 !--DASHBot--| deadurl= no}}{{cite web|url=<a href=\"http://news.yahoo.com/s/ap/20100113/ap_on_re_la_am_ca/cb_haiti_earthquake\">http://news.yahoo.com/s/ap/20100113/ap_on_re_la_am_ca/cb_haiti_earthquake</a> |title=Thousands feared dead in Haiti quake many trapped - Yahoo! News |publisher=News.yahoo.com |date= |accessdate=2010-01-13| archiveurl= <a href=\"http://web.archive.org/web/20100114182637/http://news.yahoo.com/s/ap/20100113/ap_on_re_la_am_ca/cb_haiti_earthquake|\">http://web.archive.org/web/20100114182637/http://news.yahoo.com/s/ap/20100113/ap_on_re_la_am_ca/cb_haiti_earthquake|</a> archivedate= 14 January 2010 !--DASHBot--| deadurl= no}} {{Dead link|date=September 2010|bot=H3llBot}} it is one of the deadliest on record.",
+      "lang": "en",
+      "category1": "January",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/01/15",
+      "description": " The longest annular solar eclipse of the 3rd millennium occurs.",
+      "lang": "en",
+      "category1": "January",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/01/25",
+      "description": " Ethiopian Airlines Flight 409 crashes into the Mediterranean Sea shortly after take-off from Beirut Rafic Hariri International Airport, killing all 90 people on board.",
+      "lang": "en",
+      "category1": "January",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/02/03",
+      "description": " The sculpture ''L'Homme qui marche I'' by Alberto Giacometti sells in London for \u00a365 million (US$103.7 million), setting a new world record for a work of art sold at auction.{{cite news|url=<a href=\"http://www.huffingtonpost.com/2010/02/03/giacometti-sculpture-lhom_n_448243.html|title=Giacometti\">http://www.huffingtonpost.com/2010/02/03/giacometti-sculpture-lhom_n_448243.html|title=Giacometti</a> Sculpture 'L'Homme qui marche I' Fetches $104.3ampnbspMillion|work=The Huffington Post|accessdate=3 February 2010|first=Lila|last=Shapiro|date=February 3, 2010| archiveurl= <a href=\"http://web.archive.org/web/20100206211452/http://www.huffingtonpost.com/2010/02/03/giacometti-sculpture-lhom_n_448243.html|\">http://web.archive.org/web/20100206211452/http://www.huffingtonpost.com/2010/02/03/giacometti-sculpture-lhom_n_448243.html|</a> archivedate= 6 February 2010 !--DASHBot--| deadurl= no}}{{cite news|url=<a href=\"http://www.artinfo.com/news/story/33818/giacometti-sculpture-becomes-most-expensive-work-ever-to-sell-at-auction-updated/|title=Giacometti\">http://www.artinfo.com/news/story/33818/giacometti-sculpture-becomes-most-expensive-work-ever-to-sell-at-auction-updated/|title=Giacometti</a> Sculpture Becomes Most Expensive Work Ever to Sell at Auction|work=artinfo.com|accessdate=5 February 2010| archiveurl= <a href=\"http://web.archive.org/web/20100207090622/http://www.artinfo.com/news/story/33818/giacometti-sculpture-becomes-most-expensive-work-ever-to-sell-at-auction-updated/|\">http://web.archive.org/web/20100207090622/http://www.artinfo.com/news/story/33818/giacometti-sculpture-becomes-most-expensive-work-ever-to-sell-at-auction-updated/|</a> archivedate= 7 February 2010 !--DASHBot--| deadurl= no}}{{cite news|url=<a href=\"http://www.guardian.co.uk/artanddesign/2010/feb/03/giacometti-statue-breaks-auction-record|title=Alberto\">http://www.guardian.co.uk/artanddesign/2010/feb/03/giacometti-statue-breaks-auction-record|title=Alberto</a> Giacometti statue breaks auction record with \u00a365m sale|work=Mark Brown/Guardian|accessdate=5 February 2010 | location=London | date=February 3, 2010| archiveurl= <a href=\"http://web.archive.org/web/20100206052059/http://www.guardian.co.uk/artanddesign/2010/feb/03/giacometti-statue-breaks-auction-record|\">http://web.archive.org/web/20100206052059/http://www.guardian.co.uk/artanddesign/2010/feb/03/giacometti-statue-breaks-auction-record|</a> archivedate= 6 February 2010 !--DASHBot--| deadurl= no}}",
+      "lang": "en",
+      "category1": "February",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/02/12",
+      "description": " February 28 ampndash The 2010 Winter Olympics are held in Vancouver and Whistler, Canada.",
+      "lang": "en",
+      "category1": "February",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/02/18",
+      "description": " The President of Niger, Tandja Mamadou, is overthrown after a group of soldiers storms the presidential palaceref name=Todd{{cite web|first=Todd|last=Pitman|url=<a href=\"http://www.google.com/hostednews/ap/article/ALeqM5gDZF3n7657_r2rMh4ywl_o-MjNQwD9DUOD600|title=Armed\">http://www.google.com/hostednews/ap/article/ALeqM5gDZF3n7657_r2rMh4ywl_o-MjNQwD9DUOD600|title=Armed</a> soldiers storm Niger presidential palace|publisher=Associated Press|date=2010-02-18| accessdate= 17 April 2011 !--DASHBot--}} and form a ruling junta, the Supreme Council for the Restoration of Democracy headed by ''chef d'escadron'' Salou Djibo.ref name=Ousts{{cite news|url=<a href=\"http://news.bbc.co.uk/2/hi/africa/8523196.stm|title=Military\">http://news.bbc.co.uk/2/hi/africa/8523196.stm|title=Military</a> coup ousts Niger president|work=BBC News|date=2010-02-18|accessdate=2010-02-18| archiveurl= <a href=\"http://web.archive.org/web/20100219053310/http://news.bbc.co.uk/2/hi/africa/8523196.stm|\">http://web.archive.org/web/20100219053310/http://news.bbc.co.uk/2/hi/africa/8523196.stm|</a> archivedate= 19 February 2010 !--DASHBot--| deadurl= no}}",
+      "lang": "en",
+      "category1": "February",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/02/27",
+      "description": " An 8.8-magnitude earthquake occurs in Chile, triggering a tsunami over the Pacific and killing at least 525.ref name=quotmuertosquot<a href=\"http://www.interior.gob.cl/filesapp/listado_fallecidos_desaparecidos_27Feb.pdf\">http://www.interior.gob.cl/filesapp/listado_fallecidos_desaparecidos_27Feb.pdf</a> Subsecretar\u00eda del Interior de Chile (January 31 2011). \u00abInforme final de fallecidos y desaparecidos por comuna\u00bb The earthquake is one of the largest in recorded history.",
+      "lang": "en",
+      "category1": "February",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/03/16",
+      "description": " The Kasubi Tombs, Uganda's only cultural World Heritage Site, are destroyed by fire.<a href=\"http://www.allvoices.com/s/event-5422309/aHR0cDovL3d3dy5uZXd2aXNpb24uY28udWcv\">http://www.allvoices.com/s/event-5422309/aHR0cDovL3d3dy5uZXd2aXNpb24uY28udWcv</a> Allvoices.com",
+      "lang": "en",
+      "category1": "March",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/03/26",
+      "description": " The ''ROKS Cheonan'', a South Korean Navy ship carrying 104 personnel, sinks off the country's west coast, killing 46. In May, an independent investigation blames North Korea, which denies the allegations.ref name=quotdailynk1quot{{cite web|url=<a href=\"http://www.dailynk.com/english/read.php?cataId=nk00100ampnum=6392\">http://www.dailynk.com/english/read.php?cataId=nk00100ampnum=6392</a> |title=Results Confirm North Korea Sank Cheonan |publisher=Daily NK |date= |accessdate=May 20, 2010| archiveurl= <a href=\"http://web.archive.org/web/20100522235650/http://www.dailynk.com/english/read.php?cataId=nk00100ampnum=6392|\">http://web.archive.org/web/20100522235650/http://www.dailynk.com/english/read.php?cataId=nk00100ampnum=6392|</a> archivedate= 22 May 2010 !--DASHBot--| deadurl= no}}{{cite news|url=<a href=\"http://www.timesonline.co.uk/tol/news/world/asia/article7131533.ece\">http://www.timesonline.co.uk/tol/news/world/asia/article7131533.ece</a> |title=\u2018All out war\u2019 threatened over North Korea attack on warship Cheonan |publisher=Times Online |date= May 20, 2010|accessdate=2010-05-25 | location=London | first=Anne | last=Barrowclough}}",
+      "lang": "en",
+      "category1": "March",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/04/07",
+      "description": " Kyrgyz President Kurmanbek Bakiyev flees Bishkek amid fierce rioting, sparking a sociopolitical crisis. Former foreign minister Roza Otunbayeva is placed at the head of an interim government as the opposition seizes control.{{cite news | url = <a href=\"http://www.cbc.ca/world/story/2010/04/07/kyrgyzstan-riot.html\">http://www.cbc.ca/world/story/2010/04/07/kyrgyzstan-riot.html</a> | work=CBC News | title=Tumult in Kyrgyzstan as opposition claims power | date=April 7, 2010| accessdate= 17 April 2011 !--DASHBot--| archiveurl= <a href=\"http://web.archive.org/web/20110511111728/http://www.cbc.ca/world/story/2010/04/07/kyrgyzstan-riot.html|\">http://web.archive.org/web/20110511111728/http://www.cbc.ca/world/story/2010/04/07/kyrgyzstan-riot.html|</a> archivedate= 11 May 2011| deadurl= no}}",
+      "lang": "en",
+      "category1": "April",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/04/10",
+      "description": " The President of Poland, Lech Kaczy\u0144ski, is among 96 killed when their airplane crashes in western Russia.{{cite news | url = <a href=\"http://www.guardian.co.uk/world/2010/apr/10/poland-president-lech-kaczynski-killed\">http://www.guardian.co.uk/world/2010/apr/10/poland-president-lech-kaczynski-killed</a> | location=London | work=The Guardian | first=Luke | last=Harding | title=Polish president Lech Kaczynski killed in plane crash | date=April 10, 2010| accessdate= 17 April 2011 !--DASHBot--| archiveurl= <a href=\"http://web.archive.org/web/20110419214318/http://www.guardian.co.uk/world/2010/apr/10/poland-president-lech-kaczynski-killed|\">http://web.archive.org/web/20110419214318/http://www.guardian.co.uk/world/2010/apr/10/poland-president-lech-kaczynski-killed|</a> archivedate= 19 April 2011| deadurl= no}}<a href=\"http://news.sky.com/skynews/Home/World-News/Polish-President-Lech-Kaczynski-Killed-When-Plane-Crashed-On-Approach-To-Smolensk-Airport-In-Russia/Article/201004215598482?lpos=World_News_Carousel_Region_0amplid=ARTICLE_15598482\">http://news.sky.com/skynews/Home/World-News/Polish-President-Lech-Kaczynski-Killed-When-Plane-Crashed-On-Approach-To-Smolensk-Airport-In-Russia/Article/201004215598482?lpos=World_News_Carousel_Region_0amplid=ARTICLE_15598482</a> Sky News: Polish President Lech Kaczynski Killed When Plane Crashed On Approach To Smolensk Airport In Russia",
+      "lang": "en",
+      "category1": "April",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/04/13",
+      "description": " A 6.9-magnitude earthquake occurs in Qinghai, China, killing at least 2,000 and injuring more than 10,000.{{cite news | url = <a href=\"http://news.bbc.co.uk/2/hi/asia-pacific/8631354.stm\">http://news.bbc.co.uk/2/hi/asia-pacific/8631354.stm</a> | work=BBC News | title=China remembers earthquake dead | date=April 21, 2010| accessdate= 17 April 2011 !--DASHBot--| archiveurl= <a href=\"http://web.archive.org/web/20110511120508/http://news.bbc.co.uk/2/hi/asia-pacific/8631354.stm|\">http://web.archive.org/web/20110511120508/http://news.bbc.co.uk/2/hi/asia-pacific/8631354.stm|</a> archivedate= 11 May 2011| deadurl= no}}",
+      "lang": "en",
+      "category1": "April",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/04/14",
+      "description": " Volcanic ash from one of several eruptions beneath Eyjafjallaj\u00f6kull, an ice cap in Iceland, begins to disrupt air traffic across northern and western Europe.ref name=quotNASInfoquot{{cite web|url=<a href=\"http://www.norwegian.com/en/landingssider/cancellations-due-to-volcanic-ash-in-the-air/|title=Cancellations\">http://www.norwegian.com/en/landingssider/cancellations-due-to-volcanic-ash-in-the-air/|title=Cancellations</a> due to volcanic ash in the air|date=2010-04-15|publisher=Norwegian Air Shuttle|accessdate=2010-04-15| archiveurl= <a href=\"http://web.archive.org/web/20100418203624/http://www.norwegian.com/en/landingssider/cancellations-due-to-volcanic-ash-in-the-air/|\">http://web.archive.org/web/20100418203624/http://www.norwegian.com/en/landingssider/cancellations-due-to-volcanic-ash-in-the-air/|</a> archivedate= 18 April 2010 !--DASHBot--| deadurl= no}} {{Dead link|date=September 2010|bot=H3llBot}}{{cite news|url=<a href=\"http://www.sfgate.com/cgi-bin/article.cgi?f=/g/a/2010/04/15/bloomberg1376-L0WS531A74E9-1.DTL|title=Iceland\">http://www.sfgate.com/cgi-bin/article.cgi?f=/g/a/2010/04/15/bloomberg1376-L0WS531A74E9-1.DTL|title=Iceland</a> Volcano Spewing Ash Chokes Europe Air Travel|date=2010-04-15|publisher=San Francisco Chronicle|accessdate=2010-04-15|deadurl=yes}} {{Dead link|date=November 2010|bot=H3llBot}}ref name=quotBBC8622438quot{{cite news|url=<a href=\"http://news.bbc.co.uk/1/hi/uk/8622438.stm|title=Live:\">http://news.bbc.co.uk/1/hi/uk/8622438.stm|title=Live:</a> Volcanic cloud over Europe|publisher=BBC News|accessdate=2010-04-15 | date=April 15, 2010| archiveurl= <a href=\"http://web.archive.org/web/20100418204044/http://news.bbc.co.uk/1/hi/uk/8622438.stm|\">http://web.archive.org/web/20100418204044/http://news.bbc.co.uk/1/hi/uk/8622438.stm|</a> archivedate= 18 April 2010 !--DASHBot--| deadurl= no}}",
+      "lang": "en",
+      "category1": "April",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/04/20",
+      "description": " The Deepwater Horizon oil platform explodes in the Gulf of Mexico, killing eleven workers. The resulting Horizon oil spill, one of the largest in history, spreads for several months, damaging the waters and the United States coastline, and prompting international debate and doubt about the practice and procedures of offshore drilling.{{cite news| url=<a href=\"http://www.cnn.com/2010/US/04/21/oil.rig.explosion/index.html\">http://www.cnn.com/2010/US/04/21/oil.rig.explosion/index.html</a> | work=CNN | title=At least 11 missing after blast on oil rig in Gulf | date=April 22, 2010| accessdate= 17 April 2011 !--DASHBot--| archiveurl= <a href=\"http://web.archive.org/web/20110427214529/http://www.cnn.com/2010/US/04/21/oil.rig.explosion/index.html|\">http://web.archive.org/web/20110427214529/http://www.cnn.com/2010/US/04/21/oil.rig.explosion/index.html|</a> archivedate= 27 April 2011| deadurl= no}}ref name=quotWardellquot{{cite web|last=Wardell|first=J.|year=2010|url=<a href=\"http://www.msnbc.msn.com/id/37815518/|title=Nations\">http://www.msnbc.msn.com/id/37815518/|title=Nations</a> rethink offshore drilling|work=msnbc.com|accessdate=2010-09-06}}",
+      "lang": "en",
+      "category1": "April",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/04/27",
+      "description": " Standard amp Poor's downgrades Greece's sovereign credit rating to junk four days after the activation of a \u20ac45-billion EU\u2013IMF bailout, triggering the decline of stock markets worldwide and of the euro's value,ref name=quotBBCquot{{cite news|url=<a href=\"http://news.bbc.co.uk/2/hi/business/8647441.stm\">http://news.bbc.co.uk/2/hi/business/8647441.stm</a> |title=Greek bonds rated 'junk' by Standard amp Poor's  |publisher=BBC News |date= April 27, 2010|accessdate=2010-04-28| archiveurl= <a href=\"http://web.archive.org/web/20100429143628/http://news.bbc.co.uk/2/hi/business/8647441.stm|\">http://web.archive.org/web/20100429143628/http://news.bbc.co.uk/2/hi/business/8647441.stm|</a> archivedate= 29 April 2010 !--DASHBot--| deadurl= no}}ref name=quotBBCquot{{cite news|url=<a href=\"http://news.bbc.co.uk/2/hi/business/8648029.stm\">http://news.bbc.co.uk/2/hi/business/8648029.stm</a> |title=Greece crisis: Euro markets hit again  |publisher=BBC News |date= April 28, 2010|accessdate=2010-04-28| archiveurl= <a href=\"http://web.archive.org/web/20100429031203/http://news.bbc.co.uk/2/hi/business/8648029.stm|\">http://web.archive.org/web/20100429031203/http://news.bbc.co.uk/2/hi/business/8648029.stm|</a> archivedate= 29 April 2010 !--DASHBot--| deadurl= no}}ref name=quotCNNquot{{cite news|url=<a href=\"http://edition.cnn.com/2010/BUSINESS/04/28/greece.euro.markets/index.html?hpt=T1\">http://edition.cnn.com/2010/BUSINESS/04/28/greece.euro.markets/index.html?hpt=T1</a> |title=Greece crisis deepens on global market sell-off  |publisher=CNN |date= April 28, 2010|accessdate=2010-04-28| archiveurl= <a href=\"http://web.archive.org/web/20100501141307/http://edition.cnn.com/2010/BUSINESS/04/28/greece.euro.markets/index.html?hpt=T1|\">http://web.archive.org/web/20100501141307/http://edition.cnn.com/2010/BUSINESS/04/28/greece.euro.markets/index.html?hpt=T1|</a> archivedate= 1 May 2010 !--DASHBot--| deadurl= no}} and furthering a European sovereign debt crisis.",
+      "lang": "en",
+      "category1": "April",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/05/02",
+      "description": " The eurozone and the International Monetary Fund agree to a \u20ac110 billion bailout package for Greece. The package involves sharp Greek austerity measures.{{Cite news|title=Greece Accepts Terms of EU-Led Bailout, \u2018Savage\u2019 Cuts (Update1)|work=Bloomberg.com|url=<a href=\"http://www.bloomberg.com/apps/news?pid=20601087ampsid=a9f8X9yDMcdIamppos=1|accessdate=2010-05-02|first1=Gabi|last1=Thesing|first2=Flavia|last2=Krause-Jackson|date=May\">http://www.bloomberg.com/apps/news?pid=20601087ampsid=a9f8X9yDMcdIamppos=1|accessdate=2010-05-02|first1=Gabi|last1=Thesing|first2=Flavia|last2=Krause-Jackson|date=May</a> 2, 2010}}",
+      "lang": "en",
+      "category1": "May",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/05/04",
+      "description": " ''Nude, Green Leaves and Bust'' by Pablo Picasso sells in New York for US$106.5 million, setting another new world record for a work of art sold at auction.{{cite news|title=Picasso painting fetches record $106m at auction|work=BBC News|date=2010-05-05|url=<a href=\"http://news.bbc.co.uk/1/hi/entertainment/arts_and_culture/8661338.stm|accessdate=2010-05-05|\">http://news.bbc.co.uk/1/hi/entertainment/arts_and_culture/8661338.stm|accessdate=2010-05-05|</a> archiveurl= <a href=\"http://web.archive.org/web/20100507123707/http://news.bbc.co.uk/1/hi/entertainment/arts_and_culture/8661338.stm|\">http://web.archive.org/web/20100507123707/http://news.bbc.co.uk/1/hi/entertainment/arts_and_culture/8661338.stm|</a> archivedate= 7 May 2010 !--DASHBot--| deadurl= no}}{{cite news|last=Crow|first=Kelly|title=Picasso sets auction record Portrait of mistress sells for $106.5 million, providing opening spark to season|work=The Wall Street Journal|date=2010-05-05|page=A3|url=<a href=\"http://online.wsj.com/article/SB10001424052748703866704575224873880379734.html|accessdate=2010-06-11|\">http://online.wsj.com/article/SB10001424052748703866704575224873880379734.html|accessdate=2010-06-11|</a> archiveurl= <a href=\"http://web.archive.org/web/20100508033255/http://online.wsj.com/article/SB10001424052748703866704575224873880379734.html?|\">http://web.archive.org/web/20100508033255/http://online.wsj.com/article/SB10001424052748703866704575224873880379734.html?|</a> archivedate= 8 May 2010 !--DASHBot--| deadurl= no}}{{cite news|last=Cotter|first=Holland|title=Another auction, another trophy|work=The New York Times|date=2010-05-06|page=C1|url=<a href=\"http://www.nytimes.com/2010/05/06/arts/06cotter.html|accessdate=2010-06-11|\">http://www.nytimes.com/2010/05/06/arts/06cotter.html|accessdate=2010-06-11|</a> archiveurl= <a href=\"http://web.archive.org/web/20100511024349/http://www.nytimes.com/2010/05/06/arts/06cotter.html|\">http://web.archive.org/web/20100511024349/http://www.nytimes.com/2010/05/06/arts/06cotter.html|</a> archivedate= 11 May 2010 !--DASHBot--| deadurl= no}}",
+      "lang": "en",
+      "category1": "May",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/05/07",
+      "description": " Scientists conducting the Neanderthal genome project announce that they have sequenced enough of the Neanderthal genome to suggest that Neanderthals and humans may have interbred.ref name=quotPinkowskiquot{{cite journal|last=Pinkowski|first=J.|year=2010|url=<a href=\"http://www.time.com/time/health/article/0,8599,1987568,00.html|title=Scientists\">http://www.time.com/time/health/article/0,8599,1987568,00.html|title=Scientists</a> sequence the Neanderthal genome|journal=Time|accessdate=2010-05-06| archiveurl= <a href=\"http://web.archive.org/web/20100508142534/http://www.time.com/time/health/article/0,8599,1987568,00.html|\">http://web.archive.org/web/20100508142534/http://www.time.com/time/health/article/0,8599,1987568,00.html|</a> archivedate= 8 May 2010 !--DASHBot--| deadurl= no}}ref name=quotGreen_Krausequot{{cite journal|doi=10.1126/science.1188021|last=Green|first=R.E.|coauthors=Krause, J. Briggs, A.W. Maricic, T. Stenzel, U. Kircher, M. ''et al.''|date=2010-05-07|url=<a href=\"http://www.sciencemag.org/cgi/content/full/328/5979/710|title=A\">http://www.sciencemag.org/cgi/content/full/328/5979/710|title=A</a> draft sequence of the Neanderthal genome|journal=Science|volume=328|issue=5979|pages=710\u2013722|accessdate=2010-05-06|pmid=20448178| archiveurl= <a href=\"http://web.archive.org/web/20100509162327/http://www.sciencemag.org/cgi/content/full/328/5979/710|\">http://web.archive.org/web/20100509162327/http://www.sciencemag.org/cgi/content/full/328/5979/710|</a> archivedate= 9 May 2010 !--DASHBot--| deadurl= no|bibcode = 2010Sci...328..710G }}",
+      "lang": "en",
+      "category1": "May",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/05/12",
+      "description": " Afriqiyah Airways Flight 771 crashes at runway at Tripoli International Airport in Libya, killing 103 of the 104 people on board.{{cite news| url=<a href=\"http://news.bbc.co.uk/1/hi/8676898.stm\">http://news.bbc.co.uk/1/hi/8676898.stm</a> | work=BBC News | title=Briton among Libya air crash dead | date=May 13, 2010| accessdate= 17 April 2011 !--DASHBot--| archiveurl= <a href=\"http://web.archive.org/web/20110511120452/http://news.bbc.co.uk/1/hi/8676898.stm|\">http://web.archive.org/web/20110511120452/http://news.bbc.co.uk/1/hi/8676898.stm|</a> archivedate= 11 May 2011| deadurl= no}}",
+      "lang": "en",
+      "category1": "May",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/05/19",
+      "description": " Protests in Bangkok, Thailand, end with a bloody military crackdown, killing 91 and injuring more than 2,100.ref name=quotdeathsquot{{cite news|title=Death toll rises as anti-government protests escalate in Thailand|url=<a href=\"http://www.timesonline.co.uk/tol/news/world/asia/article7126802.ece|publisher=Times\">http://www.timesonline.co.uk/tol/news/world/asia/article7126802.ece|publisher=Times</a> Newspapers Ltd|accessdate=14 May 2010|coauthors=Joanna Sugden and Sian Powell | location=London | date=15 May 2010|first1=Jenny|last1=Booth|first2=Sadie|last2=Gray}}{{cite news| url=<a href=\"http://www.telegraph.co.uk/news/worldnews/asia/thailand/7741635/Bangkok-in-flames-as-protesters-refuse-to-back-down.html\">http://www.telegraph.co.uk/news/worldnews/asia/thailand/7741635/Bangkok-in-flames-as-protesters-refuse-to-back-down.html</a> | location=London | work=The Daily Telegraph | title=Bangkok in flames as protesters refuse to back down | first1=Damien | last1=McElroy | first2=Ian | last2=MacKinnon | date=19 May 2010| accessdate= 17 April 2011 !--DASHBot--| archiveurl= <a href=\"http://web.archive.org/web/20110426200424/http://www.telegraph.co.uk/news/worldnews/asia/thailand/7741635/Bangkok-in-flames-as-protesters-refuse-to-back-down.html|\">http://web.archive.org/web/20110426200424/http://www.telegraph.co.uk/news/worldnews/asia/thailand/7741635/Bangkok-in-flames-as-protesters-refuse-to-back-down.html|</a> archivedate= 26 April 2011| deadurl= no}}",
+      "lang": "en",
+      "category1": "May",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/05/19",
+      "description": "Scientists announce that they have created a functional synthetic genome.ampamp{{cite news|url=<a href=\"http://news.bbc.co.uk/1/hi/sci/tech/8695992.stm\">http://news.bbc.co.uk/1/hi/sci/tech/8695992.stm</a> |title=How scientists made 'artificial life'|accessdate=2010-05-21|work=BBC News|date=2010-05-20| archiveurl= <a href=\"http://web.archive.org/web/20100523015837/http://news.bbc.co.uk/1/hi/sci/tech/8695992.stm?|\">http://web.archive.org/web/20100523015837/http://news.bbc.co.uk/1/hi/sci/tech/8695992.stm?|</a> archivedate= 23 May 2010 amp!--DASHBot--amp| deadurl= no}}ampamp",
+      "lang": "en",
+      "category1": "May",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/05/19",
+      "description": "Five paintings worth \u20ac100 million are stolen from the Mus\u00e9e d'Art Moderne de la Ville de Paris.ampref name=ampquotskyampquotamp{{cite news|last=Hewage|first=Tim|title= Thief Steals Paintings In Paris Art Heist|url=<a href=\"http://news.sky.com/skynews/Home/World-News/Thief-Steals-Paintings-In-Paris-Art-Heist-Valued-at-Five-Million-Euros-From-Modern-Art-Museum/Article/201005315635454?lpos=World_News_First_World_News_Article_Teaser_Region_0ampamplid=ARTICLE_15635454_Thief_Steals_Paintings_In_Paris_Art_Heist_Valued_at_Five_Million_Euros_From_Modern_Art_Museum|accessdate=20\">http://news.sky.com/skynews/Home/World-News/Thief-Steals-Paintings-In-Paris-Art-Heist-Valued-at-Five-Million-Euros-From-Modern-Art-Museum/Article/201005315635454?lpos=World_News_First_World_News_Article_Teaser_Region_0ampamplid=ARTICLE_15635454_Thief_Steals_Paintings_In_Paris_Art_Heist_Valued_at_Five_Million_Euros_From_Modern_Art_Museum|accessdate=20</a> May 2010|newspaper=Sky News|date=20 May 2010}}ampampampref name=ampquotGuardianampquotamp{{cite news|last=Jones|first=Sam|title=Picasso and Matisse masterpieces stolen from Paris museum|url=<a href=\"http://www.guardian.co.uk/artanddesign/2010/may/20/picasso-matisse-stolen-paris-museum|accessdate=20\">http://www.guardian.co.uk/artanddesign/2010/may/20/picasso-matisse-stolen-paris-museum|accessdate=20</a> May 2010|newspaper=The Guardian|date=20 May 2010 | location=London| archiveurl= <a href=\"http://web.archive.org/web/20100523151403/http://www.guardian.co.uk/artanddesign/2010/may/20/picasso-matisse-stolen-paris-museum|\">http://web.archive.org/web/20100523151403/http://www.guardian.co.uk/artanddesign/2010/may/20/picasso-matisse-stolen-paris-museum|</a> archivedate= 23 May 2010 amp!--DASHBot--amp| deadurl= no}}ampamp",
+      "lang": "en",
+      "category1": "May",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/05/22",
+      "description": " Air India Express Flight 812 overshoots the runway at Mangalore International Airport in India, killing 158 and leaving 8 survivors.{{cite web |url=<a href=\"http://hosted.ap.org/dynamic/stories/A/AS_INDIA_PLANE_CRASH?SITE=NYMIDampSECTION=HOMEampTEMPLATE=DEFAULT\">http://hosted.ap.org/dynamic/stories/A/AS_INDIA_PLANE_CRASH?SITE=NYMIDampSECTION=HOMEampTEMPLATE=DEFAULT</a> |title=Plane crashes in India, 158 feared dead, 8 alive |accessdate=2010-05-22 |work=Associated Press |date=2010-05-22}} {{Dead link|date=September 2010|bot=H3llBot}}",
+      "lang": "en",
+      "category1": "May",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/05/31",
+      "description": " Nine activists are killed in a clash with soldiers when Israeli Navy forces raid and capture a flotilla of ships attempting to break the Gaza blockade.ref name=quotedition.cnn.comquot{{cite news|url=<a href=\"http://edition.cnn.com/2010/WORLD/meast/05/31/gaza.protest/index.html?hpt=T1|title=Israeli\">http://edition.cnn.com/2010/WORLD/meast/05/31/gaza.protest/index.html?hpt=T1|title=Israeli</a> assault on Gaza-bound flotilla leaves at least 9 dead|author=CNN Wire Staff|publisher=CNN|date=31 May 2010|accessdate=2 June 2010| archiveurl= <a href=\"http://web.archive.org/web/20100603211209/http://edition.cnn.com/2010/WORLD/meast/05/31/gaza.protest/index.html?hpt=T1|\">http://web.archive.org/web/20100603211209/http://edition.cnn.com/2010/WORLD/meast/05/31/gaza.protest/index.html?hpt=T1|</a> archivedate= 3 June 2010 !--DASHBot--| deadurl= no}}{{cite news|url=<a href=\"http://www.latimes.com/news/nationworld/world/la-fg-israel-flotilla-20100531,0,1839736.story|author=Edmund\">http://www.latimes.com/news/nationworld/world/la-fg-israel-flotilla-20100531,0,1839736.story|author=Edmund</a> Sanders|title=Israel criticized over raid on Gaza flotilla|publisher=Los Angeles Times|date=June 1, 2010|accessdate=June 2, 2010| archiveurl= <a href=\"http://web.archive.org/web/20100602005741/http://www.latimes.com/news/nationworld/world/la-fg-israel-flotilla-20100531,0,1839736.story|\">http://web.archive.org/web/20100602005741/http://www.latimes.com/news/nationworld/world/la-fg-israel-flotilla-20100531,0,1839736.story|</a> archivedate= 2 June 2010 !--DASHBot--| deadurl= no}} {{Dead link|date=September 2010|bot=H3llBot}}",
+      "lang": "en",
+      "category1": "May",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/06/09",
+      "description": " Ethnic riots in Kyrgyzstan between Kyrgyz and Uzbeks results in the deaths of hundreds.{{cite web |url=<a href=\"http://news.yahoo.com/s/ap/as_kyrgyzstan_ylt=Api9XZ8yeOTfejBWw3re1JH9xg8F_ylu=X3oDMTMyaDJuaDlrBGFzc2V0A2FwLzIwMTAwNjE2L2FzX2t5cmd5enN0YW4EY2NvZGUDbW9zdHBvcHVsYXIEY3BvcwMzBHBvcwMzBHNlYwN5bl90b3Bfc3RvcmllcwRzbGsDa3lyZ3l6YXJteXRy\">http://news.yahoo.com/s/ap/as_kyrgyzstan_ylt=Api9XZ8yeOTfejBWw3re1JH9xg8F_ylu=X3oDMTMyaDJuaDlrBGFzc2V0A2FwLzIwMTAwNjE2L2FzX2t5cmd5enN0YW4EY2NvZGUDbW9zdHBvcHVsYXIEY3BvcwMzBHBvcwMzBHNlYwN5bl90b3Bfc3RvcmllcwRzbGsDa3lyZ3l6YXJteXRy</a> |title=Ethnic Uzbeks in squalid camps fear returning home |author=Leonard P. |date=June 19, 2010 |accessdate=June 19, 2010 |publisher=Yahoo! News}} {{Dead link|date=October 2010|bot=H3llBot}}",
+      "lang": "en",
+      "category1": "June",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/06/11",
+      "description": " July 11 ampndash The 2010 FIFA World Cup is held in South Africa, and is won by Spain, with the runner-up being Holland.",
+      "lang": "en",
+      "category1": "June",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/07/08",
+      "description": "  The first 24-hour flight by a solar-powered plane is completed by the Solar Impulse.{{cite news | url = <a href=\"http://www.washingtonpost.com/wp-dyn/content/article/2010/07/08/AR2010070800375.html?hpid=moreheadlines\">http://www.washingtonpost.com/wp-dyn/content/article/2010/07/08/AR2010070800375.html?hpid=moreheadlines</a> | work=The Washington Post| accessdate= 17 April 2011 !--DASHBot--}} {{Dead link|date=October 2010|bot=RjwilmsiBot}}",
+      "lang": "en",
+      "category1": "July",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/07/25",
+      "description": " Wikileaks, an online publisher of anonymous, covert, and classified material, leaks to the public over 90,000 internal reports about the United States-led involvement in the War in Afghanistan from 2004 to 2010.{{cite news|title= Afghan War Diary, 2004-2010|url= <a href=\"http://wikileaks.org/wiki/Afghan_War_Diary,_2004-2010|\">http://wikileaks.org/wiki/Afghan_War_Diary,_2004-2010|</a> accessdate= 17 April 2011 !--DASHBot--| archiveurl= <a href=\"http://web.archive.org/web/20110415203640/http://www.wikileaks.org/wiki/Afghan_War_Diary,_2004-2010|\">http://web.archive.org/web/20110415203640/http://www.wikileaks.org/wiki/Afghan_War_Diary,_2004-2010|</a> archivedate= 15 April 2011| deadurl= no}}",
+      "lang": "en",
+      "category1": "July",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/07/29",
+      "description": " Heavy monsoon rains begin to cause widespread flooding (pictured) in the Khyber-Pakhtunkhwa province of Pakistan. Over 1,600 are killed, and more than one million are displaced by the floods.{{cite news|url=<a href=\"http://www.cnn.com/2010/WORLD/asiapcf/08/04/pakistan.flooding/index.html?iref=allsearch|title=More\">http://www.cnn.com/2010/WORLD/asiapcf/08/04/pakistan.flooding/index.html?iref=allsearch|title=More</a> rain, gushing flood waters threaten Pakistanis|author=CNN Wire Staff|publisher=CNN|date=2010-08-04|accessdate=2010-08-04}}",
+      "lang": "en",
+      "category1": "July",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/08/10",
+      "description": " The World Health Organization declares the H1N1 influenza pandemic over, saying worldwide flu activity has returned to typical seasonal patterns.{{cite  web|url=<a href=\"http://www.cidrap.umn.edu/cidrap/content/influenza/swineflu/news/aug1010who.html|title=CIDRAP\">http://www.cidrap.umn.edu/cidrap/content/influenza/swineflu/news/aug1010who.html|title=CIDRAP</a> News - WHO says H1N1 pandemic is over| accessdate= 17 April 2011 !--DASHBot--| archiveurl= <a href=\"http://web.archive.org/web/20110513055911/http://www.cidrap.umn.edu/cidrap/content/influenza/swineflu/news/aug1010who.html|\">http://web.archive.org/web/20110513055911/http://www.cidrap.umn.edu/cidrap/content/influenza/swineflu/news/aug1010who.html|</a> archivedate= 13 May 2011| deadurl= no}}",
+      "lang": "en",
+      "category1": "August",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/10/10",
+      "description": " The Netherlands Antilles are dissolved, with the islands being split up and given a new constitutional status.ref name=quottimequotOfficielebekendmakingen.nl - <a href=\"https://zoek.officielebekendmakingen.nl/stb-2010-387.html\">https://zoek.officielebekendmakingen.nl/stb-2010-387.html</a> Besluit van 23 september 2010 tot vaststelling van het tijdstip van inwerkingtreding van de artikelen I en II van de Rijkswet wijziging Statuut in verband met de opheffing van de Nederlandse Antillen",
+      "lang": "en",
+      "category1": "October",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/10/13",
+      "description": " Thirty-three miners near Copiap\u00f3, Chile, trapped 700 metres underground in a mining accident in San Jos\u00e9 Mine, are brought back to the surface after surviving for a record 69 days.ref name =quotMSNBCquot{{cite news|url=<a href=\"http://www.msnbc.msn.com/id/39625809/ns/world_news-americas/|title=All\">http://www.msnbc.msn.com/id/39625809/ns/world_news-americas/|title=All</a> 33 Chile miners freed in flawless rescue|date=October 13, 2010|publisher=MSNBC|accessdate=14 October 2010|location=Chile| archiveurl= <a href=\"http://web.archive.org/web/20101013211344/http://www.msnbc.msn.com/id/39625809/ns/world_news-americas/|\">http://web.archive.org/web/20101013211344/http://www.msnbc.msn.com/id/39625809/ns/world_news-americas/|</a> archivedate= 13 October 2010 !--DASHBot--| deadurl= no}}",
+      "lang": "en",
+      "category1": "October",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/10/22",
+      "description": " The International Space Station surpasses the record for the longest continuous human occupation of space, having been continuously inhabited since November 2, 2000 (3641 days).{{cite web|url=<a href=\"http://www.federalspace.ru/main.php?id=2ampnid=10661amplang=en|title=ISS\">http://www.federalspace.ru/main.php?id=2ampnid=10661amplang=en|title=ISS</a> Beats Mir Record|date=October 26, 2010|accessdate=October 31, 2010|publisher=Russian Federal Space Agency}}{{cite web|url=<a href=\"http://timeanddate.com/worldclock/fixedtime.html?day=22ampmonth=10ampyear=2010amphour=11ampmin=13ampsec=0ampp1=1927|title=Time\">http://timeanddate.com/worldclock/fixedtime.html?day=22ampmonth=10ampyear=2010amphour=11ampmin=13ampsec=0ampp1=1927|title=Time</a> is fixed on Friday, 22 October 2010, 11:13 Cheboksary time|accessdate=October 31, 2010|publisher=Timeanddate.com}}",
+      "lang": "en",
+      "category1": "October",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/10/23",
+      "description": " In preparation for the Seoul summit, finance ministers of the G-20 agree to reform the International Monetary Fund and shift 6% of the voting shares to developing nations and countries with emerging markets.ref name=quotG20 summit agrees to reform IMFquot<a href=\"http://www.bbc.co.uk/news/business-11612701\">http://www.bbc.co.uk/news/business-11612701</a> G20 summit agrees to reform IMF BBC.",
+      "lang": "en",
+      "category1": "October",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/10/25",
+      "description": " An earthquake and consequent tsunami off the coast of Sumatra, Indonesia, kills over 400 people and leaves hundreds missing.ref name=quotBBC News Major earthquakequot{{cite news|url=<a href=\"http://www.bbc.co.uk/news/world-europe-11621977|title=Major\">http://www.bbc.co.uk/news/world-europe-11621977|title=Major</a> earthquake strikes off Indonesia|work=BBC News|date=2010-10-25|accessdate=2010-10-26| archiveurl= <a href=\"http://web.archive.org/web/20101026045356/http://www.bbc.co.uk/news/world-europe-11621977|\">http://web.archive.org/web/20101026045356/http://www.bbc.co.uk/news/world-europe-11621977|</a> archivedate= 26 October 2010 !--DASHBot--| deadurl= no}}",
+      "lang": "en",
+      "category1": "October",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/10/26",
+      "description": " ongoing{{as of?|date=May 2012}} ampndash Repeated eruptions of Mount Merapi volcano in Central Java, Indonesia, and accompanying pyroclastic flows of scalding gas, pumice, and volcanic ash descending the erupting volcano kill three hundred people and force hundreds of thousands of residents to evacuate.{{cite news| title=Flights resume to Indonesia as volcano spews ash |url= <a href=\"http://hosted.ap.org/dynamic/stories/A/AS_INDONESIA_VOLCANO?SITE=VASTRampSECTION=HOMEampTEMPLATE=DEFAULT|publisher=Associated\">http://hosted.ap.org/dynamic/stories/A/AS_INDONESIA_VOLCANO?SITE=VASTRampSECTION=HOMEampTEMPLATE=DEFAULT|publisher=Associated</a> Press|last=Riyadi|first=Slamet|date=11 November 2010|accessdate=11 November 2010}}ref name=guardian_toll{{cite news|last=Weaver|first=Matthew|coauthors=Tran, Mark amp agencies|title=Mount Merapi death toll rises|url=<a href=\"http://www.guardian.co.uk/world/2010/nov/05/mount-merapi-death-toll-rises|work=work=The</a> Guardian|date=5 November 2010|accessdate=5 November 2010|location=London| archiveurl= <a href=\"http://web.archive.org/web/20101107043458/http://www.guardian.co.uk/world/2010/nov/05/mount-merapi-death-toll-rises|\">http://web.archive.org/web/20101107043458/http://www.guardian.co.uk/world/2010/nov/05/mount-merapi-death-toll-rises|</a> archivedate= 7 November 2010 !--DASHBot--| deadurl= no}}ref name=bknpb1{{cite news|url=<a href=\"http://bnpb.go.id/irw/berita.asp?id=119|title=(Death\">http://bnpb.go.id/irw/berita.asp?id=119|title=(Death</a> toll as of 15:00hrs 05/112010 stands at 122)-Korban Meninggal Akibat Letusan Merapi Mencapai 122 Orang|publisher=Badan Koordinasi Nasional Penanganan Bencana-Indonesian Disaster Management Office|author=BNPB|language=Indonesian|date=5 November 2010|accessdate=8 November 2010}}",
+      "lang": "en",
+      "category1": "October",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/11/04",
+      "description": " Aero Caribbean Flight 883 crashes in central Cuba, killing all 68 people on board.ref name=NYT_1106{{cite news|url=<a href=\"http://www.nytimes.com/2010/11/06/world/americas/06cuba.html?ref=world|title=Cuban\">http://www.nytimes.com/2010/11/06/world/americas/06cuba.html?ref=world|title=Cuban</a> Plane Crash Kills 68 People|work=The New York Times|accessdate=6 November 2010|first=Elisabeth|last=Malkin|date=November 5, 2010| archiveurl= <a href=\"http://web.archive.org/web/20101112075553/http://www.nytimes.com/2010/11/06/world/americas/06cuba.html?ref=world|\">http://web.archive.org/web/20101112075553/http://www.nytimes.com/2010/11/06/world/americas/06cuba.html?ref=world|</a> archivedate= 12 November 2010 !--DASHBot--| deadurl= no}}",
+      "lang": "en",
+      "category1": "November",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/11/11",
+      "description": " November 12 ampndash The G-20 summit is held in Seoul, South Korea. Korea becomes the first non-G8 nation to host a G-20 leaders summit.{{cite news|last=Oliver|first=Christian|title=Seoul: S Korea looks forward to its own party|work=Financial Times|location=London|date=25 June 2010}}",
+      "lang": "en",
+      "category1": "November",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/11/13",
+      "description": " Burmese opposition politician Aung San Suu Kyi is released from her house arrest.{{cite news|url=<a href=\"http://www.bbc.co.uk/news/world-asia-pacific-11749661|title=Burma\">http://www.bbc.co.uk/news/world-asia-pacific-11749661|title=Burma</a> releases Aung San Suu Kyi|work=BBC News|date=13 November 2010| accessdate= 17 April 2011 !--DASHBot--| archiveurl= <a href=\"http://web.archive.org/web/20110415095738/http://www.bbc.co.uk/news/world-asia-pacific-11749661|\">http://web.archive.org/web/20110415095738/http://www.bbc.co.uk/news/world-asia-pacific-11749661|</a> archivedate= 15 April 2011| deadurl= no}}",
+      "lang": "en",
+      "category1": "November",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/11/17",
+      "description": " Researchers at CERN trap 38 antihydrogen atoms for a sixth of a second, marking the first time in history that humans have trapped antimatter.{{cite news|url=<a href=\"http://www.bbc.co.uk/news/science-environment-11773791|title=Antimatter\">http://www.bbc.co.uk/news/science-environment-11773791|title=Antimatter</a> atom trapped for first time, say scientists|work=BBC News|date=17 November 2010| accessdate= 17 April 2011 !--DASHBot--| archiveurl= <a href=\"http://web.archive.org/web/20110427085806/http://www.bbc.co.uk/news/science-environment-11773791|\">http://web.archive.org/web/20110427085806/http://www.bbc.co.uk/news/science-environment-11773791|</a> archivedate= 27 April 2011| deadurl= no}}",
+      "lang": "en",
+      "category1": "November",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/11/20",
+      "description": " Participants of the 2010 NATO Lisbon summit issued the Lisbon Summit Declaration.",
+      "lang": "en",
+      "category1": "November",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/11/21",
+      "description": " Eurozone countries agree to a rescue package for the Republic of Ireland from the European Financial Stability Facility in response to the country's financial crisis.{{Cite document | title = Ireland confirms EU financial rescue deal | url = <a href=\"http://www.bbc.co.uk/news/business-11807730\">http://www.bbc.co.uk/news/business-11807730</a> | publisher = BBC News | date = 21 November 2010 | postscript =.| accessdate= 17 April 2011 !--DASHBot--| archiveurl= <a href=\"http://web.archive.org/web/20110427090342/http://www.bbc.co.uk/news/business-11807730|\">http://web.archive.org/web/20110427090342/http://www.bbc.co.uk/news/business-11807730|</a> archivedate= 27 April 2011| deadurl= no}}.ref name=quotRTE 21/11quot{{cite news|url=<a href=\"http://www.rte.ie/news/2010/1121/imf2-business.html|title=Plan\">http://www.rte.ie/news/2010/1121/imf2-business.html|title=Plan</a> will have policy conditions - ECB|date=21 November 2010|work=RT\u00c9 News and Current Affairs|publisher=Raidi\u00f3 Teilif\u00eds \u00c9ireann|accessdate=21 November 2010}}{{Cite news | title = Euro zone ministers approve rescue package for Ireland | url = <a href=\"http://www.irishtimes.com/newspaper/breaking/2010/1121/breaking26.html\">http://www.irishtimes.com/newspaper/breaking/2010/1121/breaking26.html</a> | newspaper = Irish Times | date = 21 November 2010 | postscript =.| accessdate= 17 April 2011 !--DASHBot--| archiveurl= <a href=\"http://web.archive.org/web/20110426185120/http://www.irishtimes.com/newspaper/breaking/2010/1121/breaking26.html|\">http://web.archive.org/web/20110426185120/http://www.irishtimes.com/newspaper/breaking/2010/1121/breaking26.html|</a> archivedate= 26 April 2011| deadurl= no}}.",
+      "lang": "en",
+      "category1": "November",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/11/22",
+      "description": " A stampede during Bon Om Thook (Khmer Water Festival) celebrations in Phnom Penh, Cambodia, kills 347.ref name=quotcnn25quot{{cite news|url=<a href=\"http://www.cnn.com/2010/WORLD/asiapcf/11/25/cambodia.festival.deaths/index.html|title=Government\">http://www.cnn.com/2010/WORLD/asiapcf/11/25/cambodia.festival.deaths/index.html|title=Government</a> decreases death toll in Cambodian stampede|publisher=CNN|date=25 November 2010|accessdate=25 November 2010| archiveurl= <a href=\"http://web.archive.org/web/20101127085229/http://www.cnn.com/2010/WORLD/asiapcf/11/25/cambodia.festival.deaths/index.html|\">http://web.archive.org/web/20101127085229/http://www.cnn.com/2010/WORLD/asiapcf/11/25/cambodia.festival.deaths/index.html|</a> archivedate= 27 November 2010 !--DASHBot--| deadurl= no}}",
+      "lang": "en",
+      "category1": "November",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/11/23",
+      "description": " North Korea shells Yeonpyeong Island, prompting a military response by South Korea. The incident caused an escalation of tension on the Korean Peninsula and prompted widespread international condemnation. The United Nations declared it to be one of the most serious incidents since the end of the Korean War.{{cite news|title=Tensions high as North, South Korea trade shelling|url=<a href=\"http://www.dawn.com/2010/11/24/tensions-high-as-north-south-korea-trade-shelling.html|accessdate=24\">http://www.dawn.com/2010/11/24/tensions-high-as-north-south-korea-trade-shelling.html|accessdate=24</a> November 2010|newspaper=Dawn|date=24 November 2010| archiveurl= <a href=\"http://web.archive.org/web/20101125015733/http://www.dawn.com/2010/11/24/tensions-high-as-north-south-korea-trade-shelling.html|\">http://web.archive.org/web/20101125015733/http://www.dawn.com/2010/11/24/tensions-high-as-north-south-korea-trade-shelling.html|</a> archivedate= 25 November 2010 !--DASHBot--| deadurl= no}}{{cite news |url=<a href=\"http://news.chosun.com/site/data/html_dir/2010/11/23/2010112301235.html?Dep1=newsampDep2=topampDep3=top\">http://news.chosun.com/site/data/html_dir/2010/11/23/2010112301235.html?Dep1=newsampDep2=topampDep3=top</a> |first=Dong |last=Kim |title=\u5317 \ud574\uc548\ud3ec \ub3c4\ubc1c \uac10\ud589, \uc5f0\ud3c9\ub3c4\uc5d0 \ud3ec\ud0c4 200\uc5ec\ubc1c \ub5a8\uc5b4\uc838 |language=Korean |work=The Chosun Ilbo |date=2010-11-23 |accessdate=2010-11-23}}{{Cite news |url=<a href=\"http://www.reuters.com/article/idUSTRE6AM0YS20101123?loomia_ow=t0:s0:a49:g43:r1:c0.586538:b39750226:z0\">http://www.reuters.com/article/idUSTRE6AM0YS20101123?loomia_ow=t0:s0:a49:g43:r1:c0.586538:b39750226:z0</a> |title=Two Koreas exchange fire across maritime border |publisher=Reuters |date=2010-11-23 |accessdate=2010-11-23}}",
+      "lang": "en",
+      "category1": "November",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/11/28",
+      "description": " WikiLeaks releases a collection of more than 250,000 American diplomatic cables, including 100,000 marked quotsecretquot or quotconfidentialquot.<a href=\"http://www.nytimes.com/2010/11/29/world/29cables.html\">http://www.nytimes.com/2010/11/29/world/29cables.html</a> Leaked Cables Offer Raw Look at U.S. Diplomacy, New York Times, Nov 28, 2010ref name=manila<a href=\"http://www.abs-cbnnews.com/nation/11/29/10/1796-memos-us-embassy-manila-wikileaks-cablegate\">http://www.abs-cbnnews.com/nation/11/29/10/1796-memos-us-embassy-manila-wikileaks-cablegate</a> 1,796 memos from US embassy in Manila in WikiLeaks 'Cablegate' | ABS-CBN News | Latest Philippine Headlines, Breaking News, Video, Analysis, Features!-- Bot generated title --",
+      "lang": "en",
+      "category1": "November",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/11/29",
+      "description": " The European Union agree to an \u20ac85 billion rescue deal for Ireland from the European Financial Stability Facility, the International Monetary Fund and bilateral loans from the United Kingdom, Denmark and Sweden.ref name=quotrescuedealquot{{cite news|url=<a href=\"http://www.rte.ie/news/2010/1128/economy.html|title=Eurozone\">http://www.rte.ie/news/2010/1128/economy.html|title=Eurozone</a> agrees \u20ac85bn deal for Ireland|date=29 November 2010|work=RT\u00c9 News and Current Affairs|publisher=Raidi\u00f3 Teilif\u00eds \u00c9ireann|accessdate=29 November 2010}}",
+      "lang": "en",
+      "category1": "November",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/11/29",
+      "description": " December 10 ampndash The 2010 United Nations Climate Change Conference is held in Canc\u00fan, Mexico. Also referred to as the 16th Conference of the Parties of the United Nations Framework Convention on Climate Change (COP 16), it served too as the 6th meeting of the Parties to the Kyoto Protocol (CMP 6).<a href=\"http://unfccc.int/files/meetings/cop_15/application/pdf/cop15_dv_auv.pdf\">http://unfccc.int/files/meetings/cop_15/application/pdf/cop15_dv_auv.pdf</a> Dates and venues of future sessions<a href=\"http://www.cop16.mx/\">http://www.cop16.mx/</a> COP 16",
+      "lang": "en",
+      "category1": "November",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2010/12/21",
+      "description": " The first total lunar eclipse to occur on the day of the Northern winter solstice and Southern summer solstice since 1638 takes place.<a href=\"http://science.nasa.gov/science-news/science-at-nasa/2010/17dec_solsticeeclipse/\">http://science.nasa.gov/science-news/science-at-nasa/2010/17dec_solsticeeclipse/</a> NASA Science News: Solstice Lunar Eclipse<a href=\"http://www.cbc.ca/technology/story/2010/12/17/lunar-eclipse-winter-solstice-coincide.html\">http://www.cbc.ca/technology/story/2010/12/17/lunar-eclipse-winter-solstice-coincide.html</a> Lunar eclipse, winter solstice to coincide",
+      "lang": "en",
+      "category1": "December",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2011/01/01",
+      "description": " Estonia officially adopts the euro currency and becomes the seventeenth eurozone country.{{cite web|url=<a href=\"http://www.bbc.co.uk/news/world-europe-12098513\">http://www.bbc.co.uk/news/world-europe-12098513</a> |title=BBC News - Estonia becomes 17th member of the euro zone 31/12/2010 BBC News |publisher=Bbc.co.uk |date=2010-12-31 |accessdate=2012-05-06}}",
+      "lang": "en",
+      "category1": "January",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2011/01/04",
+      "description": " Tunisian street vendor Mohamed Bouazizi dies after setting himself on fire a month earlier, sparking anti-government protests in Tunisia and later other Arab nations. These protests become known collectively as the Arab Spring.{{cite news|url=<a href=\"http://www.bbc.co.uk/news/world-africa-16230190\">http://www.bbc.co.uk/news/world-africa-16230190</a> |author=Gardner, Frank |title=Tunisia one year on: Where the Arab Spring started |date=2011-12-17 |publisher=BBC News |accessdate=2012-01-15}}{{cite news |agency=Associated Press |date=2011-12-17 |url=<a href=\"http://www.cbc.ca/news/world/story/2011/12/17/tunisia-anniversary-arabspring.html\">http://www.cbc.ca/news/world/story/2011/12/17/tunisia-anniversary-arabspring.html</a> |title=Vegetable seller who inspired Arab Spring honoured |publisher=CBC News |accessdate=2012-01-15}}",
+      "lang": "en",
+      "category1": "January",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2011/01/09",
+      "description": "15 ampndash Southern Sudan holds a referendum on independence. The Sudanese electorate votes in favour of independence, paving the way for the creation of the new state in July.{{cite web|url=<a href=\"http://www.almanar.com.lb/newssite/NewsDetails.aspx?id=170242amplanguage=en\">http://www.almanar.com.lb/newssite/NewsDetails.aspx?id=170242amplanguage=en</a> |title=Al-ManarTV:: South Sudan Referendum Wraps up, Khartoum Vows to Recognize Results 15/01/2011 |publisher=Almanar.com.lb |date=2011-01-15 |accessdate=2011-01-31}}{{dead link|date=June 2011}}<a href=\"http://www.telegraph.co.uk/news/worldnews/africaandindianocean/sudan/8246615/Sudan-referendum-whats-being-voted-on-and-what-will-happen.html\">http://www.telegraph.co.uk/news/worldnews/africaandindianocean/sudan/8246615/Sudan-referendum-whats-being-voted-on-and-what-will-happen.html</a> ''Sudan referendum: what's being voted on and what will happen?'' The Telegraph. 8 January 2011",
+      "lang": "en",
+      "category1": "January",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2011/01/11",
+      "description": " Flooding and mudslides in the Brazilian state of Rio de Janeiro kills 903.{{cite news|url=<a href=\"http://www1.folha.uol.com.br/cotidiano/863364-equipe-aeropolicial-improvisa-e-arrisca-para-resgatar-vitimas-das-chuvas-no-rj.shtml\">http://www1.folha.uol.com.br/cotidiano/863364-equipe-aeropolicial-improvisa-e-arrisca-para-resgatar-vitimas-das-chuvas-no-rj.shtml</a> | title=Equipe aeropolicial improvisa e arrisca para resgatar v\u00edtimas das chuvas no RJ | accessdate=20 January 2011 | date=20 January 2011 | publisher=Folha |work=UOL | language = Portuguese}}",
+      "lang": "en",
+      "category1": "January",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2011/01/14",
+      "description": " Arab Spring: The Tunisian government falls after a month of increasingly violent protests President Zine El Abidine Ben Ali flees to Saudi Arabia after 23 years in power.ref name=quotautogenerated1quot{{cite news|author=Wyre Davies |url=<a href=\"http://www.bbc.co.uk/news/world-africa-12195025\">http://www.bbc.co.uk/news/world-africa-12195025</a> |title=BBC News \u2013 Tunisia: President Zine al-Abidine Ali forced out |publisher=BBC News |date=15 December 2010 |accessdate=2011-01-14| archiveurl= <a href=\"http://web.archive.org/web/20110115053136/http://www.bbc.co.uk/news/world-africa-12195025|\">http://web.archive.org/web/20110115053136/http://www.bbc.co.uk/news/world-africa-12195025|</a> archivedate= 15 January 2011 !--DASHBot--| deadurl= no}}{{cite web|url=<a href=\"http://www.indybay.org/newsitems/2011/01/16/18669320.php\">http://www.indybay.org/newsitems/2011/01/16/18669320.php</a> |title=Uprising in Tunisia: People Power topples Ben Ali regime |publisher=Indybay |date=16 January 2011 |accessdate=2011-01-26}}",
+      "lang": "en",
+      "category1": "January",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2011/01/24",
+      "description": " 37 people are killed and more than 180 others wounded in a bombing at Domodedovo International Airport in Moscow, Russia.ref name=quotFerris-Rotmanquot{{cite news |url=<a href=\"http://www.reuters.com/article/idUSTRE70N2TQ20110124\">http://www.reuters.com/article/idUSTRE70N2TQ20110124</a> |title=Suicide bomber kills 31 at Russia's biggest airport |author=Amie Ferris-Rotman |date=24 January 2011 |work=Reuters |accessdate=2011-06-21}}ref name=quot37deathsquot{{ru icon}}{{cite news|url=<a href=\"http://rian.ru/society/20110224/338222803.html|title=\u0427\u0438\u0441\u043b\u043e\">http://rian.ru/society/20110224/338222803.html|title=\u0427\u0438\u0441\u043b\u043e</a> \u0436\u0435\u0440\u0442\u0432 \u0442\u0435\u0440\u0430\u043a\u0442\u0430 \u0432 \u0414\u043e\u043c\u043e\u0434\u0435\u0434\u043e\u0432\u043e \u0432\u043e\u0437\u0440\u043e\u0441\u043b\u043e \u0434\u043e 37|publisher=RIA Novosti|date=24 February 2011|accessdate=24 February 2011}}ref name=quotBBCquot{{cite news|url=<a href=\"http://www.bbc.co.uk/news/world-europe-12268662|title=Moscow\">http://www.bbc.co.uk/news/world-europe-12268662|title=Moscow</a> bombing: Carnage at Russia's Domodedovo airport|publisher=BBC News|author=Steve Rosenberg|date=24 January 2011|accessdate=24 January 2011| archiveurl= <a href=\"http://web.archive.org/web/20110125024514/http://www.bbc.co.uk/news/world-europe-12268662|\">http://web.archive.org/web/20110125024514/http://www.bbc.co.uk/news/world-europe-12268662|</a> archivedate= 25 January 2011 !--DASHBot--| deadurl= no}}",
+      "lang": "en",
+      "category1": "January",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2011/02/11",
+      "description": " Arab Spring: Egyptian President Hosni Mubarak resigns after widespread protests calling for his departure, leaving control of Egypt in the hands of the military until a general election can be held.{{cite news|url=<a href=\"http://english.aljazeera.net/news/middleeast/2011/02/201121125158705862.html\">http://english.aljazeera.net/news/middleeast/2011/02/201121125158705862.html</a> | title=Hosni Mubarak resigns as president | accessdate=11 February 2011 | date=11 February 2011 | publisher=AlJazeera | archiveurl= <a href=\"http://web.archive.org/web/20110211082027/http://english.aljazeera.net/news/middleeast/2011/02/201121125158705862.html|\">http://web.archive.org/web/20110211082027/http://english.aljazeera.net/news/middleeast/2011/02/201121125158705862.html|</a> archivedate= 11 February 2011 !--DASHBot--| deadurl= no}}",
+      "lang": "en",
+      "category1": "February",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2011/02/22",
+      "description": "March 14 ampndash Uncertainty over Libyan oil output causes crude oil prices to rise 20% over a two-week period following the Arab Spring,{{cite news|url=<a href=\"http://online.wsj.com/article/SB10001424052748703610604576158613735835374.html|title=The\">http://online.wsj.com/article/SB10001424052748703610604576158613735835374.html|title=The</a> Stealth Return of $100 Oil|date=February 22, 2011|accessdate=March 12, 2011|newspaper=The Wall Street Journal|first1=Jerry A.|last1=Dicolo|first2=Brian|last2=Baskin| archiveurl= <a href=\"http://web.archive.org/web/20110224063242/http://online.wsj.com/article/SB10001424052748703610604576158613735835374.html|\">http://web.archive.org/web/20110224063242/http://online.wsj.com/article/SB10001424052748703610604576158613735835374.html|</a> archivedate= 24 February 2011 !--DASHBot--| deadurl= no}} causing the 2011 energy crisis.",
+      "lang": "en",
+      "category1": "February",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2011/03/11",
+      "description": " A 9.1-magnituderef name=quotstaradvertiserquot{{cite news|url=<a href=\"http://www.staradvertiser.com/news/breaking/Tsunami_warning_center_raises_magnitude_of_Japan_quake_to_91.html|title=Tsunami\">http://www.staradvertiser.com/news/breaking/Tsunami_warning_center_raises_magnitude_of_Japan_quake_to_91.html|title=Tsunami</a> warning center raises magnitude of Japan quake to 9.1|newspaper=Honolulu Star-Advertiser|date=March 11, 2011|accessdate=March 11, 2011| archiveurl= <a href=\"http://web.archive.org/web/20110316002505/http://www.staradvertiser.com/news/breaking/Tsunami_warning_center_raises_magnitude_of_Japan_quake_to_91.html|\">http://web.archive.org/web/20110316002505/http://www.staradvertiser.com/news/breaking/Tsunami_warning_center_raises_magnitude_of_Japan_quake_to_91.html|</a> archivedate= 16 March 2011 !--DASHBot--| deadurl= no}} earthquake and subsequent tsunami hit the east of Japan, killing 15,840 and leaving another 3,926 missing. Tsunami warnings are issued in 50 countries and territories. Emergencies are declared at four nuclear power plants affected by the quake.{{cite news|title=Japan earthquake live blog: Death toll rises amid widespread destruction| url = <a href=\"http://news.blogs.cnn.com/2011/03/12/japan-earthquake-live-blog-death-toll-rises-amid-widespread-destruction/|\">http://news.blogs.cnn.com/2011/03/12/japan-earthquake-live-blog-death-toll-rises-amid-widespread-destruction/|</a> date=12 March 2011| work =CNN blog |publisher=TimeWarner|accessdate=12 March 2011| archiveurl= <a href=\"http://web.archive.org/web/20110316132608/http://news.blogs.cnn.com/2011/03/12/japan-earthquake-live-blog-death-toll-rises-amid-widespread-destruction/|\">http://web.archive.org/web/20110316132608/http://news.blogs.cnn.com/2011/03/12/japan-earthquake-live-blog-death-toll-rises-amid-widespread-destruction/|</a> archivedate= 16 March 2011 !--DASHBot--| deadurl= no}}",
+      "lang": "en",
+      "category1": "March",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2011/03/15",
+      "description": " Arab Spring: Hamad bin Isa Al Khalifa, King of Bahrain declares a three-month state of emergency as troops from the Gulf Co-operation Council are sent to quell the civil unrest.ref name=quotBBCBahr15Marquot{{cite news | title = Bahrain King Declares State of Emergency after Protests | author= Staff writer | url = <a href=\"http://www.bbc.co.uk/news/world-middle-east-12745608\">http://www.bbc.co.uk/news/world-middle-east-12745608</a> | publisher = BBC News | date=15 March 2011 | accessdate=15 April 2011 | authorlink = Staff writer| archiveurl= <a href=\"http://web.archive.org/web/20110405202821/http://www.bbc.co.uk/news/world-middle-east-12745608|\">http://web.archive.org/web/20110405202821/http://www.bbc.co.uk/news/world-middle-east-12745608|</a> archivedate= 5 April 2011 !--DASHBot--| deadurl= no}}{{cite news | author = Staff writer | title = Two Killed in Bahrain Violence Despite Martial Law | publisher = BBC News | url = <a href=\"http://www.bbc.co.uk/news/world-middle-east-12751464\">http://www.bbc.co.uk/news/world-middle-east-12751464</a> | date=15 March 2011 | accessdate=15 April 2011 | authorlink = Staff writer| archiveurl= <a href=\"http://web.archive.org/web/20110405202839/http://www.bbc.co.uk/news/world-middle-east-12751464|\">http://web.archive.org/web/20110405202839/http://www.bbc.co.uk/news/world-middle-east-12751464|</a> archivedate= 5 April 2011 !--DASHBot--| deadurl= no}}",
+      "lang": "en",
+      "category1": "March",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2011/03/17",
+      "description": " Arab Spring and the Libyan civil war:  The United Nations Security Council votes 10-0 to create a no-fly zone over Libya in response to allegations of government aggression against civilians.{{cite web|url=<a href=\"http://www.libyafeb17.com/\">http://www.libyafeb17.com/</a> |title=libyafeb17.com |publisher=libyafeb17.com |date= |accessdate=2012-05-06}}",
+      "lang": "en",
+      "category1": "March",
+      "granularity": "year"
+    },
+    "event": {
+      "date": "2011/03/19",
+      "description": " Arab Spring and the Libyan civil war: In light of continuing attacks on Libyan rebels by forces in support of leader Muammar Gaddafi,{{cite news|url=<a href=\"http://www.msnbc.msn.com/id/42164455/ns/world_news-mideastn_africa/|title=World\">http://www.msnbc.msn.com/id/42164455/ns/world_news-mideastn_africa/|title=World</a> leaders launch military action in Libya|date=19 March 2011|accessdate=19 March 2011|publisher=MSNBC.com| archiveurl= <a href=\"http://web.archive.org/web/20110501120756/http://www.msnbc.msn.com/id/42164455/ns/world_news-mideastn_africa/|\">http://web.archive.org/web/20110501120756/http://www.msnbc.msn.com/id/42164455/ns/world_news-mideastn_africa/|</a> archivedate= 1 May 2011 !--DASHBot--| deadurl= no}} military intervention authorized under UNSCR 1973 begins as French fighter jets make reconnaissance flights over Libya.{{cite news|url=<a href=\"http://www.nytimes.com/2011/03/20/world/africa/20libya.html|title=France\">http://www.nytimes.com/2011/03/20/world/africa/20libya.html|title=France</a> Sends Military Flights Over Libya|date=19 March 2011|accessdate=19 March 2011|newspaper=The New York Times|first1=David D.|last1=Kirkpatrick|first2=Elisabeth|last2=Bumiller| archiveurl= <a href=\"http://web.archive.org/web/20110331024232/http://www.nytimes.com/2011/03/20/world/africa/20libya.html|\">http://web.archive.org/web/20110331024232/http://www.nytimes.com/2011/03/20/world/africa/20libya.html|</a> archivedate= 31 March 2011 !--DASHBot--| deadurl= no}}",
+      "lang": "en",
+      "category1": "March",
+      "granularity": "year"
+    },
+    "event": {
       "date": "2011/04/11",
       "description": " Former Ivorian President Laurent Gbagbo is arrested in his home in Abidjan by supporters of elected President Alassane Ouattara with support from French forces thereby ending the 2010\u20132011 Ivorian crisis and civil war.{{cite news|url=<a href=\"http://af.reuters.com/article/topNews/idAFJOE73A0MX20110411\">http://af.reuters.com/article/topNews/idAFJOE73A0MX20110411</a> |title=Gbagbo, wife in Ouattara's custody in I.Coast: UN amp#124 Top News amp#124 Reuters |publisher=Af.reuters.com |date=11 April 2011|accessdate=11 April 2011| archiveurl= <a href=\"http://web.archive.org/web/20110426045833/http://af.reuters.com/article/topNews/idAFJOE73A0MX20110411|\">http://web.archive.org/web/20110426045833/http://af.reuters.com/article/topNews/idAFJOE73A0MX20110411|</a> archivedate= 26 April 2011 !--DASHBot--| deadurl= no}}",
       "lang": "en",
