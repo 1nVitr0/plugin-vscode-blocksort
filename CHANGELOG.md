@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v1.2.0...v1.2.1) (2022-12-01)
+
+
+### Bug Fixes
+
+* fix comment detection for python and ruby ([d770838](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/d770838b7e5aedf2bd091d5b8d7c4bce68ac0d6a))
+
 # [1.2.0](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v1.1.1...v1.2.0) (2022-08-29)
 
 
