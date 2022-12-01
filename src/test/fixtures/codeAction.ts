@@ -21,6 +21,12 @@ export const codeActionKindTest: ListOfKindTest<BlockSortCodeActionKind>[] = [
     targetKinds: [BlockSortCodeActionKind.QuickFix],
     strict: true,
   },
+  {
+    file: "marker.python.fixture",
+    ranges: [new Range(0, 0, 8, 0)],
+    targetKinds: [BlockSortCodeActionKind.SourceFixAll],
+    strict: true,
+  },
 ];
 
 export const codeActionResultTest: CompareTest[] = [
@@ -39,6 +45,12 @@ export const codeActionResultTest: CompareTest[] = [
     compareFile: "marker.typescript.expect",
     ranges: [new Range(49, 0, 75, 7)],
   },
+
+  {
+    file: "marker.python.fixture",
+    compareFile: "marker.python.expect",
+    ranges: [new Range(0, 0, 8, 0)],
+  },
 ];
 
 export const codeLensTest: RangeTest[] = [
@@ -46,6 +58,11 @@ export const codeLensTest: RangeTest[] = [
     file: "marker.typescript.fixture",
     ranges: [new Range(0, 0, 79, 0)],
     targetRanges: [new Range(4, 0, 12, 7), new Range(19, 0, 27, 7), new Range(34, 0, 42, 7), new Range(49, 0, 75, 7)],
+  },
+  {
+    file: "marker.python.fixture",
+    ranges: [new Range(0, 0, 8, 0)],
+    targetRanges: [new Range(2, 0, 6, 4)],
   },
 ];
 
@@ -59,5 +76,11 @@ export const fixAllTest: CompareTest[] = [
     file: "blocksort.typescript.fixture",
     compareFile: "blocksort.typescript.expect",
     ranges: [new Range(0, 0, 25, 0)],
+  },
+
+  {
+    file: "marker.python.fixture",
+    compareFile: "marker.python.expect",
+    ranges: [new Range(0, 0, 8, 0)],
   },
 ];
