@@ -16,6 +16,12 @@ export interface FoldingLevel {
 }
 export type Folding<T extends string = string> = { [marker in keyof FoldingMarkerList<T>]: FoldingLevel };
 
+export interface TextBlockDefinition {
+  start: string;
+  end?: string;
+  escape?: string;
+}
+
 export interface LineMeta {
   line: number;
   indent: number;
@@ -23,7 +29,6 @@ export interface LineMeta {
   folding: Folding;
   ignoreIndent: boolean;
   hasContent: boolean;
-  multiBlockHeader: boolean;
   complete: boolean;
   incomplete: boolean;
   text?: string | null;
@@ -225,12 +230,23 @@ export default class StringProcessingProvider {
       .replace(/^\^/, `^(?:${comment}|\\s*)*`);
   }
 
-  private stripBlocksFromText(text: string, blocks: { start: string; end: string }[]): string {
+  private stripBlocksFromText(text: string, blocks: TextBlockDefinition[]): string {
     let result = text;
-    for (const { start, end } of blocks) {
-      const regex = new RegExp(`${start}(?:${end === "\\r?\\n" ? "." : "[\\s\\S]"}*?)(?:${end}|$)`);
-      let strip: string;
-      while ((strip = result.replace(regex, "")) !== result) result = strip;
+    for (const { start, end, escape = "\\\\" } of blocks) {
+      const startRegex = new RegExp(`(?:${escape})?${start}`, "g");
+      const endRegex = new RegExp(end ? `(?:${escape})?${end}` : "\\r?\\n", "g");
+      let startMatch: RegExpExecArray | null;
+      let endMatch: RegExpExecArray | null;
+      let innerResult = result;
+
+      while ((startMatch = startRegex.exec(result))) {
+        endMatch = endRegex.exec(result);
+        while (endMatch && endMatch.index < startMatch.index) endMatch = endRegex.exec(result);
+        if (endMatch)
+          innerResult = result.slice(0, startMatch.index) + result.slice(endMatch.index + endMatch[0].length);
+      }
+
+      result = innerResult;
     }
 
     return result;

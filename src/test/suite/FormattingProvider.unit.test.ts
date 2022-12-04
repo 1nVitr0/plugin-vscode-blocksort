@@ -8,12 +8,14 @@ import { formattingOptionsTest } from "../fixtures/formatting";
 suite("Unit Suite for BlockSortFormattingProvider", async () => {
   window.showInformationMessage("Start tests for BlockSortFormattingProvider.");
 
+  const blockSortFormattingProvider = new BlockSortFormattingProvider();
+
   formattingOptionsTest.forEach(({ file, ranges, targetOptions, only, skip }, i) => {
     ranges.forEach((range, j) => {
       const descriptor = file.match(/\.(.*)\.fixture/);
       const [_, lang] = descriptor || ["", "generic", "generic"];
       const testFunc = only ? test.only : skip ? test.skip : test;
-      testFunc(`Formatting test(lang ${lang}) #${i}.${j}`, async () => {
+      testFunc(`Formatting test(lang ${lang}) #${i + 1}.${j}`, async () => {
         const document = await workspace.openTextDocument(join(fixtureDir, file));
         await languages.setTextDocumentLanguage(document, lang);
 

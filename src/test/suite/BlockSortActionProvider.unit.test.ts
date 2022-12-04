@@ -12,44 +12,24 @@ suite("Unit Suite for BlockSortProvider", async () => {
   const codeActionProvider = new BlockSortActionProvider(formattingProvider);
   const token = new CancellationTokenSource();
 
-  codeActionKindTest.forEach(({ file, ranges, targetKinds, strict, only, skip }, i) => {
+  codeActionKindTest.forEach(({ file, ranges, targetKinds, strict, only, skip, onlyCodeAction }, i) => {
     ranges.forEach((range, j) => {
       const [_, lang] = file.match(/\.(.*)\.fixture/) || ["", "generic"];
       const testFunc = only ? test.only : skip ? test.skip : test;
-      testFunc(`Code Action Kind Tests (lang ${lang}) #${i}.${j}`, async () => {
+      testFunc(`Code Action Kind Tests (lang ${lang}) #${i + 1}.${j}`, async () => {
         const document = await workspace.openTextDocument(join(fixtureDir, file));
         await languages.setTextDocumentLanguage(document, lang);
 
         const codeActions = codeActionProvider.provideCodeActions(
           document,
           range,
-          { diagnostics: [], only: undefined },
-          token.token
-        );
-        const codeActionsFixAll = codeActionProvider.provideCodeActions(
-          document,
-          range,
-          { diagnostics: [], only: CodeActionKind.SourceFixAll },
+          { diagnostics: [], only: onlyCodeAction },
           token.token
         );
 
         const kinds = codeActions.map((action) => action.kind).sort();
         if (strict) assert.deepStrictEqual(kinds, targetKinds.sort(), "code actions do not match strictly");
         else assert.deepStrictEqual([...new Set(kinds)], targetKinds.sort(), "code actions do not match");
-
-        const kindsFixAll = codeActionsFixAll.map((action) => action.kind).sort();
-        const targetKindsFixAll = targetKinds
-          .filter((kind) => kind.value.includes(CodeActionKind.SourceFixAll.value))
-          .sort();
-        if (strict) {
-          assert.deepStrictEqual(kindsFixAll, targetKindsFixAll, "sourceFixAll code actions do not match strictly");
-        } else {
-          assert.deepStrictEqual(
-            [...new Set(kindsFixAll)],
-            targetKindsFixAll,
-            "sourceFixAll code actions do not match"
-          );
-        }
       });
     });
   });
@@ -59,7 +39,7 @@ suite("Unit Suite for BlockSortProvider", async () => {
       const descriptor = file.match(/\.(.*)\.fixture/);
       const [_, lang] = descriptor || ["", "generic", "generic"];
       const testFunc = only ? test.only : skip ? test.skip : test;
-      testFunc(`Code Action Compare test(lang ${lang}) #${i}.${j}`, async () => {
+      testFunc(`Code Action Compare test(lang ${lang}) #${i + 1}.${j}`, async () => {
         const compareDocument = await workspace.openTextDocument(join(fixtureDir, compareFile));
         const document = await workspace.openTextDocument(join(fixtureDir, file));
         await languages.setTextDocumentLanguage(document, lang);
@@ -87,7 +67,7 @@ suite("Unit Suite for BlockSortProvider", async () => {
       const descriptor = file.match(/\.(.*)\.fixture/);
       const [_, lang] = descriptor || ["", "generic", "generic"];
       const testFunc = only ? test.only : skip ? test.skip : test;
-      testFunc(`Code Lens test(lang ${lang}) #${i}`, async () => {
+      testFunc(`Code Lens test(lang ${lang}) #${i + 1}`, async () => {
         const document = await workspace.openTextDocument(join(fixtureDir, file));
         await languages.setTextDocumentLanguage(document, lang);
 
@@ -103,7 +83,7 @@ suite("Unit Suite for BlockSortProvider", async () => {
     const descriptor = file.match(/\.(.*)\.fixture/);
     const [_, lang] = descriptor || ["", "generic", "generic"];
     const testFunc = only ? test.only : skip ? test.skip : test;
-    testFunc(`FixAll Code Action Compare test(lang ${lang}) #${i}`, async () => {
+    testFunc(`FixAll Code Action Compare test(lang ${lang}) #${i + 1}`, async () => {
       const compareDocument = await workspace.openTextDocument(join(fixtureDir, compareFile));
       const document = await workspace.openTextDocument(join(fixtureDir, file));
       await languages.setTextDocumentLanguage(document, lang);

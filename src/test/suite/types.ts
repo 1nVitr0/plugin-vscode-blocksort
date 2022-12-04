@@ -1,4 +1,4 @@
-import { Position, Range } from "vscode";
+import { CodeActionKind, Position, Range } from "vscode";
 import { ExpandSelectionOptions } from "../../types/BlockSortOptions";
 
 export interface BaseTest {
@@ -24,6 +24,7 @@ export interface PositionTest extends BaseTest {
 }
 
 export interface ListOfKindTest<T> extends BaseTest {
+  onlyCodeAction?: CodeActionKind;
   targetKinds: T[];
   strict?: boolean;
 }

@@ -10,7 +10,6 @@ import {
 import { ExpandSelectionOptions } from "../types/BlockSortOptions";
 import ConfigurationProvider from "./ConfigurationProvider";
 import StringProcessingProvider, { Folding, LineMeta } from "./StringProcessingProvider";
-import { expandSelectionFull } from "../commands/expandSelection";
 
 type SortingStrategy = "asc" | "desc" | "ascNatural" | "descNatural";
 interface ExpandDirectionOptions extends ExpandSelectionOptions {
@@ -32,6 +31,17 @@ export default class BlockSortProvider implements Disposable {
     descNatural: (a, b) =>
       BlockSortProvider.sort.desc(BlockSortProvider.padNumbers(a), BlockSortProvider.padNumbers(b)),
   };
+
+  public static subtractRange(range: Range, subtract: Range): Range[] {
+    const ranges: Range[] = [];
+    const intersection = range.intersection(subtract);
+
+    if (intersection === undefined) return [range];
+    if (intersection?.start.isAfter(range.start)) ranges.push(new Range(range.start, intersection.start));
+    if (intersection?.end.isBefore(range.end)) ranges.push(new Range(intersection.end, range.end));
+
+    return ranges;
+  }
 
   protected static padNumbers(line: string) {
     const { omitUuids, padding, sortNegativeValues } = ConfigurationProvider.getNaturalSortOptions();
@@ -59,6 +69,8 @@ export default class BlockSortProvider implements Disposable {
   public constructor(document: TextDocument) {
     this.document = document;
     this.stringProcessor = new StringProcessingProvider(document);
+
+    this.disposables.push(workspace.onDidChangeTextDocument(this.onUpdateDocument, this, this.disposables));
   }
 
   public dispose() {
@@ -319,14 +331,10 @@ export default class BlockSortProvider implements Disposable {
     return this.document.validateRange(new Range(start, 0, end, Infinity));
   }
 
-  public watch(): void {
-    this.disposables.push(workspace.onDidChangeTextDocument(this.computeLineMeta, this, this.disposables));
-  }
-
-  private computeLineMeta(line: number, withText?: boolean, token?: CancellationToken): LineMeta;
-  private computeLineMeta(ranges?: Range[], withText?: boolean, token?: CancellationToken): LineMeta[];
-  private computeLineMeta(e?: TextDocumentChangeEvent, withText?: boolean, token?: CancellationToken): LineMeta[];
-  private computeLineMeta(
+  public computeLineMeta(line: number, withText?: boolean, token?: CancellationToken): LineMeta;
+  public computeLineMeta(ranges?: Range[], withText?: boolean, token?: CancellationToken): LineMeta[];
+  public computeLineMeta(e?: TextDocumentChangeEvent, withText?: boolean, token?: CancellationToken): LineMeta[];
+  public computeLineMeta(
     e?: TextDocumentChangeEvent | Range[] | number,
     withText?: boolean,
     token?: CancellationToken
@@ -334,7 +342,7 @@ export default class BlockSortProvider implements Disposable {
     if (e && typeof e === "object" && "document" in e && e.document !== this.document) return [];
     if (!this.documentLineMeta) this.documentLineMeta = Array(this.document.lineCount).fill(null);
 
-    const tabSize: number = workspace.getConfiguration("editor", this.document).get("tabSize") || 4;
+    const tabSize: number = ConfigurationProvider.getTabSize(this.document);
     const ranges: Range[] = e
       ? typeof e === "number"
         ? [new Range(e, 0, e, Infinity)]
@@ -360,7 +368,6 @@ export default class BlockSortProvider implements Disposable {
           folding: this.stringProcessor.getFolding(line, this.document),
           ignoreIndent: this.stringProcessor.isIndentIgnoreLine(line, this.document),
           hasContent: !!this.stringProcessor.stripComments(line).trim(),
-          multiBlockHeader: this.stringProcessor.isMultiBlockHeader(line),
           complete: this.stringProcessor.isCompleteBlock(line, this.document),
           incomplete: this.stringProcessor.isIncompleteBlock(line),
           text: withText ? line : null,
@@ -370,10 +377,63 @@ export default class BlockSortProvider implements Disposable {
       this.documentLineMeta.splice(start.line, end.line - start.line + 1, ...lineMetas);
       result.push(...lineMetas);
 
-      this.computedRanges.push(ranges[i]);
+      this.addComputedRange(ranges[i]);
     }
 
     return typeof e === "number" ? result[0] : result;
+  }
+
+  private onUpdateDocument(e: TextDocumentChangeEvent): void {
+    if (e.document !== this.document || !this.documentLineMeta) return;
+
+    const edits = [...e.contentChanges].sort((a, b) => b.range.start.line - a.range.start.line);
+
+    for (const edit of edits) {
+      const lineChange = edit.text.split(/\r?\n/).length - (edit.range.end.line - edit.range.start.line);
+
+      for (let i = this.computedRanges.length - 1; i >= 0; i--) {
+        let range = this.computedRanges[i];
+        if (range.start.isAfter(edit.range.end)) {
+          // Adjust all ranges after the edit
+          range = new Range(
+            range.start.with(range.start.line + lineChange),
+            range.end.with(range.end.line + lineChange)
+          );
+          continue;
+        }
+
+        const intersection = range.intersection(edit.range);
+
+        if (!intersection) {
+          // Skip if no intersection with edit range
+          continue;
+        }
+        if (edit.range.contains(range)) {
+          // Remove computed range if it is completely contained in the edit
+          this.computedRanges.splice(i--, 1);
+          continue;
+        }
+
+        if (intersection?.end.isBefore(range.end)) {
+          // Split computed range, if intersection is contained in range
+          const newRange = new Range(
+            intersection.end.with(intersection.end.line + lineChange),
+            range.end.with(range.end.line + lineChange)
+          );
+          this.computedRanges.splice(i + 1, 0, newRange);
+        }
+
+        if (intersection?.start.isAfter(range.start)) {
+          // Adjust computed range, or remove if intersection starts at range start
+          this.computedRanges[i] = new Range(range.start, intersection.start);
+        } else {
+          this.computedRanges.splice(i--, 1);
+        }
+      }
+
+      if (lineChange > 0) this.documentLineMeta.splice(edit.range.end.line + 1, 0, ...Array(lineChange).fill(null));
+      else if (lineChange < 0) this.documentLineMeta.splice(edit.range.start.line, -lineChange);
+    }
   }
 
   private isComputed(line: number): boolean;
@@ -382,6 +442,32 @@ export default class BlockSortProvider implements Disposable {
     const range = typeof rangeOrLine === "number" ? new Range(rangeOrLine, 0, rangeOrLine, Infinity) : rangeOrLine;
 
     return this.computedRanges.some((r) => r.contains(range));
+  }
+
+  private addComputedRange(range: Range) {
+    for (let i = 0; i < this.computedRanges.length; i++) {
+      const r = this.computedRanges[i];
+      if (r.contains(range)) return;
+      if (r.intersection(range)) {
+        const adjacent = i + (r.start.line < range.start.line ? 1 : -1);
+        this.computedRanges[i] = r.union(range);
+        if (
+          adjacent > 0 &&
+          adjacent < this.computedRanges.length &&
+          this.computedRanges[adjacent].intersection(range)
+        ) {
+          this.computedRanges[i] = this.computedRanges[i].union(this.computedRanges[adjacent]);
+          this.computedRanges.splice(adjacent, 1);
+        }
+        return;
+      }
+      if (range.start.line >= r.end.line) {
+        this.computedRanges.splice(i + 1, 0, range);
+        return;
+      }
+    }
+
+    this.computedRanges.push(range);
   }
 
   private sortInnerBlocks(
@@ -464,14 +550,19 @@ export default class BlockSortProvider implements Disposable {
   }
 
   private applySort(blocks: string[], sort: (a: string, b: string) => number = BlockSortProvider.sort.asc) {
-    blocks.sort((a, b) => {
-      const sanitizedA = this.stringProcessor.stripDecorators(this.stringProcessor.stripComments(a)).trim() || a.trim();
-      const sanitizedB = this.stringProcessor.stripDecorators(this.stringProcessor.stripComments(b)).trim() || b.trim();
-      return this.stringProcessor.isForceFirstBlock(sanitizedA) || this.stringProcessor.isForceLastBlock(sanitizedB)
-        ? -1
-        : this.stringProcessor.isForceLastBlock(sanitizedA) || this.stringProcessor.isForceFirstBlock(sanitizedB)
-        ? 1
-        : sort(sanitizedA, sanitizedB);
-    });
+    const precomputed = blocks
+      .map((original, index) => ({
+        index,
+        original,
+        sanitized:
+          this.stringProcessor.stripDecorators(this.stringProcessor.stripComments(original)).trim() || original.trim(),
+        forceFirst: this.stringProcessor.isForceFirstBlock(original),
+        forceLast: this.stringProcessor.isForceLastBlock(original),
+      }))
+      .sort((a, b) =>
+        a.forceFirst || b.forceLast ? -1 : a.forceLast || b.forceFirst ? 1 : sort(a.sanitized, b.sanitized)
+      );
+
+    precomputed.forEach(({ original }, index) => (blocks[index] = original));
   }
 }

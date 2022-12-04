@@ -1,4 +1,11 @@
-import { ConfigurationScope, DocumentSelector, TextDocument, workspace, WorkspaceConfiguration } from "vscode";
+import {
+  ConfigurationScope,
+  DocumentSelector,
+  TextDocument,
+  TextEditorOptions,
+  workspace,
+  WorkspaceConfiguration,
+} from "vscode";
 import { ExpandSelectionOptions } from "../types/BlockSortOptions";
 import { FoldingMarkerDefault, FoldingMarkerList } from "./StringProcessingProvider";
 
@@ -52,6 +59,8 @@ export default class ConfigurationProvider {
   ];
 
   private static configuration: Map<ConfigurationScope | undefined, WorkspaceConfiguration & BlockSortConfiguration> =
+    new Map();
+  private static editorConfiguration: Map<ConfigurationScope | undefined, WorkspaceConfiguration & TextEditorOptions> =
     new Map();
 
   public static getFoldingMarkers(document?: TextDocument): FoldingMarkerList {
@@ -163,6 +172,11 @@ export default class ConfigurationProvider {
     return formatting;
   }
 
+  public static getTabSize(document?: TextDocument): number {
+    const tabSize = ConfigurationProvider.getEditorConfiguration(document).tabSize;
+    return typeof tabSize === "string" ? 4 : tabSize ?? 4;
+  }
+
   public static onConfigurationChanged(): void {
     ConfigurationProvider.configuration.clear();
   }
@@ -176,6 +190,18 @@ export default class ConfigurationProvider {
       ConfigurationProvider.configuration.set(scope, configuration);
 
       return configuration;
+    }
+  }
+
+  private static getEditorConfiguration(scope?: ConfigurationScope): TextEditorOptions & WorkspaceConfiguration {
+    if (ConfigurationProvider.editorConfiguration.has(scope)) {
+      return ConfigurationProvider.editorConfiguration.get(scope) as TextEditorOptions & WorkspaceConfiguration;
+    } else {
+      const editorConfiguration = workspace.getConfiguration("editor", scope) as TextEditorOptions &
+        WorkspaceConfiguration;
+      ConfigurationProvider.editorConfiguration.set(scope, editorConfiguration);
+
+      return editorConfiguration;
     }
   }
 }

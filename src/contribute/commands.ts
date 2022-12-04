@@ -1,4 +1,4 @@
-import { commands } from 'vscode';
+import { commands } from "vscode";
 import { expandSelectionLocally, expandSelectionFull } from "../commands/expandSelection";
 import {
   blockSort,
@@ -7,15 +7,16 @@ import {
   blockSortMultilevelAsc,
   blockSortMultilevelDesc,
 } from "../commands/blockSort";
+import BlockSortFormattingProvider from "../providers/BlockSortFormattingProvider";
 
-export default function contributeCommands() {
+export default function contributeCommands(b: BlockSortFormattingProvider) {
   return [
-    commands.registerTextEditorCommand("blocksort._sortBlocks", blockSort), // private command for direct access to blocksort
-    commands.registerTextEditorCommand("blocksort.sortBlocksAsc", blockSortAsc),
-    commands.registerTextEditorCommand("blocksort.sortBlocksDesc", blockSortDesc),
+    commands.registerTextEditorCommand("blocksort._sortBlocks", blockSort.bind(null, b)), // private command for direct access to blocksort
+    commands.registerTextEditorCommand("blocksort.sortBlocksAsc", blockSortAsc.bind(null, b)),
+    commands.registerTextEditorCommand("blocksort.sortBlocksDesc", blockSortDesc.bind(null, b)),
     commands.registerTextEditorCommand("blocksort.sortBlocksMultilevelAsc", blockSortMultilevelAsc),
     commands.registerTextEditorCommand("blocksort.sortBlocksMultilevelDesc", blockSortMultilevelDesc),
-    commands.registerTextEditorCommand("blocksort.expandSelectionLocally", expandSelectionLocally),
-    commands.registerTextEditorCommand("blocksort.expandSelectionFull", expandSelectionFull),
+    commands.registerTextEditorCommand("blocksort.expandSelectionLocally", expandSelectionLocally.bind(null, b)),
+    commands.registerTextEditorCommand("blocksort.expandSelectionFull", expandSelectionFull.bind(null, b)),
   ];
 }
