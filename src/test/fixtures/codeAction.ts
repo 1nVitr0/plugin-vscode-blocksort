@@ -1,4 +1,4 @@
-import { Range } from "vscode";
+import { CodeActionKind, Range } from "vscode";
 import { BlockSortCodeActionKind } from "../../providers/BlockSortActionProvider";
 import { CompareTest, ListOfKindTest, RangeTest } from "../suite/types";
 
@@ -22,9 +22,16 @@ export const codeActionKindTest: ListOfKindTest<BlockSortCodeActionKind>[] = [
     strict: true,
   },
   {
+    file: "marker.typescript.fixture",
+    ranges: [new Range(49, 0, 75, 7)],
+    targetKinds: [BlockSortCodeActionKind.SourceFixAll],
+    onlyCodeAction: CodeActionKind.SourceFixAll,
+    strict: true,
+  },
+  {
     file: "marker.python.fixture",
     ranges: [new Range(0, 0, 8, 0)],
-    targetKinds: [BlockSortCodeActionKind.SourceFixAll],
+    targetKinds: [BlockSortCodeActionKind.QuickFix],
     strict: true,
   },
 ];
@@ -57,12 +64,12 @@ export const codeLensTest: RangeTest[] = [
   {
     file: "marker.typescript.fixture",
     ranges: [new Range(0, 0, 79, 0)],
-    targetRanges: [new Range(4, 0, 12, 7), new Range(19, 0, 27, 7), new Range(34, 0, 42, 7), new Range(49, 0, 75, 7)],
+    targetRanges: [new Range(4, 6, 4, 6), new Range(19, 6, 19, 6), new Range(34, 6, 34, 6), new Range(49, 6, 49, 6)],
   },
   {
     file: "marker.python.fixture",
     ranges: [new Range(0, 0, 8, 0)],
-    targetRanges: [new Range(2, 0, 6, 4)],
+    targetRanges: [new Range(2, 2, 2, 2)],
   },
 ];
 

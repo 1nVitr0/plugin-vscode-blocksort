@@ -1,4 +1,4 @@
-import { languages } from "vscode";
+import { Disposable, languages } from "vscode";
 import BlockSortActionProvider from "../providers/BlockSortActionProvider";
 import BlockSortFormattingProvider from "../providers/BlockSortFormattingProvider";
 import ConfigurationProvider from "../providers/ConfigurationProvider";
@@ -8,8 +8,7 @@ function getDocumentSelector(selector: DocumentSelector | true): DocumentSelecto
   return selector === true ? "*" : selector;
 }
 
-export default function contributeFormattingActions() {
-  const formattingProvider = new BlockSortFormattingProvider();
+export default function contributeFormattingActions(formattingProvider: BlockSortFormattingProvider) {
   const codeActionsProvider = new BlockSortActionProvider(formattingProvider);
 
   const enableDocumentFormatting = ConfigurationProvider.getenableDocumentFormatting();
@@ -17,7 +16,7 @@ export default function contributeFormattingActions() {
   const enableCodeActions = ConfigurationProvider.getEnableCodeActions();
   const enableCodeLens = ConfigurationProvider.getEnableCodeLens();
 
-  const disposables = [];
+  const disposables: Disposable[] = [];
   if (enableDocumentFormatting) {
     disposables.push(
       languages.registerDocumentFormattingEditProvider(

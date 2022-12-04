@@ -6,22 +6,16 @@ import {
   CodeActionProvider,
   CodeLens,
   CodeLensProvider,
-  Disposable,
   Event,
-  Position,
   ProviderResult,
   Range,
   Selection,
   TextDocument,
-  TextDocumentChangeEvent,
-  TextDocumentContentChangeEvent,
   TextEdit,
   Uri,
-  workspace,
   WorkspaceEdit,
 } from "vscode";
-import BlockSortProvider from "./BlockSortProvider";
-import BlockSortFormattingProvider from "./BlockSortFormattingProvider";
+import BlockSortFormattingProvider, { BlockSortMarker } from "./BlockSortFormattingProvider";
 
 interface CodeActionWithEditBuilder extends CodeAction {
   uri: Uri;
@@ -48,40 +42,46 @@ export class BlockSortCodeActionKind extends CodeActionKind {
 }
 
 export default class BlockSortActionProvider
-  implements CodeLensProvider, CodeActionProvider<CodeActionWithEditBuilder>, Disposable
+  implements CodeLensProvider, CodeActionProvider<CodeActionWithEditBuilder>
 {
   public onDidChangeCodeLenses?: Event<void> | undefined;
 
-  private blockSortMarkers: Map<Uri, Position[]> = new Map();
-  private blockSortProviders: Map<Uri, BlockSortProvider> = new Map();
-  private documentListeners: Map<Uri, Disposable[]> = new Map();
-
-  public constructor(private BlockSortFormattingProvider: BlockSortFormattingProvider) {}
+  public constructor(private blockSortFormattingProvider: BlockSortFormattingProvider) {}
 
   public provideCodeLenses(document: TextDocument, token: CancellationToken): ProviderResult<CodeLens[]> {
-    if (!this.documentListeners.has(document.uri)) this.attachDocument(document, token);
-
     if (token.isCancellationRequested) return [];
 
     const codeLenses: CodeLens[] = [];
-    const markers = this.blockSortMarkers.get(document.uri);
-    if (markers && markers.length > 0) {
-      markers.forEach((position) => {
-        const range = this.getBlockMarkerRange(document, position, token);
-        const options = BlockSortFormattingProvider.getBlockSortMarkerOptions(document, position);
-        if (range) {
-          codeLenses.push(
-            new CodeLens(range, {
-              tooltip: "Apply blocksort action",
-              title: "Sort block",
-              command: "blocksort._sortBlocks",
-              arguments: [range, options.sortFunction, options],
-            })
-          );
-        }
-      });
+    const markers = this.blockSortFormattingProvider.getBlockSortMarkers(document, token);
+
+    for (const marker of markers) {
+      const { position } = marker;
+      if (!position) continue;
+
+      const codeLens = new CodeLens(new Range(position, position));
+      (codeLens as any).document = document;
+      codeLenses.push(codeLens);
     }
+
     return codeLenses;
+  }
+
+  public async resolveCodeLens(codeLens: CodeLens, token: CancellationToken): Promise<CodeLens> {
+    const { document } = codeLens as unknown as CodeLens & { document?: TextDocument };
+    if (!document) return codeLens;
+
+    const { range, options } =
+      this.blockSortFormattingProvider.getBlockSortMarkerAtRange(document, codeLens.range) ?? {};
+
+    if (!range || !options) return codeLens;
+
+    codeLens.command = {
+      tooltip: "Apply blocksort action",
+      title: "Sort block",
+      command: "blocksort._sortBlocks",
+      arguments: [range, options.sortFunction, options],
+    };
+    return codeLens;
   }
 
   public provideCodeActions(
@@ -90,55 +90,40 @@ export default class BlockSortActionProvider
     context: CodeActionContext | undefined,
     token: CancellationToken
   ): CodeActionWithEditBuilder[] {
-    if (!this.documentListeners.has(document.uri)) this.attachDocument(document, token);
-    const markers = this.blockSortMarkers.get(document.uri);
+    const markers = this.blockSortFormattingProvider.getBlockSortMarkers(document, token);
 
     if (!markers) return [];
-    const filteredMarkers: Position[] = [];
+    const filteredMarkers: Required<BlockSortMarker>[] = [];
 
+    let before: Required<BlockSortMarker> | null = null;
     for (const marker of markers) {
-      const markerRange = this.getBlockMarkerRange(document, marker, token);
+      const { position: markerPosition } = marker;
 
-      if (!range || (markerRange && range.contains(markerRange) && !markerRange.isEqual(range))) {
-        filteredMarkers.push(marker);
-      } else if (markerRange?.contains(range)) {
-        if (context?.only?.contains(CodeActionKind.SourceFixAll)) return [];
-        return [
-          {
-            title: "Sort Block",
-            kind: BlockSortCodeActionKind.QuickFix,
-            uri: document.uri,
-            editBuilder: () =>
-              this.BlockSortFormattingProvider.provideBlockMarkerFormattingEdits(document, [marker], [], token),
-          },
-        ];
-      } else if (markerRange?.start.isAfter(range.end)) {
+      if (!markerPosition) continue;
+
+      if (!range || range.contains(markerPosition)) {
+        filteredMarkers.push(marker as Required<BlockSortMarker>);
+      } else if (markerPosition?.isBefore(range.start)) {
+        // Will hold the last marker before the range
+        before = marker as Required<BlockSortMarker>;
+      } else if (markerPosition?.isAfter(range.end)) {
         // Abort if marker is after range
         break;
       }
     }
 
-    if (!filteredMarkers.length) return [];
+    // Calling `marker.range` is expensive, so we only do it if we need to
+    if (before && filteredMarkers.indexOf(before) < 0) {
+      const markerRange = before.range;
+      if (range?.contains(markerRange)) filteredMarkers.push(before);
+    }
 
-    return [
-      {
-        title: "Sort all annotated Blocks",
-        kind: BlockSortCodeActionKind.SourceFixAll,
-        uri: document.uri,
-        editBuilder: () =>
-          filteredMarkers
-            .sort((a, b) => b.character - a.character)
-            .reduce<TextEdit[]>((edits, marker) => {
-              const newEdits = this.BlockSortFormattingProvider.provideBlockMarkerFormattingEdits(
-                document,
-                [marker],
-                edits,
-                token
-              );
-              return [...edits, ...newEdits];
-            }, []),
-      },
-    ];
+    if (context?.only?.contains(CodeActionKind.SourceFixAll) || filteredMarkers.length > 1) {
+      // Fix All code action is usually triggered by saving the document
+      return [this.buildFixAllCodeAction(filteredMarkers, document, range, token)];
+    } else {
+      return [this.buildQuickFixCodeAction(filteredMarkers, document, range, token)];
+    }
   }
 
   public resolveCodeAction(codeAction: CodeActionWithEditBuilder, token: CancellationToken): CodeActionWithEditBuilder {
@@ -147,110 +132,47 @@ export default class BlockSortActionProvider
     return { ...codeAction, edit };
   }
 
-  public attachDocument(document: TextDocument, token: CancellationToken) {
-    const disposable = [
-      workspace.onDidChangeTextDocument((e: TextDocumentChangeEvent) =>
-        this.updateBlockSortMarkers(e.document, token, ...e.contentChanges)
-      ),
-      workspace.onDidCloseTextDocument((e: TextDocument) => {
-        if (e.uri === document.uri) this.disposeDocument(e);
-      }),
-      token.onCancellationRequested(() => this.disposeDocument(document)),
-    ];
-
-    if (this.documentListeners.has(document.uri)) this.documentListeners.get(document.uri)?.push(...disposable);
-    else this.documentListeners.set(document.uri, disposable);
-
-    this.blockSortProviders.set(document.uri, new BlockSortProvider(document));
-
-    // Update markers once on load
-    this.updateBlockSortMarkers(document, token);
-  }
-
-  public disposeDocument(document: TextDocument) {
-    this.blockSortMarkers.delete(document.uri);
-    this.blockSortProviders.delete(document.uri);
-    if (this.documentListeners.has(document.uri)) {
-      const disposables = this.documentListeners.get(document.uri)!;
-      for (const disposable of disposables) disposable.dispose();
-      this.documentListeners.delete(document.uri);
-    }
-  }
-
-  public dispose() {
-    for (const [uri, disposables] of this.documentListeners) for (const disposable of disposables) disposable.dispose();
-
-    this.documentListeners.clear();
-  }
-
-  private getBlockMarkerRange(
+  private buildQuickFixCodeAction(
+    markers: Required<BlockSortMarker>[],
     document: TextDocument,
-    position: Position,
+    range?: Range,
     token?: CancellationToken
-  ): Range | undefined {
-    const blockSortProvider = this.blockSortProviders.get(document.uri);
-    const blockPosition = BlockSortFormattingProvider.getNextBlockPosition(document, position, token);
-    return blockPosition && blockSortProvider
-      ? blockSortProvider.trimRange(
-          blockSortProvider.expandRange(new Selection(blockPosition, blockPosition), true, token)
-        )
-      : undefined;
+  ): CodeActionWithEditBuilder {
+    return {
+      title: "Sort Block",
+      kind: BlockSortCodeActionKind.QuickFix,
+      uri: document.uri,
+      editBuilder: () => {
+        this.blockSortFormattingProvider.preComputeLineMeta(document, range && [range], token);
+        return this.blockSortFormattingProvider.provideBlockMarkerFormattingEdits(document, markers, [], token);
+      },
+    };
   }
 
-  private updateBlockSortMarkers(
+  private buildFixAllCodeAction(
+    markers: Required<BlockSortMarker>[],
     document: TextDocument,
-    token: CancellationToken,
-    ...changes: TextDocumentContentChangeEvent[]
-  ): Position[] {
-    const markers = this.blockSortMarkers.get(document.uri) ?? [];
-
-    if (changes.length === 0) {
-      if (markers.length) return markers;
-
-      markers.push(
-        ...BlockSortFormattingProvider.getBlockSortMarkers(document, undefined, token).map(
-          ({ range: { start }, firstNonWhitespaceCharacterIndex }) =>
-            start.translate(0, firstNonWhitespaceCharacterIndex)
-        )
-      );
-      this.blockSortMarkers.set(document.uri, markers);
-      return markers;
-    }
-
-    let lineOffset = 0;
-    for (const change of changes.sort((a, b) => a.range.start.compareTo(b.range.start))) {
-      if (token.isCancellationRequested) return markers;
-      const { range, text } = change;
-      const { start, end } = range;
-      const lineCountBefore = end.line - start.line + 1;
-      const lines = text.split("\n");
-
-      // If line count changes, update all markers after the change
-      const lineCountChange = lines.length - lineCountBefore;
-      if (lineCountChange) {
-        for (let i = 0; i < markers.length; i++)
-          if (markers[i].isAfter(end)) markers[i] = markers[i].translate(lineCountChange, 0);
-      }
-
-      // Delete and recreate all markers inside the changed range
-      for (let i = markers.length - 1; i >= 0; i--) {
-        if (range.contains(markers[i]) || start.line === markers[i].line || end.line === markers[i].line)
-          markers.splice(i, 1);
-      }
-
-      markers.push(
-        ...BlockSortFormattingProvider.getBlockSortMarkers(
-          document,
-          range.with(start.translate(lineOffset), end.translate(lineCountChange)),
-          token
-        ).map(({ range: { start } }) => start)
-      );
-
-      lineOffset += lineCountChange;
-    }
-
-    markers.sort((a, b) => a.compareTo(b));
-    this.blockSortMarkers.set(document.uri, markers);
-    return markers;
+    range?: Range,
+    token?: CancellationToken
+  ): CodeActionWithEditBuilder {
+    return {
+      title: "Sort all annotated Blocks",
+      kind: BlockSortCodeActionKind.SourceFixAll,
+      uri: document.uri,
+      editBuilder: () => {
+        this.blockSortFormattingProvider.preComputeLineMeta(document, range && [range], token);
+        return markers
+          .sort((a, b) => b.position.character - a.position.character)
+          .reduce<TextEdit[]>((edits, marker) => {
+            const newEdits = this.blockSortFormattingProvider.provideBlockMarkerFormattingEdits(
+              document,
+              [marker],
+              edits,
+              token
+            );
+            return [...edits, ...newEdits];
+          }, []);
+      },
+    };
   }
 }

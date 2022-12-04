@@ -5,6 +5,7 @@ import BlockSortFormattingProvider from "../providers/BlockSortFormattingProvide
 import { BlockSortOptions } from "../types/BlockSortOptions";
 
 export function blockSort(
+  formattingProvider: BlockSortFormattingProvider,
   editor: TextEditor | undefined,
   editBuilder: TextEditorEdit,
   range: Range | null,
@@ -23,7 +24,7 @@ export function blockSort(
 
   const { document, selection } = editor;
 
-  const edit = BlockSortFormattingProvider.getBlockSortEdit(document, range ?? selection, {
+  const edit = formattingProvider.getBlockSortEdit(document, range ?? selection, {
     sortFunction,
     sortChildren,
     expandSelection,
@@ -50,16 +51,24 @@ function blockSortMultilevel(sortFunction: (a: string, b: string) => number) {
   });
 }
 
-export function blockSortAsc(editor: TextEditor, editBuilder: TextEditorEdit) {
+export function blockSortAsc(
+  formattingProvider: BlockSortFormattingProvider,
+  editor: TextEditor,
+  editBuilder: TextEditorEdit
+) {
   const naturalSorting = ConfigurationProvider.getEnableNaturalSorting();
   const sortFunction = naturalSorting ? BlockSortProvider.sort.ascNatural : BlockSortProvider.sort.asc;
-  blockSort(editor, editBuilder, null, { sortFunction });
+  blockSort(formattingProvider, editor, editBuilder, null, { sortFunction });
 }
 
-export function blockSortDesc(editor: TextEditor, editBuilder: TextEditorEdit) {
+export function blockSortDesc(
+  formattingProvider: BlockSortFormattingProvider,
+  editor: TextEditor,
+  editBuilder: TextEditorEdit
+) {
   const naturalSorting = ConfigurationProvider.getEnableNaturalSorting();
   const sortFunction = naturalSorting ? BlockSortProvider.sort.descNatural : BlockSortProvider.sort.desc;
-  blockSort(editor, editBuilder, null, { sortFunction });
+  blockSort(formattingProvider, editor, editBuilder, null, { sortFunction });
 }
 
 export function blockSortMultilevelAsc() {

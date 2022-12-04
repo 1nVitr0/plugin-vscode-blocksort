@@ -25,7 +25,7 @@ function sortTest(
       const descriptor = file.match(/(.*)\.(.*)\.fixture/);
       const [_, type, lang] = descriptor || ["", "generic", "generic"];
       const testFunc = only ? test.only : skip ? test.skip : test;
-      testFunc(`${title} (${type}, lang ${lang}) #${i}`, async () => {
+      testFunc(`${title} (${type}, lang ${lang}) #${i + 1}`, async () => {
         const compareDocument = await workspace.openTextDocument(join(fixtureDir, compareFile));
         const document = await workspace.openTextDocument(join(fixtureDir, file));
         await languages.setTextDocumentLanguage(document, lang);
@@ -75,7 +75,7 @@ suite("Unit Suite for BlockSortProvider", async () => {
       .forEach(({ position, target }, i) => {
         const [_, lang] = file.match(/\.(.*)\.fixture/) || ["", "generic"];
         const testFunc = only ? test.only : skip ? test.skip : test;
-        testFunc(`Expands selection (lang ${lang}) #${i}`, async () => {
+        testFunc(`Expands selection (lang ${lang}) #${i + 1}`, async () => {
           const document = await workspace.openTextDocument(join(fixtureDir, file));
           await languages.setTextDocumentLanguage(document, lang);
           const blockSortProvider = new BlockSortProvider(document);
@@ -97,7 +97,7 @@ suite("Unit Suite for BlockSortProvider", async () => {
     ranges.forEach((range, i) => {
       const [_, lang] = file.match(/\.(.*)\.fixture/) || ["", "generic"];
       const testFunc = only ? test.only : skip ? test.skip : test;
-      testFunc(`Cancels getting Inner Blocks (lang ${lang}) #${i}`, async () => {
+      testFunc(`Cancels getting Inner Blocks (lang ${lang}) #${i + 1}`, async () => {
         const document = await workspace.openTextDocument(join(fixtureDir, file));
         await languages.setTextDocumentLanguage(document, lang);
         const blockSortProvider = new BlockSortProvider(document);
@@ -106,7 +106,7 @@ suite("Unit Suite for BlockSortProvider", async () => {
         await assertRaceCancellation(callback, "getInnerBlocks", performanceThreshold);
       });
 
-      testFunc(`Cancels getting Blocks (lang ${lang}) #${i}`, async () => {
+      testFunc(`Cancels getting Blocks (lang ${lang}) #${i + 1}`, async () => {
         const document = await workspace.openTextDocument(join(fixtureDir, file));
         await languages.setTextDocumentLanguage(document, lang);
         const blockSortProvider = new BlockSortProvider(document);
@@ -115,7 +115,7 @@ suite("Unit Suite for BlockSortProvider", async () => {
         await assertRaceCancellation(callback, "getBlocks", performanceThreshold);
       });
 
-      testFunc(`Cancels sorting Blocks (lang ${lang}) #${i}`, async () => {
+      testFunc(`Cancels sorting Blocks (lang ${lang}) #${i + 1}`, async () => {
         const document = await workspace.openTextDocument(join(fixtureDir, file));
         await languages.setTextDocumentLanguage(document, lang);
         const blockSortProvider = new BlockSortProvider(document);

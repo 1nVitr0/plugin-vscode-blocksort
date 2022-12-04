@@ -1,3 +1,4 @@
+import { TextBlockDefinition } from '../providers/StringProcessingProvider';
 export const commentRegex: Record<string, string> = {
   default: '(//.*|/\\*(.*?)(\\*/)?|\\*(.*?)(\\*/)?)',
   // abap: '',
@@ -63,9 +64,9 @@ export const commentRegex: Record<string, string> = {
   yaml: '#.*',
 };
 
-export const commentMarkers: Record<string, { start: string; end: string }[]> = {
+export const commentMarkers: Record<string, TextBlockDefinition[]> = {
   default: [
-    { start: '//', end: '(?=\\n)' },
+    { start: '//' },
     { start: '/\\*', end: '\\*/' },
   ],
   // abap: [],
@@ -73,26 +74,26 @@ export const commentMarkers: Record<string, { start: string; end: string }[]> = 
   // bibtex: [],
   // clojure: [],
   coffeescript: [
-    { start: '//', end: '(?=\\n)' },
+    { start: '//' },
     { start: '/\\*', end: '\\*/' },
   ],
   c: [
-    { start: '//', end: '(?=\\n)' },
+    { start: '//' },
     { start: '/\\*', end: '\\*/' },
   ],
   cpp: [
-    { start: '//', end: '(?=\\n)' },
+    { start: '//' },
     { start: '/\\*', end: '\\*/' },
   ],
   csharp: [
-    { start: '//', end: '(?=\\n)' },
+    { start: '//' },
     { start: '/\\*', end: '\\*/' },
   ],
   css: [
-    { start: '//', end: '(?=\\n)' },
+    { start: '//' },
     { start: '/\\*', end: '\\*/' },
   ],
-  dockerfile: [{ start: '#', end: '(?=\\n)' }],
+  dockerfile: [{ start: '#' }],
   // fsharp: [],
   // 'git-commit': [],
   // 'git-rebase': [],
@@ -103,46 +104,46 @@ export const commentMarkers: Record<string, { start: string; end: string }[]> = 
   html: [{ start: '<!--(.*?)(-->)?', end: '-->' }],
   // ini: [],
   java: [
-    { start: '//', end: '(?=\\n)' },
+    { start: '//' },
     { start: '/\\*', end: '\\*/' },
   ],
   javascript: [
-    { start: '//', end: '(?=\\n)' },
+    { start: '//' },
     { start: '/\\*', end: '\\*/' },
   ],
   javascriptreact: [
-    { start: '//', end: '(?=\\n)' },
+    { start: '//' },
     { start: '/\\*', end: '\\*/' },
   ],
   jsx: [{ start: '<!--(.*?)(-->)?', end: '-->' }],
   json: [
-    { start: '//', end: '(?=\\n)' },
+    { start: '//' },
     { start: '/\\*', end: '\\*/' },
   ],
   jsonc: [
-    { start: '//', end: '(?=\\n)' },
+    { start: '//' },
     { start: '/\\*', end: '\\*/' },
   ],
   // latex: [],
   less: [
-    { start: '//', end: '(?=\\n)' },
+    { start: '//' },
     { start: '/\\*', end: '\\*/' },
   ],
   // lua: [],
   // makefile: [],
   // markdown: [],
   'objective-c': [
-    { start: '//', end: '(?=\\n)' },
+    { start: '//' },
     { start: '/\\*', end: '\\*/' },
   ],
   'objective-cpp': [
-    { start: '//', end: '(?=\\n)' },
+    { start: '//' },
     { start: '/\\*', end: '\\*/' },
   ],
   // perl: [],
   // perl6: [],
   php: [
-    { start: '//', end: '(?=\\n)' },
+    { start: '//' },
     { start: '/\\*', end: '\\*/' },
   ],
   // plaintext: [],
@@ -150,52 +151,52 @@ export const commentMarkers: Record<string, { start: string; end: string }[]> = 
   // jade: [],
   // pug: [],
   python: [
-    { start: '#', end: '(?=\\n)' },
+    { start: '#' },
     { start: '"""', end: '"""' },
   ],
   // r: [],
   // razor: [],
   ruby: [
-    { start: '#', end: '(?=\\n)' },
+    { start: '#' },
     { start: '^\\s*=begin', end: '^\\s*=end' },
   ],
   // rust: [],
   scss: [
-    { start: '//', end: '(?=\\n)' },
+    { start: '//' },
     { start: '/\\*', end: '\\*/' },
   ],
   sass: [
-    { start: '//', end: '(?=\\n)' },
+    { start: '//' },
     { start: '/\\*', end: '\\*/' },
   ],
   // shaderlab: [],
   // shellscript: [],
   // slim: [],
   sql: [
-    { start: '#', end: '(?=\\n)' },
-    { start: '--', end: '(?=\\n)' },
+    { start: '#' },
+    { start: '--' },
   ],
   stylus: [
-    { start: '//', end: '(?=\\n)' },
+    { start: '//' },
     { start: '/\\*', end: '\\*/' },
   ],
   // swift: [],
   typescript: [
-    { start: '//', end: '(?=\\n)' },
+    { start: '//' },
     { start: '/\\*', end: '\\*/' },
   ],
   typescriptreact: [
-    { start: '//', end: '(?=\\n)' },
+    { start: '//' },
     { start: '/\\*', end: '\\*/' },
   ],
   // tex: [],
   // vb: [],
   vue: [
-    { start: '//', end: '(?=\\n)' },
+    { start: '//' },
     { start: '/\\*', end: '\\*/' },
   ],
   'vue-html': [{ start: '<!--(.*?)(-->)?', end: '-->' }],
   xml: [{ start: '<!--(.*?)(-->)?', end: '-->' }],
   // xsl: [],
-  yaml: [{ start: '#', end: '(?=\\n)' }],
+  yaml: [{ start: '#' }],
 };
