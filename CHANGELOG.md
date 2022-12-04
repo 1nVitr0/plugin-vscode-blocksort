@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v1.2.1...v1.2.2) (2022-12-04)
+
+
+### Performance Improvements
+
+* cache line meta while document is open across all providers ([c965373](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/c96537343681a112a63d5100caa538d429e72876))
+
 ## [1.2.1](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v1.2.0...v1.2.1) (2022-12-01)
 
 
