@@ -2,6 +2,7 @@
   "name": "blocksort",
   "displayName": "Block Sort",
   "description": "Sort Blocks instead of lines!",
+  "license": "MIT",
   "author": "1nVitr0",
   "publisher": "1nVitr0",
   "repository": {
