@@ -1,3 +1,10 @@
+## [1.2.3](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v1.2.2...v1.2.3) (2023-02-15)
+
+
+### Bug Fixes
+
+* deploy to OpenVSX ([fd6e60a](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/fd6e60affaeaea4c5951318584eabe331ee5a557))
+
 ## [1.2.2](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v1.2.1...v1.2.2) (2022-12-04)
 
 
