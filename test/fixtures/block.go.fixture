@@ -1,0 +1,39 @@
+type IFoo interface {
+	b() bool
+	a()
+	c() IFoo
+}
+
+type S1 struct {
+	y int
+	x int
+	z int
+}
+
+type S2[T any] struct {
+	y T
+	x T
+	z T
+}
+
+func (s S2[T]) c() IFoo {
+	return S1{}
+}
+
+func (s S2[T]) b() bool {
+	return true
+}
+
+func (s S2[T]) a() {
+}
+
+func (s S1) a() {
+}
+
+func (s S1) c() IFoo {
+	return S1{}
+}
+
+func (s S1) b() bool {
+	return true
+}
