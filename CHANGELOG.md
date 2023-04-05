@@ -1,3 +1,11 @@
+## [1.2.4](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v1.2.3...v1.2.4) (2023-04-05)
+
+
+### Bug Fixes
+
+* correctly merged pre computed ranges ([faae311](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/faae3111a75aeb03043a13eff1bea5b4c26752b2))
+* remove all computed ranges on document update ([9e70a7d](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/9e70a7dc91e0c7e9dbc54c0170d8a8586dff4460))
+
 ## [1.2.3](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v1.2.2...v1.2.3) (2023-02-15)
 
 
