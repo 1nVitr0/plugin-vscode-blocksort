@@ -410,7 +410,7 @@ export default class BlockSortProvider implements Disposable {
         }
         if (edit.range.contains(range)) {
           // Remove computed range if it is completely contained in the edit
-          this.computedRanges.splice(i--, 1);
+          this.computedRanges.splice(i, 1);
           continue;
         }
 
@@ -427,7 +427,7 @@ export default class BlockSortProvider implements Disposable {
           // Adjust computed range, or remove if intersection starts at range start
           this.computedRanges[i] = new Range(range.start, intersection.start);
         } else {
-          this.computedRanges.splice(i--, 1);
+          this.computedRanges.splice(i, 1);
         }
       }
 
