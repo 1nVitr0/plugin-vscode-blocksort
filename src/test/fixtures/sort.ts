@@ -62,4 +62,9 @@ export const sortTests: CompareTest[] = [
     compareFile: "self-closing.html.expect",
     ranges: [new Range(0, 0, 5, 34)],
   },
+  {
+    file: "block.go.fixture",
+    compareFile: "block.go.expect",
+    ranges: [new Range(1, 0, 3, 10), new Range(7, 0, 9, 10), new Range(13, 0, 15, 10), new Range(18, 0, 27, 1), new Range(29, 0, 38, 1)],
+  },
 ];

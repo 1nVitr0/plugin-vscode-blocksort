@@ -410,7 +410,7 @@ export default class BlockSortProvider implements Disposable {
         }
         if (edit.range.contains(range)) {
           // Remove computed range if it is completely contained in the edit
-          this.computedRanges.splice(i--, 1);
+          this.computedRanges.splice(i, 1);
           continue;
         }
 
@@ -427,7 +427,7 @@ export default class BlockSortProvider implements Disposable {
           // Adjust computed range, or remove if intersection starts at range start
           this.computedRanges[i] = new Range(range.start, intersection.start);
         } else {
-          this.computedRanges.splice(i--, 1);
+          this.computedRanges.splice(i, 1);
         }
       }
 
@@ -449,20 +449,16 @@ export default class BlockSortProvider implements Disposable {
       const r = this.computedRanges[i];
       if (r.contains(range)) return;
       if (r.intersection(range)) {
-        const adjacent = i + (r.start.line < range.start.line ? 1 : -1);
-        this.computedRanges[i] = r.union(range);
-        if (
-          adjacent > 0 &&
-          adjacent < this.computedRanges.length &&
-          this.computedRanges[adjacent].intersection(range)
-        ) {
-          this.computedRanges[i] = this.computedRanges[i].union(this.computedRanges[adjacent]);
-          this.computedRanges.splice(adjacent, 1);
-        }
+        this.computedRanges.splice(i, 1);
+        this.addComputedRange(r.union(range));
         return;
       }
-      if (range.start.line >= r.end.line) {
-        this.computedRanges.splice(i + 1, 0, range);
+      if (
+        (range.end.line + 1 === r.start.line && range.end.character === Infinity && r.start.character === 0) ||
+        (range.start.line - 1 === r.end.line && range.start.character === 0 && r.end.character === Infinity)
+      ) {
+        this.computedRanges.splice(i, 1);
+        this.addComputedRange(new Range(range.start.line, 0, r.end.line, Infinity));
         return;
       }
     }
