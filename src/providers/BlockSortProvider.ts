@@ -25,8 +25,8 @@ export default class BlockSortProvider implements Disposable {
   };
 
   public static sort: Record<SortingStrategy, (a: string, b: string) => number> = {
-    asc: (a, b) => (a > b ? 1 : a < b ? -1 : 0),
-    desc: (a, b) => (a < b ? 1 : a > b ? -1 : 0),
+    asc: (a, b) => a.localeCompare(b),
+    desc: (a, b) => b.localeCompare(a),
     ascNatural: (a, b) => BlockSortProvider.sort.asc(BlockSortProvider.padNumbers(a), BlockSortProvider.padNumbers(b)),
     descNatural: (a, b) =>
       BlockSortProvider.sort.desc(BlockSortProvider.padNumbers(a), BlockSortProvider.padNumbers(b)),
