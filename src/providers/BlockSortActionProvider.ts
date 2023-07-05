@@ -92,7 +92,7 @@ export default class BlockSortActionProvider
   ): CodeActionWithEditBuilder[] {
     const markers = this.blockSortFormattingProvider.getBlockSortMarkers(document, token);
 
-    if (!markers) return [];
+    if (markers.length === 0) return [];
     const filteredMarkers: Required<BlockSortMarker>[] = [];
 
     let before: Required<BlockSortMarker> | null = null;
