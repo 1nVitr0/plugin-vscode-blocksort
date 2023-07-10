@@ -1,3 +1,11 @@
+## [1.2.5](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v1.2.4...v1.2.5) (2023-07-10)
+
+
+### Bug Fixes
+
+* align sorting behavior to inbuilt "Sort Lines" ([76449af](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/76449af38698ca5012ab47c762491db7766a04c2))
+* only provide code actions inside blocksort ranges ([1a1d314](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/1a1d314039b62e6ebb1046d6482fe295f4bbc53d))
+
 ## [1.2.4](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v1.2.3...v1.2.4) (2023-04-05)
 
 
