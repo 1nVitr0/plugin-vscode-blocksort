@@ -26,3 +26,13 @@ class Test2 {
     this.test = test;
   }
 }
+
+{
+  normalFunction: function() {
+    return 2
+  },
+  arrowFunction: () => {
+    return 2
+  },
+  functionCall: myFunction({ object: (t: unknown) => 'prop' }),
+}

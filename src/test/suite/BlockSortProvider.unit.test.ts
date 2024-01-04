@@ -12,7 +12,7 @@ const defaultExpandOptions: ExpandSelectionOptions = {
   expandOverEmptyLines: false,
   foldingComplete: true,
   indentationComplete: true,
-}; 
+};
 
 function sortTest(
   tests: CompareTest[],
@@ -84,7 +84,19 @@ suite("Unit Suite for BlockSortProvider", async () => {
             blockSortProvider.expandRange(selection, expand ?? defaultExpandOptions)
           );
 
-          assert.deepStrictEqual(expanded, target, "range did not expand correctly");
+          assert.deepStrictEqual(
+            {
+              start: expanded.start,
+              end: expanded.end,
+              text: document.getText(expanded),
+            },
+            {
+              start: target.start,
+              end: target.end,
+              text: document.getText(target),
+            },
+            "range did not expand correctly"
+          );
         });
       });
   });
