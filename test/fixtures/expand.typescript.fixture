@@ -34,5 +34,5 @@ class Test2 {
   arrowFunction: () => {
     return 2
   },
-  functionCall: myFunction({ object: (t: unknown) => 'prop' }),
+  functionCall: myFunction({ object: (t: unknown) => 'prop' })
 }

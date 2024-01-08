@@ -5,7 +5,7 @@ export const expandTests: RangeTest[] = [
   {
     file: "expand.typescript.fixture",
     ranges: [new Range(3, 9, 3, 9), new Range(22, 0, 24, 0), new Range(30, 2, 30, 2)],
-    targetRanges: [new Range(3, 0, 16, 20), new Range(22, 0, 26, 3), new Range(30, 0, 36, 63)],
+    targetRanges: [new Range(3, 0, 16, 20), new Range(22, 0, 26, 3), new Range(30, 0, 36, 62)],
   },
   {
     file: "expand.cpp.fixture",

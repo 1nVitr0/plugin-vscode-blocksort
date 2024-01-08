@@ -13,7 +13,7 @@ const defaultFoldingMarkers: FoldingMarkerList<FoldingMarkerDefault> = {
   "()": { start: "\\(", end: "\\)" },
   "[]": { start: "\\[", end: "\\]" },
   "{}": { start: "\\{", end: "\\}" },
-  "<>": { start: "<", end: ">" },
+  "<>": { start: "<", end: "(?<!\\=)>" },
 };
 
 const defaultCompleteBlockMarkers = ["\\}", "<\\/[a-zA-Z0-9\\-_=\\s]+"];
