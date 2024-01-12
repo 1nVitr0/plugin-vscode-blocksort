@@ -17,6 +17,7 @@ import { BlockSortOptions } from "../types/BlockSortOptions";
 import BlockSortProvider from "./BlockSortProvider";
 import ConfigurationProvider from "./ConfigurationProvider";
 import AbstractDocumentProvider from "./AbstractDocumentProvider";
+import { StringSortProvider } from "./StringSortProvider";
 
 export interface BlockSortMarker {
   line: TextLine;
@@ -37,19 +38,12 @@ export default class BlockSortFormattingProvider
   public static getBlockSortMarkerOptions(document: TextDocument, position: Position): BlockSortOptions {
     const line = document.lineAt(position.line).text;
     const matches = line.match(/@blocksort ?(asc|desc)? ?(\d+|inf(?:inite)?)?/) ?? [];
-    const [_, direction = "asc", depth = "0"] = matches;
-    const naturalSorting = ConfigurationProvider.getEnableNaturalSorting();
-
-    const sortFunction = naturalSorting
-      ? direction === "asc"
-        ? BlockSortProvider.sort.ascNatural
-        : BlockSortProvider.sort.descNatural
-      : direction === "asc"
-      ? BlockSortProvider.sort.asc
-      : BlockSortProvider.sort.desc;
+    const [_, direction = "asc", depth = "0"] = matches as [string, "asc" | "desc", string];
+    const collator = ConfigurationProvider.getCollatorOptions();
 
     return {
-      sortFunction,
+      collator,
+      direction,
       sortChildren: depth.includes("inf") ? Infinity : parseInt(depth, 10),
       expandSelection: true,
     };
@@ -88,9 +82,10 @@ export default class BlockSortFormattingProvider
   ): TextEdit {
     if (!this.isAttached(document)) this.attachDocument(document, token);
     const blockSort = this.blockSortProviders.get(document.uri)!;
+    const sortProvider = new StringSortProvider(options.collator, options.direction);
     const range = this.expandSelection(document, selection, options, token);
     const blocks = blockSort.getBlocks(range, token);
-    const sorted = blockSort.sortBlocks(blocks, options.sortFunction, options.sortChildren, options.edits, token);
+    const sorted = blockSort.sortBlocks(blocks, sortProvider, options.sortChildren, options.edits, token);
 
     return TextEdit.replace(range, sorted.join("\n"));
   }

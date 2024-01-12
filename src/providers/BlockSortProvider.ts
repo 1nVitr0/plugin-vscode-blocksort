@@ -10,8 +10,8 @@ import {
 import { ExpandSelectionOptions } from "../types/BlockSortOptions";
 import ConfigurationProvider from "./ConfigurationProvider";
 import StringProcessingProvider, { Folding, LineMeta } from "./StringProcessingProvider";
+import { StringSortProvider } from "./StringSortProvider";
 
-type SortingStrategy = "asc" | "desc" | "ascNatural" | "descNatural";
 interface ExpandDirectionOptions extends ExpandSelectionOptions {
   direction: 1 | -1;
 }
@@ -22,14 +22,6 @@ export default class BlockSortProvider implements Disposable {
     expandOverEmptyLines: true,
     foldingComplete: true,
     indentationComplete: true,
-  };
-
-  public static sort: Record<SortingStrategy, (a: string, b: string) => number> = {
-    asc: (a, b) => a.localeCompare(b),
-    desc: (a, b) => b.localeCompare(a),
-    ascNatural: (a, b) => BlockSortProvider.sort.asc(BlockSortProvider.padNumbers(a), BlockSortProvider.padNumbers(b)),
-    descNatural: (a, b) =>
-      BlockSortProvider.sort.desc(BlockSortProvider.padNumbers(a), BlockSortProvider.padNumbers(b)),
   };
 
   public static subtractRange(range: Range, subtract: Range): Range[] {
@@ -79,14 +71,14 @@ export default class BlockSortProvider implements Disposable {
 
   public sortBlocks(
     blocks: Range[],
-    sort: (a: string, b: string) => number = BlockSortProvider.sort.asc,
+    sortProvider: StringSortProvider,
     sortChildren = 0,
     edits?: TextEdit[],
     token?: CancellationToken
   ): string[] {
-    let textBlocks = blocks.map((block) => this.sortInnerBlocks(block, sort, sortChildren, edits, token));
+    let textBlocks = blocks.map((block) => this.sortInnerBlocks(block, sortProvider, sortChildren, edits, token));
     if (ConfigurationProvider.getSortConsecutiveBlockHeaders(this.document))
-      textBlocks = textBlocks.map((block) => this.sortBlockHeaders(block, sort, token));
+      textBlocks = textBlocks.map((block) => this.sortBlockHeaders(block, sortProvider, token));
 
     if (token?.isCancellationRequested) return [];
 
@@ -115,7 +107,7 @@ export default class BlockSortProvider implements Disposable {
     // If last block has separator, we don't need to alter anything
     if (textBlocks.length && textBlocks[textBlocks.length - 1].endsWith(separator)) separator = "";
 
-    this.applySort(textBlocks, sort);
+    this.applySort(textBlocks, sortProvider);
 
     if (separator) {
       // Apply separator to all blocks except the last one
@@ -127,6 +119,7 @@ export default class BlockSortProvider implements Disposable {
     }
 
     if (suffixes) {
+      // eslint-disable-next-line curly
       for (let i = 0; i < textBlocks.length; i++) {
         if (suffixes[i]) textBlocks[i] += suffixes[i];
       }
@@ -282,7 +275,7 @@ export default class BlockSortProvider implements Disposable {
       (expandLocally && hasContent && indent >= minIndent) ||
       (expandOverEmptyLines && !hasContent) ||
       (indentationComplete && (indent > minIndent || (lastIndent > minIndent && !hasContent))) ||
-      (foldingComplete && this.stringProcessor.totalOpenFolding(folding) != 0)
+      (foldingComplete && this.stringProcessor.totalOpenFolding(folding) !== 0)
     );
   }
 
@@ -468,7 +461,7 @@ export default class BlockSortProvider implements Disposable {
 
   private sortInnerBlocks(
     block: Range,
-    sort: (a: string, b: string) => number = BlockSortProvider.sort.asc,
+    sortProvider: StringSortProvider,
     sortChildren = 0,
     edits?: TextEdit[],
     token?: CancellationToken
@@ -485,7 +478,7 @@ export default class BlockSortProvider implements Disposable {
 
     return (
       this.document.getText(head) +
-      this.sortBlocks(blocks, sort, sortChildren - 1, edits, token).join("\n") +
+      this.sortBlocks(blocks, sortProvider, sortChildren - 1, edits, token).join("\n") +
       this.document.getText(tail)
     );
   }
@@ -514,6 +507,7 @@ export default class BlockSortProvider implements Disposable {
 
       lineOffset += editLines.length - (end.line - start.line);
       containedEdits.forEach((edit) => {
+        // eslint-disable-next-line curly
         if (edit.range.start.line > end.line) {
           edit.range = edit.range.with(edit.range.start.translate(lineOffset), edit.range.end.translate(lineOffset));
         }
@@ -523,11 +517,7 @@ export default class BlockSortProvider implements Disposable {
     return lines.join("\n");
   }
 
-  private sortBlockHeaders(
-    block: string,
-    sort: (a: string, b: string) => number = BlockSortProvider.sort.asc,
-    token?: CancellationToken
-  ): string {
+  private sortBlockHeaders(block: string, sortProvider: StringSortProvider, token?: CancellationToken): string {
     let lines = block.split(/\r?\n/);
     const headers: string[] = [];
 
@@ -539,13 +529,14 @@ export default class BlockSortProvider implements Disposable {
     }
 
     if (currentLine !== undefined) lines.unshift(currentLine);
-    this.applySort(headers, sort);
+    this.applySort(headers, sortProvider);
     lines = [...headers, ...lines];
 
     return lines.join("\n");
   }
 
-  private applySort(blocks: string[], sort: (a: string, b: string) => number = BlockSortProvider.sort.asc) {
+  private applySort(blocks: string[], sortProvider: StringSortProvider) {
+    const compare = sortProvider.compare.bind(sortProvider);
     const precomputed = blocks
       .map((original, index) => ({
         index,
@@ -556,7 +547,7 @@ export default class BlockSortProvider implements Disposable {
         forceLast: this.stringProcessor.isForceLastBlock(original),
       }))
       .sort((a, b) =>
-        a.forceFirst || b.forceLast ? -1 : a.forceLast || b.forceFirst ? 1 : sort(a.sanitized, b.sanitized)
+        a.forceFirst || b.forceLast ? -1 : a.forceLast || b.forceFirst ? 1 : compare(a.sanitized, b.sanitized)
       );
 
     precomputed.forEach(({ original }, index) => (blocks[index] = original));

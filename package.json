@@ -146,20 +146,18 @@
           "blocksort.enableNaturalSorting": {
             "type": "boolean",
             "description": "Sort string containing numbers intuitively (`80` before `443`)",
-            "default": false
+            "deprecationMessage": "This setting is deprecated. Use blocksort.collatorOptions.numeric instead",
+            "default": true
           },
           "blocksort.naturalSorting": {
             "type": "object",
             "description": "Settings for natural sorting",
+            "deprecationMessage": "This setting is deprecated and will no longer be applied. Use blocksort.collatorOptions instead",
             "default": {
-              "enabled": false,
               "padding": 9,
               "omitUuids": false,
               "sortNegativeValues": true
             },
-            "required": [
-              "enabled"
-            ],
             "additionalProperties": false,
             "properties": {
               "padding": {
@@ -178,6 +176,83 @@
                 "description": "Sort negative values before positive. Might fail, especially on UUIDs containing dashes",
                 "default": true,
                 "type": "boolean"
+              }
+            }
+          },
+          "blocksort.collatorOptions": {
+            "type": "object",
+            "description": "Collator options for sorting. See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Collator/Collator for more information",
+            "default": {
+              "numeric": true,
+              "caseFirst": "false",
+              "sensitivity": "base"
+            },
+            "additionalProperties": false,
+            "properties": {
+              "locales": {
+                "description": "A BCP 47 language tag, or an comma separated array of such strings.",
+                "default": "en-US",
+                "type": "string"
+              },
+              "customSortOrder": {
+                "description": "Custom Sort order in the form of a list of characters",
+                "type": "string",
+                "examples": [
+                  "abcdefghijklmnopqrstuvwxyz:@"
+                ]
+              },
+              "localeMatcher": {
+                "description": "The locale matching algorithm to use. Possible values are 'lookup' and 'best fit'. For information about this option, see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl#Locale_negotiation.",
+                "default": "best fit",
+                "type": "string",
+                "enum": [
+                  "lookup",
+                  "best fit"
+                ]
+              },
+              "numeric": {
+                "description": "Sort string containing numbers intuitively (`80` before `443`)",
+                "default": true,
+                "type": "boolean"
+              },
+              "caseFirst": {
+                "description": "Sort upper case before lower case (`A` before `a`)",
+                "default": "false",
+                "type": "string",
+                "enum": [
+                  "false",
+                  "upper",
+                  "lower"
+                ]
+              },
+              "sensitivity": {
+                "description": "which differences in the strings should lead to non-zero result values",
+                "default": "base",
+                "type": "string",
+                "enum": [
+                  "base",
+                  "accent",
+                  "case",
+                  "variant"
+                ]
+              },
+              "collation": {
+                "description": "Whether punctuation should be considered when sorting (`a` before `#`)",
+                "default": "false",
+                "type": "string",
+                "enum": [
+                  "false",
+                  "true"
+                ]
+              },
+              "ignorePunctuation": {
+                "description": "Whether punctuation should be ignored when sorting (`a` before `#`)",
+                "default": "false",
+                "type": "string",
+                "enum": [
+                  "false",
+                  "true"
+                ]
               }
             }
           },
