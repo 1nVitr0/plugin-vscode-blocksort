@@ -11,8 +11,8 @@ function getDocumentSelector(selector: DocumentSelector | true): DocumentSelecto
 export default function contributeFormattingActions(formattingProvider: BlockSortFormattingProvider) {
   const codeActionsProvider = new BlockSortActionProvider(formattingProvider);
 
-  const enableDocumentFormatting = ConfigurationProvider.getenableDocumentFormatting();
-  const enableRangeFormatting = ConfigurationProvider.getenableRangeFormatting();
+  const enableDocumentFormatting = ConfigurationProvider.getEnableDocumentFormatting();
+  const enableRangeFormatting = ConfigurationProvider.getEnableRangeFormatting();
   const enableCodeActions = ConfigurationProvider.getEnableCodeActions();
   const enableCodeLens = ConfigurationProvider.getEnableCodeLens();
 

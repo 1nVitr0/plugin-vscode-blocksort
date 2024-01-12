@@ -79,7 +79,7 @@ export default class BlockSortActionProvider
       tooltip: "Apply blocksort action",
       title: "Sort block",
       command: "blocksort._sortBlocks",
-      arguments: [range, options.sortFunction, options],
+      arguments: [range, options],
     };
     return codeLens;
   }

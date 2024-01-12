@@ -1,6 +1,5 @@
 import { commands, InputBoxOptions, Selection, Range, TextEditor, TextEditorEdit, window } from "vscode";
-import BlockSortProvider from "../providers/BlockSortProvider";
-import ConfigurationProvider from "../providers/ConfigurationProvider";
+import ConfigurationProvider, { BlockSortCollatorOptions } from "../providers/ConfigurationProvider";
 import BlockSortFormattingProvider from "../providers/BlockSortFormattingProvider";
 import { BlockSortOptions } from "../types/BlockSortOptions";
 
@@ -15,7 +14,8 @@ export function blockSort(
   if (!editor) return;
 
   const {
-    sortFunction,
+    collator,
+    direction,
     sortChildren = 0,
     expandSelection = range?.isEmpty
       ? ConfigurationProvider.getExpandCursor()
@@ -25,7 +25,8 @@ export function blockSort(
   const { document, selection } = editor;
 
   const edit = formattingProvider.getBlockSortEdit(document, range ?? selection, {
-    sortFunction,
+    collator,
+    direction,
     sortChildren,
     expandSelection,
   });
@@ -33,10 +34,10 @@ export function blockSort(
   editor.selection = new Selection(edit.range.start, edit.range.end);
 }
 
-function blockSortMultilevel(sortFunction: (a: string, b: string) => number) {
+function blockSortMultilevel(collator: BlockSortCollatorOptions, direction: "asc" | "desc" = "asc") {
   const defaultDepth = ConfigurationProvider.getDefaultMultilevelDepth();
   if (!ConfigurationProvider.getAskForMultilevelDepth())
-    return commands.executeCommand("blocksort._sortBlocks", null, { sortFunction, sortChildren: defaultDepth });
+    return commands.executeCommand("blocksort._sortBlocks", null, { collator, direction, sortChildren: defaultDepth });
 
   let options: InputBoxOptions = {
     prompt: "Indentation Depth: ",
@@ -47,7 +48,7 @@ function blockSortMultilevel(sortFunction: (a: string, b: string) => number) {
 
   window.showInputBox(options).then((value) => {
     if (value === undefined) return;
-    commands.executeCommand("blocksort._sortBlocks", null, { sortFunction, sortChildren: parseInt(value) });
+    commands.executeCommand("blocksort._sortBlocks", null, { collator, direction, sortChildren: parseInt(value) });
   });
 }
 
@@ -56,9 +57,8 @@ export function blockSortAsc(
   editor: TextEditor,
   editBuilder: TextEditorEdit
 ) {
-  const naturalSorting = ConfigurationProvider.getEnableNaturalSorting();
-  const sortFunction = naturalSorting ? BlockSortProvider.sort.ascNatural : BlockSortProvider.sort.asc;
-  blockSort(formattingProvider, editor, editBuilder, null, { sortFunction });
+  const collator = ConfigurationProvider.getCollatorOptions();
+  blockSort(formattingProvider, editor, editBuilder, null, { collator, direction: "asc" });
 }
 
 export function blockSortDesc(
@@ -66,19 +66,16 @@ export function blockSortDesc(
   editor: TextEditor,
   editBuilder: TextEditorEdit
 ) {
-  const naturalSorting = ConfigurationProvider.getEnableNaturalSorting();
-  const sortFunction = naturalSorting ? BlockSortProvider.sort.descNatural : BlockSortProvider.sort.desc;
-  blockSort(formattingProvider, editor, editBuilder, null, { sortFunction });
+  const collator = ConfigurationProvider.getCollatorOptions();
+  blockSort(formattingProvider, editor, editBuilder, null, { collator, direction: "desc" });
 }
 
 export function blockSortMultilevelAsc() {
-  const naturalSorting = ConfigurationProvider.getEnableNaturalSorting();
-  const sortFunction = naturalSorting ? BlockSortProvider.sort.ascNatural : BlockSortProvider.sort.asc;
-  blockSortMultilevel(sortFunction);
+  const collator = ConfigurationProvider.getCollatorOptions();
+  blockSortMultilevel(collator, "asc");
 }
 
 export function blockSortMultilevelDesc() {
-  const naturalSorting = ConfigurationProvider.getEnableNaturalSorting();
-  const sortFunction = naturalSorting ? BlockSortProvider.sort.descNatural : BlockSortProvider.sort.desc;
-  blockSortMultilevel(sortFunction);
+  const collator = ConfigurationProvider.getCollatorOptions();
+  blockSortMultilevel(collator, "desc");
 }
