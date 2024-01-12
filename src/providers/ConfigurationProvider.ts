@@ -1,8 +1,11 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import {
+  commands,
   ConfigurationScope,
   DocumentSelector,
   TextDocument,
   TextEditorOptions,
+  window,
   workspace,
   WorkspaceConfiguration,
 } from "vscode";
@@ -13,7 +16,7 @@ const defaultFoldingMarkers: FoldingMarkerList<FoldingMarkerDefault> = {
   "()": { start: "\\(", end: "\\)" },
   "[]": { start: "\\[", end: "\\]" },
   "{}": { start: "\\{", end: "\\}" },
-  "<>": { start: "<", end: ">" },
+  "<>": { start: "<", end: "(?<!\\=)>" },
 };
 
 const defaultCompleteBlockMarkers = ["\\}", "<\\/[a-zA-Z0-9\\-_=\\s]+"];
@@ -25,11 +28,16 @@ const defaultIndentIgnoreMarkers = [
   "esac|fi",
 ];
 
+/** @deprecated Will no longer be applied. Use collatorOptions instead  */
 export interface NaturalSortOptions {
-  enabled: boolean;
   padding: number;
   omitUuids: boolean;
   sortNegativeValues: boolean;
+}
+
+export interface BlockSortCollatorOptions extends Omit<Intl.CollatorOptions, "usage"> {
+  locales?: string;
+  customSortOrder?: string;
 }
 
 export interface BlockSortConfiguration {
@@ -38,8 +46,11 @@ export interface BlockSortConfiguration {
   indentIgnoreMarkers: string[];
   completeBlockMarkers: string[];
   foldingMarkers: FoldingMarkerList;
+  /** @deprecated Use collatorOptions.numeric instead */
   enableNaturalSorting: boolean;
+  /** @deprecated Will no longer be applied. Use collatorOptions instead */
   naturalSorting: NaturalSortOptions;
+  collatorOptions: BlockSortCollatorOptions;
   sortConsecutiveBlockHeaders: boolean;
   enableCodeLens: DocumentSelector | boolean;
   enableCodeActions: DocumentSelector | boolean;
@@ -119,13 +130,24 @@ export default class ConfigurationProvider {
     return [...additional, ...defaultIndentIgnoreMarkers];
   }
 
+  /** @deprecated Use getCollatorOptions instead */
   public static getNaturalSortOptions(): NaturalSortOptions {
     const configuration: Partial<NaturalSortOptions> = ConfigurationProvider.getConfiguration().naturalSorting || {};
     return {
-      enabled: false,
       padding: 9,
       omitUuids: false,
       sortNegativeValues: true,
+      ...configuration,
+    };
+  }
+
+  public static getCollatorOptions(): BlockSortCollatorOptions {
+    const configuration: Partial<BlockSortCollatorOptions> =
+      ConfigurationProvider.getConfiguration().collatorOptions || {};
+    return {
+      numeric: ConfigurationProvider.getEnableNaturalSorting() ?? true,
+      caseFirst: "false",
+      sensitivity: "base",
       ...configuration,
     };
   }
@@ -142,15 +164,14 @@ export default class ConfigurationProvider {
     return ConfigurationProvider.getConfiguration().expandCursor;
   }
 
+  /** @deprecated Use getCollatorOptions instead */
   public static getEnableNaturalSorting(): boolean {
     return ConfigurationProvider.getConfiguration().enableNaturalSorting;
   }
 
   public static getEnableCodeLens(): DocumentSelector | boolean {
     const codeLens = ConfigurationProvider.getConfiguration().enableCodeLens;
-    if (codeLens === true) {
-      return ConfigurationProvider.getConfiguration().enableCodeActions || codeLens;
-    }
+    if (codeLens === true) return ConfigurationProvider.getConfiguration().enableCodeActions || codeLens;
 
     return codeLens;
   }
@@ -159,15 +180,13 @@ export default class ConfigurationProvider {
     return ConfigurationProvider.getConfiguration().enableCodeActions;
   }
 
-  public static getenableDocumentFormatting(): DocumentSelector | boolean {
+  public static getEnableDocumentFormatting(): DocumentSelector | boolean {
     return ConfigurationProvider.getConfiguration().enableDocumentFormatting;
   }
 
-  public static getenableRangeFormatting(): DocumentSelector | boolean {
+  public static getEnableRangeFormatting(): DocumentSelector | boolean {
     const formatting = ConfigurationProvider.getConfiguration().enableRangeFormatting;
-    if (formatting === true) {
-      return ConfigurationProvider.getConfiguration().enableRangeFormatting || formatting;
-    }
+    if (formatting === true) return ConfigurationProvider.getConfiguration().enableRangeFormatting || formatting;
 
     return formatting;
   }
@@ -188,6 +207,7 @@ export default class ConfigurationProvider {
       const configuration = workspace.getConfiguration("blocksort", scope) as BlockSortConfiguration &
         WorkspaceConfiguration;
       ConfigurationProvider.configuration.set(scope, configuration);
+      this.validateConfiguration(configuration);
 
       return configuration;
     }
@@ -202,6 +222,33 @@ export default class ConfigurationProvider {
       ConfigurationProvider.editorConfiguration.set(scope, editorConfiguration);
 
       return editorConfiguration;
+    }
+  }
+
+  private static validateConfiguration(configuration: BlockSortConfiguration): void {
+    const deprecatedConfigurationKeys: Partial<Record<keyof BlockSortConfiguration, string>> = {
+      enableNaturalSorting: "collatorOptions.numeric",
+    };
+
+    for (const [key, value] of Object.entries(deprecatedConfigurationKeys) as [
+      keyof BlockSortConfiguration,
+      string
+    ][]) {
+      if (configuration[key] !== undefined) {
+        window
+          .showWarningMessage(
+            `The configuration option '${key}' is deprecated. Please use '${value}' instead.`,
+            "Open Settings"
+          )
+          .then((selection) => {
+            switch (selection) {
+              case "Open Settings":
+                commands.executeCommand("workbench.action.openSettings", `blocksort.${value}`);
+                break;
+            }
+          });
+        return;
+      }
     }
   }
 }

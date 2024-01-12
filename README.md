@@ -158,16 +158,19 @@ some:
   - *Language Overridable*
 - `enableNaturalSorting`: Enables the natural sorting behavior for lines containing numbers.
   - Default: `false`
-- `naturalSorting`: Options for the natural sorting behavior. Only takes effect if `enableNaturalSorting` is true.
+  - **Deprecated**: This option is n longer used, use `collationOptions.numeric` instead
+- `collatorOptions`: Collator options for sorting. See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Collator/Collator for more information
   - Default:
     ```json
     {
-      "enabled": false,
-      "padding": 9,
-      "omitUuids": false,
-      "sortNegativeValues": true
+      "numeric": true,
+      "caseFirst": "false",
+      "sensitivity": "base"
     }
     ```
+  - In addition to the default JavaScript Collator options, the following properties can be supplied
+    - `locales`: A BCP 47 language tag, or an comma separated array of such strings.
+    - `customSortOrder`: Custom Sort order in the form of a list of characters
 - `sortConsecutiveBlockHeaders`: sorts consecutive block headers, such as a list of `case` statements.
   - Default: `true`
   - *Language Overridable*
@@ -238,7 +241,6 @@ Settings marked as *Language Overridable* can be specified on a per-language bas
 - some spacings between the original blocks may not be preserved
 - The extension does NOT check for code errors due to sorting
 - The extension assumes valid formatting, invalid formatting will probably result in invalid sorting
-- "Natural" sorting may break sorting of UUID strings containing a mix of numbers, letters and/or dashes
 
 ***
 

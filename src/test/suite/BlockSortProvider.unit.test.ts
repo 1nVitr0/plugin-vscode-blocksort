@@ -6,18 +6,20 @@ import { expandTests, fixtureDir, sortTests, multilevelSortTests, cancelSortTest
 import { CompareTest } from "./types";
 import { naturalSortTests } from "../fixtures/natural";
 import { ExpandSelectionOptions } from "../../types/BlockSortOptions";
+import { StringSortProvider } from "../../providers/StringSortProvider";
+import { customSortTests } from "../fixtures/custom";
 
 const defaultExpandOptions: ExpandSelectionOptions = {
   expandLocally: true,
   expandOverEmptyLines: false,
   foldingComplete: true,
   indentationComplete: true,
-}; 
+};
 
 function sortTest(
   tests: CompareTest[],
   title = "Sort Blocks",
-  sort: (a: string, b: string) => number = BlockSortProvider.sort.asc,
+  sortProvider: StringSortProvider = new StringSortProvider(),
   sortChildren = 0
 ) {
   tests.forEach(({ file, compareFile, ranges, only, skip }) => {
@@ -32,7 +34,7 @@ function sortTest(
         const blockSortProvider = new BlockSortProvider(document);
 
         const blocks = blockSortProvider.getBlocks(range);
-        const sorted = blockSortProvider.sortBlocks(blocks, sort, sortChildren).join("\n");
+        const sorted = blockSortProvider.sortBlocks(blocks, sortProvider, sortChildren).join("\n");
         const compareSorted = compareDocument.getText(range);
 
         assert.strictEqual(sorted, compareSorted, "sorted ranges are not equal");
@@ -84,14 +86,32 @@ suite("Unit Suite for BlockSortProvider", async () => {
             blockSortProvider.expandRange(selection, expand ?? defaultExpandOptions)
           );
 
-          assert.deepStrictEqual(expanded, target, "range did not expand correctly");
+          assert.deepStrictEqual(
+            {
+              start: expanded.start,
+              end: expanded.end,
+              text: document.getText(expanded),
+            },
+            {
+              start: target.start,
+              end: target.end,
+              text: document.getText(target),
+            },
+            "range did not expand correctly"
+          );
         });
       });
   });
 
   sortTest(sortTests, "Sort Blocks");
-  sortTest(multilevelSortTests, "Deep Sort Blocks", BlockSortProvider.sort.asc, -1);
-  sortTest(naturalSortTests, "Natural Sort Blocks", BlockSortProvider.sort.ascNatural, 0);
+  sortTest(multilevelSortTests, "Deep Sort Blocks", new StringSortProvider(), -1);
+  sortTest(naturalSortTests, "Natural Sort Blocks", new StringSortProvider({ numeric: true }), 0);
+  sortTest(
+    customSortTests,
+    "Custom Sort Blocks",
+    new StringSortProvider({ customSortOrder: "abcdefghijklmnopqrstuvwxyz:#" }),
+    0
+  );
 
   cancelSortTests.forEach(({ file, ranges, performanceThreshold, only, skip }) => {
     ranges.forEach((range, i) => {
@@ -124,7 +144,7 @@ suite("Unit Suite for BlockSortProvider", async () => {
         const callback = blockSortProvider.sortBlocks.bind(
           blockSortProvider,
           blocks,
-          BlockSortProvider.sort.asc,
+          new StringSortProvider(),
           Infinity,
           []
         );
