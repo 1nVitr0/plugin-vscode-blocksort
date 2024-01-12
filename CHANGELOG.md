@@ -1,3 +1,20 @@
+# [2.0.0](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v1.2.5...v2.0.0) (2024-01-12)
+
+
+### Bug Fixes
+
+* correctly expand selections containing arrow functions ([423a3f6](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/423a3f6a994acbbe6974f8ab111edf3dde2a2081))
+
+
+### Features
+
+* add custom sort order ([e4ce07c](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/e4ce07caf25d1838efbb9cbde16fe65fdb5011a6))
+
+
+### BREAKING CHANGES
+
+* naturalSort has been replaced by collationOptions
+
 ## [1.2.5](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v1.2.4...v1.2.5) (2023-07-10)
 
 
