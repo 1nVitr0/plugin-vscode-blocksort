@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v2.0.0...v2.0.1) (2024-01-13)
+
+
+### Bug Fixes
+
+* temporarily hide deprecation notice ([0e6c717](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/0e6c717060b2a5eaff4356a35c4add625d7f555c))
+
 # [2.0.0](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v1.2.5...v2.0.0) (2024-01-12)
 
 
