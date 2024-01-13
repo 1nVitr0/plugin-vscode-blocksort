@@ -207,7 +207,7 @@ export default class ConfigurationProvider {
       const configuration = workspace.getConfiguration("blocksort", scope) as BlockSortConfiguration &
         WorkspaceConfiguration;
       ConfigurationProvider.configuration.set(scope, configuration);
-      this.validateConfiguration(configuration);
+      // this.validateConfiguration(configuration);
 
       return configuration;
     }
