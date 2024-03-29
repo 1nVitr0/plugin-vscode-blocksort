@@ -4,3 +4,19 @@ bbbb
 :bbb
 #aaa
 #bbb
+
+variable "grafana" {
+  type = bool
+}
+variable "grafana-count" {
+  type = number
+}
+variable "grafana-username" {
+  type = string
+}
+variable "grafana_address" {
+  type = string
+}
+variable "grafana_password" {
+  type = string
+}

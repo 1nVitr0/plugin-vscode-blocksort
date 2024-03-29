@@ -1,5 +1,6 @@
 import { CodeActionKind, Position, Range } from "vscode";
 import { ExpandSelectionOptions } from "../../types/BlockSortOptions";
+import { BlockSortCollatorOptions } from "../../providers/ConfigurationProvider";
 
 export interface BaseTest {
   file: string;
@@ -10,6 +11,11 @@ export interface BaseTest {
 
 export interface CompareTest extends BaseTest {
   compareFile: string;
+}
+
+export interface CustomSortTest extends CompareTest {
+  collatorOptions?: BlockSortCollatorOptions;
+  direction?: "asc" | "desc";
 }
 
 export interface RangeTest extends BaseTest {
