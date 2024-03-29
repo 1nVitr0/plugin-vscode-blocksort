@@ -1,3 +1,10 @@
+## [2.0.2](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v2.0.1...v2.0.2) (2024-03-29)
+
+
+### Bug Fixes
+
+* apply customSortOrder for non-exhaustive orders ([396c549](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/396c549052824448eb056a3e678ec08aa42a99dd))
+
 ## [2.0.1](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v2.0.0...v2.0.1) (2024-01-13)
 
 
