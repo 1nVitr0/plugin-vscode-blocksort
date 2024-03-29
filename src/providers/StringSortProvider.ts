@@ -43,7 +43,7 @@ export class StringSortProvider extends Intl.Collator {
         const aIndex = customSortOrder.indexOf(ignoreCase ? a[i].toLowerCase() : a[i]);
         const bIndex = customSortOrder.indexOf(ignoreCase ? b[i].toLowerCase() : b[i]);
 
-        if (aIndex === -1 || bIndex === -1) break;
+        if (aIndex === -1 || bIndex === -1) continue;
         else if (aIndex !== bIndex) return (aIndex - bIndex) * sign;
         else if (i === minLength - 1) return (a.length - b.length) * sign;
       }

@@ -3,7 +3,7 @@ import { join } from "path";
 import { window, workspace, Selection, CancellationTokenSource, CancellationToken, languages } from "vscode";
 import BlockSortProvider from "../../providers/BlockSortProvider";
 import { expandTests, fixtureDir, sortTests, multilevelSortTests, cancelSortTests } from "../fixtures";
-import { CompareTest } from "./types";
+import { CompareTest, CustomSortTest } from "./types";
 import { naturalSortTests } from "../fixtures/natural";
 import { ExpandSelectionOptions } from "../../types/BlockSortOptions";
 import { StringSortProvider } from "../../providers/StringSortProvider";
@@ -16,16 +16,12 @@ const defaultExpandOptions: ExpandSelectionOptions = {
   indentationComplete: true,
 };
 
-function sortTest(
-  tests: CompareTest[],
-  title = "Sort Blocks",
-  sortProvider: StringSortProvider = new StringSortProvider(),
-  sortChildren = 0
-) {
-  tests.forEach(({ file, compareFile, ranges, only, skip }) => {
+function sortTest(tests: CustomSortTest[], title = "Sort Blocks", sortChildren = 0) {
+  tests.forEach(({ file, compareFile, ranges, only, skip, collatorOptions, direction }) => {
     ranges.forEach((range, i) => {
       const descriptor = file.match(/(.*)\.(.*)\.fixture/);
       const [_, type, lang] = descriptor || ["", "generic", "generic"];
+      const sortProvider = new StringSortProvider(collatorOptions, direction);
       const testFunc = only ? test.only : skip ? test.skip : test;
       testFunc(`${title} (${type}, lang ${lang}) #${i + 1}`, async () => {
         const compareDocument = await workspace.openTextDocument(join(fixtureDir, compareFile));
@@ -104,14 +100,13 @@ suite("Unit Suite for BlockSortProvider", async () => {
   });
 
   sortTest(sortTests, "Sort Blocks");
-  sortTest(multilevelSortTests, "Deep Sort Blocks", new StringSortProvider(), -1);
-  sortTest(naturalSortTests, "Natural Sort Blocks", new StringSortProvider({ numeric: true }), 0);
+  sortTest(multilevelSortTests, "Deep Sort Blocks", -1);
   sortTest(
-    customSortTests,
-    "Custom Sort Blocks",
-    new StringSortProvider({ customSortOrder: "abcdefghijklmnopqrstuvwxyz:#" }),
+    naturalSortTests.map((test) => ({ ...test, collatorOptions: { numeric: true } })),
+    "Natural Sort Blocks",
     0
   );
+  sortTest(customSortTests, "Custom Sort Blocks", 0);
 
   cancelSortTests.forEach(({ file, ranges, performanceThreshold, only, skip }) => {
     ranges.forEach((range, i) => {
