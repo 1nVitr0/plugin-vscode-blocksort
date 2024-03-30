@@ -14,4 +14,16 @@ export const customSortTests: CustomSortTest[] = [
     ranges: [new Range(7, 0, 21, 1)],
     collatorOptions: { customSortOrder: '"-_' },
   },
+  {
+    file: "custom.plaintext.fixture",
+    compareFile: "custom.plaintext.expect",
+    ranges: [new Range(23, 0, 37, 1)],
+    collatorOptions: { customSortOrder: "-_", customIgnoreCharacters: "'\"()[]{}<>" },
+  },
+  {
+    file: "custom.plaintext.fixture",
+    compareFile: "custom.plaintext.expect",
+    ranges: [new Range(23, 0, 37, 1)],
+    collatorOptions: { customSortOrder: '"-_' },
+  },
 ];

@@ -20,3 +20,19 @@ variable "grafana_address" {
 variable "grafana_password" {
   type = string
 }
+
+variable "grafana" {
+  type = bool
+}
+variable "grafana_password" {
+  type = string
+}
+variable "helm_chart_version" {
+  type = string
+}
+variable "name" {
+  type = string
+}
+variable "name_chart_version" {
+  type = string
+}
