@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v2.0.2...v2.1.0) (2024-03-30)
+
+
+### Features
+
+* add option to ignore characters when sorting ([47ee322](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/47ee32210f3da38d12ee14171102076327a8ad49))
+
 ## [2.0.2](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v2.0.1...v2.0.2) (2024-03-29)
 
 
