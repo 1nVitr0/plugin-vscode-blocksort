@@ -171,6 +171,7 @@ some:
   - In addition to the default JavaScript Collator options, the following properties can be supplied
     - `locales`: A BCP 47 language tag, or an comma separated array of such strings.
     - `customSortOrder`: Custom Sort order in the form of a list of characters
+    - `customIgnoreCharacters`: A list of characters that are ignored when sorting, e.g. `"'\"()[]{}<>"`
 - `sortConsecutiveBlockHeaders`: sorts consecutive block headers, such as a list of `case` statements.
   - Default: `true`
   - *Language Overridable*
