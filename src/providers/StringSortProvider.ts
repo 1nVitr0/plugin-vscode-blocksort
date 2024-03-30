@@ -2,6 +2,7 @@ import { BlockSortCollatorOptions } from "./ConfigurationProvider";
 
 export class StringSortProvider extends Intl.Collator {
   private customSortOrder?: string;
+  private customIgnoreCharacters?: RegExp;
   private ignoreCase?: boolean;
   private direction?: "asc" | "desc";
 
@@ -29,13 +30,24 @@ export class StringSortProvider extends Intl.Collator {
       this.customSortOrder = customSortOrder;
     }
 
+    this.customIgnoreCharacters = options?.customIgnoreCharacters
+      ? new RegExp(
+          `[${options.customIgnoreCharacters.replace(/\\/, "\\\\").replace(/]/g, "\\]").replace(/-/g, "\\-")}]`,
+          "g"
+        )
+      : undefined;
     this.ignoreCase = caseFirst === "false" ? true : false;
     this.direction = direction ?? "asc";
   }
 
   public compare(a: string, b: string): number {
-    const { customSortOrder, direction, ignoreCase } = this;
+    const { customSortOrder, customIgnoreCharacters, direction, ignoreCase } = this;
     const sign = direction === "asc" ? 1 : -1;
+
+    if (customIgnoreCharacters) {
+      a = a.replace(customIgnoreCharacters, "");
+      b = b.replace(customIgnoreCharacters, "");
+    }
 
     if (customSortOrder) {
       const minLength = Math.min(a.length, b.length);
@@ -43,8 +55,13 @@ export class StringSortProvider extends Intl.Collator {
         const aIndex = customSortOrder.indexOf(ignoreCase ? a[i].toLowerCase() : a[i]);
         const bIndex = customSortOrder.indexOf(ignoreCase ? b[i].toLowerCase() : b[i]);
 
-        if (aIndex === -1 || bIndex === -1) continue;
-        else if (aIndex !== bIndex) return (aIndex - bIndex) * sign;
+        if (aIndex === -1 || bIndex === -1) {
+          const diff = super.compare(a[i], b[i]);
+          if (diff !== 0) return diff * sign;
+          else continue;
+        }
+
+        if (aIndex !== bIndex) return (aIndex - bIndex) * sign;
         else if (i === minLength - 1) return (a.length - b.length) * sign;
       }
     }

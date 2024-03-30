@@ -38,6 +38,7 @@ export interface NaturalSortOptions {
 export interface BlockSortCollatorOptions extends Omit<Intl.CollatorOptions, "usage"> {
   locales?: string;
   customSortOrder?: string;
+  customIgnoreCharacters?: string;
 }
 
 export interface BlockSortConfiguration {
