@@ -47,9 +47,6 @@ export class StringSortProvider extends Intl.Collator {
     if (customIgnoreCharacters) {
       a = a.replace(customIgnoreCharacters, "");
       b = b.replace(customIgnoreCharacters, "");
-      console.log("customIgnoreCharacters", customIgnoreCharacters);
-      console.log("a", a);
-      console.log("b", b);
     }
 
     if (customSortOrder) {
