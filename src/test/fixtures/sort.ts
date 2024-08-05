@@ -67,4 +67,9 @@ export const sortTests: CompareTest[] = [
     compareFile: "block.go.expect",
     ranges: [new Range(1, 0, 3, 10), new Range(7, 0, 9, 10), new Range(13, 0, 15, 10), new Range(18, 0, 27, 1), new Range(29, 0, 38, 1)],
   },
+  {
+    file: "block.markdown.fixture",
+    compareFile: "block.markdown.expect",
+    ranges: [new Range(0, 0, 15, 21)],
+  },
 ];

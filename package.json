@@ -454,7 +454,7 @@
             "format": "regex",
             "description": "Regex to match block headers that should be sorted last. `^` and `$` will be expanded to allow comments",
             "scope": "language-overridable",
-            "default": "^(\\s*(when|case)\\s*('([^']|(?<=\\\\)')*'|\"([^\"]|(?<=\\\\)\")*\"|`([^`]|(?<=\\\\)`)*`|[A-Za-z_+\\-*/%<>d.,s]*)*\\s*(.*:)?\\n?\\r?)*\\s*default|else(?!\\s?if)\\s*:?$"
+            "default": "^(\\s*(when|case)\\s*('([^']|(?<=\\\\)')*'|\"([^\"]|(?<=\\\\)\")*\"|`([^`]|(?<=\\\\)`)*`|[A-Za-z_+\\-*\\/%<>\\d.,\\s]*)*\\s*(.*:)?\\n?\\r?)*\\s*default|else(?!\\s?if)\\s*:?$"
           },
           "blocksort.multiBlockHeaderRegex": {
             "type": "string",
@@ -468,7 +468,7 @@
             "format": "regex",
             "description": "Regex for incomplete blocks. `^` and `$` will be expanded to allow comments",
             "scope": "language-overridable",
-            "default": "(if|when|else|case|for|foreach|else|elsif|while|def|then|default)\\s*('([^']|(?<=\\\\)')*'|\"([^\"]|(?<=\\\\)\")*\"|`([^`]|(?<=\\\\)`)*`|[A-Za-z_+\\-*/%<>d.,s]*)*\\s*(.*:)?$"
+            "default": "(if|when|else|case|for|foreach|else|elsif|while|def|then|default)\\s*([A-Za-z_+\\-*\\/%<>\\d.,\\s]*|.*:)?$"
           },
           "blocksort.keepAppendedNewlines": {
             "type": "boolean",

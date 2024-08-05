@@ -354,16 +354,27 @@ export default class BlockSortProvider implements Disposable {
       const lines = text.split(/\r?\n/);
 
       const lineMetas = lines.map((line, j) => {
+        const noComments = this.stringProcessor.stripComments(line).trim();
+        const noStringsOrComments = this.stringProcessor.stripStrings(noComments).trim();
+
+        const hasContent = !!noComments;
+        const indent = this.stringProcessor.getIndent(line, tabSize);
+        const folding = this.stringProcessor.getFolding(noStringsOrComments, this.document, undefined, true);
+        const valid = this.stringProcessor.isValidLine(line, this.document, folding);
+        const ignoreIndent = this.stringProcessor.isIndentIgnoreLine(line, this.document);
+        const complete = this.stringProcessor.isCompleteBlock(noComments, this.document);
+        const incomplete = this.stringProcessor.isIncompleteBlock(noComments);
+
         return {
           line: start.line + j,
-          indent: this.stringProcessor.getIndent(line, tabSize),
-          valid: this.stringProcessor.isValidLine(line, this.document),
-          folding: this.stringProcessor.getFolding(line, this.document),
-          ignoreIndent: this.stringProcessor.isIndentIgnoreLine(line, this.document),
-          hasContent: !!this.stringProcessor.stripComments(line).trim(),
-          complete: this.stringProcessor.isCompleteBlock(line, this.document),
-          incomplete: this.stringProcessor.isIncompleteBlock(line),
           text: withText ? line : null,
+          folding,
+          indent,
+          valid,
+          ignoreIndent,
+          hasContent,
+          complete,
+          incomplete,
         };
       });
 

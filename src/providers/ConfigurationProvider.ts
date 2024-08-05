@@ -122,7 +122,7 @@ export default class ConfigurationProvider {
   public static getIncompleteBlockRegex(document?: TextDocument): string {
     return (
       ConfigurationProvider.getConfiguration(document).incompleteBlockRegex ||
-      "(if|when|else|case|for|foreach|else|elsif|while|def|then|default)\\s*('([^']|(?<=\\\\)')*'|\"([^\"]|(?<=\\\\)\")*\"|`([^`]|(?<=\\\\)`)*`|[A-Za-z_+\\-*/%<>d.,s]*)*\\s*(.*:)?$"
+      "(if|when|else|case|for|foreach|else|elsif|while|def|then|default)\\s*([A-Za-z_+\\-*\\/%<>\\d.,\\s]*|.*:)?$"
     );
   }
 

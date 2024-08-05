@@ -79,7 +79,12 @@ export default class StringProcessingProvider {
     return { min, max };
   }
 
-  public getFolding(text: string, document: TextDocument, initial: Folding = initialFolding(document)): Folding {
+  public getFolding(
+    text: string,
+    document: TextDocument,
+    initial: Folding = initialFolding(document),
+    isSanitized?: boolean
+  ): Folding {
     const foldingMarkers = ConfigurationProvider.getFoldingMarkers(document);
     const result: Folding = { ...initial };
 
@@ -89,7 +94,7 @@ export default class StringProcessingProvider {
     markerKeys.push("{}"); // ensure '{}' is last to make abort on curly braces possible
 
     for (const line of lines) {
-      const sanitized = this.stripStrings(this.stripComments(line)).trim();
+      const sanitized = isSanitized ? line : this.stripStrings(this.stripComments(line)).trim();
       for (const [key, marker] of Object.entries(foldingMarkers)) {
         if (!marker) continue;
 
@@ -147,8 +152,7 @@ export default class StringProcessingProvider {
 
   public isCompleteBlock(block: string, document: TextDocument): boolean {
     const completeBlockMarkers = ConfigurationProvider.getCompleteBlockMarkers(document);
-    const comment = commentRegex[this.document.languageId || "default"] || commentRegex.default;
-    const completeBlockRegex = `(?:${completeBlockMarkers.join("|")})(?:,|;)?(?:${comment}|\\s*)*(?:,|;)?$`;
+    const completeBlockRegex = `(?:${completeBlockMarkers.join("|")})\\s*(?:,|;)?$`;
     return new RegExp(completeBlockRegex, "g").test(block);
   }
 
@@ -175,11 +179,11 @@ export default class StringProcessingProvider {
     return new RegExp(lastRegex, "g").test(block);
   }
 
-  public isValidLine(line: string | LineMeta, document: TextDocument): boolean {
+  public isValidLine(line: string | LineMeta, document: TextDocument, folding?: Folding): boolean {
     if (typeof line !== "string") return line.valid;
 
     const comment = commentRegex[this.document.languageId || "default"] || commentRegex.default;
-    const hasFolding = this.hasFolding(this.getFolding(line, document));
+    const hasFolding = this.hasFolding(folding ?? this.getFolding(line, document));
     return (
       !/^\s*$/.test(line) &&
       !/^\s*@/.test(line) &&
