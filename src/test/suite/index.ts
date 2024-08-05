@@ -1,6 +1,7 @@
 import * as path from 'path';
 import * as Mocha from 'mocha';
 import * as glob from 'glob';
+import { commands } from 'vscode';
 
 export function run(): Promise<void> {
   // Create the mocha test
@@ -27,6 +28,8 @@ export function run(): Promise<void> {
       } catch (err) {
         console.error(err);
         e(err);
+      } finally {
+        commands.executeCommand('workbench.action.closeAllEditors');
       }
     });
   });
