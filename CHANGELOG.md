@@ -1,3 +1,10 @@
+## [2.1.1](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v2.1.0...v2.1.1) (2024-08-05)
+
+
+### Bug Fixes
+
+* massively increase regexp efficiency ([26865d2](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/26865d2662f2e3c821be8f8c3e3e34a2ff561a7b))
+
 # [2.1.0](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v2.0.2...v2.1.0) (2024-03-30)
 
 
