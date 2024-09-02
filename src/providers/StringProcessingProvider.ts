@@ -125,7 +125,7 @@ export default class StringProcessingProvider {
   }
 
   public hasFolding(folding: Folding): boolean {
-    for (const key of Object.keys(folding)) if (folding[key].level) return true;
+    for (const { level } of Object.values(folding)) if (level) return true;
 
     return false;
   }

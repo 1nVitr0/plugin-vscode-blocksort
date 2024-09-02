@@ -11,6 +11,7 @@ import { ExpandSelectionOptions } from "../types/BlockSortOptions";
 import ConfigurationProvider from "./ConfigurationProvider";
 import StringProcessingProvider, { Folding, LineMeta } from "./StringProcessingProvider";
 import { StringSortProvider } from "./StringSortProvider";
+import { join, sep } from "path";
 
 interface ExpandDirectionOptions extends ExpandSelectionOptions {
   direction: 1 | -1;
@@ -194,20 +195,24 @@ export default class BlockSortProvider implements Disposable {
     if (!this.isComputed(block)) this.computeLineMeta([block], true, token);
     if (!this.documentLineMeta) return []; //* TS hint, this never actually happens
 
-    const indent = this.stringProcessor.getIndentRange(
+    const indentRange = this.stringProcessor.getIndentRange(
       this.documentLineMeta.slice(block.start.line, block.end.line),
       this.document
     );
 
+    let checkFolding: Folding | null = null;
     let start = 0;
     let end = -1;
     for (let i = block.start.line; i <= block.end.line; i++) {
       if (token?.isCancellationRequested) return [];
 
-      const lineMeta = this.documentLineMeta[i];
+      const { indent, folding } = this.documentLineMeta[i];
 
-      if (lineMeta.indent === indent.min) {
+      if (checkFolding) checkFolding = this.stringProcessor.mergeFolding(checkFolding, folding);
+
+      if (indent === indentRange.min || (checkFolding && !this.stringProcessor.hasFolding(checkFolding))) {
         if (end >= start) break;
+        if (this.stringProcessor.hasFolding(folding)) checkFolding = folding;
         start++;
       }
       end++;
@@ -485,7 +490,7 @@ export default class BlockSortProvider implements Disposable {
     const tail: Range = new Range(blocks[blocks.length - 1]?.end || block.end, block.end);
 
     if (token?.isCancellationRequested) return "";
-    if (head.isEmpty && tail.isEmpty) return this.document.getText(block);
+    if (blocks.length <= 1) return this.document.getText(block);
 
     return (
       this.document.getText(head) +
@@ -546,7 +551,7 @@ export default class BlockSortProvider implements Disposable {
     return lines.join("\n");
   }
 
-  private applySort(blocks: string[], sortProvider: StringSortProvider) {
+  private applySort(blocks: string[], sortProvider: StringSortProvider, ...affixes: string[][]) {
     const compare = sortProvider.compare.bind(sortProvider);
     const precomputed = blocks
       .map((original, index) => ({
@@ -561,6 +566,9 @@ export default class BlockSortProvider implements Disposable {
         a.forceFirst || b.forceLast ? -1 : a.forceLast || b.forceFirst ? 1 : compare(a.sanitized, b.sanitized)
       );
 
-    precomputed.forEach(({ original }, index) => (blocks[index] = original));
+    precomputed.forEach(({ original, index: originalIndex }, index) => {
+      blocks[index] = original;
+      affixes.forEach((affix) => (affix[index] = affix[originalIndex]));
+    });
   }
 }
