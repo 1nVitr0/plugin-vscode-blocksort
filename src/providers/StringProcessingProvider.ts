@@ -197,16 +197,16 @@ export default class StringProcessingProvider {
     return null;
   }
 
-  public getBlockSeparator(line: string, currentSeparator?: string): string {
-    if (typeof currentSeparator !== "string") return /[,\r?\n]+$/g.exec(line)?.pop() || "";
-    if (!currentSeparator) return "";
+  public getBlockSeparator(lines: string | string[], allowed: string = ",;", ignoreLast = true): string {
+    if (!allowed) return "";
 
-    const separator = /[,;\r?\n]+$/g.exec(line)?.pop() || "";
-    const index = currentSeparator.indexOf(separator);
+    const separatorRegex = new RegExp(`[${allowed}](?=[\\s\\r\\n]+)?$`, "g");
+    const separators = (typeof lines === "string" ? [lines] : lines).map((line) => line.match(separatorRegex)?.pop());
 
-    if (index < 0) return "";
+    let separator = separators.shift();
+    for (const sep of separators.slice(0, ignoreLast ? -1 : separators.length)) if (sep !== separator) return "";
 
-    return currentSeparator.slice(index);
+    return separator || "";
   }
 
   public stripComments(text: string): string {

@@ -11,7 +11,6 @@ import { ExpandSelectionOptions } from "../types/BlockSortOptions";
 import ConfigurationProvider from "./ConfigurationProvider";
 import StringProcessingProvider, { Folding, LineMeta } from "./StringProcessingProvider";
 import { StringSortProvider } from "./StringSortProvider";
-import { join, sep } from "path";
 
 interface ExpandDirectionOptions extends ExpandSelectionOptions {
   direction: 1 | -1;
@@ -100,17 +99,25 @@ export default class BlockSortProvider implements Disposable {
     }
 
     // Find common block separator, ignoring the last block
-    let separator = textBlocks.length > 1 ? this.stringProcessor.getBlockSeparator(textBlocks[0]) : "";
-    for (const block of textBlocks.slice(1, -1)) {
-      separator = this.stringProcessor.getBlockSeparator(block, separator);
-      if (!separator) break;
-    }
+    const separator = this.stringProcessor.getBlockSeparator(textBlocks);
     // If last block has separator, we don't need to alter anything
-    if (textBlocks.length && textBlocks[textBlocks.length - 1].endsWith(separator)) separator = "";
+    const lastSeparator =
+      textBlocks.length > 1 ? this.stringProcessor.getBlockSeparator(textBlocks[textBlocks.length - 1]) : "";
+    const applySeparator = textBlocks.length > 1 && !!separator && lastSeparator !== separator;
+    let floatLastSeparator = "";
+
+    if (textBlocks.length > 1 && lastSeparator && !separator) {
+      // Last Block is terminated with a separator, but others are not
+      const lastBlock = textBlocks.pop()!;
+      const separatorIndex = lastBlock.lastIndexOf(lastSeparator);
+
+      textBlocks.push(lastBlock.slice(0, separatorIndex));
+      floatLastSeparator = lastBlock.slice(separatorIndex);
+    }
 
     this.applySort(textBlocks, sortProvider);
 
-    if (separator) {
+    if (applySeparator) {
       // Apply separator to all blocks except the last one
       textBlocks = textBlocks.map((block, i) => {
         if (i === textBlocks.length - 1 && block.endsWith(separator)) return block.slice(0, -separator.length);
@@ -119,11 +126,12 @@ export default class BlockSortProvider implements Disposable {
       });
     }
 
-    if (suffixes) {
-      // eslint-disable-next-line curly
-      for (let i = 0; i < textBlocks.length; i++) {
-        if (suffixes[i]) textBlocks[i] += suffixes[i];
-      }
+    // Apply floated separator to last block before suffixes (was floated after suffixes)
+    if (floatLastSeparator) textBlocks[textBlocks.length - 1] += lastSeparator;
+
+    // eslint-disable-next-line curly
+    for (let i = 0; i < textBlocks.length; i++) {
+      if (suffixes[i]) textBlocks[i] += suffixes[i];
     }
 
     return textBlocks;
@@ -213,6 +221,7 @@ export default class BlockSortProvider implements Disposable {
       if (indent === indentRange.min || (checkFolding && !this.stringProcessor.hasFolding(checkFolding))) {
         if (end >= start) break;
         if (this.stringProcessor.hasFolding(folding)) checkFolding = folding;
+
         start++;
       }
       end++;
@@ -482,7 +491,7 @@ export default class BlockSortProvider implements Disposable {
     edits?: TextEdit[],
     token?: CancellationToken
   ): string {
-    if (sortChildren === 0) return this.getEditedText(block, edits, token);
+    if (sortChildren === 0 || block.isSingleLine) return this.getEditedText(block, edits, token);
 
     let blocks = this.getInnerBlocks(block, token);
 
@@ -490,7 +499,6 @@ export default class BlockSortProvider implements Disposable {
     const tail: Range = new Range(blocks[blocks.length - 1]?.end || block.end, block.end);
 
     if (token?.isCancellationRequested) return "";
-    if (blocks.length <= 1) return this.document.getText(block);
 
     return (
       this.document.getText(head) +
