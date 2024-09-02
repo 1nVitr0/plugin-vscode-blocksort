@@ -19,3 +19,35 @@ function test(input: string, select = 0) {
       return 'last';
   }
 }
+
+type Return<T extends any> =
+  | {
+      data: T;
+      meta?: unknown;
+      error?: undefined;
+    }
+  | {
+      data: null;
+      error: {
+        status: number;
+        name: string;
+        message: string;
+        details: object;
+      };
+    }
+
+type Return<T extends any> =
+  | {
+      data: T;
+      meta?: unknown;
+      error?: undefined;
+    }
+  | {
+      data: null;
+      error: {
+        status: number;
+        name: string;
+        message: string;
+        details: object;
+      };
+    };
