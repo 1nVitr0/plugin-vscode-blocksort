@@ -1,3 +1,11 @@
+## [2.1.2](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v2.1.1...v2.1.2) (2024-09-04)
+
+
+### Bug Fixes
+
+* add support block separator of outer block (`;`) ([6bafbae](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/6bafbaeadc77404442495e7c7ccd453d3b788f07))
+* check for folding when sorting inner blocks ([0281d86](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/0281d86b3d7756ce50c9e475f64c7c244e5fe237))
+
 ## [2.1.1](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v2.1.0...v2.1.1) (2024-08-05)
 
 
