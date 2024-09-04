@@ -99,17 +99,25 @@ export default class BlockSortProvider implements Disposable {
     }
 
     // Find common block separator, ignoring the last block
-    let separator = textBlocks.length > 1 ? this.stringProcessor.getBlockSeparator(textBlocks[0]) : "";
-    for (const block of textBlocks.slice(1, -1)) {
-      separator = this.stringProcessor.getBlockSeparator(block, separator);
-      if (!separator) break;
-    }
+    const separator = this.stringProcessor.getBlockSeparator(textBlocks);
     // If last block has separator, we don't need to alter anything
-    if (textBlocks.length && textBlocks[textBlocks.length - 1].endsWith(separator)) separator = "";
+    const lastSeparator =
+      textBlocks.length > 1 ? this.stringProcessor.getBlockSeparator(textBlocks[textBlocks.length - 1]) : "";
+    const applySeparator = textBlocks.length > 1 && !!separator && lastSeparator !== separator;
+    let floatLastSeparator = "";
+
+    if (textBlocks.length > 1 && lastSeparator && !separator) {
+      // Last Block is terminated with a separator, but others are not
+      const lastBlock = textBlocks.pop()!;
+      const separatorIndex = lastBlock.lastIndexOf(lastSeparator);
+
+      textBlocks.push(lastBlock.slice(0, separatorIndex));
+      floatLastSeparator = lastBlock.slice(separatorIndex);
+    }
 
     this.applySort(textBlocks, sortProvider);
 
-    if (separator) {
+    if (applySeparator) {
       // Apply separator to all blocks except the last one
       textBlocks = textBlocks.map((block, i) => {
         if (i === textBlocks.length - 1 && block.endsWith(separator)) return block.slice(0, -separator.length);
@@ -118,11 +126,12 @@ export default class BlockSortProvider implements Disposable {
       });
     }
 
-    if (suffixes) {
-      // eslint-disable-next-line curly
-      for (let i = 0; i < textBlocks.length; i++) {
-        if (suffixes[i]) textBlocks[i] += suffixes[i];
-      }
+    // Apply floated separator to last block before suffixes (was floated after suffixes)
+    if (floatLastSeparator) textBlocks[textBlocks.length - 1] += lastSeparator;
+
+    // eslint-disable-next-line curly
+    for (let i = 0; i < textBlocks.length; i++) {
+      if (suffixes[i]) textBlocks[i] += suffixes[i];
     }
 
     return textBlocks;
@@ -194,20 +203,25 @@ export default class BlockSortProvider implements Disposable {
     if (!this.isComputed(block)) this.computeLineMeta([block], true, token);
     if (!this.documentLineMeta) return []; //* TS hint, this never actually happens
 
-    const indent = this.stringProcessor.getIndentRange(
+    const indentRange = this.stringProcessor.getIndentRange(
       this.documentLineMeta.slice(block.start.line, block.end.line),
       this.document
     );
 
+    let checkFolding: Folding | null = null;
     let start = 0;
     let end = -1;
     for (let i = block.start.line; i <= block.end.line; i++) {
       if (token?.isCancellationRequested) return [];
 
-      const lineMeta = this.documentLineMeta[i];
+      const { indent, folding } = this.documentLineMeta[i];
 
-      if (lineMeta.indent === indent.min) {
+      if (checkFolding) checkFolding = this.stringProcessor.mergeFolding(checkFolding, folding);
+
+      if (indent === indentRange.min || (checkFolding && !this.stringProcessor.hasFolding(checkFolding))) {
         if (end >= start) break;
+        if (this.stringProcessor.hasFolding(folding)) checkFolding = folding;
+
         start++;
       }
       end++;
@@ -477,7 +491,7 @@ export default class BlockSortProvider implements Disposable {
     edits?: TextEdit[],
     token?: CancellationToken
   ): string {
-    if (sortChildren === 0) return this.getEditedText(block, edits, token);
+    if (sortChildren === 0 || block.isSingleLine) return this.getEditedText(block, edits, token);
 
     let blocks = this.getInnerBlocks(block, token);
 
@@ -485,7 +499,6 @@ export default class BlockSortProvider implements Disposable {
     const tail: Range = new Range(blocks[blocks.length - 1]?.end || block.end, block.end);
 
     if (token?.isCancellationRequested) return "";
-    if (head.isEmpty && tail.isEmpty) return this.document.getText(block);
 
     return (
       this.document.getText(head) +
@@ -546,7 +559,7 @@ export default class BlockSortProvider implements Disposable {
     return lines.join("\n");
   }
 
-  private applySort(blocks: string[], sortProvider: StringSortProvider) {
+  private applySort(blocks: string[], sortProvider: StringSortProvider, ...affixes: string[][]) {
     const compare = sortProvider.compare.bind(sortProvider);
     const precomputed = blocks
       .map((original, index) => ({
@@ -561,6 +574,9 @@ export default class BlockSortProvider implements Disposable {
         a.forceFirst || b.forceLast ? -1 : a.forceLast || b.forceFirst ? 1 : compare(a.sanitized, b.sanitized)
       );
 
-    precomputed.forEach(({ original }, index) => (blocks[index] = original));
+    precomputed.forEach(({ original, index: originalIndex }, index) => {
+      blocks[index] = original;
+      affixes.forEach((affix) => (affix[index] = affix[originalIndex]));
+    });
   }
 }
