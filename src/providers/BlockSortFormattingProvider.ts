@@ -93,7 +93,9 @@ export default class BlockSortFormattingProvider
   public getBlockSortMarkerAtRange(document: TextDocument, range: Range): BlockSortMarker | undefined {
     const markers = this.getBlockSortMarkers(document);
 
-    return markers.find(({ line }) => range.intersection(line.range) !== undefined);
+    return markers.find(
+      ({ range: markerRange }) => markerRange && markerRange.intersection(range) !== undefined
+    );
   }
 
   public preComputeLineMeta(document: TextDocument, ranges?: Range[], token?: CancellationToken) {
@@ -233,13 +235,14 @@ export default class BlockSortFormattingProvider
   ): BlockSortMarker[] {
     const markers: TextLine[] = [];
     const comments = commentMarkers[document.languageId] ?? commentMarkers.default;
-    const markerPrefixes = comments.map((comment) => `${comment.start} ${BlockSortFormattingProvider.blockSortMarker}`);
+    const escapedBlockSortMarker = this.escapeRegExp(BlockSortFormattingProvider.blockSortMarker);
+    const markerPrefixes = comments.map((comment) => new RegExp(`^${comment.start} ${escapedBlockSortMarker}`));
 
     for (let i = range.start.line; i <= range.end.line; i++) {
       if (token?.isCancellationRequested) return [];
 
       const line = document.lineAt(i);
-      if (markerPrefixes.some((prefix) => line.text.trim().startsWith(prefix))) markers.push(line);
+      if (markerPrefixes.some((prefix) => prefix.test(line.text.trim()))) markers.push(line);
     }
 
     const expandRange = this.expandSelection.bind(this, document);
@@ -253,5 +256,9 @@ export default class BlockSortFormattingProvider
     }));
 
     return result;
+  }
+
+  private escapeRegExp(input: string) {
+    return input.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // $& means the whole matched string
   }
 }

@@ -66,7 +66,7 @@ export const commentRegex: Record<string, string> = {
 
 export const commentMarkers: Record<string, TextBlockDefinition[]> = {
   default: [
-    { start: '//' },
+    { start: '(?://|#)' },
     { start: '/\\*', end: '\\*/' },
   ],
   // abap: [],
