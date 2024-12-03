@@ -1,3 +1,11 @@
+## [2.1.3](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v2.1.2...v2.1.3) (2024-12-03)
+
+
+### Bug Fixes
+
+* globally support '#' comments ([39c5deb](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/39c5debf54115d9c90aea8e46ca4e42c0a9365b0))
+* resolve multi-line code lenses ([744b8a2](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/744b8a2c6fa86354c7b612607b5856dacedd51c1))
+
 ## [2.1.2](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v2.1.1...v2.1.2) (2024-09-04)
 
 
