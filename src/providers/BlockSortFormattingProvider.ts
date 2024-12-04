@@ -37,14 +37,15 @@ export default class BlockSortFormattingProvider
 
   public static getBlockSortMarkerOptions(document: TextDocument, position: Position): BlockSortOptions {
     const line = document.lineAt(position.line).text;
-    const matches = line.match(/@blocksort ?(asc|desc)? ?(\d+|inf(?:inite)?)?/) ?? [];
-    const [_, direction = "asc", depth = "0"] = matches as [string, "asc" | "desc", string];
+    const matches = line.match(/@blocksort ?(asc|desc)? ?(\d+|inf(?:inite)?)?:?(\d+|inf(?:inite)?)?/) ?? [];
+    const [_, direction = "asc", depth = "0", skip = "0"] = matches as [string, "asc" | "desc", string];
     const collator = ConfigurationProvider.getCollatorOptions();
 
     return {
       collator,
       direction,
-      sortChildren: depth.includes("inf") ? Infinity : parseInt(depth, 10),
+      sortChildren: depth.startsWith("inf") ? Infinity : parseInt(depth, 10),
+      skipParents: skip.startsWith("inf") ? Infinity : parseInt(skip, 10),
       expandSelection: true,
     };
   }

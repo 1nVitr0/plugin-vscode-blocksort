@@ -75,7 +75,7 @@ To enable auto Sorting, you must set the `editor.codeActionsOnSave` in your `set
 
 This will enable auto-sorting for blocks following a `@blocksort` marker.
 The marker can additionally be followed by the options `asc` or `desc` to control the sorting order,
-as well as a number for the sorting depth:
+as well as optional numbers for the depth and skipping parent blocks (`depth:skip`):
 
 ```js
 // @blocksort asc
@@ -99,6 +99,23 @@ some:
     - up to
     - any level)
 ```
+
+```jsonc
+// @blocksort inf:1
+{
+  "keep2": [
+    "sort",
+    "only",
+    "inner",
+    "values",
+  ],
+  "keep1": {
+    "first": "level",
+    "items": "will",
+    "be": "kept",
+  }
+}
+```
 </details>
 
 ***
@@ -110,7 +127,11 @@ some:
 
 - `defaultMultilevelDepth`: Default depth used for deep sorting.
   - Default: `-1` (infinite)
-- `askForMultilevelDepth`: Skip asking for multilevel depth and always use `defaultMultilevelDepth`.
+- `askForMultilevelDepth`: Skip asking for multilevel depth and always use `defaultSkipParents`.
+  - Default: `true`
+- `defaultSkipParents`: Default depth of parent blocks to skip sorting
+  - Default: `0`
+- `askForSkipParents`: Skip asking for depth of parent blocks to skip and always use `defaultSkipParents`.
   - Default: `true`
 - `indentIgnoreMarkers`: List of regex markers that when matched will result in ignoring the indentation of the current line. This is for example used for c-style `{` in a new line. The markers are always assumed to be at teh start of the line, but can be preceded by spaces and comments.
   - Default:
