@@ -413,15 +413,15 @@ export default class BlockSortProvider implements Disposable {
     const edits = [...e.contentChanges].sort((a, b) => b.range.start.line - a.range.start.line);
 
     for (const edit of edits) {
-      const lineChange = edit.text.split(/\r?\n/).length - (edit.range.end.line - edit.range.start.line);
+      const lineCountChange = edit.text.split(/\r?\n/).length - (edit.range.end.line - edit.range.start.line) - 1;
 
       for (let i = this.computedRanges.length - 1; i >= 0; i--) {
         let range = this.computedRanges[i];
         if (range.start.isAfter(edit.range.end)) {
           // Adjust all ranges after the edit
           range = new Range(
-            range.start.with(range.start.line + lineChange),
-            range.end.with(range.end.line + lineChange)
+            range.start.with(range.start.line + lineCountChange),
+            range.end.with(range.end.line + lineCountChange)
           );
           continue;
         }
@@ -441,8 +441,8 @@ export default class BlockSortProvider implements Disposable {
         if (intersection?.end.isBefore(range.end)) {
           // Split computed range, if intersection is contained in range
           const newRange = new Range(
-            intersection.end.with(intersection.end.line + lineChange),
-            range.end.with(range.end.line + lineChange)
+            intersection.end.with(intersection.end.line + lineCountChange),
+            range.end.with(range.end.line + lineCountChange)
           );
           this.computedRanges.splice(i + 1, 0, newRange);
         }
@@ -455,8 +455,9 @@ export default class BlockSortProvider implements Disposable {
         }
       }
 
-      if (lineChange > 0) this.documentLineMeta.splice(edit.range.end.line + 1, 0, ...Array(lineChange).fill(null));
-      else if (lineChange < 0) this.documentLineMeta.splice(edit.range.start.line, -lineChange);
+      if (lineCountChange > 0)
+        this.documentLineMeta.splice(edit.range.end.line + 1, 0, ...Array(lineCountChange).fill(null));
+      else if (lineCountChange < 0) this.documentLineMeta.splice(edit.range.start.line, -lineCountChange);
     }
   }
 
