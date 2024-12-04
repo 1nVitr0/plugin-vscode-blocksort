@@ -35,8 +35,7 @@
         "reveal": "never"
       },
       "group": {
-        "kind": "build",
-        "isDefault": true
+        "kind": "build"
       }
     }
   ]
