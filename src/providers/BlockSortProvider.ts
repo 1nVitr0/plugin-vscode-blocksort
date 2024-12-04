@@ -73,10 +73,14 @@ export default class BlockSortProvider implements Disposable {
     blocks: Range[],
     sortProvider: StringSortProvider,
     sortChildren = 0,
+    skip = 0,
     edits?: TextEdit[],
     token?: CancellationToken
   ): string[] {
-    let textBlocks = blocks.map((block) => this.sortInnerBlocks(block, sortProvider, sortChildren, edits, token));
+    let textBlocks = blocks.map((block) => this.sortInnerBlocks(block, sortProvider, sortChildren, skip, edits, token));
+
+    if (skip > 0) return textBlocks;
+
     if (ConfigurationProvider.getSortConsecutiveBlockHeaders(this.document))
       textBlocks = textBlocks.map((block) => this.sortBlockHeaders(block, sortProvider, token));
 
@@ -492,6 +496,7 @@ export default class BlockSortProvider implements Disposable {
     block: Range,
     sortProvider: StringSortProvider,
     sortChildren = 0,
+    skip = 0,
     edits?: TextEdit[],
     token?: CancellationToken
   ): string {
@@ -506,7 +511,7 @@ export default class BlockSortProvider implements Disposable {
 
     return (
       this.document.getText(head) +
-      this.sortBlocks(blocks, sortProvider, sortChildren - 1, edits, token).join("\n") +
+      this.sortBlocks(blocks, sortProvider, sortChildren - 1, skip - 1, edits, token).join("\n") +
       this.document.getText(tail)
     );
   }

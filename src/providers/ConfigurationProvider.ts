@@ -43,7 +43,9 @@ export interface BlockSortCollatorOptions extends Omit<Intl.CollatorOptions, "us
 
 export interface BlockSortConfiguration {
   defaultMultilevelDepth: number;
+  defaultSkipParents: number;
   askForMultilevelDepth: boolean;
+  askForSkipParents: boolean;
   indentIgnoreMarkers: string[];
   completeBlockMarkers: string[];
   foldingMarkers: FoldingMarkerList;
@@ -96,8 +98,18 @@ export default class ConfigurationProvider {
     return configuration === undefined ? -1 : configuration;
   }
 
+  public static getDefaultSkipParents(): number {
+    const configuration: number | undefined = ConfigurationProvider.getConfiguration().defaultSkipParents;
+    return configuration === undefined ? 0 : configuration;
+  }
+
   public static getAskForMultilevelDepth(): boolean {
     const configuration: boolean | undefined = ConfigurationProvider.getConfiguration().askForMultilevelDepth;
+    return configuration === undefined ? true : configuration;
+  }
+
+  public static getAskForSkipParents(): boolean {
+    const configuration: boolean | undefined = ConfigurationProvider.getConfiguration().askForSkipParents;
     return configuration === undefined ? true : configuration;
   }
 

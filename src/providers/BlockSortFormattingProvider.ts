@@ -85,7 +85,14 @@ export default class BlockSortFormattingProvider
     const sortProvider = new StringSortProvider(options.collator, options.direction);
     const range = this.expandSelection(document, selection, options, token);
     const blocks = blockSort.getBlocks(range, token);
-    const sorted = blockSort.sortBlocks(blocks, sortProvider, options.sortChildren, options.edits, token);
+    const sorted = blockSort.sortBlocks(
+      blocks,
+      sortProvider,
+      options.sortChildren,
+      options.skipParents,
+      options.edits,
+      token
+    );
 
     return TextEdit.replace(range, sorted.join("\n"));
   }

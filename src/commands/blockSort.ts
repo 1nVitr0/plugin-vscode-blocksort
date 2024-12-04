@@ -2,6 +2,7 @@ import { commands, InputBoxOptions, Selection, Range, TextEditor, TextEditorEdit
 import ConfigurationProvider, { BlockSortCollatorOptions } from "../providers/ConfigurationProvider";
 import BlockSortFormattingProvider from "../providers/BlockSortFormattingProvider";
 import { BlockSortOptions } from "../types/BlockSortOptions";
+import { showNumberQuickPick } from "../helpers/showNumberQuickPick";
 
 export function blockSort(
   formattingProvider: BlockSortFormattingProvider,
@@ -17,6 +18,7 @@ export function blockSort(
     collator,
     direction,
     sortChildren = 0,
+    skipParents = 0,
     expandSelection = range?.isEmpty
       ? ConfigurationProvider.getExpandCursor()
       : ConfigurationProvider.getExpandSelection(),
@@ -28,27 +30,49 @@ export function blockSort(
     collator,
     direction,
     sortChildren,
+    skipParents,
     expandSelection,
   });
   editBuilder.replace(edit.range, edit.newText);
   editor.selection = new Selection(edit.range.start, edit.range.end);
 }
 
-function blockSortMultilevel(collator: BlockSortCollatorOptions, direction: "asc" | "desc" = "asc") {
+async function blockSortMultilevel(
+  collator: BlockSortCollatorOptions,
+  direction: "asc" | "desc" = "asc",
+  enableSkipParents = false
+) {
   const defaultDepth = ConfigurationProvider.getDefaultMultilevelDepth();
-  if (!ConfigurationProvider.getAskForMultilevelDepth())
-    return commands.executeCommand("blocksort._sortBlocks", null, { collator, direction, sortChildren: defaultDepth });
+  const askForDepth = ConfigurationProvider.getAskForMultilevelDepth();
 
-  let options: InputBoxOptions = {
-    prompt: "Indentation Depth: ",
-    placeHolder: "(number)",
-    value: defaultDepth.toString(),
-    validateInput: (value) => (/\-?\d+/.test(value) ? null : "Only integer values allowed. Use -1 for infinite depth"),
-  };
+  const sortChildren = askForDepth
+    ? await showNumberQuickPick(-1, 100, 1, {
+        placeHolder: "Indentation Depth",
+        picked: defaultDepth,
+        negativeAsInfinite: true,
+      })
+    : defaultDepth;
 
-  window.showInputBox(options).then((value) => {
-    if (value === undefined) return;
-    commands.executeCommand("blocksort._sortBlocks", null, { collator, direction, sortChildren: parseInt(value) });
+  if (sortChildren === undefined) return;
+  if (!enableSkipParents) {
+    return commands.executeCommand("blocksort._sortBlocks", null, { collator, direction, sortChildren });
+  }
+
+  const defaultSkipParents = ConfigurationProvider.getDefaultSkipParents();
+  const askForSkipParents = ConfigurationProvider.getAskForSkipParents();
+
+  const skipParents =
+    enableSkipParents && askForSkipParents
+      ? await showNumberQuickPick(0, 100, 1, { placeHolder: "Skip Parents", picked: defaultSkipParents })
+      : defaultSkipParents;
+
+  if (sortChildren === undefined || skipParents === undefined) return;
+
+  return commands.executeCommand("blocksort._sortBlocks", null, {
+    collator,
+    direction,
+    sortChildren: sortChildren === -1 ? sortChildren : sortChildren + skipParents,
+    skipParents,
   });
 }
 
@@ -78,4 +102,14 @@ export function blockSortMultilevelAsc() {
 export function blockSortMultilevelDesc() {
   const collator = ConfigurationProvider.getCollatorOptions();
   blockSortMultilevel(collator, "desc");
+}
+
+export function blockSortInnerBlocksAsc() {
+  const collator = ConfigurationProvider.getCollatorOptions();
+  blockSortMultilevel(collator, "asc", true);
+}
+
+export function blockSortInnerBlocksDesc() {
+  const collator = ConfigurationProvider.getCollatorOptions();
+  blockSortMultilevel(collator, "desc", true);
 }

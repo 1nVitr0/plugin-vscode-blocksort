@@ -141,6 +141,7 @@ suite("Unit Suite for BlockSortProvider", async () => {
           blocks,
           new StringSortProvider(),
           Infinity,
+          0,
           []
         );
         await assertRaceCancellation(callback, "sortBlocks", performanceThreshold);
