@@ -30,7 +30,11 @@
     "onCommand:blocksort.sortBlocksAsc",
     "onCommand:blocksort.sortBlocksDesc",
     "onCommand:blocksort.sortBlocksMultilevelAsc",
-    "onCommand:blocksort.sortBlocksMultilevelDesc"
+    "onCommand:blocksort.sortBlocksMultilevelDesc",
+    "onCommand:blocksort.sortInnerBlocksAsc",
+    "onCommand:blocksort.sortInnerBlocksDesc",
+    "onCommand:blocksort.expandSelectionLocally",
+    "onCommand:blocksort.expandSelectionFull"
   ],
   "main": "./dist/extension.js",
   "contributes": {
@@ -72,6 +76,24 @@
         }
       },
       {
+        "command": "blocksort.sortInnerBlocksAsc",
+        "title": "Sort inner Blocks Ascending",
+        "category": "Sort",
+        "icon": {
+          "dark": "resources/icon_asc_dark.svg",
+          "light": "resources/icon_asc.svg"
+        }
+      },
+      {
+        "command": "blocksort.sortInnerBlocksDesc",
+        "title": "Sort inner Blocks Descending",
+        "category": "Sort",
+        "icon": {
+          "dark": "resources/icon_desc_dark.svg",
+          "light": "resources/icon_desc.svg"
+        }
+      },
+      {
         "command": "blocksort.expandSelectionLocally",
         "title": "Expand current Selection to surrounding Block",
         "category": "Select",
@@ -95,12 +117,22 @@
         "title": "Block Sort",
         "properties": {
           "blocksort.defaultMultilevelDepth": {
-            "description": "Default depth used for depp (multilevel) sorting. Use `-1` for infinite depth",
+            "description": "Default depth used for deep (multilevel) sorting. Use `-1` for infinite depth",
             "default": -1,
+            "type": "integer"
+          },
+          "blocksort.defaultSkipParents": {
+            "description": "Default number of parents to skip when sorting deep (multilevel)",
+            "default": 0,
             "type": "integer"
           },
           "blocksort.askForMultilevelDepth": {
             "description": "Controls secondary dialog asking for multilevel Depth. When false, blocksort.defaultMultilevelDepth will be used",
+            "default": true,
+            "type": "boolean"
+          },
+          "blocksort.askForSkipParents": {
+            "description": "Controls secondary dialog asking for number of parents to skip. When false, blocksort.defaultSkipParents will be used",
             "default": true,
             "type": "boolean"
           },

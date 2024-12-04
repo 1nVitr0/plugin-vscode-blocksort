@@ -4,6 +4,8 @@ import {
   blockSort,
   blockSortAsc,
   blockSortDesc,
+  blockSortInnerBlocksAsc,
+  blockSortInnerBlocksDesc,
   blockSortMultilevelAsc,
   blockSortMultilevelDesc,
 } from "../commands/blockSort";
@@ -16,6 +18,8 @@ export default function contributeCommands(b: BlockSortFormattingProvider) {
     commands.registerTextEditorCommand("blocksort.sortBlocksDesc", blockSortDesc.bind(null, b)),
     commands.registerTextEditorCommand("blocksort.sortBlocksMultilevelAsc", blockSortMultilevelAsc),
     commands.registerTextEditorCommand("blocksort.sortBlocksMultilevelDesc", blockSortMultilevelDesc),
+    commands.registerTextEditorCommand("blocksort.sortInnerBlocksAsc", blockSortInnerBlocksAsc),
+    commands.registerTextEditorCommand("blocksort.sortInnerBlocksDesc", blockSortInnerBlocksDesc),
     commands.registerTextEditorCommand("blocksort.expandSelectionLocally", expandSelectionLocally.bind(null, b)),
     commands.registerTextEditorCommand("blocksort.expandSelectionFull", expandSelectionFull.bind(null, b)),
   ];

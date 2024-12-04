@@ -68,9 +68,11 @@ export default class StringProcessingProvider {
     let min = Infinity;
     let max = 0;
 
-    for (const line of lines) {
+    for (const [i, line] of lines.entries()) {
+      const isBoundaryLine = i === 0 || i === lines.length - 1;
+
       if (token?.isCancellationRequested) return { min, max };
-      if (checkIndentIgnore && this.isIndentIgnoreLine(line, document)) continue;
+      if (checkIndentIgnore && !isBoundaryLine && this.isIndentIgnoreLine(line, document)) continue;
       const indent = this.getIndent(line, indentWidth);
       if (indent < min) min = indent;
       if (indent > max) max = indent;

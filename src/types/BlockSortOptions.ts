@@ -11,6 +11,7 @@ export interface ExpandSelectionOptions {
 export type BlockSortOptions = {
   collator?: BlockSortCollatorOptions;
   direction?: "asc" | "desc";
+  skipParents?: number
   sortChildren?: number;
   // `false` for no expansion, `true` for all options enabled
   expandSelection?: boolean | ExpandSelectionOptions;
