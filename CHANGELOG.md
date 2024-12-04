@@ -1,3 +1,17 @@
+# [2.2.0](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v2.1.3...v2.2.0) (2024-12-04)
+
+
+### Bug Fixes
+
+* determine ranges for line meta recomputation on update ([8503dbd](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/8503dbd475c44180cff13bb773bc44b380199f62))
+* sorting for inner blocks without  trailing newline ([e27f20f](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/e27f20fdf7a087ebec097c86a705ad7308b69dc7))
+
+
+### Features
+
+* add command for sorting inner blocks only ([462fd5f](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/462fd5f007468b899526acb6ea4371d379c196b6))
+* add skipParents parameter to [@blocksort](https://github.com/blocksort) marker ([11969e3](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/11969e30d845adfcc5f2a5bb2c0242f159f8dd23))
+
 ## [2.1.3](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v2.1.2...v2.1.3) (2024-12-03)
 
 
