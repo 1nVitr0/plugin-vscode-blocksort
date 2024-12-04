@@ -160,6 +160,7 @@ export default class BlockSortProvider implements Disposable {
 
       const lineMeta = this.documentLineMeta[i];
       const text = lineMeta.text ?? this.document.getText(new Range(start, start.translate(0, Infinity)));
+
       if (
         validBlock &&
         hasContent &&
@@ -187,6 +188,7 @@ export default class BlockSortProvider implements Disposable {
         completeBlock = lineMeta.complete;
         incompleteBlock = lineMeta.incomplete;
       }
+
       folding = this.stringProcessor.mergeFolding(folding, lineMeta.folding);
     }
 
@@ -457,7 +459,9 @@ export default class BlockSortProvider implements Disposable {
   private isComputed(line: number): boolean;
   private isComputed(range: Range): boolean;
   private isComputed(rangeOrLine: Range | number): boolean {
-    const range = typeof rangeOrLine === "number" ? new Range(rangeOrLine, 0, rangeOrLine, Infinity) : rangeOrLine;
+    const range = this.document.validateRange(
+      typeof rangeOrLine === "number" ? new Range(rangeOrLine, 0, rangeOrLine, Infinity) : rangeOrLine
+    );
 
     return this.computedRanges.some((r) => r.contains(range));
   }
