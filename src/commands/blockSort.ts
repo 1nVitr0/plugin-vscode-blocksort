@@ -15,8 +15,8 @@ export function blockSort(
   if (!editor) return;
 
   const {
-    collator,
-    direction,
+    collator = ConfigurationProvider.getCollatorOptions(),
+    direction = "asc",
     sortChildren = 0,
     skipParents = 0,
     expandSelection = range?.isEmpty
@@ -38,9 +38,12 @@ export function blockSort(
 }
 
 async function blockSortMultilevel(
-  collator: BlockSortCollatorOptions,
-  direction: "asc" | "desc" = "asc",
-  enableSkipParents = false
+  formattingProvider: BlockSortFormattingProvider,
+  editor: TextEditor | undefined,
+  editBuilder: TextEditorEdit,
+  direction: "asc" | "desc" | "rand" = "asc",
+  enableSkipParents = false,
+  options: Partial<BlockSortOptions> = {}
 ) {
   const defaultDepth = ConfigurationProvider.getDefaultMultilevelDepth();
   const askForDepth = ConfigurationProvider.getAskForMultilevelDepth();
@@ -55,7 +58,7 @@ async function blockSortMultilevel(
 
   if (sortChildren === undefined) return;
   if (!enableSkipParents) {
-    return commands.executeCommand("blocksort._sortBlocks", null, { collator, direction, sortChildren });
+    return blockSort(formattingProvider, editor, editBuilder, null, { direction, sortChildren, ...options });
   }
 
   const defaultSkipParents = ConfigurationProvider.getDefaultSkipParents();
@@ -68,48 +71,91 @@ async function blockSortMultilevel(
 
   if (sortChildren === undefined || skipParents === undefined) return;
 
-  return commands.executeCommand("blocksort._sortBlocks", null, {
-    collator,
+  return blockSort(formattingProvider, editor, editBuilder, null, {
     direction,
     sortChildren: sortChildren === -1 ? sortChildren : sortChildren + skipParents,
     skipParents,
+    ...options,
   });
 }
 
 export function blockSortAsc(
   formattingProvider: BlockSortFormattingProvider,
   editor: TextEditor,
-  editBuilder: TextEditorEdit
+  editBuilder: TextEditorEdit,
+  options: Partial<BlockSortOptions> = {}
 ) {
-  const collator = ConfigurationProvider.getCollatorOptions();
-  blockSort(formattingProvider, editor, editBuilder, null, { collator, direction: "asc" });
+  blockSort(formattingProvider, editor, editBuilder, null, { direction: "asc", ...options });
 }
 
 export function blockSortDesc(
   formattingProvider: BlockSortFormattingProvider,
   editor: TextEditor,
-  editBuilder: TextEditorEdit
+  editBuilder: TextEditorEdit,
+  options: Partial<BlockSortOptions> = {}
 ) {
-  const collator = ConfigurationProvider.getCollatorOptions();
-  blockSort(formattingProvider, editor, editBuilder, null, { collator, direction: "desc" });
+  blockSort(formattingProvider, editor, editBuilder, null, { direction: "desc", ...options });
 }
 
-export function blockSortMultilevelAsc() {
-  const collator = ConfigurationProvider.getCollatorOptions();
-  blockSortMultilevel(collator, "asc");
+export function blockSortShuffle(
+  formattingProvider: BlockSortFormattingProvider,
+  editor: TextEditor,
+  editBuilder: TextEditorEdit,
+  options: Partial<BlockSortOptions> = {}
+) {
+  blockSort(formattingProvider, editor, editBuilder, null, { direction: "rand", ...options });
 }
 
-export function blockSortMultilevelDesc() {
-  const collator = ConfigurationProvider.getCollatorOptions();
-  blockSortMultilevel(collator, "desc");
+export function blockSortMultilevelAsc(
+  formattingProvider: BlockSortFormattingProvider,
+  editor: TextEditor,
+  editBuilder: TextEditorEdit,
+  options: Partial<BlockSortOptions> = {}
+) {
+  blockSortMultilevel(formattingProvider, editor, editBuilder, "asc", false, options);
 }
 
-export function blockSortInnerBlocksAsc() {
-  const collator = ConfigurationProvider.getCollatorOptions();
-  blockSortMultilevel(collator, "asc", true);
+export function blockSortMultilevelDesc(
+  formattingProvider: BlockSortFormattingProvider,
+  editor: TextEditor,
+  editBuilder: TextEditorEdit,
+  options: Partial<BlockSortOptions> = {}
+) {
+  blockSortMultilevel(formattingProvider, editor, editBuilder, "desc", false, options);
 }
 
-export function blockSortInnerBlocksDesc() {
-  const collator = ConfigurationProvider.getCollatorOptions();
-  blockSortMultilevel(collator, "desc", true);
+export function blockSortMultilevelShuffle(
+  formattingProvider: BlockSortFormattingProvider,
+  editor: TextEditor,
+  editBuilder: TextEditorEdit,
+  options: Partial<BlockSortOptions> = {}
+) {
+  blockSortMultilevel(formattingProvider, editor, editBuilder, "rand", false, options);
+}
+
+export function blockSortInnerBlocksAsc(
+  formattingProvider: BlockSortFormattingProvider,
+  editor: TextEditor,
+  editBuilder: TextEditorEdit,
+  options: Partial<BlockSortOptions> = {}
+) {
+  blockSortMultilevel(formattingProvider, editor, editBuilder, "asc", true, options);
+}
+
+export function blockSortInnerBlocksDesc(
+  formattingProvider: BlockSortFormattingProvider,
+  editor: TextEditor,
+  editBuilder: TextEditorEdit,
+  options: Partial<BlockSortOptions> = {}
+) {
+  blockSortMultilevel(formattingProvider, editor, editBuilder, "desc", true, options);
+}
+
+export function blockSortInnerBlocksShuffle(
+  formattingProvider: BlockSortFormattingProvider,
+  editor: TextEditor,
+  editBuilder: TextEditorEdit,
+  options: Partial<BlockSortOptions> = {}
+) {
+  blockSortMultilevel(formattingProvider, editor, editBuilder, "rand", true, options);
 }
