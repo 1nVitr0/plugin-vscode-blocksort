@@ -1,3 +1,15 @@
+# [2.3.0](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v2.2.0...v2.3.0) (2024-12-28)
+
+
+### Bug Fixes
+
+* align signatures of sorting command functions ([6a7c2fa](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/6a7c2faec93632909bafeb0971eb50abda1de6d9))
+
+
+### Features
+
+* add shuffle blocks commands ([db4d014](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/db4d0145265d553af908c354129bc8c22ab6f55f))
+
 # [2.2.0](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v2.1.3...v2.2.0) (2024-12-04)
 
 
