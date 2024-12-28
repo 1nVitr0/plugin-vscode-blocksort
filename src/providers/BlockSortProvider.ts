@@ -570,7 +570,8 @@ export default class BlockSortProvider implements Disposable {
   }
 
   private applySort(blocks: string[], sortProvider: StringSortProvider, ...affixes: string[][]) {
-    const compare = sortProvider.compare.bind(sortProvider);
+    if (sortProvider.direction === "rand") return this.applyShuffle(blocks, ...affixes);
+
     const precomputed = blocks
       .map((original, index) => ({
         index,
@@ -581,12 +582,24 @@ export default class BlockSortProvider implements Disposable {
         forceLast: this.stringProcessor.isForceLastBlock(original),
       }))
       .sort((a, b) =>
-        a.forceFirst || b.forceLast ? -1 : a.forceLast || b.forceFirst ? 1 : compare(a.sanitized, b.sanitized)
+        a.forceFirst || b.forceLast
+          ? -1
+          : a.forceLast || b.forceFirst
+          ? 1
+          : sortProvider.compare(a.sanitized, b.sanitized)
       );
 
     precomputed.forEach(({ original, index: originalIndex }, index) => {
       blocks[index] = original;
       affixes.forEach((affix) => (affix[index] = affix[originalIndex]));
     });
+  }
+
+  private applyShuffle(blocks: string[], ...affixes: string[][]) {
+    for (let i = blocks.length - 1; i >= 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [blocks[i], blocks[j]] = [blocks[j], blocks[i]];
+      affixes.forEach((affix) => ([affix[i], affix[j]] = [affix[j], affix[i]]));
+    }
   }
 }

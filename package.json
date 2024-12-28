@@ -29,10 +29,13 @@
     "onStartupFinished",
     "onCommand:blocksort.sortBlocksAsc",
     "onCommand:blocksort.sortBlocksDesc",
+    "onCommand:blocksort.sortBlocksShuffle",
     "onCommand:blocksort.sortBlocksMultilevelAsc",
     "onCommand:blocksort.sortBlocksMultilevelDesc",
+    "onCommand:blocksort.sortBlocksMultilevelShuffle",
     "onCommand:blocksort.sortInnerBlocksAsc",
     "onCommand:blocksort.sortInnerBlocksDesc",
+    "onCommand:blocksort.sortInnerBlocksShuffle",
     "onCommand:blocksort.expandSelectionLocally",
     "onCommand:blocksort.expandSelectionFull"
   ],
@@ -58,6 +61,15 @@
         }
       },
       {
+        "command": "blocksort.sortBlocksShuffle",
+        "title": "Shuffle Blocks",
+        "category": "Sort",
+        "icon": {
+          "dark": "resources/icon_shuffle_dark.svg",
+          "light": "resources/icon_shuffle.svg"
+        }
+      },
+      {
         "command": "blocksort.sortBlocksMultilevelAsc",
         "title": "Sort Blocks Deep Ascending (Multilevel)",
         "category": "Sort",
@@ -76,6 +88,15 @@
         }
       },
       {
+        "command": "blocksort.sortBlocksMultilevelShuffle",
+        "title": "Shuffle Blocks Deep (Multilevel)",
+        "category": "Sort",
+        "icon": {
+          "dark": "resources/icon_shuffle_dark.svg",
+          "light": "resources/icon_shuffle.svg"
+        }
+      },
+      {
         "command": "blocksort.sortInnerBlocksAsc",
         "title": "Sort inner Blocks Ascending",
         "category": "Sort",
@@ -91,6 +112,15 @@
         "icon": {
           "dark": "resources/icon_desc_dark.svg",
           "light": "resources/icon_desc.svg"
+        }
+      },
+      {
+        "command": "blocksort.sortInnerBlocksShuffle",
+        "title": "Shuffle inner Blocks",
+        "category": "Sort",
+        "icon": {
+          "dark": "resources/icon_shuffle_dark.svg",
+          "light": "resources/icon_shuffle.svg"
         }
       },
       {

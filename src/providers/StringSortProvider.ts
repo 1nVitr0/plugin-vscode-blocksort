@@ -1,12 +1,12 @@
 import { BlockSortCollatorOptions } from "./ConfigurationProvider";
 
 export class StringSortProvider extends Intl.Collator {
-  private customSortOrder?: string;
-  private customIgnoreCharacters?: RegExp;
-  private ignoreCase?: boolean;
-  private direction?: "asc" | "desc";
+  public readonly customSortOrder?: string;
+  public readonly customIgnoreCharacters?: RegExp;
+  public readonly ignoreCase?: boolean;
+  public readonly direction?: "asc" | "desc" | "rand";
 
-  constructor(options?: BlockSortCollatorOptions, direction: "asc" | "desc" = "asc") {
+  constructor(options?: BlockSortCollatorOptions, direction: "asc" | "desc" | "rand" = "asc") {
     const locales = options?.locales?.includes(",") ? options?.locales?.split(",") : options?.locales;
     super(locales, options);
 
@@ -43,6 +43,8 @@ export class StringSortProvider extends Intl.Collator {
   public compare(a: string, b: string): number {
     const { customSortOrder, customIgnoreCharacters, direction, ignoreCase } = this;
     const sign = direction === "asc" ? 1 : -1;
+
+    if (direction === "rand") return 0; // Shouldn't be used
 
     if (customIgnoreCharacters) {
       a = a.replace(customIgnoreCharacters, "");
