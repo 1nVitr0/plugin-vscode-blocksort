@@ -41,7 +41,7 @@ async function blockSortMultilevel(
   formattingProvider: BlockSortFormattingProvider,
   editor: TextEditor | undefined,
   editBuilder: TextEditorEdit,
-  direction: "asc" | "desc" = "asc",
+  direction: "asc" | "desc" | "rand" = "asc",
   enableSkipParents = false,
   options: Partial<BlockSortOptions> = {}
 ) {
@@ -97,6 +97,15 @@ export function blockSortDesc(
   blockSort(formattingProvider, editor, editBuilder, null, { direction: "desc", ...options });
 }
 
+export function blockSortShuffle(
+  formattingProvider: BlockSortFormattingProvider,
+  editor: TextEditor,
+  editBuilder: TextEditorEdit,
+  options: Partial<BlockSortOptions> = {}
+) {
+  blockSort(formattingProvider, editor, editBuilder, null, { direction: "rand", ...options });
+}
+
 export function blockSortMultilevelAsc(
   formattingProvider: BlockSortFormattingProvider,
   editor: TextEditor,
@@ -115,6 +124,15 @@ export function blockSortMultilevelDesc(
   blockSortMultilevel(formattingProvider, editor, editBuilder, "desc", false, options);
 }
 
+export function blockSortMultilevelShuffle(
+  formattingProvider: BlockSortFormattingProvider,
+  editor: TextEditor,
+  editBuilder: TextEditorEdit,
+  options: Partial<BlockSortOptions> = {}
+) {
+  blockSortMultilevel(formattingProvider, editor, editBuilder, "rand", false, options);
+}
+
 export function blockSortInnerBlocksAsc(
   formattingProvider: BlockSortFormattingProvider,
   editor: TextEditor,
@@ -131,4 +149,13 @@ export function blockSortInnerBlocksDesc(
   options: Partial<BlockSortOptions> = {}
 ) {
   blockSortMultilevel(formattingProvider, editor, editBuilder, "desc", true, options);
+}
+
+export function blockSortInnerBlocksShuffle(
+  formattingProvider: BlockSortFormattingProvider,
+  editor: TextEditor,
+  editBuilder: TextEditorEdit,
+  options: Partial<BlockSortOptions> = {}
+) {
+  blockSortMultilevel(formattingProvider, editor, editBuilder, "rand", true, options);
 }

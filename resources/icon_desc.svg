@@ -1,37 +1,106 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Generator: Adobe Illustrator 25.2.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1"
-	 id="svg8" inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)" sodipodi:docname="icon.svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:svg="http://www.w3.org/2000/svg"
-	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 16 16"
-	 style="enable-background:new 0 0 16 16;" xml:space="preserve">
-<style type="text/css">
+
+<svg
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.4 (1:1.4+202410161351+e7c3feb100)"
+   sodipodi:docname="icon_desc.svg"
+   x="0px"
+   y="0px"
+   viewBox="0 0 16 16"
+   style="enable-background:new 0 0 16 16;"
+   xml:space="preserve"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+   id="defs3">
+			
+			
+			
+			
+			
+		</defs><sodipodi:namedview
+   id="namedview3"
+   pagecolor="#505050"
+   bordercolor="#ffffff"
+   borderopacity="1"
+   inkscape:showpageshadow="0"
+   inkscape:pageopacity="0"
+   inkscape:pagecheckerboard="1"
+   inkscape:deskcolor="#d1d1d1"
+   inkscape:zoom="49.125"
+   inkscape:cx="8"
+   inkscape:cy="8"
+   inkscape:window-width="1920"
+   inkscape:window-height="991"
+   inkscape:window-x="0"
+   inkscape:window-y="28"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="g1796" />
+<style
+   type="text/css"
+   id="style1">
 	.st0{fill-rule:evenodd;clip-rule:evenodd;}
 	.st1{enable-background:new    ;}
 </style>
-<g id="layer1" inkscape:groupmode="layer" inkscape:label="Layer 1">
-	<g id="g1796" transform="matrix(0.84013301,0,0,0.84480666,9.1202848,5.1613091)">
-		<g id="g125_1_" transform="translate(-4.4142267,0.03811824)">
-			<rect id="rect18_1_" x="-2.4" y="-2.6" class="st0" width="11.1" height="1.6"/>
-			<rect id="rect18-7_1_" x="-0.5" y="-0.1" class="st0" width="9.2" height="1.6"/>
-			<rect id="rect18-7-0_1_" x="1.3" y="2.4" class="st0" width="7.4" height="1.6"/>
-			<rect id="rect18-7-0-9_1_" x="3.2" y="4.9" class="st0" width="5.5" height="1.6"/>
-			<rect id="rect18-7-0-9-9_1_" x="5" y="7.5" class="st0" width="3.7" height="1.6"/>
-		</g>
-		<path class="st0" d="M-6.9-2.6H4.1V-1H-6.9V-2.6z M-5.1-0.1h9.2v1.6h-9.2V-0.1z M-3.2,2.4h7.4V4h-7.4V2.4z M-1.4,5h5.5v1.6h-5.5V5
-			z M0.5,7.5h3.7v1.6H0.5V7.5z"/>
+<g
+   id="layer1"
+   inkscape:groupmode="layer"
+   inkscape:label="Layer 1">
+	<g
+   id="g1796"
+   transform="matrix(0.84013301,0,0,0.84480666,9.1202848,5.1613091)">
+		<rect
+   id="rect18_1_"
+   x="-6.8142266"
+   y="-2.5618818"
+   class="st0"
+   width="11.1"
+   height="1.6" /><rect
+   id="rect18-7_1_"
+   x="-4.9142265"
+   y="-0.061881762"
+   class="st0"
+   width="9.1999998"
+   height="1.6" /><rect
+   id="rect18-7-0_1_"
+   x="-3.1142268"
+   y="2.4381182"
+   class="st0"
+   width="7.4000001"
+   height="1.6" /><rect
+   id="rect18-7-0-9_1_"
+   x="-1.2142266"
+   y="4.9381185"
+   class="st0"
+   width="5.5"
+   height="1.6" /><rect
+   id="rect18-7-0-9-9_1_"
+   x="0.58577329"
+   y="7.5381184"
+   class="st0"
+   width="3.7"
+   height="1.6" />
+		
 	</g>
-	<g id="g1780" transform="matrix(0.84013301,0,0,0.84480666,5.8777681,5.2558813)">
-		<g class="st1">
-			<path d="M-7,2.6c0.4,0,0.7-0.3,0.9-0.6c0.2-0.4,0.3-0.9,0.3-1.6v-3.1c0-1,0.2-1.8,0.7-2.2c0.5-0.4,1.2-0.6,2.1-0.6v1.2
-				c-0.5,0-0.9,0.1-1.1,0.4c-0.2,0.3-0.3,0.7-0.3,1.2v3.1c0,1.4-0.4,2.4-1.3,2.9c0.8,0.5,1.3,1.5,1.3,2.9v3.1c0,0.5,0.1,0.9,0.3,1.2
-				c0.2,0.3,0.6,0.4,1.1,0.4V12c-0.9,0-1.6-0.2-2.1-0.6c-0.5-0.4-0.7-1.2-0.7-2.2V6.1c0-0.7-0.1-1.2-0.3-1.6C-6.3,4.1-6.6,3.9-7,3.8
-				V2.6z"/>
+	<g
+   id="g1780"
+   transform="matrix(0.84013301,0,0,0.84480666,5.8777681,5.2558813)">
+		<g
+   class="st1"
+   id="g2">
+			<path
+   d="M-7,2.6c0.4,0,0.7-0.3,0.9-0.6c0.2-0.4,0.3-0.9,0.3-1.6v-3.1c0-1,0.2-1.8,0.7-2.2c0.5-0.4,1.2-0.6,2.1-0.6v1.2     c-0.5,0-0.9,0.1-1.1,0.4c-0.2,0.3-0.3,0.7-0.3,1.2v3.1c0,1.4-0.4,2.4-1.3,2.9c0.8,0.5,1.3,1.5,1.3,2.9v3.1c0,0.5,0.1,0.9,0.3,1.2     c0.2,0.3,0.6,0.4,1.1,0.4V12c-0.9,0-1.6-0.2-2.1-0.6c-0.5-0.4-0.7-1.2-0.7-2.2V6.1c0-0.7-0.1-1.2-0.3-1.6C-6.3,4.1-6.6,3.9-7,3.8     V2.6z"
+   id="path2" />
 		</g>
-		<g class="st1">
-			<path d="M12,3.8c-0.4,0-0.7,0.3-0.9,0.6c-0.2,0.4-0.3,0.9-0.3,1.6v3.1c0,1-0.2,1.8-0.7,2.2C9.6,11.8,8.9,12,8,12v-1.2
-				c0.5,0,0.9-0.1,1.1-0.4c0.2-0.3,0.3-0.7,0.3-1.2V6.1c0-1.4,0.4-2.4,1.3-2.9C9.8,2.8,9.4,1.8,9.4,0.4v-3.1c0-0.5-0.1-0.9-0.3-1.2
-				C8.9-4.2,8.5-4.3,8-4.3v-1.2c0.9,0,1.6,0.2,2.1,0.6c0.5,0.4,0.7,1.2,0.7,2.2v3.1c0,0.7,0.1,1.2,0.3,1.6c0.2,0.4,0.5,0.6,0.9,0.6
-				V3.8z"/>
+		<g
+   class="st1"
+   id="g3">
+			<path
+   d="M12,3.8c-0.4,0-0.7,0.3-0.9,0.6c-0.2,0.4-0.3,0.9-0.3,1.6v3.1c0,1-0.2,1.8-0.7,2.2C9.6,11.8,8.9,12,8,12v-1.2     c0.5,0,0.9-0.1,1.1-0.4c0.2-0.3,0.3-0.7,0.3-1.2V6.1c0-1.4,0.4-2.4,1.3-2.9C9.8,2.8,9.4,1.8,9.4,0.4v-3.1c0-0.5-0.1-0.9-0.3-1.2     C8.9-4.2,8.5-4.3,8-4.3v-1.2c0.9,0,1.6,0.2,2.1,0.6c0.5,0.4,0.7,1.2,0.7,2.2v3.1c0,0.7,0.1,1.2,0.3,1.6c0.2,0.4,0.5,0.6,0.9,0.6     V3.8z"
+   id="path3" />
 		</g>
 	</g>
 </g>

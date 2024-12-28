@@ -15,7 +15,7 @@ export interface CompareTest extends BaseTest {
 
 export interface CustomSortTest extends CompareTest {
   collatorOptions?: BlockSortCollatorOptions;
-  direction?: "asc" | "desc";
+  direction?: "asc" | "desc" | "rand";
 }
 
 export interface RangeTest extends BaseTest {
