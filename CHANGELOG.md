@@ -1,3 +1,10 @@
+## [2.3.1](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v2.3.0...v2.3.1) (2024-12-30)
+
+
+### Bug Fixes
+
+* add default keybindings and document shuffle commands ([f19e54d](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/f19e54da0e76847d0f02616419814d6bf7232426))
+
 # [2.3.0](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v2.2.0...v2.3.0) (2024-12-28)
 
 
