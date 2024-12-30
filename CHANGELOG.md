@@ -1,3 +1,10 @@
+## [2.3.2](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v2.3.1...v2.3.2) (2024-12-30)
+
+
+### Bug Fixes
+
+* use separate comments for pr test results ([3052504](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/30525045b80002e2f9b552dd39fcdf36f2447599))
+
 ## [2.3.1](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v2.3.0...v2.3.1) (2024-12-30)
 
 
