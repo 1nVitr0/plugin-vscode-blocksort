@@ -16,6 +16,7 @@ Sort Blocks instead of lines! Works for all major programming languages includin
 - [Commands](#commands)
 - [Code Actions / Auto Sorting](#code-actions--auto-sorting)
 - [Extension Settings](#extension-settings)
+- [Default Keybindings](#default-keybindings)
 - [Known Issues](#known-issues)
 - [Contributors](#contributors)
 
@@ -46,9 +47,19 @@ The blocks are sorted purely by their content, so while decorators are supported
 
 `Sort Blocks Descending`: Sorts the selected code blocks in descending order. If no code blocks are selected, a selection for the deepest block the cursor is currently positioned in is generated.
 
+`Shuffle Blocks`: Sorts the blocks in a random order. If no code blocks are selected, a selection for the deepest block the cursor is currently positioned in is generated.
+
 `Sort Blocks Deep Ascending (Multilevel)`: Sorts the selected code blocks in ascending order, including nested blocks up to a specified depth.
 
 `Sort Blocks Deep Descending (Multilevel)`: Sorts the selected code blocks in descending order, including nested blocks up to a specified depth.
+
+`Shuffle Blocks Deep (Multilevel)`: Sorts the selected code blocks in a random order, including nested blocks up to a specified depth.
+
+`Sort inner Blocks Ascending`: Sorts inner blocks in ascending order, without affecting the surrounding block(s). The depth at which to start, as well as the depth to stop at can ve specified.
+
+`Sort inner Blocks Descending`: Sorts inner blocks in descending order, without affecting the surrounding block(s). The depth at which to start, as well as the depth to stop at can ve specified.
+
+`Shuffle inner Blocks`: Sorts inner blocks in a random order, without affecting the surrounding block(s). The depth at which to start, as well as the depth to stop at can ve specified.
 
 `Expand current Selection to surrounding Block`: Expand curren selection locally to surrounding lines in block.
 
@@ -103,17 +114,17 @@ some:
 ```jsonc
 // @blocksort inf:1
 {
-  "keep2": [
-    "sort",
-    "only",
-    "inner",
-    "values",
-  ],
   "keep1": {
+    "be": "kept",
     "first": "level",
     "items": "will",
-    "be": "kept",
-  }
+  },
+  "keep2": [
+    "inner",
+    "only",
+    "sort",
+    "values",
+  ]
 }
 ```
 </details>
@@ -137,9 +148,7 @@ some:
   - Default:
     ```json
     [
-      "end(?:for(?:each)?|if|while|case|def)?\\s*?([\\.\\[\\->\\|\\s]\\s*(?:[$A-Za-z0-9_+\\-\\*\\/\\^\\%\\<\\>\\=\\!\\?\\:]*|'[^']*?'|'[']*?'|\"[^\"]*?\"|`[^`]*?`)\\s*[\\]\\|]?\\s*)*",
-      "esac|fi",
-      "{"
+
     ]
     ```
   - *Language Overridable*
@@ -254,6 +263,19 @@ Settings marked as *Language Overridable* can be specified on a per-language bas
   }
 }
 ```
+</details>
+
+***
+
+## Default Keybindings
+
+<details>
+<summary>This extension has the following default keybindings:</summary>
+
+- `Ctrl + Alt + Up` (when editor text has focus): `Sort Blocks Ascending` - Sort the currently blocks at the current selection in ascending order
+- `Ctrl + Alt + Down` (when editor text has focus): `Sort Blocks Descending` - Sort the currently blocks at the current selection in descending order
+- `Ctrl + Alt + End` (when editor text has focus): `Shuffle Blocks` - Sort the currently blocks at the current selection in a random order
+
 </details>
 
 ***
