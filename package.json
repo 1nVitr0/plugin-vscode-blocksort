@@ -21,7 +21,7 @@
   "keywords": [
     "sort",
     "format",
-    "block",
+    "shuffle",
     "order",
     "block sort"
   ],
@@ -684,8 +684,10 @@
     "@typescript-eslint/parser": "^5.32.0",
     "eslint": "^8.21.0",
     "eslint-config-prettier": "^8.5.0",
+    "github-actions-ctrf": "^0.0.54",
     "glob": "^11.0.0",
     "mocha": "^10.7.3",
+    "mocha-ctrf-json-reporter": "^0.0.6",
     "semantic-release": "^21.0.1",
     "semantic-release-vsce": "^5.5.10",
     "ts-loader": "^9.5.1",
