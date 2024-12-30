@@ -9,6 +9,7 @@ export async function run(): Promise<void> {
     ui: "tdd",
     color: true,
     timeout: 10000,
+    reporter: "mocha-ctrf-json-reporter",
   });
 
   const testsRoot = path.resolve(__dirname, "..");
