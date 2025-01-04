@@ -1,3 +1,10 @@
+## [2.3.3](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v2.3.2...v2.3.3) (2025-01-04)
+
+
+### Bug Fixes
+
+* revert default keybindings ([a0c8dea](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/a0c8dea863f195d5af441ebaa11b4d6204406947))
+
 ## [2.3.2](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v2.3.1...v2.3.2) (2024-12-30)
 
 
