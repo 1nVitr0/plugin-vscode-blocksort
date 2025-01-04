@@ -643,24 +643,7 @@
           "end": "<\\/[a-zA-Z0-9\\-_=\\s]+|\\/>"
         }
       }
-    },
-    "keybindings": [
-      {
-        "key": "ctrl+alt+up",
-        "command": "blocksort.sortBlocksAsc",
-        "when": "editorTextFocus"
-      },
-      {
-        "key": "ctrl+alt+down",
-        "command": "editor.action.sortLinesDescending",
-        "when": "editorTextFocus"
-      },
-      {
-        "key": "ctrl+alt+end",
-        "command": "blocksort.sortBlocksShuffle",
-        "when": "editorTextFocus"
-      }
-    ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run package",
