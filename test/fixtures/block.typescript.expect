@@ -82,4 +82,18 @@ class Test {
       }
     };
   }
+
+  testFencedSwitchCase() {
+    switch ('foo') {
+      case 'alpha': {
+        return 'something';
+      }
+      case 'beta': {
+        return 'something';
+      }
+      case 'gamma': {
+        return 'something';
+      }
+    }
+  }
 }
