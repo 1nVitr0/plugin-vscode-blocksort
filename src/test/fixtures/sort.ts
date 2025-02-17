@@ -5,7 +5,7 @@ export const sortTests: CompareTest[] = [
   {
     file: "block.typescript.fixture",
     compareFile: "block.typescript.expect",
-    ranges: [new Range(3, 0, 13, 22), new Range(19, 0, 33, 8), new Range(39, 0, 47, 8), new Range(86, 0, 96, 7)],
+    ranges: [new Range(3, 0, 13, 22), new Range(19, 0, 33, 8), new Range(39, 0, 47, 8), new Range(87, 0, 95, 7)],
   },
   {
     file: "block.cpp.fixture",
