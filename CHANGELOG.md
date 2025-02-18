@@ -1,3 +1,10 @@
+## [2.3.4](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v2.3.3...v2.3.4) (2025-02-18)
+
+
+### Bug Fixes
+
+* **extension:** trim hanging cursors at start or end of line from selection ([c85cd8c](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/c85cd8c750e2bce82bae1179a2203ce4ef4812c2))
+
 ## [2.3.3](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v2.3.2...v2.3.3) (2025-01-04)
 
 
