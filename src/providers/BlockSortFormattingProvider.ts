@@ -121,7 +121,9 @@ export default class BlockSortFormattingProvider
   ): Range {
     if (!this.isAttached(document)) this.attachDocument(document, token);
     const blockSort = this.blockSortProviders.get(document.uri)!;
-    const initialRange = "start" in selection ? selection : new Range(selection, selection);
+    const initialRange = blockSort.trimRange(
+      "start" in selection ? selection : new Range(selection, selection)
+    );
 
     if (options.expandSelection === false) return initialRange;
 
