@@ -338,6 +338,9 @@ export default class BlockSortProvider implements Disposable {
     let start = selection.start.line;
     let end = selection.end.line;
 
+    if (start < end && selection.start.character >= this.document.lineAt(start).text.length) start++;
+    if (end > start && selection.end.character === 0) end--;
+
     while (start < end && this.document.lineAt(start).isEmptyOrWhitespace) start++;
     while (end > start && this.document.lineAt(end).isEmptyOrWhitespace) end--;
 
