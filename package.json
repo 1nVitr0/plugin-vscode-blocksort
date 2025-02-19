@@ -37,7 +37,8 @@
     "onCommand:blocksort.sortInnerBlocksDesc",
     "onCommand:blocksort.sortInnerBlocksShuffle",
     "onCommand:blocksort.expandSelectionLocally",
-    "onCommand:blocksort.expandSelectionFull"
+    "onCommand:blocksort.expandSelectionFull",
+    "onCommand:blocksort.quickSort"
   ],
   "main": "./dist/extension.js",
   "contributes": {
@@ -140,6 +141,11 @@
           "dark": "resources/icon_expand_dark.svg",
           "light": "resources/icon_expand.svg"
         }
+      },
+      {
+        "command": "blocksort.quickSort",
+        "title": "Quick Sort",
+        "category": "Sort"
       }
     ],
     "configuration": [
@@ -572,42 +578,112 @@
               "foldingComplete": true,
               "indentationComplete": true
             }
-          }
-        },
-        "blocksort.expandCursor": {
-          "oneOf": [
-            {
-              "type": "boolean"
-            },
-            {
-              "type": "object",
-              "minProperties": 1,
-              "properties": {
-                "expandLocally": {
-                  "type": "boolean",
-                  "description": "Expand selection locally while in the same blocks (stopping at empty lines)"
-                },
-                "expandOverEmptyLines": {
-                  "type": "boolean",
-                  "description": "Expand selection over empty lines"
-                },
-                "foldingComplete": {
-                  "type": "boolean",
-                  "description": "Expand selection, so that all folding markers are closed"
-                },
-                "indentationComplete": {
-                  "type": "boolean",
-                  "description": "Expand selection, so that all indentation is complete"
+          },
+          "blocksort.expandCursor": {
+            "oneOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "object",
+                "minProperties": 1,
+                "properties": {
+                  "expandLocally": {
+                    "type": "boolean",
+                    "description": "Expand selection locally while in the same blocks (stopping at empty lines)"
+                  },
+                  "expandOverEmptyLines": {
+                    "type": "boolean",
+                    "description": "Expand selection over empty lines"
+                  },
+                  "foldingComplete": {
+                    "type": "boolean",
+                    "description": "Expand selection, so that all folding markers are closed"
+                  },
+                  "indentationComplete": {
+                    "type": "boolean",
+                    "description": "Expand selection, so that all indentation is complete"
+                  }
                 }
               }
+            ],
+            "description": "Expand cursor to selection when sorting blocks",
+            "default": {
+              "expandLocally": true,
+              "expandOverEmptyLines": false,
+              "foldingComplete": true,
+              "indentationComplete": true
             }
-          ],
-          "description": "Expand cursor to selection when sorting blocks",
-          "default": {
-            "expandLocally": true,
-            "expandOverEmptyLines": false,
-            "foldingComplete": true,
-            "indentationComplete": true
+          },
+          "blocksort.quickSortCommands": {
+            "type": "object",
+            "default": [
+              {
+                "command": "blocksort.sortBlocksAsc",
+                "label": "$(sort-asc) Sort Blocks Ascending",
+                "description": "Expand Selection and sort blocks in ascending order",
+                "picked": true
+              },
+              {
+                "command": "blocksort.sortBlocksDesc",
+                "label": "$(sort-desc) Sort Blocks Descending",
+                "description": "Expand Selection and sort blocks in descending order"
+              },
+              {
+                "command": "blocksort.sortBlocksShuffle",
+                "label": "$(arrow-switch) Shuffle Blocks",
+                "description": "Expand Selection and shuffle blocks"
+              },
+              {
+                "command": "editor.action.sortLinesAscending",
+                "label": "$(sort-asc) Sort Lines Ascending",
+                "description": "Sort selected lines in ascending order"
+              },
+              {
+                "command": "editor.action.sortLinesDescending",
+                "label": "$(sort-desc) Sort Lines Descending",
+                "description": "Sort selected lines in descending order"
+              },
+              {
+                "command": "blocksort.expandSelectionLocally",
+                "label": "$(unfold) Expand Selection",
+                "description": "Expand current Selection to surrounding Block"
+              }
+            ],
+            "properties": {
+              "command": {
+                "type": "string",
+                "description": "The command to execute"
+              },
+              "args": {
+                "type": "array",
+                "description": "The arguments to pass to the command"
+              },
+              "label": {
+                "type": "string",
+                "description": "A human-readable string which is rendered prominent"
+              },
+              "description": {
+                "type": "string",
+                "description": "A human-readable string which is rendered less prominent in the same line"
+              },
+              "detail": {
+                "type": "string",
+                "description": "A human-readable string which is rendered less prominent in a separate line"
+              },
+              "picked": {
+                "type": "boolean",
+                "description": "Optional flag indicating if this item is picked initially"
+              },
+              "alwaysShow": {
+                "type": "boolean",
+                "description": "Always show this item"
+              }
+            },
+            "required": [
+              "command",
+              "label"
+            ]
           }
         }
       }

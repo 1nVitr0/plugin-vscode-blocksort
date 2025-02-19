@@ -1,6 +1,6 @@
 import { CodeActionKind, Position, Range } from "vscode";
 import { ExpandSelectionOptions } from "../../types/BlockSortOptions";
-import { BlockSortCollatorOptions } from "../../providers/ConfigurationProvider";
+import { BlockSortCollatorOptions } from "../../types/BlockSortConfiguration";
 
 export interface BaseTest {
   file: string;
