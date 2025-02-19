@@ -1,3 +1,10 @@
+# [2.4.0](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v2.3.4...v2.4.0) (2025-02-19)
+
+
+### Features
+
+* add quick sort picker command ([523a57d](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/523a57dd8b494528555593cb5bb3d67b3cf33e9b))
+
 ## [2.3.4](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v2.3.3...v2.3.4) (2025-02-18)
 
 
