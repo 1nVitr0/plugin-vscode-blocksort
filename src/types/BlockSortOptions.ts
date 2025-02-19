@@ -1,5 +1,5 @@
 import { TextEdit } from "vscode";
-import { BlockSortCollatorOptions } from "../providers/ConfigurationProvider";
+import { BlockSortCollatorOptions } from "./BlockSortConfiguration";
 
 export interface ExpandSelectionOptions {
   expandLocally?: boolean;

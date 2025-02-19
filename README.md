@@ -64,6 +64,8 @@ The blocks are sorted purely by their content, so while decorators are supported
 `Expand current Selection to surrounding Block`: Expand curren selection locally to surrounding lines in block.
 
 `Expand current Selection fully (including separating Newlines) to the surrounding Block`: Expand curren selection to complete surrounding block.
+
+`Quick Sort`: Shows a configurable list of sort commands, can be used to bind a keyboard shortcut.
 </details>
 
 ***
@@ -249,6 +251,43 @@ some:
       "foldingComplete": true,
       "indentationComplete": true
     }
+    ```
+- `quickSortCommands`: Commands to show when the quick sort is opened
+  - Default:
+    ```json
+    [
+      {
+        "command": "blocksort.sortBlocksAsc",
+        "label": "$(sort-asc) Sort Blocks Ascending",
+        "description": "Expand Selection and sort blocks in ascending order",
+        "picked": true
+      },
+      {
+        "command": "blocksort.sortBlocksDesc",
+        "label": "$(sort-desc) Sort Blocks Descending",
+        "description": "Expand Selection and sort blocks in descending order"
+      },
+      {
+        "command": "blocksort.sortBlocksShuffle",
+        "label": "$(arrow-switch) Shuffle Blocks",
+        "description": "Expand Selection and shuffle blocks"
+      },
+      {
+        "command": "editor.action.sortLinesAscending",
+        "label": "$(sort-asc) Sort Lines Ascending",
+        "description": "Sort selected lines in ascending order"
+      },
+      {
+        "command": "editor.action.sortLinesDescending",
+        "label": "$(sort-desc) Sort Lines Descending",
+        "description": "Sort selected lines in descending order"
+      },
+      {
+        "command": "blocksort.expandSelectionLocally",
+        "label": "$(unfold) Expand Selection",
+        "description": "Expand current Selection to surrounding Block"
+      }
+    ]
     ```
 
 Settings marked as *Language Overridable* can be specified on a per-language basis using the notation:

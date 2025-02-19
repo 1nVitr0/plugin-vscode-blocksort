@@ -11,6 +11,12 @@ import {
 } from "vscode";
 import { ExpandSelectionOptions } from "../types/BlockSortOptions";
 import { FoldingMarkerDefault, FoldingMarkerList } from "./StringProcessingProvider";
+import {
+  BlockSortCollatorOptions,
+  BlockSortConfiguration,
+  NaturalSortOptions,
+  SortCommandOptions,
+} from "../types/BlockSortConfiguration";
 
 const defaultFoldingMarkers: FoldingMarkerList<FoldingMarkerDefault> = {
   "()": { start: "\\(", end: "\\)" },
@@ -27,43 +33,6 @@ const defaultIndentIgnoreMarkers = [
   "end(?:for(?:each)?|if|while|case|def)?\\s*?([\\.\\[\\->\\|\\s]\\s*(?:[$A-Za-z0-9_+\\-\\*\\/\\^\\%\\<\\>\\=\\!\\?\\:]*|'[^']*?'|'[']*?'|\"[^\"]*?\"|`[^`]*?`)\\s*[\\]\\|]?\\s*)*",
   "esac|fi",
 ];
-
-/** @deprecated Will no longer be applied. Use collatorOptions instead  */
-export interface NaturalSortOptions {
-  padding: number;
-  omitUuids: boolean;
-  sortNegativeValues: boolean;
-}
-
-export interface BlockSortCollatorOptions extends Omit<Intl.CollatorOptions, "usage"> {
-  locales?: string;
-  customSortOrder?: string;
-  customIgnoreCharacters?: string;
-}
-
-export interface BlockSortConfiguration {
-  defaultMultilevelDepth: number;
-  defaultSkipParents: number;
-  askForMultilevelDepth: boolean;
-  askForSkipParents: boolean;
-  indentIgnoreMarkers: string[];
-  completeBlockMarkers: string[];
-  foldingMarkers: FoldingMarkerList;
-  /** @deprecated Use collatorOptions.numeric instead */
-  enableNaturalSorting: boolean;
-  /** @deprecated Will no longer be applied. Use collatorOptions instead */
-  naturalSorting: NaturalSortOptions;
-  collatorOptions: BlockSortCollatorOptions;
-  sortConsecutiveBlockHeaders: boolean;
-  enableCodeLens: DocumentSelector | boolean;
-  enableCodeActions: DocumentSelector | boolean;
-  enableDocumentFormatting: DocumentSelector | boolean;
-  enableRangeFormatting: DocumentSelector | boolean;
-  forceBlockHeaderFirstRegex: string;
-  forceBlockHeaderLastRegex: string;
-  multiBlockHeaderRegex: string;
-  incompleteBlockRegex: string;
-}
 
 export default class ConfigurationProvider {
   public static readonly invalidatingConfigurationKeys: string[] = [
@@ -207,6 +176,11 @@ export default class ConfigurationProvider {
   public static getTabSize(document?: TextDocument): number {
     const tabSize = ConfigurationProvider.getEditorConfiguration(document).tabSize;
     return typeof tabSize === "string" ? 4 : tabSize ?? 4;
+  }
+
+  public static getQuickSortCommands(): SortCommandOptions[] {
+    const quickSortCommands: SortCommandOptions[] = ConfigurationProvider.getConfiguration().quickSortCommands || [];
+    return quickSortCommands;
   }
 
   public static onConfigurationChanged(): void {

@@ -11,6 +11,7 @@ import {
 } from "../commands/blockSort";
 import { expandSelectionFull, expandSelectionLocally } from "../commands/expandSelection";
 import BlockSortFormattingProvider from "../providers/BlockSortFormattingProvider";
+import { quickSort } from "../commands/quickSort";
 
 export default function contributeCommands(b: BlockSortFormattingProvider) {
   return [
@@ -26,5 +27,6 @@ export default function contributeCommands(b: BlockSortFormattingProvider) {
     commands.registerTextEditorCommand("blocksort.sortInnerBlocksShuffle", blockSortShuffle.bind(null, b)),
     commands.registerTextEditorCommand("blocksort.expandSelectionLocally", expandSelectionLocally.bind(null, b)),
     commands.registerTextEditorCommand("blocksort.expandSelectionFull", expandSelectionFull.bind(null, b)),
+    commands.registerTextEditorCommand("blocksort.quickSort", quickSort),
   ];
 }

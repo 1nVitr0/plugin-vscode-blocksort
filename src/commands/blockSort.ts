@@ -1,5 +1,5 @@
-import { commands, InputBoxOptions, Selection, Range, TextEditor, TextEditorEdit, window } from "vscode";
-import ConfigurationProvider, { BlockSortCollatorOptions } from "../providers/ConfigurationProvider";
+import { Selection, Range, TextEditor, TextEditorEdit, window } from "vscode";
+import ConfigurationProvider from "../providers/ConfigurationProvider";
 import BlockSortFormattingProvider from "../providers/BlockSortFormattingProvider";
 import { BlockSortOptions } from "../types/BlockSortOptions";
 import { showNumberQuickPick } from "../helpers/showNumberQuickPick";

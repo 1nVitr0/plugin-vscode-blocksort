@@ -1,4 +1,4 @@
-import { BlockSortCollatorOptions } from "./ConfigurationProvider";
+import { BlockSortCollatorOptions } from "../types/BlockSortConfiguration";
 
 export class StringSortProvider extends Intl.Collator {
   public readonly customSortOrder?: string;
