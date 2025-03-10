@@ -145,7 +145,11 @@
       {
         "command": "blocksort.quickSort",
         "title": "Quick Sort",
-        "category": "Sort"
+        "category": "Sort",
+        "icon": {
+          "dark": "resources/icon_quick_dark.svg",
+          "light": "resources/icon_quick.svg"
+        }
       }
     ],
     "configuration": [
