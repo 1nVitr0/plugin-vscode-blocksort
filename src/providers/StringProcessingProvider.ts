@@ -2,6 +2,7 @@ import { CancellationToken, Range, TextDocument, workspace } from "vscode";
 import { commentMarkers, commentRegex } from "../constants/comments";
 import { stringMarkers } from "../constants/strings";
 import ConfigurationProvider from "./ConfigurationProvider";
+import { decoratorMarkers, decoratorRegex } from "../constants/decorators";
 
 export type FoldingMarkerDefault = "()" | "[]" | "{}" | "<>";
 export type FoldingMarkerList<T extends string = string> = Record<
@@ -185,12 +186,13 @@ export default class StringProcessingProvider {
     if (typeof line !== "string") return line.valid;
 
     const comment = commentRegex[this.document.languageId || "default"] || commentRegex.default;
+    const decorator = decoratorRegex[this.document.languageId || "default"] || decoratorRegex.default;
     const hasFolding = this.hasFolding(folding ?? this.getFolding(line, document));
     return (
       !/^\s*$/.test(line) &&
-      !/^\s*@/.test(line) &&
       !(/^\s*{/.test(line) && hasFolding) &&
-      !new RegExp(`^\\s*${comment}\\s*$`).test(line)
+      !(decorator && new RegExp(`^\\s*${decorator}`).test(line)) &&
+      !(comment && new RegExp(`^\\s*${comment}\\s*$`).test(line))
     );
   }
 
@@ -226,7 +228,10 @@ export default class StringProcessingProvider {
   }
 
   public stripDecorators(text: string): string {
-    return text.replace(/^\s*@.*/g, "");
+    return this.stripBlocksFromText(
+      text,
+      decoratorMarkers[this.document.languageId || "default"] || decoratorMarkers.default
+    );
   }
 
   private extendLineAnchors(regex: string, keepEndLine = true): string {

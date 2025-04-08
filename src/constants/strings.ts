@@ -1,11 +1,12 @@
-import { TextBlockDefinition } from '../providers/StringProcessingProvider';
+/* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable quotes */
+import { TextBlockDefinition } from "../providers/StringProcessingProvider";
 
 export const stringMarkers: Record<string, TextBlockDefinition[]> = {
   default: [
     { start: '"', end: '"' },
     { start: "'", end: "'" },
-    { start: '`', end: '`' },
+    { start: "`", end: "`" },
   ],
   // abap: [],
   // bat: [],
@@ -14,27 +15,27 @@ export const stringMarkers: Record<string, TextBlockDefinition[]> = {
   coffeescript: [
     { start: '"', end: '"' },
     { start: "'", end: '"' },
-    { start: '`', end: '`' },
+    { start: "`", end: "`" },
   ],
   c: [
     { start: '"', end: '"' },
     { start: "'", end: '"' },
-    { start: '`', end: '`' },
+    { start: "`", end: "`" },
   ],
   cpp: [
     { start: '"', end: '"' },
     { start: "'", end: '"' },
-    { start: '`', end: '`' },
+    { start: "`", end: "`" },
   ],
   csharp: [
     { start: '"', end: '"' },
     { start: "'", end: '"' },
-    { start: '`', end: '`' },
+    { start: "`", end: "`" },
   ],
   css: [
     { start: '"', end: '"' },
     { start: "'", end: '"' },
-    { start: '`', end: '`' },
+    { start: "`", end: "`" },
   ],
   // dockerfile: [],
   // fsharp: [],
@@ -52,17 +53,17 @@ export const stringMarkers: Record<string, TextBlockDefinition[]> = {
   java: [
     { start: '"', end: '"' },
     { start: "'", end: '"' },
-    { start: '`', end: '`' },
+    { start: "`", end: "`" },
   ],
   javascript: [
     { start: '"', end: '"' },
     { start: "'", end: '"' },
-    { start: '`', end: '`' },
+    { start: "`", end: "`" },
   ],
   javascriptreact: [
     { start: '"', end: '"' },
     { start: "'", end: '"' },
-    { start: '`', end: '`' },
+    { start: "`", end: "`" },
   ],
   jsx: [
     { start: '"', end: '"' },
@@ -71,38 +72,38 @@ export const stringMarkers: Record<string, TextBlockDefinition[]> = {
   json: [
     { start: '"', end: '"' },
     { start: "'", end: '"' },
-    { start: '`', end: '`' },
+    { start: "`", end: "`" },
   ],
   jsonc: [
     { start: '"', end: '"' },
     { start: "'", end: '"' },
-    { start: '`', end: '`' },
+    { start: "`", end: "`" },
   ],
   // latex: [],
   less: [
     { start: '"', end: '"' },
     { start: "'", end: '"' },
-    { start: '`', end: '`' },
+    { start: "`", end: "`" },
   ],
   // lua: [],
   // makefile: [],
   // markdown: [],
-  'objective-c': [
+  "objective-c": [
     { start: '"', end: '"' },
     { start: "'", end: '"' },
-    { start: '`', end: '`' },
+    { start: "`", end: "`" },
   ],
-  'objective-cpp': [
+  "objective-cpp": [
     { start: '"', end: '"' },
     { start: "'", end: '"' },
-    { start: '`', end: '`' },
+    { start: "`", end: "`" },
   ],
   // perl: [],
   // perl6: [],
   php: [
     { start: '"', end: '"' },
     { start: "'", end: '"' },
-    { start: '`', end: '`' },
+    { start: "`", end: "`" },
   ],
   // plaintext: [],
   // powershell: [],
@@ -111,25 +112,25 @@ export const stringMarkers: Record<string, TextBlockDefinition[]> = {
   python: [
     { start: '"', end: '"' },
     { start: "'", end: '"' },
-    { start: '`', end: '`' },
+    { start: "`", end: "`" },
   ],
   // r: [],
   // razor: [],
   ruby: [
     { start: '"', end: '"' },
     { start: "'", end: '"' },
-    { start: '`', end: '`' },
+    { start: "`", end: "`" },
   ],
   // rust: [],
   scss: [
     { start: '"', end: '"' },
     { start: "'", end: '"' },
-    { start: '`', end: '`' },
+    { start: "`", end: "`" },
   ],
   sass: [
     { start: '"', end: '"' },
     { start: "'", end: '"' },
-    { start: '`', end: '`' },
+    { start: "`", end: "`" },
   ],
   // shaderlab: [],
   // shellscript: [],
@@ -141,27 +142,27 @@ export const stringMarkers: Record<string, TextBlockDefinition[]> = {
   stylus: [
     { start: '"', end: '"' },
     { start: "'", end: '"' },
-    { start: '`', end: '`' },
+    { start: "`", end: "`" },
   ],
   // swift: [],
   typescript: [
     { start: '"', end: '"' },
     { start: "'", end: '"' },
-    { start: '`', end: '`' },
+    { start: "`", end: "`" },
   ],
   typescriptreact: [
     { start: '"', end: '"' },
     { start: "'", end: '"' },
-    { start: '`', end: '`' },
+    { start: "`", end: "`" },
   ],
   // tex: [],
   // vb: [],
   vue: [
     { start: '"', end: '"' },
     { start: "'", end: '"' },
-    { start: '`', end: '`' },
+    { start: "`", end: "`" },
   ],
-  'vue-html': [
+  "vue-html": [
     { start: '"', end: '"' },
     { start: "'", end: '"' },
   ],
