@@ -9,7 +9,7 @@ export async function run(): Promise<void> {
     ui: "tdd",
     color: true,
     timeout: 10000,
-    reporter: "mocha-ctrf-json-reporter",
+    reporter: process.env.GITHUB_ACTIONS ? "mocha-ctrf-json-reporter" : undefined,
   });
 
   const testsRoot = path.resolve(__dirname, "..");
