@@ -118,12 +118,14 @@ export default class BlockSortActionProvider
       if (range?.contains(markerRange)) filteredMarkers.push(before);
     }
 
-    if (context?.only?.contains(CodeActionKind.SourceFixAll) || filteredMarkers.length > 1) {
-      // Fix All code action is usually triggered by saving the document
-      return [this.buildFixAllCodeAction(filteredMarkers, document, range, token)];
-    } else {
-      return [this.buildQuickFixCodeAction(filteredMarkers, document, range, token)];
-    }
+    const result: CodeActionWithEditBuilder[] = [];
+
+    if (!context?.only || context.only.contains(CodeActionKind.QuickFix))
+      result.push(this.buildQuickFixCodeAction(filteredMarkers, document, range, token));
+    if (!context?.only || context.only.contains(BlockSortCodeActionKind.SourceFixAll))
+      result.push(this.buildFixAllCodeAction(filteredMarkers, document, range, token));
+
+    return result;
   }
 
   public resolveCodeAction(codeAction: CodeActionWithEditBuilder, token: CancellationToken): CodeActionWithEditBuilder {
