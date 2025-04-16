@@ -1,3 +1,11 @@
+## [2.4.1](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v2.4.0...v2.4.1) (2025-04-16)
+
+
+### Bug Fixes
+
+* add icon to quick sort command ([31b61c2](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/31b61c226b77ab432329f856ee7124f6fd08e89b))
+* use per-language decorator options ([fb149a2](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/fb149a21fdd5584c821a96afab8ab24383e9a922))
+
 # [2.4.0](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v2.3.4...v2.4.0) (2025-02-19)
 
 
