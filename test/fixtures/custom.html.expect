@@ -1,0 +1,8 @@
+<component
+  aaa="1"
+  bbb="1"
+  :aaa="2"
+  :bbb="2"
+  @aaa="get()"
+  @bbb="get()"
+/>

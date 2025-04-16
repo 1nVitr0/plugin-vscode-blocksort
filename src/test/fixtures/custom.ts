@@ -26,4 +26,10 @@ export const customSortTests: CustomSortTest[] = [
     ranges: [new Range(25, 0, 39, 1)],
     collatorOptions: { customSortOrder: '"-_' },
   },
+  {
+    file: "custom.html.fixture",
+    compareFile: "custom.html.expect",
+    ranges: [new Range(1, 0, 6, 15)],
+    collatorOptions: { customSortOrder: "abcdefghijklmnopqrstuvwxyz#:@" },
+  },
 ];
