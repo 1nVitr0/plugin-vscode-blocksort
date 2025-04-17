@@ -188,6 +188,8 @@ export default class BlockSortFormattingProvider
     token: CancellationToken,
     ...changes: TextDocumentContentChangeEvent[]
   ) {
+    if (!this.isAttached(document)) return;
+
     const markers = this.blockSortMarkers.get(document.uri) ?? this.getBlockSortMarkers(document, token);
 
     if (!this.blockSortMarkers.has(document.uri)) {
