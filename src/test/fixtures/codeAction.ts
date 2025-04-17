@@ -6,19 +6,19 @@ export const codeActionKindTest: ListOfKindTest<BlockSortCodeActionKind>[] = [
   {
     file: "marker.typescript.fixture",
     ranges: [new Range(0, 0, 79, 0)],
-    targetKinds: [BlockSortCodeActionKind.SourceFixAll],
+    targetKinds: [BlockSortCodeActionKind.QuickFix, BlockSortCodeActionKind.SourceFixAll],
     strict: true,
   },
   {
     file: "marker.typescript.fixture",
     ranges: [new Range(2, 0, 30, 0)],
-    targetKinds: [BlockSortCodeActionKind.SourceFixAll],
+    targetKinds: [BlockSortCodeActionKind.QuickFix, BlockSortCodeActionKind.SourceFixAll],
     strict: true,
   },
   {
     file: "marker.typescript.fixture",
     ranges: [new Range(49, 0, 75, 7)],
-    targetKinds: [BlockSortCodeActionKind.QuickFix],
+    targetKinds: [BlockSortCodeActionKind.QuickFix, BlockSortCodeActionKind.SourceFixAll],
     strict: true,
   },
   {
@@ -31,7 +31,7 @@ export const codeActionKindTest: ListOfKindTest<BlockSortCodeActionKind>[] = [
   {
     file: "marker.python.fixture",
     ranges: [new Range(0, 0, 8, 0)],
-    targetKinds: [BlockSortCodeActionKind.QuickFix],
+    targetKinds: [BlockSortCodeActionKind.QuickFix, BlockSortCodeActionKind.SourceFixAll],
     strict: true,
   },
 ];

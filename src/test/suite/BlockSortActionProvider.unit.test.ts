@@ -5,7 +5,7 @@ import BlockSortActionProvider from "../../providers/BlockSortActionProvider";
 import BlockSortFormattingProvider from "../../providers/BlockSortFormattingProvider";
 import { codeActionKindTest, codeActionResultTest, codeLensTest, fixAllTest, fixtureDir } from "../fixtures";
 
-suite("Unit Suite for BlockSortProvider", async () => {
+suite("Unit Suite for BlockSortActionProvider", async () => {
   window.showInformationMessage("Start tests for BlockSortProvider.");
 
   const formattingProvider = new BlockSortFormattingProvider();
