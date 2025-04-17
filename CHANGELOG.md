@@ -1,3 +1,15 @@
+## [2.4.2](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v2.4.1...v2.4.2) (2025-04-17)
+
+
+### Bug Fixes
+
+* always provide available code actions if not filtered explicitly ([e755b07](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/e755b0736b6d4c8a20c078c33092f673d38fe010))
+
+
+### Performance Improvements
+
+* only calculate blocksort markers for attached documents ([54211b0](https://github.com/1nVitr0/plugin-vscode-blocksort/commit/54211b0848a10109d8a6595ed853143e028645b3))
+
 ## [2.4.1](https://github.com/1nVitr0/plugin-vscode-blocksort/compare/v2.4.0...v2.4.1) (2025-04-16)
 
 
